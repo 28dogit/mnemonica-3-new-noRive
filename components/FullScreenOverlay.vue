@@ -7,8 +7,8 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue';
-import gsap from 'gsap';
+import { ref, watch, onMounted } from "vue";
+import gsap from "gsap";
 
 const props = defineProps({
   visible: Boolean,
@@ -17,11 +17,14 @@ const props = defineProps({
 
 const overlay = ref(null);
 
-watch(() => props.visible, (newValue) => {
-  if (newValue) {
-    openOverlay();
+watch(
+  () => props.visible,
+  (newValue) => {
+    if (newValue) {
+      openOverlay();
+    }
   }
-});
+);
 
 const openOverlay = () => {
   const { width, height, left, top } = props.buttonRect;
@@ -35,18 +38,27 @@ const openOverlay = () => {
   const distanceTL = Math.sqrt((centerX - 0) ** 2 + (centerY - 0) ** 2);
   const distanceTR = Math.sqrt((centerX - window.innerWidth) ** 2 + (centerY - 0) ** 2);
   const distanceBL = Math.sqrt((centerX - 0) ** 2 + (centerY - window.innerHeight) ** 2);
-  const distanceBR = Math.sqrt((centerX - window.innerWidth) ** 2 + (centerY - window.innerHeight) ** 2);
+  const distanceBR = Math.sqrt(
+    (centerX - window.innerWidth) ** 2 + (centerY - window.innerHeight) ** 2
+  );
   //dichiaro la costante che racchiude i valori calcolati e ne restituisce il più grande che è quello che userò come raggio per il mio clipPath
   const radius = Math.max(distanceTL, distanceTR, distanceBL, distanceBR);
 
-  gsap.fromTo(overlay.value, {
-    // clipPath: `circle(${width / 2}px at ${left + width / 2}px ${top + height / 2}px)`,
-    clipPath: `circle(${width / 10}px at ${left + width / 2}px ${top + height / 2}px)`,
-  }, {
-    clipPath: `circle(${radius}px at ${window.innerWidth / 2}px ${window.innerHeight / 2}px)`,
-    duration: 5,
-    ease: 'power2.inOut',
-  });
+  gsap.fromTo(
+    overlay.value,
+    {
+      // clipPath: `circle(${width / 2}px at ${left + width / 2}px ${top + height / 2}px)`,
+      clipPath: `circle(${width / 10}px at ${left + width / 2}px ${top + height / 2}px)`,
+    },
+    {
+      clipPath: `circle(${radius}px at ${window.innerWidth / 2}px ${
+        window.innerHeight / 2
+      }px)`,
+      duration: 2,
+      // ease: "power2.inOut",
+      ease: "power2.out",
+    }
+  );
 };
 </script>
 
