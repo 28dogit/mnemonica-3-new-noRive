@@ -1,5 +1,6 @@
 <template>
     <div>
+    <!-- Integrare componente NUXT UI e centrare bene il punto di partenza calcolare padding eventuali -->
       <button ref="button" @click="showOverlay" class="open-btn">Apri Overlay</button>
       <FullScreenOverlay :visible="isOverlayVisible" :buttonRect="buttonRect">
         <p>Contenuto dell'overlay new</p>
@@ -24,9 +25,6 @@
   
   <style scoped>
   .open-btn {
-    position: fixed;
-    top:300px;
-    right: 70px;
     padding: 20px;
     font-size: 1rem;
     cursor: pointer;
