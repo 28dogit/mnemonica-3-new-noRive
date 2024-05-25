@@ -11,16 +11,12 @@
       size="sm"
       color="primary"
       variant="soft"
-      :ui="{
-        strategy: 'override',
-        color: {
-          primary: {
-            soft: 'bg-white dark:bg-orange-900 text-red-600',
-          },
-        },
-      }"
     />
-    <FullScreenOverlay :visible="isOverlayVisible" :buttonRect="buttonRect">
+    <FullScreenOverlay
+      :visible.sync="isOverlayVisible"
+      :buttonRect="buttonRect"
+      @update:visible="isOverlayVisible = $event"
+    >
       <p>Contenuto dell'overlay new</p>
     </FullScreenOverlay>
   </div>

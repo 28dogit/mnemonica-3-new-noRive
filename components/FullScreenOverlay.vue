@@ -1,19 +1,41 @@
 <template>
   <div ref="overlay" class="overlay" v-show="visible">
     <div class="content">
+      <button
+        @click="closeOverlay"
+        class="close-btn w-8 h-8 bg-transparent text-slate-200 hover:text-slate-400 hover:rotate-[20deg]"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1"
+            d="m9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0"
+          />
+        </svg>
+      </button>
       <slot></slot>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, defineEmits } from "vue";
 import gsap from "gsap";
 
 const props = defineProps({
   visible: Boolean,
   buttonRect: Object,
 });
+
+const emits = defineEmits(["update:visible"]);
 
 const overlay = ref(null);
 
@@ -59,6 +81,25 @@ const openOverlay = () => {
       ease: "power2.out",
     }
   );
+};
+
+const closeOverlay = () => {
+  const { width, height, left, top } = props.buttonRect;
+  const centerX = left + width / 2;
+  const centerY = top + height / 2;
+
+  const radius = Math.max(window.innerWidth, window.innerHeight) * 1.5;
+
+  gsap.to(overlay.value, {
+    // clipPath: `circle(${width / 2}px at ${centerX}px ${centerY}px)`,
+    clipPath: `circle(${width / 10}px at ${left + width / 2}px ${top + height / 2}px)`,
+    duration: 0.5,
+    ease: "power2.out",
+    onComplete: () => {
+      console.log("chiuso");
+      emits("update:visible", false);
+    },
+  });
 };
 </script>
 
