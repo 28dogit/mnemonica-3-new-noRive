@@ -6,7 +6,7 @@
       label="Open Overlay Focus"
       ref="button"
       @click="showOverlay"
-      class="open-btn"
+      class="open-btn cursor-pointer text-base p-5"
       icon="i-heroicons-pencil-square"
       size="sm"
       color="primary"
@@ -17,7 +17,6 @@
       :buttonRect="buttonRect"
       @update:visible="isOverlayVisible = $event"
     >
-      <p>Contenuto dell'overlay new</p>
     </FullScreenOverlay>
   </div>
 </template>
@@ -37,10 +36,4 @@ const showOverlay = async () => {
 };
 </script>
 
-<style scoped>
-.open-btn {
-  padding: 20px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-</style>
+<style scoped></style>
