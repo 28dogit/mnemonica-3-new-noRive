@@ -1,7 +1,6 @@
 <template>
   <div>
-    <!-- Integrare componente NUXT UI e centrare bene il punto di partenza calcolare padding eventuali -->
-    <!-- <button ref="button" @click="showOverlay" class="open-btn">Apri Overlay</button> -->
+    <h1>Title of content</h1>
     <UButton
       label="Open Overlay Focus"
       ref="button"

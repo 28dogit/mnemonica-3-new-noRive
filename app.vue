@@ -5,3 +5,7 @@
     </NuxtLayout>
   </div>
 </template>
+
+<style lang="scss">
+@use "@/assets/css/globals.scss";
+</style>
