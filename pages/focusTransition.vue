@@ -1,6 +1,15 @@
 <template>
   <div>
-    <h1>Title of content</h1>
+    <h1>Much More Than Screening</h1>
+
+    <h3>PLAY</h3>
+    <p>Touch Day and Bin, and your playlist is ready to watch.</p>
+
+    <h3>MEET</h3>
+    <p>Review, comment, approve, import into your NLEs, stay up to date.</p>
+
+    <h3>PROTECT</h3>
+    <p>Each Room is a secure vault with its own watermark.</p>
     <UButton
       label="Open Overlay Focus"
       ref="button"
