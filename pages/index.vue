@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-[1700px] px-16">
-    <p class="sm:text-orange-500 md:text-slate-600 lg:text-lime-500">Home</p>
     <!-- <div class="box w-8 h-8 rounded bg-lime-600"></div> -->
+    <ContentDoc class="sm:text-orange-500 md:text-slate-600 lg:text-lime-500" />
   </div>
 </template>
 

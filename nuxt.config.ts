@@ -14,5 +14,5 @@ export default defineNuxtConfig({
   plugins:[
     '@/plugins/gsap.js',
   ],
-  modules: ["@nuxt/ui"]
+  modules: ["@nuxt/ui", '@nuxt/content']
 })
