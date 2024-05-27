@@ -8,14 +8,18 @@
     <h3>MEET</h3>
     <p>
       Review, comment, approve, import into your
-      <a ref="button" @click="showOverlay($event)" class="open-btn underline">NLEs</a>,
+      <a ref="button" @click="showOverlay($event)" class="open-btn underline cursor-pointer text-blue-400">NLEs</a>,
       stay up to date.
     </p>
 
     <h3>PROTECT</h3>
     <p>
       Each Room is a secure vault with its own
-      <a ref="button" @click="showOverlay($event)" class="open-btn underline">watermark</a
+      <a
+        ref="button"
+        @click="showOverlay($event)"
+        class="open-btn underline cursor-pointer text-blue-400"
+        >watermark</a
       >.
     </p>
     <!-- <UButton
