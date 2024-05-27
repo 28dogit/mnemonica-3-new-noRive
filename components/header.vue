@@ -1,23 +1,45 @@
 <template>
-  <div class="headerWrap flex gap-3 bg-slate-500 p-10">
-    <Nav />
+  <div id="hWrapper" class="sticky top-0 p-5 text-center z-[999]">
+    <div
+      id="menuWrapper"
+      class="flex max-w-[1700px] min-h-[100px] items-center text-black bg-slate-200 dark:text-slate-300 dark:bg-slate-800 rounded-3xl m-auto"
+    >
+      <div id="logoWrapper" class="flex w-3/12 justify-start pl-10">
+        <img
+          class="logo max-w-44"
+          alt="Vue logo"
+          src="@/assets/img/mnemonica-logo-2024-site.png"
+        />
+      </div>
+      <div id="navWrapper" class="flex w-9/12 justify-end pr-10">
+        <Nav />
+
+        <!-- <div class="darktoggle ml-12"><DarkModeToggle /></div> -->
+      </div>
+    </div>
   </div>
 </template>
+<script setup>
+//Utilizzo di Gsap!!-----
+gsap.registerPlugin(ScrollTrigger);
 
-<script lang="ts" setup>
-//Utilizzo di Gsap
-// import { onMounted } from "vue";
-// import { gsap } from "gsap";
+import { onMounted } from "vue";
+import { gsap } from "gsap"; //importa gsap
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// onMounted(() => {
-//   gsap.to(".gbox", {
-//     duration: 1,
-//     y: -20,
-//     repeat: -1,
-//     yoyo: true,
-//   });
-// });
-//fine - Utilizzo di Gsap
+// Aggiungi un'animazione quando il componente viene montato sarà poi triggerata allo scroll
+onMounted(() => {
+  gsap.to("#menuWrapper", {
+    scrollTrigger: {
+      trigger: "#mainContent",
+      start: "top+=150px top+=135px",
+      end: "top+=150px top+=130px",
+      toggleActions: "play none reverse none",
+      markers: false,
+    },
+    boxShadow: "0px 12px 18px -6px rgba(0, 0, 0, 0.3)",
+    duration: 0.5,
+  });
+});
+//Gsap-fine
 </script>
-
-<style></style>

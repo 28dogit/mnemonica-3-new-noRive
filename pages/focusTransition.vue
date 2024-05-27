@@ -1,16 +1,24 @@
 <template>
-  <div>
+  <div class="max-w-[1700px] px-16">
     <h1>Much More Than Screening</h1>
 
     <h3>PLAY</h3>
     <p>Touch Day and Bin, and your playlist is ready to watch.</p>
 
     <h3>MEET</h3>
-    <p>Review, comment, approve, import into your NLEs, stay up to date.</p>
+    <p>
+      Review, comment, approve, import into your
+      <a ref="button" @click="showOverlay($event)" class="open-btn underline">NLEs</a>,
+      stay up to date.
+    </p>
 
     <h3>PROTECT</h3>
-    <p>Each Room is a secure vault with its own watermark.</p>
-    <UButton
+    <p>
+      Each Room is a secure vault with its own
+      <a ref="button" @click="showOverlay($event)" class="open-btn underline">watermark</a
+      >.
+    </p>
+    <!-- <UButton
       label="Open Overlay Focus"
       ref="button"
       @click="showOverlay"
@@ -19,7 +27,7 @@
       size="sm"
       color="primary"
       variant="soft"
-    />
+    /> -->
     <FullScreenOverlay
       :visible.sync="isOverlayVisible"
       :buttonRect="buttonRect"
@@ -36,8 +44,9 @@ import FullScreenOverlay from "~/components/FullScreenOverlay.vue";
 const isOverlayVisible = ref(false);
 const buttonRect = ref({});
 
-const showOverlay = async () => {
-  const button = document.querySelector(".open-btn");
+const showOverlay = async (event) => {
+  const button = event.target;
+  //const button = document.querySelector(".open-btn");
   buttonRect.value = button.getBoundingClientRect();
   await nextTick();
   isOverlayVisible.value = true;

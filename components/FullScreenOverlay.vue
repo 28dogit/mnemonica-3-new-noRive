@@ -1,8 +1,12 @@
 <template>
-  <div ref="overlay" class="overlay" v-show="visible">
+  <div
+    ref="overlay"
+    class="overlay fixed top-0 left-0 w-full h-full p-[8%] bg-black/80 z-[1000] overflow-scroll"
+    v-show="visible"
+  >
     <button
       @click="closeOverlay"
-      class="close-btn fixed top-5 right-5 bg-transparent text-4xl text-slate-200 hover:text-slate-400 hover:rotate-[20deg]"
+      class="close-btn fixed top-[5%] right-[5%] bg-transparent text-4xl text-slate-200 hover:text-slate-400"
     >
       <UIcon name="i-heroicons-x-circle" class="flex" />
     </button>
@@ -128,15 +132,4 @@ const closeOverlay = () => {
 };
 </script>
 
-<style scoped>
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 1000;
-  overflow: scroll;
-}
-</style>
+<style></style>
