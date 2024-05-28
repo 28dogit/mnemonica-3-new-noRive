@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-[1700px] px-16">
+  <div class="max-w-[1700px] m-auto px-16">
     <ContentDoc />
   </div>
 </template>
