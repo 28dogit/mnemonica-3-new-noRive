@@ -2,7 +2,7 @@
 export default {
 darkMode: 'class',
 content: [
-    "./assetes/Css/**/*.{css,scss}",
+    "./assetes/css/**/*.{css,scss}",
     "./components/**/*.{vue,js}",
     "./layouts/**/*.vue",
     "./pages/**/*.vue",

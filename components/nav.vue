@@ -6,11 +6,13 @@
         <li><nuxt-link to="/contacts">Contacts</nuxt-link></li>
         <li><nuxt-link to="/focusTransition">Test transitions</nuxt-link></li>
       </ul>
-      <!-- <UToggle color="primary" :model-value="true" /> -->
     </nav>
+    <UToggle v-model="selected" />
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const selected = ref(false);
+</script>
 
 <style></style>
