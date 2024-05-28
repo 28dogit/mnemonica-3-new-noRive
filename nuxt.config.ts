@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
-    baseURL: '/nuxt/', // Assicurati che il percorso sia seguito da una barra finale
+    baseURL: '/mne/', // Assicurati che il percorso sia seguito da una barra finale
     // layoutTransition: { name: 'layout', mode: 'out-in' }
   },
   devtools: {
