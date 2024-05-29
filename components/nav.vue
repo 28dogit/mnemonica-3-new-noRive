@@ -7,7 +7,7 @@
         <li><nuxt-link to="/focusTransition">Test transitions</nuxt-link></li>
       </ul>
     </nav>
-    <span>|</span>
+    <span class="vDivider w-px h-5 bg-slate-600 dark:bg-slate-300"></span>
     <UToggle
       v-model="selected"
       on-icon="i-heroicons-moon-20-solid"
@@ -25,4 +25,4 @@ const setColorTheme = (newTheme: Theme) => {
 };
 </script>
 
-<style></style>
+<style scoped></style>
