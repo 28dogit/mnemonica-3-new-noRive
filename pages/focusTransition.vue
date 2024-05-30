@@ -3,13 +3,23 @@
     <h1>Much More Than Screening</h1>
 
     <h3>PLAY</h3>
-    <p>Touch Day and Bin, and your playlist is ready to watch.</p>
+    <p>
+      Touch Day and Bin, and your is
+      <UChip color="seagull">ready</UChip> to watch.
+    </p>
 
     <h3>MEET</h3>
     <p>
       Review, comment, approve, import into your
-      <a ref="button" @click="showOverlay($event)" class="open-btn underline cursor-pointer text-blue-400">NLEs</a>,
-      stay up to date.
+      <a
+        ref="button"
+        @click="showOverlay($event)"
+        class="open-btn underline cursor-pointer text-seagull-400"
+        >NLEs</a
+      ><UIcon name="i-heroicons-light-bulb-solid" class="text-chenin-400"></UIcon>, stay
+      <!-- <UIcon name="i-mdi-account-file" class="text-chenin-400"></UIcon>
+      <UIcon name="i-lucide-arrow-big-right" class="text-chenin-400"></UIcon> -->
+      up to date.
     </p>
 
     <h3>PROTECT</h3>
@@ -18,7 +28,7 @@
       <a
         ref="button"
         @click="showOverlay($event)"
-        class="open-btn underline cursor-pointer text-blue-400"
+        class="open-btn underline cursor-pointer text-seagull-400"
         >watermark</a
       >.
     </p>
