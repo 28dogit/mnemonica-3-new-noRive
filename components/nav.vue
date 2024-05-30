@@ -1,10 +1,16 @@
 <template>
   <div class="text-right flex items-center gap-3">
     <nav>
-      <ul class="block gap-3 uppercase text-sm md:flex">
-        <li><nuxt-link to="/">Home</nuxt-link></li>
-        <li><nuxt-link to="/contacts">Contacts</nuxt-link></li>
-        <li><nuxt-link to="/focusTransition">Test transitions</nuxt-link></li>
+      <ul class="block gap-3 uppercase text-sm md:flex testSass">
+        <li class="dark:hover:text-chenin-300 hover:text-seagull-400">
+          <nuxt-link to="/">Home</nuxt-link>
+        </li>
+        <li class="dark:hover:text-chenin-300 hover:text-seagull-400">
+          <nuxt-link to="/contacts">Contacts</nuxt-link>
+        </li>
+        <li class="dark:hover:text-chenin-300 hover:text-seagull-400">
+          <nuxt-link to="/focusTransition">Test transitions</nuxt-link>
+        </li>
       </ul>
     </nav>
     <span class="vDivider w-px h-5 bg-slate-600 dark:bg-slate-300"></span>
@@ -25,4 +31,11 @@ const setColorTheme = (newTheme: Theme) => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+/* .testSass {
+  background-color: brown;
+}
+.dark .testSass {
+  background-color: blue;
+} */
+</style>
