@@ -15,11 +15,12 @@
         ref="button"
         @click="showOverlay($event)"
         class="open-btn underline cursor-pointer text-seagull-400"
-        >NLEs</a
-      ><UIcon name="i-heroicons-light-bulb-solid" class="text-chenin-400"></UIcon>, stay
-      <!-- <UIcon name="i-mdi-account-file" class="text-chenin-400"></UIcon>
-      <UIcon name="i-lucide-arrow-big-right" class="text-chenin-400"></UIcon> -->
-      up to date.
+        >NLEs
+        <UIcon
+          name="i-mdi-focus-field-horizontal"
+          class="text-chenin-400 w-5 h-5"
+        ></UIcon></a
+      >, stay up to date.
     </p>
 
     <h3>PROTECT</h3>
@@ -28,8 +29,9 @@
       <a
         ref="button"
         @click="showOverlay($event)"
-        class="open-btn underline cursor-pointer text-seagull-400"
-        >watermark</a
+        class="open-btn border-b-[1px] border-dashed cursor-pointer hover:text-seagull-400"
+        >watermark
+        <UIcon name="i-lucide-focus" class="text-chenin-400 w-5 h-5"></UIcon></a
       >.
     </p>
     <!-- <UButton
