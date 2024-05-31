@@ -6,7 +6,7 @@
       <article>
         <h1 class="text-seagull-400 dark:text-orange-400">{{ doc.title }}</h1>
         <p class="dark:text-orange-600">{{ doc.description }}</p>
-        <ContentRenderer :value="doc" class="dark:text-orange-600" />
+        <ContentRenderer :value="doc" />
       </article>
     </ContentDoc>
   </div>

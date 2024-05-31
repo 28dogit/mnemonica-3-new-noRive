@@ -1,7 +1,7 @@
 <div class="content py-20 px-5 text-white h-full">
       <h2 class="text-4xl">Contenuto dell'overlay</h2>
       <p class="text-base font-thin">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a nisl tincidunt,
+        **Lorem** ipsum dolor sit amet, consectetur adipiscing elit. Cras a nisl tincidunt,
         ullamcorper ipsum sit amet, efficitur diam. Nullam rutrum mauris eget pretium
         porta. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
         inceptos himenaeos. Suspendisse quis blandit sem, nec semper sapien. Donec finibus
