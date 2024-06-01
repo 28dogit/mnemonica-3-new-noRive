@@ -1,6 +1,8 @@
 <template>
   <div class="max-w-[1700px] m-auto px-16">
-    <!-- <div class="box w-8 h-8 rounded bg-lime-600"></div> -->
+    <!-- <div class="box w-8 h-8 rounded bg-lime-600"></div>
+    <div class="box2 w-8 h-8 rounded bg-orange-600"></div>
+    <div class="box3 w-8 h-8 rounded bg-violet-600"></div> -->
     <!-- <ContentDoc class="sm:text-orange-500 md:text-slate-600 lg:text-lime-500" /> -->
     <ContentDoc v-slot="{ doc }">
       <article>
@@ -16,9 +18,11 @@
 //Utilizzo di Gsap
 // import { onMounted } from "vue";
 // import { gsap } from "gsap";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+// const tl = gsap.timeline({ defaults: { duration: 1, ease: "back" } });
 
 // onMounted(() => {
-//   gsap.to(".box", {
+//   tl.to(".box2", { rotation: -270 }).to(".box3", { rotation: 360 }).to(".box", {
 //     duration: 3,
 //     rotation: 360,
 //     scale: 2,
