@@ -4,7 +4,7 @@ import { iconsPlugin, getIconCollections } from "@egoist/tailwindcss-icons"
 export default <Partial<Config>>{
   darkMode: 'class',
     content: [
-      "./assetes/css/**/*.{css,scss}",
+      // "./assets/css/**/*.{css,scss}",
       "./components/**/*.{vue,js}",
       "./layouts/**/*.vue",
       "./pages/**/*.vue",
