@@ -15,6 +15,24 @@
 </template>
 
 <script setup>
+// console.groupCollapsed(
+//   "%c Site Credits",
+//   "display:block;padding:0.125em 1em;font-family:courier;font-size:14px;font-weight:bold;line-height:2;text-transform:uppercase;background:black;color:white;"
+// ),
+//   console.log(
+//     "%cDesign by Alright Studio \n– https://alright.studio",
+//     "display:block;font-family:courier;font-size:12px;font-weight:bold;line-height:1;color:black;"
+//   ),
+//   console.log(
+//     "%cDevelopment by Nick DiMatteo \n– https://nickdimatteo.com",
+//     "display:block;font-family:courier;font-size:12px;font-weight:bold;line-height:1;color:black;"
+//   ),
+//   console.groupEnd();
+
+console.groupCollapsed("Site Credits");
+console.log("ciao");
+console.log("test");
+
 //Utilizzo di Gsap
 // import { onMounted } from "vue";
 // import { gsap } from "gsap";
