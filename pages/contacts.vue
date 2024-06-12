@@ -1,6 +1,7 @@
 <template>
   <div class="max-w-[1700px] m-auto px-16">
     <ContentDoc />
+    <LoadPosts />
   </div>
 </template>
 

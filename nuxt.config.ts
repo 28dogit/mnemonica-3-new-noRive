@@ -21,5 +21,17 @@ export default defineNuxtConfig({
   plugins:[
     '@/plugins/gsap.js',
   ],
-  modules: ["@nuxt/ui", '@nuxt/content']
+  modules: ["@nuxt/ui", '@nuxt/content', '@nuxtjs/apollo'],
+  apollo: {
+    clients: {
+      default: {
+        httpEndpoint: 'https://mnemonica.com/graphql',
+      }
+    },
+    defaultOptions: {
+      query: {
+        fetchPolicy: 'no-cache',
+      },
+    }
+  },
 })
