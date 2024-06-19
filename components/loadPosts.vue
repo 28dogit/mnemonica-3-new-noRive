@@ -28,6 +28,8 @@
 </template>
 
 <script setup>
+import striptags from "striptags";
+
 const GET_POSTS = gql`
   query {
     posts(first: 100) {
@@ -49,6 +51,10 @@ const GET_POSTS = gql`
 const { result, loading, error } = useQuery(GET_POSTS);
 
 const posts = result?.value?.posts?.nodes || [];
+const postexcTest = posts[0].excerpt;
+console.log(postexcTest);
+const plainTextContent = striptags(postexcTest);
+console.log(plainTextContent);
 </script>
 
 <style scoped>
