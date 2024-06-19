@@ -28,10 +28,10 @@ export default defineNuxtConfig({
         httpEndpoint: 'https://mnemonica.com/graphql',
       }
     },
-    defaultOptions: {
-      query: {
-        fetchPolicy: 'no-cache',
-      },
-    }
+    // defaultOptions: {
+    //   query: {
+    //     fetchPolicy: 'no-cache',
+    //   },
+    // }
   },
 })
