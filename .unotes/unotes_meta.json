@@ -1,0 +1,52 @@
+{
+  "name": "",
+  "isOrdered": true,
+  "folders": {
+    "assets": {
+      "name": "assets",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "components": {
+      "name": "components",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "layouts": {
+      "name": "layouts",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "pages": {
+      "name": "pages",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "plugins": {
+      "name": "plugins",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "public": {
+      "name": "public",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "server": {
+      "name": "server",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    }
+  },
+  "files": {
+    "README": 0,
+    "ToDo Lavorazione": 1
+  }
+}
