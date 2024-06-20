@@ -10,9 +10,6 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.1.193",
-    "@iconify-json/mdi": "^1.1.66",
-    "@nuxt/content": "^2.12.1",
     "@nuxt/ui": "^2.17.0",
     "@vue/apollo-composable": "^4.0.2",
     "gsap": "^3.12.5",
@@ -23,6 +20,8 @@
   },
   "devDependencies": {
     "@egoist/tailwindcss-icons": "^1.8.1",
+    "@iconify-json/lucide": "^1.1.194",
+    "@iconify-json/mdi": "^1.1.67",
     "@nuxtjs/apollo": "^5.0.0-alpha.14",
     "sass": "^1.77.6"
   }
