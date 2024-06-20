@@ -1,11 +1,14 @@
 <template>
-  <div class="w-[1100px] max-w-[1100px] mx-auto">
+  <div class="max-w-[1100px] mx-auto md:w-[960px]">
     <div v-if="posts.length">
-      <div id="PagesCardsWrapper" class="grid grid-cols-3 gap-8">
+      <div
+        id="PagesCardsWrapper"
+        class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
         <div
           v-for="post in posts"
           :key="post.id"
-          class="PageCard bg-white dark:bg-mine-shaft-800 rounded-b-2xl drop-shadow-lg"
+          class="PageCard max-w-96 bg-white dark:bg-mine-shaft-800 rounded-b-2xl drop-shadow-lg"
         >
           <img
             :src="post.featuredImage.node.link"

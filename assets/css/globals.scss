@@ -1,20 +1,25 @@
 $mne_primary: #11cbee;
-h1{
+h1 {
     font-size: 30px;
     color: $mne_primary;
     // font-weight: bold;
     padding: 20px 0;
+    font-family: "raleway", sans-serif;
+    .light & {
+        color: #151515;
+    }
 }
-h2{
-font-size: 22px;
-color: antiquewhite;
+h2 {
+    font-size: 22px;
+    color: antiquewhite;
+    font-family: "raleway", sans-serif;
 }
-h3{
-    padding:10px 0;
-font-size: 18px;
-color: azure;
+h3 {
+    padding: 10px 0;
+    font-size: 18px;
+    color: azure;
 }
-p{
+p {
     font-size: 14px;
     line-height: 16px;
     color: white;

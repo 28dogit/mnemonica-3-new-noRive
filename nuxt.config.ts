@@ -21,7 +21,7 @@ export default defineNuxtConfig({
   plugins:[
     '@/plugins/gsap.js',
   ],
-  modules: ["@nuxt/ui", '@nuxtjs/apollo'],
+  modules: ["@nuxt/ui", '@nuxtjs/apollo', '@nuxt/fonts'],
   apollo: {
     clients: {
       default: {
@@ -33,5 +33,8 @@ export default defineNuxtConfig({
     //     fetchPolicy: 'no-cache',
     //   },
     // }
+  },
+  fonts: {
+    
   },
 })
