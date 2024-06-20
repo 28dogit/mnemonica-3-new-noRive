@@ -3,6 +3,7 @@
     <h1>WordPress Posts</h1>
     <div v-if="loading">Loading...</div>
     <div v-if="error">Error: {{ error.message }}</div>
+    <!-- class="flex flex-row flex-nowrap items-stretch justify-around gap-5" -->
     <div v-if="posts.length">
       <div id="PagesCardsWrapper" class="grid grid-cols-3 gap-3">
         <div
@@ -16,7 +17,7 @@
           />
           <div class="py-6 px-5">
             <h2 class="text-chenin-300 mb-4">{{ post.title }}</h2>
-            <p class="font-light text-base" v-html="post.cleanedExcerpt"></p>
+            <p class="font-light text-base" v-html="post.excerpt"></p>
           </div>
         </div>
       </div>
@@ -25,10 +26,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { useQuery } from "@vue/apollo-composable";
-import gql from "graphql-tag";
 import striptags from "striptags";
+import { ref, onMounted } from "vue";
 
 const GET_POSTS = gql`
   query {
@@ -36,6 +35,7 @@ const GET_POSTS = gql`
       nodes {
         id
         title
+        content
         excerpt
         featuredImage {
           node {
@@ -47,19 +47,45 @@ const GET_POSTS = gql`
     }
   }
 `;
+const { result, loading, error } = useAsyncQuery(GET_POSTS);
 
-let { result, loading, error } = useQuery(GET_POSTS);
+//const posts = result?.value?.posts?.nodes || [];
 
-let posts = ref([]);
+const posts = ref([]);
 
 onMounted(() => {
   if (result.value) {
     posts.value = result.value.posts.nodes.map((post) => ({
       ...post,
-      cleanedExcerpt: striptags(post.excerpt),
+      //content: striptags(post.content),
+      excerpt: striptags(post.excerpt),
     }));
   }
 });
+
+let isLoading = ref(true);
+let isError = ref(null);
+let isPosts = ref([]);
+
+onMounted(async () => {
+  try {
+    const { data } = await apolloClient.query({ query: GET_POSTS });
+    isPosts.value = data.posts.nodes;
+  } catch (e) {
+    isError.value = e;
+  } finally {
+    isLoading.value = false;
+  }
+});
+
+// let i = ref([]);
+
+// for (i = 0; i < posts.length; i++) {
+//   const postExcerpt = posts[i].excerpt;
+//   console.log(postExcerpt);
+//   const cleanExcerpt = striptags(postExcerpt);
+//   console.log(plainTextContent);
+// }
 </script>
 
 <style scoped>

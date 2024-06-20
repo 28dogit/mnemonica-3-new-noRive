@@ -21,6 +21,7 @@
         </div>
       </div>
     </div>
+    <button @click="loadMore">Load More</button>
   </div>
 </template>
 
@@ -31,8 +32,8 @@ import gql from "graphql-tag";
 import striptags from "striptags";
 
 const GET_POSTS = gql`
-  query {
-    posts(first: 100) {
+  query getPosts($first: Int, $after: String) {
+    posts(first: $first, after: $after) {
       nodes {
         id
         title
@@ -44,11 +45,19 @@ const GET_POSTS = gql`
           }
         }
       }
+      pageInfo {
+        endCursor
+      }
     }
   }
 `;
 
-let { result, loading, error } = useQuery(GET_POSTS);
+let first = ref(18);
+let after = ref(null);
+let { result, loading, error, fetchMore } = useQuery(GET_POSTS, {
+  first: first.value,
+  after: after.value,
+});
 
 let posts = ref([]);
 
@@ -58,10 +67,25 @@ onMounted(() => {
       ...post,
       cleanedExcerpt: striptags(post.excerpt),
     }));
+    after.value = result.value.posts.pageInfo.endCursor;
   }
 });
-</script>
 
-<style scoped>
-/* Stili del componente */
-</style>
+const loadMore = () => {
+  fetchMore({
+    variables: {
+      first: first.value,
+      after: after.value,
+    },
+    updateQuery: (previousResult, { fetchMoreResult }) => {
+      posts.value = posts.value.concat(
+        fetchMoreResult.posts.nodes.map((post) => ({
+          ...post,
+          cleanedExcerpt: striptags(post.excerpt),
+        }))
+      );
+      after.value = fetchMoreResult.posts.pageInfo.endCursor;
+    },
+  });
+};
+</script>
