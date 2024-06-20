@@ -25,7 +25,7 @@ export default defineNuxtConfig({
   apollo: {
     clients: {
       default: {
-        httpEndpoint: 'https://mnemonica.com/graphql',
+        httpEndpoint: 'https://wp-project.28do.live/graphql',
       }
     },
     // defaultOptions: {

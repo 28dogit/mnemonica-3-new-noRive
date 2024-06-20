@@ -1,10 +1,7 @@
 <template>
-  <div>
-    <h1>WordPress Posts</h1>
-    <div v-if="loading">Loading...</div>
-    <div v-if="error">Error: {{ error.message }}</div>
+  <div class="w-[1100px] max-w-[1100px] mx-auto">
     <div v-if="posts.length">
-      <div id="PagesCardsWrapper" class="grid grid-cols-3 gap-3">
+      <div id="PagesCardsWrapper" class="grid grid-cols-3 gap-8">
         <div
           v-for="post in posts"
           :key="post.id"
@@ -21,7 +18,11 @@
         </div>
       </div>
     </div>
-    <button @click="loadMore">Load More</button>
+    <UButton @click="loadMore" class="my-4">
+      <template v-if="loading"> Loading... </template>
+      <template v-else> Load More </template>
+    </UButton>
+    <div v-if="error">Error: {{ error.message }}</div>
   </div>
 </template>
 
@@ -52,7 +53,7 @@ const GET_POSTS = gql`
   }
 `;
 
-let first = ref(18);
+let first = ref(3);
 let after = ref(null);
 let { result, loading, error, fetchMore } = useQuery(GET_POSTS, {
   first: first.value,

@@ -1,5 +1,5 @@
 <template>
-  <div id="mainContent" class="w-screen bg-slate-100 dark:bg-slate-700">
+  <div id="mainContent" class="w-screen bg-slate-300 dark:bg-woodsmoke-950">
     <Header />
     <slot />
     <Footer />
