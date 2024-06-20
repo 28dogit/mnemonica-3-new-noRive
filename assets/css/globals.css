@@ -1,0 +1,24 @@
+h1 {
+  font-size: 30px;
+  color: #11cbee;
+  padding: 20px 0;
+}
+
+h2 {
+  font-size: 22px;
+  color: antiquewhite;
+}
+
+h3 {
+  padding: 10px 0;
+  font-size: 18px;
+  color: azure;
+}
+
+p {
+  font-size: 14px;
+  line-height: 16px;
+  color: white;
+  font-weight: 400;
+  padding-bottom: 10px;
+}/*# sourceMappingURL=globals.css.map */

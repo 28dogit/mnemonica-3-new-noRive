@@ -11,12 +11,18 @@
   },
   "dependencies": {
     "@nuxt/ui": "^2.17.0",
+    "@vue/apollo-composable": "^4.0.2",
     "gsap": "^3.12.5",
     "nuxt": "^3.12.2",
+    "striptags": "^3.2.0",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
   "devDependencies": {
-    "sass": "^1.77.2"
+    "@egoist/tailwindcss-icons": "^1.8.1",
+    "@iconify-json/lucide": "^1.1.194",
+    "@iconify-json/mdi": "^1.1.67",
+    "@nuxtjs/apollo": "^5.0.0-alpha.14",
+    "sass": "^1.77.6"
   }
 }

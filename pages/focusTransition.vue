@@ -1,21 +1,37 @@
 <template>
-  <div class="max-w-[1700px] px-16">
+  <div class="max-w-[1700px] m-auto px-16">
     <h1>Much More Than Screening</h1>
 
     <h3>PLAY</h3>
-    <p>Touch Day and Bin, and your playlist is ready to watch.</p>
+    <p>
+      Touch Day and Bin, and your is
+      <UChip color="seagull">ready</UChip> to watch.
+    </p>
 
     <h3>MEET</h3>
     <p>
       Review, comment, approve, import into your
-      <a ref="button" @click="showOverlay($event)" class="open-btn underline">NLEs</a>,
-      stay up to date.
+      <a
+        ref="button"
+        @click="showOverlay($event)"
+        class="open-btn underline cursor-pointer text-seagull-400"
+        >NLEs
+        <UIcon
+          name="i-mdi-focus-field-horizontal"
+          class="text-chenin-400 w-5 h-5"
+        ></UIcon></a
+      >, stay up to date.
     </p>
 
     <h3>PROTECT</h3>
     <p>
       Each Room is a secure vault with its own
-      <a ref="button" @click="showOverlay($event)" class="open-btn underline">watermark</a
+      <a
+        ref="button"
+        @click="showOverlay($event)"
+        class="open-btn border-b-[1px] border-dashed cursor-pointer hover:text-seagull-400"
+        >watermark
+        <UIcon name="i-lucide-focus" class="text-chenin-400 w-5 h-5"></UIcon></a
       >.
     </p>
     <!-- <UButton
