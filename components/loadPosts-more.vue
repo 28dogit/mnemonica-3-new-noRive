@@ -1,27 +1,30 @@
 <template>
   <div class="xl:max-w-[1100px] mx-auto md:w-[960px]">
     <div v-if="posts.length">
-      <transition-group
-        id="PagesCardsWrapper"
-        class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        name="fade"
-        tag="div"
-      >
-        <div
-          v-for="post in posts"
-          :key="post.id"
-          class="PageCard max-w-96 bg-white dark:bg-mine-shaft-800 rounded-b-2xl drop-shadow-lg"
+      <ClientOnly>
+        <TransitionGroup
+          id="PagesCardsWrapper"
+          class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          name="fade"
+          tag="div"
+          appear
         >
-          <img
-            :src="post.featuredImage.node.link"
-            :alt="post.featuredImage.node.altText"
-          />
-          <div class="py-6 px-5">
-            <h2 class="text-chenin-300 mb-4">{{ post.title }}</h2>
-            <p class="font-light text-base" v-html="post.cleanedExcerpt"></p>
+          <div
+            v-for="post in posts"
+            :key="post.id"
+            class="PageCard max-w-96 bg-white dark:bg-mine-shaft-800 rounded-b-2xl drop-shadow-lg"
+          >
+            <img
+              :src="post.featuredImage.node.link"
+              :alt="post.featuredImage.node.altText"
+            />
+            <div class="py-6 px-5">
+              <h2 class="text-chenin-300 mb-4">{{ post.title }}</h2>
+              <p class="font-light text-base" v-html="post.cleanedExcerpt"></p>
+            </div>
           </div>
-        </div>
-      </transition-group>
+        </TransitionGroup>
+      </ClientOnly>
     </div>
     <UButton @click="loadMore" class="my-4">
       <template v-if="loading"> Loading... </template>
@@ -118,11 +121,14 @@ const handleScroll = () => {
 </script>
 
 <style scoped>
+/* .fade-post {
+  transition: all 1s;
+} */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 5s;
 }
-.fade-enter,
+.fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }
