@@ -1,9 +1,11 @@
 <template>
-  <div class="max-w-[1100px] mx-auto md:w-[960px]">
+  <div class="xl:max-w-[1100px] mx-auto md:w-[960px]">
     <div v-if="posts.length">
-      <div
+      <transition-group
         id="PagesCardsWrapper"
         class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        name="fade"
+        tag="div"
       >
         <div
           v-for="post in posts"
@@ -19,7 +21,7 @@
             <p class="font-light text-base" v-html="post.cleanedExcerpt"></p>
           </div>
         </div>
-      </div>
+      </transition-group>
     </div>
     <UButton @click="loadMore" class="my-4">
       <template v-if="loading"> Loading... </template>
@@ -30,7 +32,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { useQuery } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 import striptags from "striptags";
@@ -56,7 +58,7 @@ const GET_POSTS = gql`
   }
 `;
 
-let first = ref(3);
+let first = ref(7);
 let after = ref(null);
 let { result, loading, error, fetchMore } = useQuery(GET_POSTS, {
   first: first.value,
@@ -73,6 +75,12 @@ onMounted(() => {
     }));
     after.value = result.value.posts.pageInfo.endCursor;
   }
+
+  window.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
 });
 
 const loadMore = () => {
@@ -92,4 +100,30 @@ const loadMore = () => {
     },
   });
 };
+
+const handleScroll = () => {
+  let bottomOfWindow =
+    Math.max(
+      window.pageYOffset,
+      document.documentElement.scrollTop,
+      document.body.scrollTop
+    ) +
+      window.innerHeight ===
+    document.documentElement.offsetHeight;
+
+  if (bottomOfWindow) {
+    loadMore();
+  }
+};
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

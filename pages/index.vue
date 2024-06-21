@@ -46,9 +46,9 @@
 </template>
 
 <script setup>
-console.groupCollapsed("Site Credits");
-console.log("ciao");
-console.log("test");
+// console.groupCollapsed("Site Credits");
+// console.log("ciao");
+// console.log("test");
 
 //Utilizzo di Gsap
 // import { onMounted } from "vue";
