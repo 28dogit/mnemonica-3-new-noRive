@@ -14,9 +14,11 @@
             :key="post.id"
             class="PageCard max-w-96 bg-white dark:bg-mine-shaft-800 rounded-b-2xl drop-shadow-lg"
           >
-            <img
+            <nuxt-img
+              fit="cover"
               :src="post.featuredImage.node.link"
               :alt="post.featuredImage.node.altText"
+              class="w-full h-auto"
             />
             <div class="py-6 px-5">
               <h2 class="text-chenin-300 mb-4">{{ post.title }}</h2>
@@ -35,7 +37,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
 import { useQuery } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 import striptags from "striptags";
@@ -69,6 +71,21 @@ let { result, loading, error, fetchMore } = useQuery(GET_POSTS, {
 });
 
 let posts = ref([]);
+
+// Aggiorna i post ogni volta che result cambia per forzare il caricamento iniziale
+watch(
+  result,
+  (newValue) => {
+    if (newValue && newValue.posts) {
+      posts.value = newValue.posts.nodes.map((post) => ({
+        ...post,
+        cleanedExcerpt: striptags(post.excerpt),
+      }));
+      after.value = newValue.posts.pageInfo.endCursor;
+    }
+  },
+  { immediate: true }
+);
 
 onMounted(() => {
   if (result.value) {
@@ -107,7 +124,7 @@ const loadMore = () => {
 const handleScroll = () => {
   let bottomOfWindow =
     Math.max(
-      window.pageYOffset,
+      window.scrollY,
       document.documentElement.scrollTop,
       document.body.scrollTop
     ) +
