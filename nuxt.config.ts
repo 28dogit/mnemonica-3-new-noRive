@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     baseURL: '/mne/', // Assicurati che il percorso sia seguito da una barra finale
     // layoutTransition: { name: 'layout', mode: 'out-in' }
   },
+
   devtools: {
     enabled: true,
 
@@ -11,17 +12,22 @@ export default defineNuxtConfig({
       enabled: true
     }
   },
+
   css: ['~/assets/css/main.css'],
+
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
+
   plugins:[
     '@/plugins/gsap.js',
   ],
+
   modules: ["@nuxt/ui", '@nuxtjs/apollo', '@nuxt/fonts', '@nuxt/image'],
+
   apollo: {
     clients: {
       default: {
@@ -34,7 +40,10 @@ export default defineNuxtConfig({
     //   },
     // }
   },
+
   fonts: {
     
   },
+
+  compatibilityDate: '2024-07-10',
 })
