@@ -11,7 +11,7 @@
         :r="circle.radius"
         fill="none"
         :stroke="circle.color"
-        stroke-width="5"
+        stroke-width="1"
       />
     </svg>
   </div>
@@ -27,7 +27,7 @@
           :r="circle.radius"
           fill="none"
           :stroke="circle.color"
-          stroke-width="0.5"
+          stroke-width="2"
         />
       </svg>
     </div>
@@ -43,10 +43,10 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const circles = ref([
-  { radius: 45, color: "#ff6b6b" },
-  { radius: 35, color: "#feca57" },
-  { radius: 25, color: "#48dbfb" },
-  { radius: 15, color: "#ff9ff3" },
+  { radius: 20, color: "#ff6b6b" },
+  { radius: 25, color: "#feca57" },
+  { radius: 30, color: "#48dbfb" },
+  { radius: 35, color: "#ff9ff3" },
 ]);
 onMounted(() => {
   gsap.to(".circle", {
@@ -68,9 +68,12 @@ onMounted(() => {
     gsap.from(circle, {
       scrollTrigger: {
         trigger: ".circle",
-        start: "top top+=150",
-        end: "bottom top+=50",
-        scrub: true,
+        pin: true,
+        // start: "top top+=150",
+        // end: "bottom top+=50",
+        start: `top+=${index * 30} top+=150`,
+        end: `top+=${(index + 1) * 30} top+=150`,
+        scrub: 3,
         markers: true, // Rimuovi questa riga in produzione
       },
       rotation: 360,
@@ -79,7 +82,11 @@ onMounted(() => {
       transformOrigin: "50% 50%",
       ease: "power1.inOut",
       duration: 2,
-      delay: index * 0.5,
+      //delay: index * 0.5,
+      // stagger: {
+      //   each: 0.5,
+      //   from: "start",
+      // },
     });
   });
 });
@@ -87,14 +94,17 @@ onMounted(() => {
 
 <style scoped>
 .scroll-container {
-  /* height: 300vh; */
+  height: 100vh;
+  overflow-y: scroll;
 }
-
 .animation-container {
   /* height: 100vh; */
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.c1rcle {
+  opacity: 0.5;
 }
 svg {
   width: 300px;

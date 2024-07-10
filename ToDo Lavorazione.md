@@ -10,3 +10,7 @@ Thu, Jun 20, 2024 6:08 PM
 5. Inserire la data nella Scheda dei post caricati
 6. Impostare le media queries (soprattutto gestire le card dei post News)
 7. inserire il filtraggio nella pagina News basata sule gategorie o i tag (controllare su mnemonica)
+
+## Gsap Animazioni
+
+1. Risolvere il problema del pin dei cerchi concentrici (forse fare i cerchi manualmente e non con ciclo for)
