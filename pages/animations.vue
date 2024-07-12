@@ -1,37 +1,59 @@
 <template>
-  <div>
+  <div class="h-[300vh]">
     <h1>Animations Page</h1>
-    <svg viewBox="0 0 200 200" width="300" height="300">
-      <circle
-        v-for="(circle, index) in circles"
-        :key="index"
-        class="circle"
-        cx="50"
-        cy="50"
-        :r="circle.radius"
+    <div class="dots">
+      <div class="dot a"></div>
+      <div class="dot b"></div>
+      <div class="dot c"></div>
+      <div class="dot d"></div>
+    </div>
+    <div class="C_Container flex justify-center items-center">
+      <svg
+        width="191"
+        height="94"
+        viewBox="0 0 191 94"
         fill="none"
-        :stroke="circle.color"
-        stroke-width="1"
-      />
-    </svg>
-  </div>
-  <div class="scroll-container">
-    <div class="animation-container">
-      <svg viewBox="0 0 100 100">
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g mask="url(#theMask5)">
+          <path
+            d="M0 0 44 49 117 49"
+            stroke="#9898A0"
+            stroke-dasharray="2 4"
+            stroke-linecap="round"
+          ></path>
+        </g>
+      </svg>
+      <svg
+        width="191"
+        height="94"
+        viewBox="0 0 191 94"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g mask="url(#theMask6)">
+          <path
+            d="M0 0 53-25 102-25"
+            stroke="#9898A0"
+            stroke-dasharray="2 4"
+            stroke-linecap="round"
+          ></path>
+        </g>
+      </svg>
+      <svg viewBox="0 0 100 100" width="300" height="300">
         <circle
           v-for="(circle, index) in circles"
           :key="index"
-          class="c1rcle"
+          class="circle"
           cx="50"
           cy="50"
           :r="circle.radius"
-          fill="none"
+          :fill="circle.fill"
           :stroke="circle.color"
-          stroke-width="2"
+          :stroke-width="circle.strokeWidth"
         />
       </svg>
     </div>
-    <div class="spacer"></div>
   </div>
 </template>
 
@@ -39,75 +61,87 @@
 import { ref, onMounted } from "vue";
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { _strokeWidth } from "#tailwind-config/theme";
 
 gsap.registerPlugin(ScrollTrigger);
-
 const circles = ref([
-  { radius: 20, color: "#ff6b6b" },
-  { radius: 25, color: "#feca57" },
-  { radius: 30, color: "#48dbfb" },
-  { radius: 35, color: "#ff9ff3" },
+  { radius: 15, color: "#ff6b6b", fill: "#ff6b6b", strokeWidth: 2 },
+  { radius: 20, color: "#ff6b6b", fill: "none", strokeWidth: 2 },
+  { radius: 25, color: "#feca57", fill: "none", strokeWidth: 2 },
+  { radius: 30, color: "#48dbfb", fill: "none", strokeWidth: 2 },
+  { radius: 35, color: "#ff9ff3", fill: "none", strokeWidth: 2 },
 ]);
+
 onMounted(() => {
-  gsap.to(".circle", {
-    duration: 4,
-    rotation: 360,
-    scale: 0.5,
-    opacity: 0,
-    //transformOrigin: "50% 50%",
-    ease: "power1.inOut",
-    stagger: {
-      each: 0.3,
-      repeat: -1,
-      yoyo: true,
+  gsap.to(".dot", {
+    scale: 1,
+    duration: 3,
+    x: 0,
+    y: function (index, target, targets) {
+      return `${4 * index - 6}rem`;
+    },
+    scrollTrigger: {
+      trigger: ".dots",
+      start: "center top+=350",
+      end: "center+=350 top+=350",
+      scrub: 1,
+      pin: ".dots",
+      markers: true,
     },
   });
 
-  const circleElements = document.querySelectorAll(".c1rcle");
-  circleElements.forEach((circle, index) => {
-    gsap.from(circle, {
-      scrollTrigger: {
-        trigger: ".circle",
-        pin: true,
-        // start: "top top+=150",
-        // end: "bottom top+=50",
-        start: `top+=${index * 30} top+=150`,
-        end: `top+=${(index + 1) * 30} top+=150`,
-        scrub: 3,
-        markers: true, // Rimuovi questa riga in produzione
-      },
-      rotation: 360,
-      scale: 0,
-      opacity: 0,
-      transformOrigin: "50% 50%",
-      ease: "power1.inOut",
-      duration: 2,
-      //delay: index * 0.5,
-      // stagger: {
-      //   each: 0.5,
-      //   from: "start",
-      // },
-    });
+  gsap.to(".circle", {
+    opacity: 1,
+    duration: 3,
+    scrollTrigger: {
+      trigger: ".C_Container",
+      start: "center top+=350",
+      end: "center+=350 top+=350",
+      scrub: 1,
+      pin: ".C_Container",
+      markers: true,
+    },
+    stagger: {
+      each: 0.5,
+      from: "start",
+    },
   });
 });
 </script>
 
 <style scoped>
-.scroll-container {
-  height: 100vh;
-  overflow-y: scroll;
+.circle {
+  opacity: 0;
 }
-.animation-container {
-  /* height: 100vh; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.dots {
+  position: absolute;
+  top: 50vh;
+  left: 50%;
+  margin-left: -400px;
+  z-index: 9999999;
 }
-.c1rcle {
-  opacity: 0.5;
+.dot {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: red;
+  position: absolute;
+  top: -1.5rem;
+  left: -1.5rem;
 }
-svg {
-  width: 300px;
-  height: 300px;
+.a {
+  transform: translate(-4rem, -4rem);
+}
+
+.b {
+  transform: translate(4rem, -4rem);
+}
+
+.c {
+  transform: translate(4rem, 4rem);
+}
+
+.d {
+  transform: translate(-4rem, 4rem);
 }
 </style>
