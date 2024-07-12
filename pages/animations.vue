@@ -90,14 +90,16 @@ onMounted(() => {
     },
   });
 
-  gsap.to(".circle", {
-    opacity: 1,
+  gsap.from(".circle", {
+    opacity: 0,
+    scale: 1.3,
     duration: 3,
+    transformOrigin: "50% 50%",
     scrollTrigger: {
       trigger: ".C_Container",
       start: "center top+=350",
       end: "center+=350 top+=350",
-      scrub: 1,
+      scrub: 3,
       pin: ".C_Container",
       markers: true,
     },
@@ -110,15 +112,11 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.circle {
-  opacity: 0;
-}
 .dots {
   position: absolute;
   top: 50vh;
   left: 50%;
   margin-left: -400px;
-  z-index: 9999999;
 }
 .dot {
   width: 3rem;
