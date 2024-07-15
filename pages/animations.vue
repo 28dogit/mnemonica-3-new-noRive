@@ -1,6 +1,14 @@
 <template>
   <div class="h-[600vh]">
     <h1>Animations Page</h1>
+    <div class="hero">
+      <NuxtImg
+        src="/img/Ghirlanda-960-web.png"
+        alt="mnemonica"
+        sizes="50vw sm:80vw md:400px"
+        class="hero_img mx-auto opacity-0"
+      />
+    </div>
     <div
       class="C_Container flex justify-center items-center border-b-2 border-blue-500 border-dashed pb-28"
     >
@@ -126,6 +134,12 @@ const circles = ref([
 ]);
 
 onMounted(() => {
+  gsap.to(".hero_img", {
+    opacity: 0.7,
+    duration: 2,
+    ease: "power2.inOut",
+  });
+
   gsap.from(".circle", {
     opacity: 0,
     scale: 1.3,
@@ -223,4 +237,20 @@ onMounted(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.hero {
+  background-image: linear-gradient(
+      100deg,
+      rgba(0, 36, 58, 0.6),
+      rgba(0, 36, 58, 0.6),
+      rgba(7, 86, 111, 0.6),
+      rgba(7, 86, 111, 0.6),
+      rgba(0, 36, 58, 0.6),
+      rgba(0, 36, 58, 0.6)
+        /* rgba(58, 205, 252, 0.6),
+      rgba(255, 71, 179, 0.6),
+      rgba(255, 151, 38, 0.6) */
+    ),
+    linear-gradient(#1e063c, #1e063c);
+}
+</style>
