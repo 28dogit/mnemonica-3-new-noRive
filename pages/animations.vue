@@ -202,7 +202,7 @@ onMounted(() => {
       end: "bottom center",
       scrub: 1,
       pin: ".pathDots",
-      onUpdate: ({ progress }) => console.log(progress), //  info for position
+      // onUpdate: ({ progress }) => console.log(progress), //  info for position
       markers: true,
     },
   });
