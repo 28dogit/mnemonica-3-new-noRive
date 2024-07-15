@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[600vh]">
+  <div class="h-[300vh]">
     <h1>Animations Page</h1>
     <div
       class="C_Container flex justify-center items-center border-b-2 border-blue-500 border-dashed pb-28"
@@ -87,23 +87,14 @@
         </g>
       </svg>
     </div>
-    <div class="pathDots py-14 h-[900px]">
-      <svg width="903" height="300" viewBox="0 0 903 209" fill="none" class="mx-auto">
-        <g id="Path-Dots">
-          <path
-            id="c_path"
-            d="M20 126C51 87.3333 137.2 11.7999 234 18.9999C355 27.9999 388 215 470 186C552 157 627 -5 696 27C765 59 846 115 884 96"
-            stroke="white"
-            stroke-width="2"
-          />
-          <circle id="c1" cx="19.5" cy="128.5" r="19.5" fill="#D9D9D9" />
-          <circle id="c2" cx="231.5" cy="19.5" r="19.5" fill="#D9D9D9" />
-          <circle id="c3" cx="451.5" cy="189.5" r="19.5" fill="#D9D9D9" />
-          <circle id="c4" cx="672.5" cy="24.5" r="19.5" fill="#D9D9D9" />
-          <circle id="c5" cx="883.5" cy="97.5" r="19.5" fill="#D9D9D9" />
-        </g>
-      </svg>
-    </div>
+    <!-- <div class="speradDot">
+      <div class="dots">
+        <div class="dot a"></div>
+        <div class="dot b"></div>
+        <div class="dot c"></div>
+        <div class="dot d"></div>
+      </div>
+    </div> -->
   </div>
 </template>
 
@@ -112,10 +103,10 @@ import { ref, onMounted } from "vue";
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import DrawSVGPlugin from "gsap/DrawSVGPlugin";
-import MotionPathPlugin from "gsap/MotionPathPlugin";
 import { _strokeWidth } from "#tailwind-config/theme";
 
-gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, MotionPathPlugin);
+gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(DrawSVGPlugin);
 
 const circles = ref([
   { radius: 15, color: "#ff6b6b", fill: "#ff6b6b", strokeWidth: 2 },
@@ -126,6 +117,23 @@ const circles = ref([
 ]);
 
 onMounted(() => {
+  // gsap.to(".dot", {
+  //   scale: 1,
+  //   duration: 3,
+  //   x: 0,
+  //   y: function (index, target, targets) {
+  //     return `${4 * index - 6}rem`;
+  //   },
+  //   scrollTrigger: {
+  //     trigger: ".dots",
+  //     start: "center top+=350",
+  //     end: "center+=350 top+=350",
+  //     scrub: 1,
+  //     pin: ".dots",
+  //     markers: true,
+  //   },
+  // });
+
   gsap.from(".circle", {
     opacity: 0,
     scale: 1.3,
@@ -176,51 +184,38 @@ onMounted(() => {
   tl.from("#Label2", {
     opacity: 0,
   });
-
-  //animazione per pathDots
-
-  var stops = gsap.utils.toArray("circle");
-  const tlp = gsap.timeline({
-    defaults: { duration: 1, ease: "back" },
-    scrollTrigger: {
-      trigger: ".pathDots",
-      start: "top center-=150",
-      end: "bottom center",
-      scrub: 1,
-      pin: ".pathDots",
-      onUpdate: ({ progress }) => console.log(progress), //  info for position
-      markers: true,
-    },
-  });
-  tlp.from("#c_path", {
-    drawSVG: "0",
-  });
-  tlp.from(
-    "#c1",
-    { transformOrigin: "50% 50%", scale: 1, opacity: 0, fill: "red" },
-    0.01
-  );
-  tlp.from(
-    "#c2",
-    { transformOrigin: "50% 50%", scale: 1.5, opacity: 0, fill: "red" },
-    0.05627
-  );
-  tlp.from(
-    "#c3",
-    { transformOrigin: "50% 50%", scale: 2, opacity: 0, fill: "red" },
-    0.1233
-  );
-  tlp.from(
-    "#c4",
-    { transformOrigin: "50% 50%", scale: 0.6, opacity: 0, fill: "red" },
-    0.2034
-  );
-  tlp.from(
-    "#c5",
-    { transformOrigin: "50% 50%", scale: 1, opacity: 0, fill: "red" },
-    0.316
-  );
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+/* .dots {
+  position: relative;
+  top: 50px;
+  left: 50%;
+  margin-left: -400px;
+}
+.dot {
+  width: 3rem;              
+  height: 3rem;
+  border-radius: 50%;
+  background: red;
+  position: absolute;
+  top: -1.5rem;
+  left: -1.5rem;
+}
+.a {
+  transform: translate(-4rem, -4rem);
+}
+
+.b {
+  transform: translate(4rem, -4rem);
+}
+
+.c {
+  transform: translate(4rem, 4rem);
+}
+
+.d {
+  transform: translate(-4rem, 4rem);
+} */
+</style>
