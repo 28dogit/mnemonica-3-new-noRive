@@ -1,16 +1,16 @@
 <template>
   <div class="h-[600vh]">
     <h1>Animations Page</h1>
-    <div class="hero">
+    <!-- <div class="hero">
       <NuxtImg
         src="/img/Ghirlanda-960-web.png"
         alt="mnemonica"
         sizes="50vw sm:80vw md:400px"
         class="hero_img mx-auto opacity-0"
       />
-    </div>
+    </div> -->
     <div
-      class="C_Container flex justify-center items-center border-b-2 border-blue-500 border-dashed pb-28"
+      class="C_Container flex justify-center items-center border-b-2 border-slate-800 border-dashed pb-28"
     >
       <svg viewBox="0 0 100 100" width="300" height="300">
         <circle
@@ -26,7 +26,7 @@
         />
       </svg>
     </div>
-    <div class="circle-label border-b-2 border-blue-500 border-dashed pb-28">
+    <div class="circle-label border-b-2 border-slate-800 border-dashed pb-28">
       <svg
         width="560"
         height="700"
@@ -202,7 +202,7 @@ onMounted(() => {
       end: "bottom center",
       scrub: 1,
       pin: ".pathDots",
-      // onUpdate: ({ progress }) => console.log(progress), //  info for position
+      onUpdate: ({ progress }) => console.log(progress), //  info for position
       markers: true,
     },
   });
@@ -240,17 +240,17 @@ onMounted(() => {
 <style scoped>
 .hero {
   background-image: linear-gradient(
-      100deg,
-      rgba(0, 36, 58, 0.6),
-      rgba(0, 36, 58, 0.6),
-      rgba(7, 86, 111, 0.6),
-      rgba(7, 86, 111, 0.6),
-      rgba(0, 36, 58, 0.6),
-      rgba(0, 36, 58, 0.6)
-        /* rgba(58, 205, 252, 0.6),
+    100deg,
+    rgba(0, 36, 58, 0.6),
+    rgba(0, 36, 58, 0.6),
+    rgba(7, 86, 111, 0.6),
+    rgba(7, 86, 111, 0.6),
+    rgba(0, 36, 58, 0.6),
+    rgba(0, 36, 58, 0.6)
+      /* rgba(58, 205, 252, 0.6),
       rgba(255, 71, 179, 0.6),
       rgba(255, 151, 38, 0.6) */
-    ),
-    linear-gradient(#1e063c, #1e063c);
+  );
+  /* linear-gradient(#1e063c, #1e063c); */
 }
 </style>
