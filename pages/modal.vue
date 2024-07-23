@@ -1,0 +1,90 @@
+<template>
+  <div>
+    <h1>Modali test</h1>
+    <dialog id="mioModale" class="bg-slate-500 w-96 h-96 rounded-lg" ref="myModal">
+      <h1>
+        <Title>Titolo dell modale</Title>
+        <p>
+          Corpo del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
+          quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
+          perspiciatis deleniti.
+        </p>
+        <button @click="closeModal">chiudi X</button>
+      </h1>
+    </dialog>
+    <button @click="openModal" class="bg-slate-500 rounded-2xl text-gray-900 p-2">
+      show the modal
+    </button>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted, computed } from "vue";
+import { gsap } from "gsap/gsap-core";
+
+const myModal = ref(null); //imposto la ref
+//controllo il rapporto tra altezza e larghezza della viewport
+const isPortrait = computed(() => {
+  return window.innerHeight > window.innerWidth;
+});
+
+//imposto le props da passare in base al rapporto della viewport
+//creo la funzione (freccia) AnimationProps che passerà isOpening come come parametro booleano che indica se il modale si sta aprendo (true) o chiudendo (false)
+const AnimationProps = (isOpening) => {
+  //se isPortait è valido
+  if (isPortrait.value) {
+    // Entrata dal basso per orientamento verticale
+    return {
+      y: isOpening ? 100 : 0, //isOpening true = si sta aprendo e y sarà 100, se è false si sta chiudendo quindi y sarà 0
+      x: 0,
+      opacity: isOpening ? 0 : 1,
+    };
+  } else {
+    // Entrata da destra per orientamento orizzontale, in questo caso usiamo la x
+    return {
+      x: isOpening ? 100 : 0,
+      y: 0,
+      opacity: isOpening ? 0 : 1,
+    };
+  }
+};
+//i valori di questa funzione x,y,opacity vengono passati a gisap per l'animazione
+
+//apro il modale
+const openModal = () => {
+  myModal.value.showModal();
+  //prendo i valori delle props
+  const { x, y, opacity } = AnimationProps(true);
+  //le passo a gsap
+  gsap.fromTo(
+    myModal.value,
+    { opacity, x, y },
+    { opacity: 1, x: 0, y: 0, duration: 0.5, ease: "power2.out" }
+    // { opacity: 0, x: 50 },
+    // { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }
+  );
+};
+//chiudo il modale
+const closeModal = () => {
+  const { x, y, opacity } = AnimationProps(false);
+  gsap.to(myModal.value, {
+    opacity,
+    x,
+    y,
+    duration: 0.5,
+    ease: "power2.in",
+    onComplete: () => myModal.value.close(),
+  });
+};
+
+onMounted(() => {
+  // Aggiorna isPortrait quando la finestra viene ridimensionata
+  window.addEventListener("resize", () => {
+    isPortrait.value = window.innerHeight > window.innerWidth;
+  });
+  console.log(isPortrait.value + " - situazione verticale/orizzontale");
+});
+</script>
+
+<style></style>

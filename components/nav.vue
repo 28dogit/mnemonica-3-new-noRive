@@ -9,6 +9,9 @@
           <nuxt-link to="/animations">Animations</nuxt-link>
         </li>
         <li class="dark:hover:text-chenin-300 hover:text-seagull-400">
+          <nuxt-link to="/modal">Modals</nuxt-link>
+        </li>
+        <li class="dark:hover:text-chenin-300 hover:text-seagull-400">
           <nuxt-link to="/news">News</nuxt-link>
         </li>
         <li class="dark:hover:text-chenin-300 hover:text-seagull-400">
