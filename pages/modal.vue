@@ -1,6 +1,24 @@
 <template>
-  <div>
+  <div class="p-5">
     <h1>Modali test</h1>
+    <p class="text-xl">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse suscipit quos nisi
+      accusantium ad. Iure tenetur itaque saepe veritatis soluta, dicta, ipsa ab ea
+      officia ducimus doloribus blanditiis a odio. <br />Lorem ipsum dolor, sit amet
+      consectetur adipisicing elit. Esse suscipit quos nisi accusantium ad. Iure tenetur
+      itaque saepe veritatis soluta, dicta, ipsa ab ea officia ducimus doloribus
+      blanditiis a odio.
+      <span>
+        <button @click="openModal" class="bg-slate-800 text-orange-500 px-3">
+          Focus
+        </button>
+      </span>
+    </p>
+    <p class="text-xl">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse suscipit quos nisi
+      accusantium ad. Iure tenetur itaque saepe veritatis soluta, dicta, ipsa ab ea
+      officia ducimus doloribus blanditiis a odio.
+    </p>
     <dialog
       id="mioModale"
       class="bg-slate-500"
@@ -12,10 +30,13 @@
       <div ref="modalContent" class="modal-content" id="m-content">
         <button
           @click="closeModal"
-          class="bg-orange-500 rounded-full absolute top-[20px] left-[20px] w-9 h-9 flex items-center justify-center"
+          class="modal-x-btn bg-orange-500 rounded-full absolute top-[20px] left-[20px] w-9 h-9 flex items-center justify-center"
         >
           <UIcon name="i-heroicons-x-mark" class="text-woodsmoke-950 w-5 h-5"></UIcon>
         </button>
+        <svg width="100" height="100">
+          <circle id="x-circle" cx="38" cy="38" r="17" stroke-width="0" fill="#ffffff" />
+        </svg>
         <div ref="modalInner" class="modal-inner">
           <p class="modal-block">
             Corpo del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -63,9 +84,6 @@
         </div>
       </div>
     </dialog>
-    <button @click="openModal" class="bg-orange-500 rounded-2xl text-gray-900 p-2">
-      show the modal
-    </button>
   </div>
 </template>
 
@@ -80,13 +98,8 @@ gsap.registerPlugin(ScrollToPlugin);
 const myModal = ref(null);
 const modalContent = ref(null);
 const modalInner = ref(null);
-
-//controllo il rapporto tra altezza e larghezza della viewport
-// const isPortrait = computed(() => {
-//   return window.innerHeight > window.innerWidth;
-// });
-
 const { width, height } = useWindowSize();
+
 //controllo il rapporto tra altezza e larghezza della viewport
 const isPortrait = computed(() => {
   return height.value > width.value;
@@ -112,12 +125,12 @@ const AnimationProps = (isOpening) => {
     };
   }
 };
-//i valori di questa funzione x,y,opacity vengono passati a gisap per l'animazione
+//i valori di questa funzione x,y,opacity vengono passati a gsap per l'animazione
 
 //apro il modale
 const openModal = () => {
-  myModal.value.showModal();
-  //prendo i valori delle props dalla funzione AnimationProps passando idOpening=true
+  //myModal.value.showModal();
+  //prendo i valori delle props dalla funzione AnimationProps passando isOpening=true
   const { x, y, opacity } = AnimationProps(true);
   //le passo a gsap
   gsap.fromTo(
@@ -153,7 +166,38 @@ const handleScroll = (event) => {
 };
 
 onMounted(() => {
+  //metto in pausa l'animazione di apertura del modale
+  gsap
+    .fromTo(
+      myModal.value,
+      { opacity: 0, x: "100%", y: "100%" },
+      { opacity: 1, x: "0%", y: "0%", duration: 0.5, ease: "power2.out" }
+    )
+    .pause();
+
   modalInner.value.addEventListener("wheel", handleScroll, { passive: false });
+
+  const cClose = document.querySelector(".modal-x-btn");
+
+  const animation = gsap.fromTo(
+    "#x-circle",
+    { opacity: 0, scale: 1, transformOrigin: "58% 50%", rotate: 0 },
+    {
+      scale: 1.3,
+      opacity: 0.3,
+      rotate: 360,
+      duration: 0.3,
+      ease: "power2",
+      transformOrigin: "58% 50%",
+      // repeat: -1,
+      // yoyo: true,
+    }
+  );
+
+  animation.pause();
+
+  cClose.addEventListener("mouseenter", () => animation.play());
+  cClose.addEventListener("mouseleave", () => animation.reverse());
 });
 
 onBeforeUnmount(() => {
@@ -180,11 +224,15 @@ dialog {
   height: 100%;
 }
 .modal-inner {
+  padding: 80px 3% 20px 3%;
   display: flex;
   align-items: center;
   flex-direction: column;
   overflow: auto;
   white-space: normal;
+}
+.modal-inner .modal-block {
+  margin-bottom: 4%;
 }
 
 .horizontal .modal-inner {
@@ -193,6 +241,7 @@ dialog {
   overflow-x: auto;
   overflow-y: hidden;
   height: 100%;
+  padding-left: 60px;
 }
 
 .modal-inner p {
