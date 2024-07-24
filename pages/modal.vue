@@ -10,8 +10,12 @@
       <!-- aggiungo una classe dinamica horizontal che viene aggiunta quando la viewport non è portrait -->
 
       <div ref="modalContent" class="modal-content" id="m-content">
-        <h1>Titolo del modale</h1>
-        <button @click="closeModal" class="bg-orange-500 p-4 rounded-lg">chiudi X</button>
+        <button
+          @click="closeModal"
+          class="bg-orange-500 rounded-full absolute top-[20px] left-[20px] w-9 h-9 flex items-center justify-center"
+        >
+          <UIcon name="i-heroicons-x-mark" class="text-woodsmoke-950 w-5 h-5"></UIcon>
+        </button>
         <div ref="modalInner" class="modal-inner">
           <p class="modal-block">
             Corpo del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -172,6 +176,9 @@ dialog {
   flex-direction: column;
   z-index: 9999999999;
 }
+.modal-content {
+  height: 100%;
+}
 .modal-inner {
   display: flex;
   align-items: center;
@@ -185,6 +192,7 @@ dialog {
   white-space: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
+  height: 100%;
 }
 
 .modal-inner p {
@@ -193,8 +201,11 @@ dialog {
   color: black;
 }
 .horizontal .modal-inner .modal-block {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   min-width: 400px;
+  height: 100%;
   margin-right: 20px;
   text-wrap: wrap;
 }
