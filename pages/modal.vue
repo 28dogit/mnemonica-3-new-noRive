@@ -3,70 +3,80 @@
     <h1>Modali test</h1>
     <dialog
       id="mioModale"
-      class="bg-slate-500 pt-[150px]"
+      class="bg-slate-500"
       ref="myModal"
       :class="{ horizontal: !isPortrait }"
     >
       <!-- aggiungo una classe dinamica horizontal che viene aggiunta quando la viewport non è portrait -->
-      <h1>
-        <Title>Titolo dell modale</Title>
-        <p>
-          Corpo del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
-          quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
-          perspiciatis deleniti.
-        </p>
-        <button @click="closeModal">chiudi X</button>
-        <p>
-          Blocco 1 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
-          quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
-          perspiciatis deleniti.
-        </p>
-        <p>
-          Blocco 2 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
-          quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
-          perspiciatis deleniti.
-        </p>
-        <p>
-          Blocco 3 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
-          quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
-          perspiciatis deleniti.
-        </p>
-        <p>
-          Blocco 4 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
-          quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
-          perspiciatis deleniti.
-        </p>
-        <p>
-          Blocco 5 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
-          quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
-          perspiciatis deleniti.
-        </p>
-        <p>
-          Blocco 6 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
-          quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
-          perspiciatis deleniti.
-        </p>
-      </h1>
+
+      <div ref="modalContent" class="modal-content" id="m-content">
+        <h1>Titolo del modale</h1>
+        <button @click="closeModal" class="bg-orange-500 p-4 rounded-lg">chiudi X</button>
+        <div ref="modalInner" class="modal-inner">
+          <p class="modal-block">
+            Corpo del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
+            quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
+            perspiciatis deleniti.
+          </p>
+          <p class="modal-block">
+            Blocco 1 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
+            quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
+            perspiciatis deleniti.
+          </p>
+          <div class="modal-block">
+            <h1>Titolo blocco 3</h1>
+            Blocco 2 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
+            quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
+            perspiciatis deleniti.
+          </div>
+          <p class="modal-block">
+            Blocco 3 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
+            quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
+            perspiciatis deleniti.
+          </p>
+          <p class="modal-block">
+            Blocco 4 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
+            quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
+            perspiciatis deleniti.
+          </p>
+          <p class="modal-block">
+            Blocco 5 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
+            quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
+            perspiciatis deleniti.
+          </p>
+          <p class="modal-block">
+            Blocco 6 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
+            quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
+            perspiciatis deleniti.
+          </p>
+        </div>
+      </div>
     </dialog>
-    <button @click="openModal" class="bg-slate-500 rounded-2xl text-gray-900 p-2">
+    <button @click="openModal" class="bg-orange-500 rounded-2xl text-gray-900 p-2">
       show the modal
     </button>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 import { gsap } from "gsap/gsap-core";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { useWindowSize } from "@vueuse/core";
 
-const myModal = ref(null); //imposto la ref
+gsap.registerPlugin(ScrollToPlugin);
+
+const myModal = ref(null);
+const modalContent = ref(null);
+const modalInner = ref(null);
+
 //controllo il rapporto tra altezza e larghezza della viewport
 // const isPortrait = computed(() => {
 //   return window.innerHeight > window.innerWidth;
@@ -125,11 +135,25 @@ const closeModal = () => {
   });
 };
 
+const handleScroll = (event) => {
+  if (!isPortrait.value) {
+    event.preventDefault();
+    gsap.to(modalInner.value, {
+      scrollTo: {
+        x: modalInner.value.scrollLeft + event.deltaY * 6,
+      },
+      ease: "power2",
+      duration: 0.5,
+    });
+  }
+};
+
 onMounted(() => {
-  // Aggiorna isPortrait quando la finestra viene ridimensionata
-  // window.addEventListener("resize", () => {
-  //   isPortrait.value = window.innerHeight > window.innerWidth;
-  // });
+  modalInner.value.addEventListener("wheel", handleScroll, { passive: false });
+});
+
+onBeforeUnmount(() => {
+  modalInner.value.removeEventListener("wheel", handleScroll);
 });
 </script>
 
@@ -137,8 +161,8 @@ onMounted(() => {
 dialog {
   max-width: none;
   max-height: none;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -146,9 +170,32 @@ dialog {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  z-index: 9999999999;
 }
-dialog p {
+.modal-inner {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow: auto;
+  white-space: normal;
+}
+
+.horizontal .modal-inner {
+  flex-direction: row;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.modal-inner p {
   font-size: 30px;
   line-height: 45px;
+  color: black;
+}
+.horizontal .modal-inner .modal-block {
+  display: inline-block;
+  min-width: 400px;
+  margin-right: 20px;
+  text-wrap: wrap;
 }
 </style>
