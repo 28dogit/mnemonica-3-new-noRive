@@ -1,5 +1,5 @@
 <template>
-  <div class="p-5">
+  <div class="p-5 max-w-4xl">
     <h1>Modali test</h1>
     <p class="text-xl">
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse suscipit quos nisi
@@ -44,18 +44,25 @@
             quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
             perspiciatis deleniti.
           </p>
+          <NuxtImg
+            class="modal-block"
+            src="img/mia2023-mnemonica.jpg"
+            sizes="600px"
+          ></NuxtImg>
           <p class="modal-block">
             Blocco 1 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
             quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
             perspiciatis deleniti.
           </p>
-          <div class="modal-block">
+          <div class="modal-block min-w-80">
             <h1>Titolo blocco 3</h1>
-            Blocco 2 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
-            quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
-            perspiciatis deleniti.
+            <h3>
+              Blocco 2 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
+              elit. Eligendi, earum facilis labore voluptatum nemo optio iste voluptates,
+              ducimus quas autem atque! Aspernatur temporibus fuga assumenda! Impedit
+              neque amet perspiciatis deleniti.
+            </h3>
           </div>
           <p class="modal-block">
             Blocco 3 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -253,9 +260,11 @@ dialog {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-width: 400px;
-  height: 100%;
   margin-right: 20px;
   text-wrap: wrap;
+}
+.horizontal .modal-inner p.modal-block {
+  min-width: 400px;
+  height: 100%;
 }
 </style>

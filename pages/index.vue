@@ -6,11 +6,13 @@
     <!-- <ContentDoc class="sm:text-orange-500 md:text-slate-600 lg:text-lime-500" /> -->
     <article>
       <h1 class="text-seagull-400 dark:text-orange-400">Home Page</h1>
-      <button @click="show = !show">Toggle</button>
+      <button @click="show = !show">
+        <h3>{{ toggleText }}</h3>
+      </button>
       <ClientOnly>
-        <!-- il wrap ClientOnly serve per permettere il funzionamento di appar della Transition  -->
+        <!-- il wrap ClientOnly serve per permettere il funzionamento della Transition  -->
         <Transition appear>
-          <p v-if="show" class="text-base font-thin">
+          <p v-if="show">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a nisl
             tincidunt, ullamcorper ipsum sit amet, efficitur diam. Nullam rutrum mauris
             eget pretium porta. Class aptent taciti sociosqu ad litora torquent per
@@ -55,7 +57,13 @@
 </template>
 
 <script setup>
+import { ref, computed } from "vue";
+
 const show = ref(true);
+const toggleText = computed(() => {
+  return show.value ? "Nascondi testo" : "Mostra testo";
+});
+
 // console.groupCollapsed("Site Credits");
 // console.log("ciao");
 // console.log("test");
