@@ -1,7 +1,7 @@
 <template>
   <div
     id="hWrapper"
-    class="sticky top-0 max-w-[1920px] mx-auto px-7 py-5 text-center z-[999]"
+    class="sticky top-0 max-w-[1920px] mx-auto px-7 pt-5 dark:bg-woodsmoke-950 bg-slate-300 text-center z-[999]"
   >
     <!-- <div
       id="menuWrapper"
