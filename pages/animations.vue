@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[600vh]">
+  <div class="h-[600vh] px-16 max-w-[1920px] mx-auto">
     <h1>Animations Page</h1>
     <!-- <div class="hero">
       <NuxtImg
@@ -151,7 +151,7 @@ onMounted(() => {
       end: "center+=350 top+=350",
       scrub: 3,
       pin: ".C_Container",
-      markers: true,
+      // markers: true,
     },
     stagger: {
       each: 0.5,
@@ -167,7 +167,7 @@ onMounted(() => {
       end: "bottom center",
       scrub: 1,
       pin: ".circle-label",
-      markers: false,
+      // markers: false,
     },
   });
   tl.from("#Circle1", {
@@ -203,7 +203,7 @@ onMounted(() => {
       scrub: 1,
       pin: ".pathDots",
       onUpdate: ({ progress }) => console.log(progress), //  info for position
-      markers: true,
+      // markers: true,
     },
   });
   tlp.from("#c_path", {

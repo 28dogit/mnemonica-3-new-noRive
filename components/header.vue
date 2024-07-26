@@ -1,8 +1,15 @@
 <template>
-  <div id="hWrapper" class="sticky top-0 p-5 text-center z-[999]">
+  <div
+    id="hWrapper"
+    class="sticky top-0 max-w-[1920px] mx-auto px-7 py-5 text-center z-[999]"
+  >
+    <!-- <div
+      id="menuWrapper"
+      class="flex min-h-[100px] items-center text-black bg-slate-200 dark:text-slate-300 dark:bg-slate-800 rounded-3xl m-auto"
+    > -->
     <div
       id="menuWrapper"
-      class="flex max-w-[1700px] min-h-[100px] items-center text-black bg-slate-200 dark:text-slate-300 dark:bg-slate-800 rounded-3xl m-auto"
+      class="flex min-h-[100px] items-center text-black dark:text-slate-300 m-auto border-b-[1px] border-solid border-slate-700"
     >
       <div id="logoWrapper" class="flex w-3/12 justify-start pl-10">
         <img

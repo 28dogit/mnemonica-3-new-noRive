@@ -1,5 +1,5 @@
 <template>
-  <div class="p-5 max-w-4xl">
+  <div class="py-5 px-16 max-w-[1920px] mx-auto">
     <h1>Modali test</h1>
     <p class="text-xl">
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse suscipit quos nisi
