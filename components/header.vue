@@ -20,6 +20,7 @@
     </div>
   </div>
 </template>
+
 <script setup>
 //Utilizzo di Gsap!!-----
 gsap.registerPlugin(ScrollTrigger);
