@@ -106,7 +106,8 @@ onMounted(() => {});
 
 <style scoped>
 li {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
   border-bottom: 1px solid #ffffff29;
 }
 </style>
