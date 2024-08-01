@@ -24,17 +24,35 @@
       v-model="selected"
       on-icon="i-heroicons-moon-20-solid"
       off-icon="i-heroicons-sun-20-solid"
-      @click="setColorTheme($colorMode.preference == 'dark' ? 'light' : 'dark')"
+      @click="toggleTheme"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
-const selected = ref(true);
+import { ref, onMounted, watch } from "vue";
+import { useColorMode } from "@vueuse/core";
+
+const selected = ref(false);
 type Theme = "light" | "dark";
+const colorMode = useColorMode();
 const setColorTheme = (newTheme: Theme) => {
-  useColorMode().preference = newTheme;
+  colorMode.value = newTheme;
 };
+const toggleTheme = () => {
+  setColorTheme(colorMode.value == "dark" ? "light" : "dark");
+};
+
+onMounted(() => {
+  selected.value = colorMode.value === "dark";
+});
+
+watch(
+  () => colorMode.value,
+  (newvalue) => {
+    selected.value = newvalue === "dark";
+  }
+);
 </script>
 
 <style scoped>

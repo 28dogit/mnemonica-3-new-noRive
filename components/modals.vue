@@ -217,6 +217,7 @@ onBeforeUnmount(() => {
 
 <style>
 dialog {
+  opacity: 0;
   max-width: none;
   max-height: none;
   width: 100%;
