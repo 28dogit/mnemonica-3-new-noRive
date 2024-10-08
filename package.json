@@ -16,14 +16,14 @@
     "@vueuse/nuxt": "^11.0.3",
     "gsap": "npm:gsap-trial@^3.12.5",
     "striptags": "^3.2.0",
-    "vue": "^3.4.38",
+    "vue": "^3.5.11",
     "vue-router": "^4.4.3"
   },
   "devDependencies": {
     "@egoist/tailwindcss-icons": "^1.8.1",
     "@iconify-json/lucide": "^1.1.209",
     "@iconify-json/mdi": "^1.1.68",
-    "@nuxt/fonts": "^0.9.2",
+    "@nuxt/fonts": "^0.10.0",
     "@nuxtjs/apollo": "^5.0.0-alpha.14",
     "nuxt": "^3.13.0",
     "sass": "^1.77.8"
