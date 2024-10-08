@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss'
 import { iconsPlugin, getIconCollections } from "@egoist/tailwindcss-icons"
+import typography from '@tailwindcss/typography'
 
 export default <Partial<Config>>{
   darkMode: 'class',
@@ -19,9 +20,16 @@ export default <Partial<Config>>{
       collections: getIconCollections(["mdi", "lucide"]),
       // If you want to use all icons collections: getIconCollections("all"),
     }),
+    typography,
   ],
   theme: {
     extend: {
+      fontFamily: {
+        gabarito: ['Gabarito', 'sans-serif'], // Definisco il font Gabarito
+        jost: ['Jost', 'sans-serif'],
+        instrumentSans:['"Instrument Sans"', 'sans-serif'],
+        playfair: ['"Playfair Display"', 'serif'],
+      },
       aspectRatio: {
         auto: 'auto',
         square: '1 / 1',
@@ -80,7 +88,37 @@ export default <Partial<Config>>{
           '900': '#3d3d3d',
           '950': '#151515',
         },
-    }
-    }
-  }
+    },
+    typography: (theme: any) => ({
+      DEFAULT: {
+        css: {
+          h1: {
+            fontFamily: theme('fontFamily.gabarito'),
+            fontSize: theme('fontSize.3xl'),
+            fontWeight: theme('fontWeight.bold'),
+            color: theme('colors.woodsmoke.100'),
+          },
+          h2: {
+            fontFamily: theme('fontFamily.gabarito'),
+            fontSize: theme('fontSize.2xl'),
+            fontWeight: theme('fontWeight.bold'),
+            color: theme('colors.woodsmoke.800'),
+          },
+          h3: {
+            fontFamily: theme('fontFamily.gabarito'),
+            fontSize: theme('fontSize.xl'),
+            fontWeight: theme('fontWeight.semibold'),
+            color: theme('colors.woodsmoke.700'),
+          },
+          p:{
+            fontFamily: theme('fontFamily.gabarito'),
+            fontSize: theme('fontSize.lg'),
+            fontWeight: theme('fontWeight.semibold'),
+            color: theme('colors.woodsmoke.300'),
+          },
+        },
+      },
+    }),
+    },
+  },
 }
