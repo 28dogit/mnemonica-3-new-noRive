@@ -36,6 +36,19 @@ export default <Partial<Config>>{
         video: '16 / 9'
       },
       colors:{
+        'mne_primary':{
+          '50': '#ecfeff',
+          '100': '#cff9fe',
+          '200': '#a5f1fc',
+          '300': '#66e5fa',
+          '400': '#11cbee',
+          '500': '#05b2d5',
+          '600': '#078eb3',
+          '700': '#0d7191',
+          '800': '#145b76',
+          '900': '#164c63',
+          '950': '#083144',
+        },
         'seagull': {
           '50': '#f1fafe',
           '100': '#e3f3fb',
@@ -93,16 +106,16 @@ export default <Partial<Config>>{
       DEFAULT: {
         css: {
           h1: {
-            fontFamily: theme('fontFamily.gabarito'),
+            fontFamily: `${theme('fontFamily.gabarito')} !important`,
             fontSize: theme('fontSize.3xl'),
             fontWeight: theme('fontWeight.bold'),
-            color: theme('colors.woodsmoke.100'),
+            color: theme('colors.mne_primary.400'),
           },
           h2: {
             fontFamily: theme('fontFamily.gabarito'),
             fontSize: theme('fontSize.2xl'),
             fontWeight: theme('fontWeight.bold'),
-            color: theme('colors.woodsmoke.800'),
+            color: theme('colors.mne_primary.400'),
           },
           h3: {
             fontFamily: theme('fontFamily.gabarito'),
