@@ -1,7 +1,7 @@
 <template>
   <div
     id="hWrapper"
-    class="sticky top-0 max-w-[1920px] mx-auto px-7 pt-5 dark:bg-woodsmoke-950 bg-slate-300 text-center z-[999]"
+    class="sticky top-0 max-w-[1920px] px-7 pt-5 text-center z-[999] backdrop-blur-md"
   >
     <!-- <div
       id="menuWrapper"
@@ -15,7 +15,7 @@
         <img
           class="logo max-w-44"
           alt="Vue logo"
-          src="@/assets/img/mnemonica-logo-2024-site.png"
+          src="@/assets/img/svg/MN-Brand-Light.svg"
         />
       </div>
       <div id="navWrapper" class="flex w-9/12 justify-end pr-10">

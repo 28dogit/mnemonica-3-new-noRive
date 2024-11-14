@@ -7,6 +7,5 @@
 </template>
 
 <style lang="scss">
-@use "@/assets/css/globals.scss";
+//@use "@/assets/css/globals.scss";
 </style>
-
