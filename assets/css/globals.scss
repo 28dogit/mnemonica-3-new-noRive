@@ -1,45 +1,49 @@
 $mne_primary: #11cbee;
-// h1 {
-//     font-size: 30px;
-//     color: $mne_primary;
-//     // font-weight: bold;
-//     padding: 20px 0;
-//     font-family: "montserrat", sans-serif;
-//     .light & {
-//         color: #151515;
-//     }
-// }
-// h2 {
-//     font-size: 22px;
-//     color: antiquewhite;
-//     font-family: "montserrat", sans-serif;
-// }
-// h3 {
-//     padding: 10px 0;
-//     font-size: 18px;
-//     color: azure;
-//     font-family: "montserrat", sans-serif;
-//   font-optical-sizing: auto;
-//   font-weight: 400;
-//   font-style: normal;
-// }
-// p {
-//     font-size: 14px;
-//     line-height: 21px;
-//     color: #dadada;
-//     padding-bottom: 10px;
-//     font-family: "open sans", sans-serif;
-//   font-optical-sizing: auto;
-//   font-weight: 300;
-//   font-style: normal;
-// }
+$gradient_1: hsla(202,92%,35%,0.5);
+$gradient_2: hsla(202, 92%, 15%, 1);
+$gradient_3: hsla(205, 59%, 10%, 0.5);
+$gradient_4: hsla(205, 59%, 10%, 1);
+$gradient_5: hsl(303, 90%, 32%);
 
-.btnToggle {
-  background-color: #002a41;
-  padding: 8px 16px;
-  border-radius: 5px;
-  margin: 5px;
+.bbg{
+  min-width: 100vw;
+  min-height: 100vh;
+  border:5px solid red;
+  position: fixed;
+  top:0px;
+  left: 0px;
+  z-index: -1;
+  background: radial-gradient(at 50% 10%, $gradient_1 0.25%, $gradient_3 50%, transparent),
+              radial-gradient(at 80% 80%, $gradient_5 0.25%, $gradient_4 20%, transparent),
+              radial-gradient(at 20% 70%, $gradient_5 0.25%, $gradient_4 40%);
+              background-size: 180% 180%;
+  animation: rotate-background 10s ease infinite;  
 }
-.btnToggle:hover {
-  background-color: #04364f;
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes rotate-background {
+  0% {
+    background-position: 50% 50%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  75% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
 }
