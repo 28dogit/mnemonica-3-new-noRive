@@ -1,9 +1,5 @@
 <template>
   <div class="max-w-[1920px] mx-auto px-16">
-    <!-- <div class="box w-8 h-8 rounded bg-lime-600"></div>
-    <div class="box2 w-8 h-8 rounded bg-orange-600"></div>
-    <div class="box3 w-8 h-8 rounded bg-violet-600"></div> -->
-    <!-- <ContentDoc class="sm:text-orange-500 md:text-slate-600 lg:text-lime-500" /> -->
     <article>
       <h1 class="text-seagull-400 dark:text-orange-400">Home Page</h1>
       <button @click="show = !show">

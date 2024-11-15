@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss'
 import { iconsPlugin, getIconCollections } from "@egoist/tailwindcss-icons"
 import typography from '@tailwindcss/typography'
-import { _textDecorationColor } from '#tailwind-config/theme'
+// import { _textDecorationColor } from '#tailwind-config/theme'
 
 export default <Partial<Config>>{
   darkMode: 'class',
@@ -26,7 +26,7 @@ export default <Partial<Config>>{
   theme: {
     extend: {
       fontFamily: {
-        gabarito: ['Gabarito', 'sans-serif'], // Definisco il font Gabarito
+        montserrat: ['Montserrat', 'sans-serif'], // Definisco il font Gabarito
         jost: ['Jost', 'sans-serif'],
         instrumentSans:['"Instrument Sans"', 'sans-serif'],
         playfair: ['"Playfair Display"', 'serif'],
@@ -107,28 +107,28 @@ export default <Partial<Config>>{
       DEFAULT: {
         css: {
           h1: {
-            fontFamily: `${theme('fontFamily.jost')} !important`,
-            fontSize: theme('fontSize.3xl'),
-            fontWeight: theme('fontWeight.semibold'),
-            color: theme('colors.mne_primary.400'),
+            fontFamily: `${theme('fontFamily.jost')}`,
+            fontSize: `${theme('fontSize.3xl')}`,
+            fontWeight: `${theme('fontWeight.semibold')}`,
+            color: `${theme('colors.mne_primary.400')}`,
           },
           h2: {
-            fontFamily: theme('fontFamily.jost'),
-            fontSize: theme('fontSize.2xl'),
-            fontWeight: theme('fontWeight.bold'),
-            color: theme('colors.mne_primary.400'),
+            fontFamily: `${theme('fontFamily.jost')}`,
+            fontSize: `${theme('fontSize.2xl')}`,
+            fontWeight: `${theme('fontWeight.bold')}`,
+            color: `${theme('colors.mne_primary.400')}`,
           },
           h3: {
-            fontFamily: theme('fontFamily.jost'),
-            fontSize: theme('fontSize.xl'),
-            fontWeight: theme('fontWeight.semibold'),
-            color: theme('colors.woodsmoke.700'),
+            fontFamily: `${theme('fontFamily.jost')}`,
+            fontSize: `${theme('fontSize.xl')}`,
+            fontWeight: `${theme('fontWeight.semibold')}`,
+            color: `${theme('colors.woodsmoke.700')}`,
           },
           p:{
-            fontFamily: theme('fontFamily.jost'),
-            fontSize: theme('fontSize.md'),
-            fontWeight: theme('fontWeight.semibold'),
-            color: theme('colors.woodsmoke.300'),
+            fontFamily: `${theme('fontFamily.jost')}`,
+            fontSize: `${theme('fontSize.md')}`,
+            fontWeight: `${theme('fontWeight.semibold')}`,
+            color: `${theme('colors.woodsmoke.300')}`,
           },
         },
       },

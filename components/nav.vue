@@ -2,7 +2,7 @@
   <div class="text-right flex items-center gap-3">
     <nav class="font-jost">
       <ul class="block gap-3 uppercase text-sm md:flex testSass">
-        <li class="dark:hover:text-chenin-300 hover:text-seagull-400">
+        <!-- <li class="dark:hover:text-chenin-300 hover:text-seagull-400">
           <nuxt-link to="/">Home</nuxt-link>
         </li>
         <li class="dark:hover:text-chenin-300 hover:text-seagull-400">
@@ -16,6 +16,9 @@
         </li>
         <li class="dark:hover:text-chenin-300 hover:text-seagull-400">
           <nuxt-link to="/focusTransition">Transitions</nuxt-link>
+        </li> -->
+        <li class="dark:hover:text-chenin-300 hover:text-seagull-400">
+          <nuxt-link to="/test">Test</nuxt-link>
         </li>
       </ul>
     </nav>
