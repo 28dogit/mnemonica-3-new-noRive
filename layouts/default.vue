@@ -1,17 +1,20 @@
 <template>
-  <div id="mainContent" class="min-h-screen flex flex-col flex-grow">
+  <div
+    id="mainContent"
+    class="min-h-screen flex flex-col flex-grow relative overflow-hidden"
+  >
     <div class="bbg"></div>
-    <div class="testghi">
-      <div class="ghirlanda-updx">
-        <img src="/assets/img/Ghirlanda-up-dx-600.png" alt="" />
-      </div>
-      <div class="ghirlanda-updx test1">
+    <!-- <div class="testghi relative overflow-hidden"> -->
+    <div class="ghirlanda-updx">
+      <img src="/assets/img/Ghirlanda-up-dx-600.png" alt="" />
+    </div>
+    <!-- <div class="ghirlanda-updx test1">
         <img src="/assets/img/Ghirlanda-up-dx-600.png" alt="" />
       </div>
       <div class="ghirlanda-updx test2">
         <img src="/assets/img/Ghirlanda-up-dx-600.png" alt="" />
-      </div>
-    </div>
+      </div> -->
+    <!-- </div> -->
     <Header />
     <slot class="min-h-screen" />
     <Footer />
@@ -26,11 +29,14 @@
   display: flex;
 }
 .ghirlanda-updx {
-  transform: rotate(-20deg);
-  max-width: 300px;
+  transform: rotate(10deg);
+  max-width: 600px;
   mix-blend-mode: luminosity;
   float: left;
   opacity: 0.6;
+  position: absolute;
+  top: 80px;
+  right: -100px;
 }
 .ghirlanda-updx.test1 {
   mix-blend-mode: color-dodge;

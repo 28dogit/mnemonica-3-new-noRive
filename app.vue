@@ -10,5 +10,4 @@
 <style lang="scss">
 @use "@/assets/css/globals.scss";
 @use "@/assets/css/buttons.scss";
-@use "@/assets/css/typography.scss";
 </style>

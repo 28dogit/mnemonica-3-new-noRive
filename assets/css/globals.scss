@@ -1,9 +1,20 @@
+@import url("/assets/css/typography.scss");
 $mne_primary: #11cbee;
+
+//gradienti
 $gradient_1: hsla(202,92%,35%,0.5);
 $gradient_2: hsla(202, 92%, 15%, 1);
 $gradient_3: hsla(205, 59%, 10%, 0.5);
 $gradient_4: hsla(205, 59%, 10%, 1);
 $gradient_5: hsl(303, 90%, 32%);
+
+//posizioni dei radial-gradient
+$x-rg1: 50%;
+$y-rg1: 10%;
+$x-rg2: 80%;
+$y-rg2: 80%;
+$x-rg3: 20%;
+$y-rg3: 70%;
 
 .bbg{
   min-width: 100vw;
@@ -13,11 +24,12 @@ $gradient_5: hsl(303, 90%, 32%);
   top:0px;
   left: 0px;
   z-index: -1;
-  background: radial-gradient(at 50% 10%, $gradient_1 0.25%, $gradient_3 50%, transparent),
-              radial-gradient(at 80% 80%, $gradient_2 0.25%, $gradient_4 20%, transparent),
-              radial-gradient(at 20% 70%, $gradient_2 0.25%, $gradient_4 40%);
+  //background-color: hsla(205, 59%, 10%, 1);
+  background: radial-gradient(at $x-rg1 $y-rg1, $gradient_1 0.25%, $gradient_3 50%, transparent),
+              radial-gradient(at $x-rg2 $y-rg2, $gradient_2 0.25%, $gradient_4 20%, transparent),
+              radial-gradient(at $x-rg3 $y-rg3, $gradient_2 0.25%, $gradient_4 40%);
               background-size: 180% 180%;
-  animation: rotate-background 5s ease infinite reverse;  
+  animation: rotate-background 70s linear infinite;  
 }
 @keyframes gradient-animation {
   0% {
@@ -59,3 +71,16 @@ $gradient_5: hsl(303, 90%, 32%);
     background-position: 50% 0%;
   }
 }
+
+// .bbg{
+//   animation: rotate-bbgcontainer 10s ease infinite;
+//   width: 200vw;
+//   height: 200vh;
+//   border-radius: 50%;
+//   overflow: visible;
+// }
+
+// @keyframes rotate-bbgcontainer{
+//   0%{transform: rotate(0deg)}
+//   100%{transform: rotate(360deg)}
+// }
