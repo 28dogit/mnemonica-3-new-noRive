@@ -8,16 +8,16 @@ $gradient_5: hsl(303, 90%, 32%);
 .bbg{
   min-width: 100vw;
   min-height: 100vh;
-  border:5px solid red;
+  //border:5px solid red;
   position: fixed;
   top:0px;
   left: 0px;
   z-index: -1;
   background: radial-gradient(at 50% 10%, $gradient_1 0.25%, $gradient_3 50%, transparent),
-              radial-gradient(at 80% 80%, $gradient_5 0.25%, $gradient_4 20%, transparent),
-              radial-gradient(at 20% 70%, $gradient_5 0.25%, $gradient_4 40%);
+              radial-gradient(at 80% 80%, $gradient_2 0.25%, $gradient_4 20%, transparent),
+              radial-gradient(at 20% 70%, $gradient_2 0.25%, $gradient_4 40%);
               background-size: 180% 180%;
-  animation: rotate-background 10s ease infinite;  
+  animation: rotate-background 5s ease infinite reverse;  
 }
 @keyframes gradient-animation {
   0% {
@@ -32,16 +32,28 @@ $gradient_5: hsl(303, 90%, 32%);
 }
 @keyframes rotate-background {
   0% {
-    background-position: 50% 50%;
+    background-position: 50% 0%;
+  }
+  12% {
+    background-position: 75% 25%;
   }
   25% {
     background-position: 100% 50%;
   }
+  37% {
+    background-position: 75% 75%;
+  }
   50% {
     background-position: 50% 100%;
   }
+  62% {
+    background-position: 25% 75%;
+  }
   75% {
     background-position: 0% 50%;
+  }
+  87% {
+    background-position: 25% 25%;
   }
   100% {
     background-position: 50% 0%;

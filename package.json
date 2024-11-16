@@ -20,13 +20,13 @@
   },
   "devDependencies": {
     "@egoist/tailwindcss-icons": "^1.8.1",
-    "@iconify-json/lucide": "^1.2.14",
+    "@iconify-json/lucide": "^1.2.15",
     "@iconify-json/mdi": "^1.2.1",
     "@nuxt/fonts": "^0.10.2",
     "@nuxt/ui": "^2.19.2",
     "@nuxtjs/apollo": "^5.0.0-alpha.14",
     "nuxt": "^3.14.159",
-    "sass": "^1.80.7",
-    "vue": "^3.5.12"
+    "sass": "^1.81.0",
+    "vue": "^3.5.13"
   }
 }
