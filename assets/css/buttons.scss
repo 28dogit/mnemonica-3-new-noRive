@@ -1,3 +1,4 @@
+@use 'globals' as *;
 .btnToggle {
     background-color: #002a41;
     padding: 8px 16px;
@@ -5,5 +6,6 @@
     margin: 5px;
   }
   .btnToggle:hover {
-    background-color: #04364f;
+    //background-color: #04364f;
+    background-color: $gradient_1;
   }

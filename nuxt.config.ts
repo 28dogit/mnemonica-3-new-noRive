@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     }
   },
 
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/css/main.scss'],
 
   postcss: {
     plugins: {
@@ -41,16 +41,28 @@ export default defineNuxtConfig({
     // }
   },
 
+  //da eliminare
+  // fonts: {
+  //   provider: 'google',
+  //   google: {
+  //     families: {
+  //       'Gabarito': [400, 500,600, 700, 800], // Aggiungi i pesi che vuoi includere
+  //       'Jost': [300, 400, 500, 600, 700, 800],
+  //       'Instrument Sans':[300, 400, 500, 600, 700, 800],
+  //       'Playfair Display': [400, 700],
+  //     }
+  //   }
+  // },
+
   fonts: {
-    google: {
-      families: {
-        'Gabarito': [400, 500,600, 700, 800], // Aggiungi i pesi che vuoi includere
-        'Jost': [300, 400, 500, 600, 700, 800],
-        'Instrument Sans':[300, 400, 500, 600, 700, 800],
-        'Playfair Display': [400, 700],
-      }
-    }
+      families: [
+        { name: 'Gabarito', provider: 'google', weights: [400, 500,600, 700, 800] },
+        { name: 'Jost', provider: 'google', weights: [300, 400, 500, 600, 700, 800] },
+        { name: 'Instrument Sans', provider: 'google', weights: [300, 400, 500, 600, 700, 800] },
+        { name: 'Playfair Display', provider: 'google', weights: [400, 700] },
+      ]
   },
+
 
   compatibilityDate: '2024-11-10',
 })
