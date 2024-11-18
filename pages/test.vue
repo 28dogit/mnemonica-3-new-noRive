@@ -4,7 +4,7 @@
       id="heroSection"
       class="flex flex-col items-center justify-center h-[calc(100vh-70px)] w-screen"
     >
-      <div id="logo" class="absolute opacity-5 max-w-4xl">
+      <div id="logo" class="absolute opacity-50 max-w-4xl">
         <img src="/assets/img/svg/MN-Portrait-light.svg" alt="Mnemonica logo portrait" />
       </div>
       <div id="heroTitle" class="flex items-center gap-10 justify-center flex-wrap">
@@ -24,8 +24,6 @@
   </main>
 </template>
 
-<script lang="ts" setup>
-import { ref } from "vue";
-</script>
+<script lang="ts" setup></script>
 
 <style></style>

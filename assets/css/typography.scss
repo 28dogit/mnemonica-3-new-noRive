@@ -10,15 +10,16 @@ h1 {
     font-weight: 300;
     letter-spacing: 1px;
     padding: 20px 0;
+    font-optical-sizing: auto;
     .light & {
         color: #151515;
     }
 }
-// h2 {
-//     font-size: 22px;
-//     color: antiquewhite;
-//     font-family: "montserrat", sans-serif;
-// }
+h2 {
+    font-size: 1.3rem;
+    color: $mne_text-on-dark;
+    font-optical-sizing: auto;
+}
 // h3 {
 //     padding: 10px 0;
 //     font-size: 18px;

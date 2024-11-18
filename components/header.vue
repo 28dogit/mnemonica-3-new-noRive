@@ -37,7 +37,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 onMounted(() => {
   gsap.to("#hWrapper", {
     scrollTrigger: {
-      trigger: "#mainContent",
+      trigger: "#mainContainer",
       start: "top+=150px top+=135px",
       end: "top+=150px top+=130px",
       toggleActions: "play none reverse none",
