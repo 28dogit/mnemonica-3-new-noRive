@@ -22,11 +22,22 @@ export default defineNuxtConfig({
     },
   },
 
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "sass:math";', // Aggiungi globalmente se necessario
+        },
+      },
+    },
+  },
+
   plugins:[
     '@/plugins/gsap.js',
   ],
 
   modules: ["@nuxt/ui", '@nuxtjs/apollo', '@nuxt/fonts', '@nuxt/image', '@vueuse/nuxt'],
+
 
   apollo: {
     clients: {
@@ -40,19 +51,6 @@ export default defineNuxtConfig({
     //   },
     // }
   },
-
-  //da eliminare
-  // fonts: {
-  //   provider: 'google',
-  //   google: {
-  //     families: {
-  //       'Gabarito': [400, 500,600, 700, 800], // Aggiungi i pesi che vuoi includere
-  //       'Jost': [300, 400, 500, 600, 700, 800],
-  //       'Instrument Sans':[300, 400, 500, 600, 700, 800],
-  //       'Playfair Display': [400, 700],
-  //     }
-  //   }
-  // },
 
   fonts: {
       families: [

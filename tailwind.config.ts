@@ -6,7 +6,7 @@ import typography from '@tailwindcss/typography'
 export default <Partial<Config>>{
   darkMode: 'class',
     content: [
-      // "./assets/css/**/*.{css,scss}",
+      "./assets/css/**/*.{css,scss}",
       "./components/**/*.{vue,js}",
       "./layouts/**/*.vue",
       "./pages/**/*.vue",
@@ -103,36 +103,6 @@ export default <Partial<Config>>{
           '950': '#151515',
         },
     },
-    typography: (theme: any) => ({
-      DEFAULT: {
-        css: {
-          h1: {
-            fontFamily: `${theme('fontFamily.jost')}`,
-            fontSize: `${theme('fontSize.3xl')}`,
-            fontWeight: `${theme('fontWeight.semibold')}`,
-            color: `${theme('colors.mne_primary.400')}`,
-          },
-          h2: {
-            fontFamily: `${theme('fontFamily.jost')}`,
-            fontSize: `${theme('fontSize.2xl')}`,
-            fontWeight: `${theme('fontWeight.bold')}`,
-            color: `${theme('colors.mne_primary.400')}`,
-          },
-          h3: {
-            fontFamily: `${theme('fontFamily.jost')}`,
-            fontSize: `${theme('fontSize.xl')}`,
-            fontWeight: `${theme('fontWeight.semibold')}`,
-            color: `${theme('colors.woodsmoke.700')}`,
-          },
-          p:{
-            fontFamily: `${theme('fontFamily.jost')}`,
-            fontSize: `${theme('fontSize.md')}`,
-            fontWeight: `${theme('fontWeight.semibold')}`,
-            color: `${theme('colors.woodsmoke.300')}`,
-          },
-        },
-      },
-    }),
     },
   },
 }

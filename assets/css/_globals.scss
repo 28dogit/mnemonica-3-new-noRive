@@ -1,3 +1,9 @@
+
+//fonts
+$M_Font: "montserrat", sans-serif;
+$J_Font: "jost", sans-serif;
+
+//colors
 $mne_primary: #11cbee;
 
 //gradienti
@@ -14,72 +20,3 @@ $x-rg2: 80%;
 $y-rg2: 80%;
 $x-rg3: 20%;
 $y-rg3: 70%;
-
-.bbg{
-  min-width: 100vw;
-  min-height: 100vh;
-  //border:5px solid red;
-  position: fixed;
-  top:0px;
-  left: 0px;
-  z-index: -1;
-  //background-color: hsla(205, 59%, 10%, 1);
-  background: radial-gradient(at $x-rg1 $y-rg1, $gradient_1 0.25%, $gradient_3 50%, transparent),
-              radial-gradient(at $x-rg2 $y-rg2, $gradient_2 0.25%, $gradient_4 20%, transparent),
-              radial-gradient(at $x-rg3 $y-rg3, $gradient_2 0.25%, $gradient_4 40%);
-              background-size: 180% 180%;
-  animation: rotate-background 70s linear infinite;  
-}
-@keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-@keyframes rotate-background {
-  0% {
-    background-position: 50% 0%;
-  }
-  12% {
-    background-position: 75% 25%;
-  }
-  25% {
-    background-position: 100% 50%;
-  }
-  37% {
-    background-position: 75% 75%;
-  }
-  50% {
-    background-position: 50% 100%;
-  }
-  62% {
-    background-position: 25% 75%;
-  }
-  75% {
-    background-position: 0% 50%;
-  }
-  87% {
-    background-position: 25% 25%;
-  }
-  100% {
-    background-position: 50% 0%;
-  }
-}
-
-// .bbg{
-//   animation: rotate-bbgcontainer 10s ease infinite;
-//   width: 200vw;
-//   height: 200vh;
-//   border-radius: 50%;
-//   overflow: visible;
-// }
-
-// @keyframes rotate-bbgcontainer{
-//   0%{transform: rotate(0deg)}
-//   100%{transform: rotate(360deg)}
-// }

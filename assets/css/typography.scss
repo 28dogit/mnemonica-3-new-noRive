@@ -1,10 +1,14 @@
 @use 'globals' as *;
+
+*{
+    font-family: $J_Font;
+}
+
 h1 {
-    font-size: 300px;
+    font-size: 30px;
     color: $mne_primary;
-    // font-weight: bold;
+    font-weight: 400;
     padding: 20px 0;
-    font-family: "montserrat", sans-serif;
     .light & {
         color: #151515;
     }
@@ -23,13 +27,12 @@ h1 {
 //   font-weight: 400;
 //   font-style: normal;
 // }
-// p {
-//     font-size: 14px;
-//     line-height: 21px;
-//     color: #dadada;
-//     padding-bottom: 10px;
-//     font-family: "open sans", sans-serif;
-//   font-optical-sizing: auto;
-//   font-weight: 300;
-//   font-style: normal;
-// }
+p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: #dadada;
+    padding-bottom: 10px;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
