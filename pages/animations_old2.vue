@@ -102,11 +102,11 @@
 import { ref, onMounted } from "vue";
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import DrawSVGPlugin from "gsap/DrawSVGPlugin";
+// import DrawSVGPlugin from "gsap/DrawSVGPlugin";
 import { _strokeWidth } from "#tailwind-config/theme";
 
 gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(DrawSVGPlugin);
+// gsap.registerPlugin(DrawSVGPlugin);
 
 const circles = ref([
   { radius: 15, color: "#ff6b6b", fill: "#ff6b6b", strokeWidth: 2 },
@@ -164,23 +164,23 @@ onMounted(() => {
       markers: false,
     },
   });
-  tl.from("#Circle1", {
-    opacity: 0,
-  });
-  // Animazione della linea tratteggiata di SX
-  tl.from("#masker1", {
-    drawSVG: "0",
-  });
+  // tl.from("#Circle1", {
+  //   opacity: 0,
+  // });
+  // // Animazione della linea tratteggiata di SX
+  // tl.from("#masker1", {
+  //   drawSVG: "0",
+  // });
 
-  tl.from("#Label1", {
-    opacity: 0,
-  });
+  // tl.from("#Label1", {
+  //   opacity: 0,
+  // });
 
   //Animazione della linea tratteggiata di DX
 
-  tl.from("#masker2", {
-    drawSVG: "0",
-  });
+  // tl.from("#masker2", {
+  //   drawSVG: "0",
+  // });
   tl.from("#Label2", {
     opacity: 0,
   });
