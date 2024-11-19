@@ -5,9 +5,9 @@
     <div class="ghirlanda-updx l1" data-speed="0.25">
       <img src="/assets/img/Ghirlanda-web-up-dx.png" alt="" />
     </div>
-    <div class="ghirlanda-updx l2" data-speed="0.35">
+    <!-- <div class="ghirlanda-updx l2" data-speed="0.35">
       <img src="/assets/img/Ghirlanda-web-up-dx.png" alt="" />
-    </div>
+    </div> -->
     <div class="ghirlanda-dwsx l1" data-speed="0.4">
       <img src="/assets/img/Ghirlanda-web-dw-sx.png" alt="" />
     </div>
@@ -51,8 +51,21 @@ onMounted(() => {
       //pin: true,
       // scrub: true, //animazione durante lo scroll
     },
-    boxShadow: "0px 12px 18px -6px rgba(0, 0, 0, 0.3)",
-    duration: 0.5,
+  });
+  gsap.from(".ghirlanda-updx img", {
+    x: -250,
+    y: 50,
+    ease: "power2.inOut",
+    duration: 2,
+    opacity: 0,
+  });
+
+  gsap.from(".ghirlanda-dwsx img", {
+    x: 250,
+    y: -50,
+    ease: "power2.inOut",
+    duration: 2,
+    opacity: 0,
   });
 });
 //Gsap-fine

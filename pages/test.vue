@@ -4,8 +4,8 @@
       id="heroSection"
       class="flex flex-col items-center justify-center h-[calc(100vh-70px)] w-screen"
     >
-      <div id="logo" class="absolute opacity-50 max-w-4xl">
-        <img src="/assets/img/svg/MN-Portrait-light.svg" alt="Mnemonica logo portrait" />
+      <div id="logo_mne" class="absolute opacity-5 w-3xl">
+        <img src="/assets/img/svg/Logo-mne-Vector.svg" alt="Mnemonica logo portrait" />
       </div>
       <div id="heroTitle" class="flex items-center gap-10 justify-center flex-wrap">
         <h1 class="uppercase">Screen</h1>
