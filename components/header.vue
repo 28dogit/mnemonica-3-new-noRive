@@ -42,7 +42,6 @@ onMounted(() => {
       end: "top+=150px top+=130px",
       toggleActions: "play none reverse none",
       markers: false,
-      //pin: true,
       // scrub: true, //animazione durante lo scroll
     },
     boxShadow: "0px 12px 18px -6px rgba(0, 0, 0, 0.3)",

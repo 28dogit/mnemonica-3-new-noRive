@@ -119,11 +119,12 @@
 import { ref, onMounted } from "vue";
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import DrawSVGPlugin from "gsap/DrawSVGPlugin";
+//import DrawSVGPlugin from "gsap/DrawSVGPlugin";
 import MotionPathPlugin from "gsap/MotionPathPlugin";
 import { _strokeWidth } from "#tailwind-config/theme";
 
-gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, MotionPathPlugin);
+//gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, MotionPathPlugin);
+gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
 const circles = ref([
   { radius: 15, color: "#ff6b6b", fill: "#ff6b6b", strokeWidth: 2 },
@@ -173,23 +174,23 @@ onMounted(() => {
   tl.from("#Circle1", {
     opacity: 0,
   });
-  // Animazione della linea tratteggiata di SX
-  tl.from("#masker1", {
-    drawSVG: "0",
-  });
+  // Animazione della linea tratteggiata di SX (usano draw svg a pagamento si possono usare solo con gsap trial in dev mode)
+  // tl.from("#masker1", {
+  //   drawSVG: "0",
+  // });
 
-  tl.from("#Label1", {
-    opacity: 0,
-  });
+  // tl.from("#Label1", {
+  //   opacity: 0,
+  // });
 
-  //Animazione della linea tratteggiata di DX
+  // //Animazione della linea tratteggiata di DX
 
-  tl.from("#masker2", {
-    drawSVG: "0",
-  });
-  tl.from("#Label2", {
-    opacity: 0,
-  });
+  // tl.from("#masker2", {
+  //   drawSVG: "0",
+  // });
+  // tl.from("#Label2", {
+  //   opacity: 0,
+  // });
 
   //animazione per pathDots
 
@@ -206,9 +207,9 @@ onMounted(() => {
       // markers: true,
     },
   });
-  tlp.from("#c_path", {
-    drawSVG: "0",
-  });
+  // tlp.from("#c_path", {
+  //   drawSVG: "0",
+  // });
   tlp.from(
     "#c1",
     { transformOrigin: "50% 50%", scale: 1, opacity: 0, fill: "red" },
