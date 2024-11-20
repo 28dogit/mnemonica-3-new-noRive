@@ -1,16 +1,19 @@
-
 //fonts
 $M_Font: "montserrat", sans-serif;
 $J_Font: "jost", sans-serif;
 
+* {
+    font-family: $M_Font;
+}
+
 //colors
 $mne_primary: #11cbee;
-$mne_lighter:#B8EFFA;
-$mne_secondary:#CEF372;
-$mne_text-on-dark:#D9D9D9;
+$mne_lighter: #b8effa;
+$mne_secondary: #cef372;
+$mne_text-on-dark: #d9d9d9;
 
 //gradienti
-$gradient_1: hsla(202,92%,35%,0.5);
+$gradient_1: hsla(202, 92%, 35%, 0.5);
 $gradient_2: hsla(202, 92%, 15%, 1);
 $gradient_3: hsla(205, 59%, 10%, 0.5);
 $gradient_4: hsla(205, 59%, 10%, 1);
@@ -23,3 +26,58 @@ $x-rg2: 80%;
 $y-rg2: 80%;
 $x-rg3: 20%;
 $y-rg3: 70%;
+
+@mixin grad-var-mobile($x1,$y1,$x2,$y2,$x3,$y3){
+    @media all and (max-width: 490px){
+    background: radial-gradient(at $x1 $y1, $gradient_1 0.25%, $gradient_3 50%, transparent),
+    radial-gradient(at $x2 $y2, $gradient_2 0.25%, $gradient_4 20%, transparent),
+    radial-gradient(at $x3 $y3, $gradient_2 0.25%, $gradient_4 40%);
+    animation: rotate-background 10s linear infinite;
+    }
+}
+@mixin grad-var-tablet($x1,$y1,$x2,$y2,$x3,$y3){
+    @media all and (max-width: 768px){
+    background: radial-gradient(at $x1 $y1, $gradient_1 0.25%, $gradient_3 50%, transparent),
+    radial-gradient(at $x2 $y2, $gradient_2 0.25%, $gradient_4 20%, transparent),
+    radial-gradient(at $x3 $y3, $gradient_2 0.25%, $gradient_4 40%);
+    animation: rotate-background 10s linear infinite;
+    }
+}
+
+
+// @mixin responsive-gradients{
+//     @media all and (max-width: 490px){
+//         $gradient_1: hsl(303, 90%, 32%);
+//         $gradient_2: hsl(303, 64%, 33%);
+//         $gradient_3: hsl(303, 49%, 68%);
+//         $gradient_4: hsl(303, 81%, 49%);
+//     }
+// }
+
+@mixin for-phone-only {
+    @media all and (max-width: 490px) {
+        @content;
+    }
+}
+@mixin for-tablet-portrait-up {
+    @media (min-width: 600px) {
+        @content;
+    }
+}
+@mixin for-tablet-landscape-up {
+    @media (min-width: 900px) {
+        @content;
+    }
+}
+@mixin for-desktop-up {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
+@mixin for-big-desktop-up {
+    @media (min-width: 1800px) {
+        @content;
+    }
+}
+
+ 

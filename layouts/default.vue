@@ -1,6 +1,6 @@
 <template>
   <div id="mainContainer" class="min-h-screen flex flex-col flex-grow relative">
-    <div class="bbg"></div>
+    <div id="bbg"></div>
 
     <div class="ghirlanda-updx l1" data-speed="0.25">
       <img src="/assets/img/Ghirlanda-web-up-dx.png" alt="" />

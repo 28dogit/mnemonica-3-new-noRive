@@ -15,11 +15,6 @@
       <h2 id="heroSubTitle">
         Connecting the dots of the digital cinema living ecosystem
       </h2>
-      <!-- <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse suscipit quos nisi
-        accusantium ad. Iure tenetur itaque saepe veritatis soluta, dicta, ipsa ab ea
-        officia ducimus doloribus blanditiis a odio.
-      </p> -->
     </div>
   </main>
 </template>

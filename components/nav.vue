@@ -5,7 +5,7 @@
         <li class="dark:hover:text-chenin-300 hover:text-seagull-400">
           <nuxt-link to="/">Home</nuxt-link>
         </li>
-        <li class="dark:hover:text-chenin-300 hover:text-seagull-400">
+        <!-- <li class="dark:hover:text-chenin-300 hover:text-seagull-400">
           <nuxt-link to="/animations">Animations</nuxt-link>
         </li>
         <li class="dark:hover:text-chenin-300 hover:text-seagull-400">
@@ -16,7 +16,7 @@
         </li>
         <li class="dark:hover:text-chenin-300 hover:text-seagull-400">
           <nuxt-link to="/focusTransition">Transitions</nuxt-link>
-        </li>
+        </li> -->
         <li class="dark:hover:text-chenin-300 hover:text-seagull-400">
           <nuxt-link to="/test">Test</nuxt-link>
         </li>

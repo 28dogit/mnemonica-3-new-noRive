@@ -6,21 +6,21 @@
 // @tailwind components;
 // @tailwind utilities;
 
-//background gradients + animation
-.bbg {
+///*SECTION - background gradients + animation
+#bbg {
   min-width: 100vw;
   min-height: 100vh;
-  //border:5px solid red;
   position: fixed;
   top: 0px;
   left: 0px;
   z-index: -1;
-  //background-color: hsla(205, 59%, 10%, 1);
-  background: radial-gradient(at $x-rg1 $y-rg1, $gradient_1 0.25%, $gradient_3 50%, transparent),
+  background-size: 180% 180%;
+  background-image: radial-gradient(at $x-rg1 $y-rg1, $gradient_1 0.25%, $gradient_3 50%, transparent),
     radial-gradient(at $x-rg2 $y-rg2, $gradient_2 0.25%, $gradient_4 20%, transparent),
     radial-gradient(at $x-rg3 $y-rg3, $gradient_2 0.25%, $gradient_4 40%);
-  background-size: 180% 180%;
-  animation: rotate-background 70s linear infinite;
+  animation: rotate-background 10s linear infinite;
+    @include grad-var-tablet(30%,36%,56%,10%,21%,80%);
+    @include grad-var-mobile(10%,30%,24%,50%,21%,2%);
 }
 @keyframes gradient-animation {
   0% {
@@ -62,7 +62,9 @@
     background-position: 50% 0%;
   }
 }
-//Ghirlanda up dx
+///*!SECTION
+///*SECTION - Ghirlande
+//*ANCHOR -  Ghirlanda up dx
 .ghirlanda-updx {
   overflow: hidden;
   width: 100vw;
@@ -87,7 +89,7 @@
   //   transform: rotate(20deg);
   // }
 }
-//ghirlanda down sx
+///*ANCHOR -  ghirlanda down sx
 .ghirlanda-dwsx{
   overflow: hidden;
   width: 100vw;
@@ -106,8 +108,9 @@
     left: -70px;
   }
 }
+///*!SECTION
 
-//Hero section
+///*ANCHOR -  Hero section
 
 // #heroTitle{
 
@@ -115,8 +118,6 @@
 
 
 
-//-----MEDIA QUERIES-------///
+///*SECTION ------MEDIA QUERIES-------///
 
-@media all and (max-width:490px){
-
-}
+///*!SECTION
