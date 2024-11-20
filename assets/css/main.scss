@@ -16,14 +16,13 @@
   left: 0px;
   z-index: -1;
   background-size: 180% 180%;
+  background-image: radial-gradient(circle at $x-rg1 $y-rg1, $gradient_1 0.25%, $gradient_3 50%, transparent),
+    radial-gradient(circle at $x-rg2 $y-rg2, $gradient_2 0.25%, $gradient_4 20%, transparent),
+    radial-gradient(circle at $x-rg3 $y-rg3, $gradient_2 0.25%, $gradient_4 40%);
   animation: rotate-background 5s linear infinite;
 
   @include grad-var-tablet(30%, 36%, 56%, 10%, 21%, 80%);
   @include grad-var-phone(10%, 30%, 24%, 50%, 21%, 2%);
-
-  background-image: radial-gradient(at $x-rg1 $y-rg1, $gradient_1 0.25%, $gradient_3 50%, transparent),
-    radial-gradient(at $x-rg2 $y-rg2, $gradient_2 0.25%, $gradient_4 20%, transparent),
-    radial-gradient(at $x-rg3 $y-rg3, $gradient_2 0.25%, $gradient_4 40%);
 }
 // @keyframes gradient-animation {
 //   0% {
