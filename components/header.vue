@@ -1,13 +1,13 @@
 <template>
-  <header
-    id="hWrapper"
-    class="sticky top-0 max-w-[1920px] py-5 text-center z-[999] backdrop-blur-[0.5rem]"
-  >
+  <header id="hWrapper" class="sticky top-0 py-5 z-[999] backdrop-blur-[0.5rem]">
     <!-- <div
       id="menuWrapper"
       class="flex min-h-[100px] items-center text-black bg-slate-200 dark:text-slate-300 dark:bg-slate-800 rounded-3xl m-auto"
     > -->
-    <div id="menuWrapper" class="flex items-center text-black dark:text-slate-300 m-auto">
+    <div
+      id="menuWrapper"
+      class="flex items-center max-w-[1440px] text-black dark:text-slate-300 m-auto"
+    >
       <div id="logoWrapper" class="flex w-3/12 justify-start pl-10">
         <img
           class="logo max-w-44"

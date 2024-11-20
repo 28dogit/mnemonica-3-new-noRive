@@ -1,5 +1,5 @@
 <template>
-  <main class="max-w-[1920px] mx-auto">
+  <main>
     <div
       id="heroSection"
       class="flex flex-col items-center justify-center h-[calc(100vh-70px)] w-screen"
