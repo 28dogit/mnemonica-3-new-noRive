@@ -1,6 +1,7 @@
 @use "globals" as *; //(espone direttamente le variabili senza bisogno di un namespace)
-@use "buttons.scss";
-@use "typography.scss";
+@use "buttons.scss" as btn;
+@use "typography.scss" as typo;
+@use "breakpoints.scss" as bp;
 
 // @tailwind base;
 // @tailwind components;
@@ -15,24 +16,26 @@
   left: 0px;
   z-index: -1;
   background-size: 180% 180%;
+  animation: rotate-background 5s linear infinite;
+
+  @include grad-var-tablet(30%, 36%, 56%, 10%, 21%, 80%);
+  @include grad-var-phone(10%, 30%, 24%, 50%, 21%, 2%);
+
   background-image: radial-gradient(at $x-rg1 $y-rg1, $gradient_1 0.25%, $gradient_3 50%, transparent),
     radial-gradient(at $x-rg2 $y-rg2, $gradient_2 0.25%, $gradient_4 20%, transparent),
     radial-gradient(at $x-rg3 $y-rg3, $gradient_2 0.25%, $gradient_4 40%);
-  animation: rotate-background 10s linear infinite;
-    @include grad-var-tablet(30%,36%,56%,10%,21%,80%);
-    @include grad-var-mobile(10%,30%,24%,50%,21%,2%);
 }
-@keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
+// @keyframes gradient-animation {
+//   0% {
+//     background-position: 0% 50%;
+//   }
+//   50% {
+//     background-position: 100% 50%;
+//   }
+//   100% {
+//     background-position: 0% 50%;
+//   }
+// }
 @keyframes rotate-background {
   0% {
     background-position: 50% 0%;
@@ -69,7 +72,7 @@
   overflow: hidden;
   width: 100vw;
   height: 100vh;
-  mix-blend-mode:luminosity;
+  mix-blend-mode: luminosity;
   opacity: 0.6;
   position: absolute;
   right: 0;
@@ -90,7 +93,7 @@
   // }
 }
 ///*ANCHOR -  ghirlanda down sx
-.ghirlanda-dwsx{
+.ghirlanda-dwsx {
   overflow: hidden;
   width: 100vw;
   height: 100%;
@@ -115,8 +118,6 @@
 // #heroTitle{
 
 // }
-
-
 
 ///*SECTION ------MEDIA QUERIES-------///
 
