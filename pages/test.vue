@@ -12,8 +12,11 @@
         <h1 class="uppercase">Deliver</h1>
         <h1 class="uppercase">Preserve</h1>
       </div>
-      <h2 id="heroSubTitle">
+      <h2 id="heroSubTitle" class="hidden min-[680px]:block text-center">
         Connecting the dots of the digital cinema living ecosystem
+      </h2>
+      <h2 id="heroSubTitle" class="text-center min-[680px]:hidden">
+        Connecting the dots of the digital <br />cinema living ecosystem
       </h2>
     </div>
   </main>

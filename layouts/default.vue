@@ -58,6 +58,7 @@ onMounted(() => {
     ease: "power2.inOut",
     duration: 2,
     opacity: 0,
+    filter: "(blur:5px)",
   });
 
   gsap.from(".ghirlanda-dwsx img", {
