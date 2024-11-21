@@ -52,22 +52,27 @@ onMounted(() => {
       // scrub: true, //animazione durante lo scroll
     },
   });
-  gsap.from(".ghirlanda-updx img", {
-    x: -250,
-    y: 50,
+
+  var tl = gsap.timeline({ duration: 2, opacity: 0 });
+
+  tl.from(".ghirlanda-updx img", {
+    //x: -250,
+    //y: 50,
     ease: "power2.inOut",
     duration: 2,
     opacity: 0,
-    filter: "(blur:5px)",
+    filter: "blur(5px)",
   });
 
-  gsap.from(".ghirlanda-dwsx img", {
-    x: 250,
-    y: -50,
+  tl.from(".ghirlanda-dwsx img", {
+    // x: 250,
+    //y: -50,
     ease: "power2.inOut",
     duration: 2,
     opacity: 0,
+    filter: "blur(5px)",
   });
+  // tl.from({"#logo_mne"});
 });
 //Gsap-fine
 </script>
