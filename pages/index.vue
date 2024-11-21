@@ -19,6 +19,36 @@
         Connecting the dots of the digital <br />cinema living ecosystem
       </h2>
     </div>
+    <div id="modules" class="px-5 py-6">
+      <div id="boxes">
+        <h2 class="font-medium">Boxes</h2>
+        <p>
+          Forget hard drives and LTOs. Welcome to the most advanced and reliable solution
+          for long-term preservation of digital film works that also keeps them always
+          available for business opportunities and cultural outreach. Arrange immediate
+          screenings with integrated Rooms, easily retrieve relevant assets, securely
+          deliver to stakeholders.
+        </p>
+      </div>
+      <div id="rooms">
+        <h2 class="font-medium">Rooms</h2>
+        <p>
+          Leave folders behind. Experience active workspaces that free you from repetitive
+          tasks—encoding, watermarking, keeping everyone updated. Enjoy private places
+          where people meet around media, playlists are a given, content is easy to find
+          and move.
+        </p>
+      </div>
+      <div id="masters">
+        <h2>Masters</h2>
+        <p>
+          Get rid of third-party shuttles. With the built-in data exchange facility, you
+          can send & receive files and folders of any size and complexity directly from/to
+          Rooms, as well as local drives. Only between registered users, without leaving
+          Mnemonica safe walls.
+        </p>
+      </div>
+    </div>
   </main>
 </template>
 
