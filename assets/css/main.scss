@@ -78,7 +78,7 @@
   }
 
   img {
-    width: 550px;
+    max-width: 550px;
     position: absolute;
     top: 0px;
     right: -50px;
@@ -109,23 +109,22 @@
   left: 0px;
   bottom: -30px;
   @include bp.for-phone{
-    width: 490px;
+    max-width: 490px;
   }
 
   img {
-    width: 550px;
-    //transform: rotate(10deg);
+    max-width: 550px;
     position: absolute;
     bottom: 120px;
     left: -70px;
     @include bp.for-tablet-portrait{
       bottom: 50px;
       left: -120px;
-      //transform: rotate(-30deg) !important;
     }
     @include bp.for-phone{
-      bottom: 50px;
-      left: -120px;
+      bottom: 25px;
+      left: -70px;
+      transform: rotate(-45deg) !important;
     }
   }
 }
@@ -144,8 +143,17 @@
   @include bp.for-phone{
     flex-direction: column;
     gap: 0;
+    margin-bottom: 1.5rem;
     h1{
       padding: 0;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
     }
   }
 }
+#logo_mne{
+  @include bp.for-phone{
+    max-width: 80vw;
+  }
+}
+

@@ -5,19 +5,9 @@
     <div class="ghirlanda-updx l1" data-speed="0.25">
       <img src="/assets/img/Ghirlanda-web-up-dx.png" alt="" />
     </div>
-    <!-- <div class="ghirlanda-updx l2" data-speed="0.35">
-      <img src="/assets/img/Ghirlanda-web-up-dx.png" alt="" />
-    </div> -->
     <div class="ghirlanda-dwsx l1" data-speed="0.4">
       <img src="/assets/img/Ghirlanda-web-dw-sx.png" alt="" />
     </div>
-    <!-- <div class="ghirlanda-updx test1">
-        <img src="/assets/img/Ghirlanda-up-dx-600.png" alt="" />
-      </div>
-      <div class="ghirlanda-updx test2">
-        <img src="/assets/img/Ghirlanda-up-dx-600.png" alt="" />
-      </div> -->
-
     <Header />
     <slot class="min-h-screen" />
     <Footer />
@@ -26,11 +16,11 @@
 
 <script setup>
 //Utilizzo di Gsap!!-----
-gsap.registerPlugin(ScrollTrigger);
-
 import { onMounted } from "vue";
 import { gsap } from "gsap"; //importa gsap
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Aggiunge animazione quando il componente viene montato
 onMounted(() => {
@@ -43,36 +33,8 @@ onMounted(() => {
       end: "max",
       invalidateOnRefresh: true,
       scrub: 0,
-      // trigger: "#mainContainer",
-      // start: "top+=150px top+=135px",
-      // end: "top+=150px top+=130px",
-      // toggleActions: "play none reverse none",
-      // markers: false,
-      //pin: true,
-      // scrub: true, //animazione durante lo scroll
     },
   });
-
-  var tl = gsap.timeline({ duration: 2, opacity: 0 });
-
-  tl.from(".ghirlanda-updx img", {
-    //x: -250,
-    //y: 50,
-    ease: "power2.inOut",
-    duration: 2,
-    opacity: 0,
-    filter: "blur(5px)",
-  });
-
-  tl.from(".ghirlanda-dwsx img", {
-    // x: 250,
-    //y: -50,
-    ease: "power2.inOut",
-    duration: 2,
-    opacity: 0,
-    filter: "blur(5px)",
-  });
-  // tl.from({"#logo_mne"});
 });
 //Gsap-fine
 </script>
