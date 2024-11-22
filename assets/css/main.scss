@@ -16,9 +16,11 @@
   left: 0px;
   background-size: 180% 180%;
   animation: rotate-background 70s linear infinite;
-  @include grad-var-desktop(50%,10%,80%,80%,20%,70%);
-  @include grad-var-tablet(50%,10%,80%,80%,20%,70%);
-  @include grad-var-phone(50%,10%,80%,80%,20%,70%);
+  
+  @include grad-var-phone(50%,10%,80%,80%,20%,70%,0.25%,50%);
+  @include grad-var-tablet(50%,10%,80%,80%,20%,70%,0.25%,50%);
+  @include grad-var-desktop(50%,10%,80%,80%,20%,70%,0.25%,50%);
+  //@include grad-var-desktop(50%,10%,80%,80%,20%,70%,25%,5%);
 }
 // @keyframes gradient-animation {
 //   0% {
