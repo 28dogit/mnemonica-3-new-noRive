@@ -104,7 +104,7 @@ onMounted(() => {
       opacity: 0,
       duration: 0.5,
     },
-    "> -=0.3"
+    "> -=0.4"
   );
   tl.from(
     "#heroSubTitle",
