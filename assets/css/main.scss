@@ -129,19 +129,34 @@
 }
 
 ///*ANCHOR - test ghirlande
+/// 
 
-.test.ghirlanda-updx img {
-  top: 85px;
-  left: calc(50% - 225px);
+#ghirlandeContainert.test{
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
-.test.ghirlanda-dwsx img {
-   top: -42px;
-  //top:-10%;
-  left: calc(50% - 360px);
-  @include bp.for-phone{
-    bottom: 50px;
-    left: -120px;
-  }
+.test.ghirlanda-updxt {
+width: 550px;
+//height: 660px;
+position: absolute;
+transform: translate(-45%,-50%);
+top:50%;
+left: 50%;
+}
+.test.ghirlanda-dwsxt {
+width: 550px;
+//height: 630px;
+position: absolute;
+transform: translate(-55%, -50%);
+top:50%;
+left: 50%;
 }
 ///*!SECTION
 

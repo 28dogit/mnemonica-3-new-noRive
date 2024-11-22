@@ -1,14 +1,14 @@
 <template>
   <main>
     <div
-      id="ghirlandeContainer"
+      id="ghirlandeContainert"
       class="test w-screen h-screen absolute top-0 left-0 -z-10"
     >
-      <div class="test ghirlanda-updx l1" data-speed="0.4">
-        <img src="/assets/img/Ghirlanda-web-up-dx.png" alt="" />
-      </div>
-      <div class="test ghirlanda-dwsx l1" data-speed="0.6">
+      <div class="test ghirlanda-dwsxt l1" data-speed="0.6">
         <img src="/assets/img/Ghirlanda-web-dw-sx.png" alt="" />
+      </div>
+      <div class="test ghirlanda-updxt l1" data-speed="0.4">
+        <img src="/assets/img/Ghirlanda-web-up-dx.png" alt="" />
       </div>
     </div>
     <div
@@ -58,77 +58,77 @@ onMounted(() => {
 
   var tl = gsap.timeline({ ease: "power2.in" });
 
-  tl.from(".ghirlanda-updx img", {
-    opacity: 0,
-    filter: "blur(5px)",
-    duration: 2,
-  });
+  // tl.from(".ghirlanda-updxt", {
+  //   opacity: 0,
+  //   filter: "blur(5px)",
+  //   duration: 2,
+  // });
 
-  tl.from(
-    ".ghirlanda-dwsx img",
-    {
-      opacity: 0,
-      filter: "blur(5px)",
-      duration: 2,
-    },
-    "<"
-  );
-  tl.to(".ghirlanda-updx img", {
-    right: "-50px",
-    top: "0",
+  // tl.from(
+  //   ".ghirlanda-dwsxt",
+  //   {
+  //     opacity: 0,
+  //     filter: "blur(5px)",
+  //     duration: 2,
+  //   },
+  //   "<"
+  // );
+  tl.to(".ghirlanda-updxt", {
+    top: "40%",
+    left: "90%",
     duration: 2,
     ease: "power3.inOut",
   });
   tl.to(
-    ".ghirlanda-dwsx img",
+    ".ghirlanda-dwsxt",
     {
-      x: "-100%",
-      y: "40%",
+      top: "70%",
+      left: "10%",
       duration: 2,
       ease: "power3.inOut",
     },
     "<"
   );
-  tl.from("#logo_mne", {
-    opacity: 0,
-    duration: 2,
-  });
-  tl.from(
-    "#H-screen",
-    {
-      y: "-10px",
-      opacity: 0,
-      duration: 0.5,
-    },
-    "<"
-  );
-  tl.from(
-    "#H-deliver",
-    {
-      y: "-10px",
-      opacity: 0,
-      duration: 0.5,
-    },
-    "> -=0.3"
-  );
-  tl.from(
-    "#H-preserve",
-    {
-      y: "-10px",
-      opacity: 0,
-      duration: 0.5,
-    },
-    "> -=0.3"
-  );
-  tl.from(
-    "#heroSubTitle",
-    {
-      y: "15px",
-      opacity: 0,
-      duration: 0.5,
-    },
-    "-=1"
-  );
+  // tl.from("#logo_mne", {
+  //   opacity: 0,
+  //   duration: 2,
+  // });
+  // tl.from(
+  //   "#H-screen",
+  //   {
+  //     y: "-10px",
+  //     opacity: 0,
+  //     duration: 0.5,
+  //   },
+  //   "<"
+  // );
+  // tl.from(
+  //   "#H-deliver",
+  //   {
+  //     y: "-10px",
+  //     opacity: 0,
+  //     duration: 0.5,
+  //   },
+  //   "> -=0.3"
+  // );
+  // tl.from(
+  //   "#H-preserve",
+  //   {
+  //     y: "-10px",
+  //     opacity: 0,
+  //     duration: 0.5,
+  //   },
+  //   "> -=0.3"
+  // );
+  // tl.from(
+  //   "#heroSubTitle",
+  //   {
+  //     y: "15px",
+  //     opacity: 0,
+  //     duration: 0.5,
+  //   },
+  //   "-=1"
+  // );
 });
 //Gsap-fine
 </script>
