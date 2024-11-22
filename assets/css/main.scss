@@ -127,11 +127,29 @@
     }
   }
 }
+
+///*ANCHOR - test ghirlande
+
+.test.ghirlanda-updx img {
+  top: 85px;
+  left: calc(50% - 225px);
+}
+.test.ghirlanda-dwsx img {
+   top: -42px;
+  //top:-10%;
+  left: calc(50% - 360px);
+  @include bp.for-phone{
+    bottom: 50px;
+    left: -120px;
+  }
+}
 ///*!SECTION
 
 ///*ANCHOR -  Hero section
 
 #heroSection{
+  position: relative;
+  top:-50px;
   @include bp.for-phone{
     position: relative;
     top:-50px;
@@ -168,5 +186,16 @@
 
 #modules{
   background-color: $gradient_4;
+  background-image: url("/assets/img/svg/BG-modules-circle.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  @include bp.for-phone{
+    background-position: left;
+    p{
+      font-size: 14px;
+      line-height: 21px;
+    }
+  }
+  
 }
 

@@ -2,14 +2,16 @@
   <div id="mainContainer" class="min-h-screen flex flex-col flex-grow relative">
     <div id="bbg" class="-z-20"></div>
 
-    <div id="ghirlandeContainer" class="w-screen h-screen absolute top-0 left-0 -z-10">
-      <div class="ghirlanda-updx l1" data-speed="0.25">
+    <!-- momentaneamente spostata nelle singole pagine per differenziare i test -->
+    <!-- <div id="ghirlandeContainer" class="w-screen h-screen absolute top-0 left-0 -z-10">
+      <div class="ghirlanda-updx l1" data-speed="0.4">
         <img src="/assets/img/Ghirlanda-web-up-dx.png" alt="" />
       </div>
-      <div class="ghirlanda-dwsx l1" data-speed="0.4">
+      <div class="ghirlanda-dwsx l1" data-speed="0.6">
         <img src="/assets/img/Ghirlanda-web-dw-sx.png" alt="" />
       </div>
-    </div>
+    </div> -->
+
     <Header />
     <slot class="min-h-screen" />
     <Footer />

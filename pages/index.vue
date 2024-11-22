@@ -1,5 +1,13 @@
 <template>
   <main>
+    <div id="ghirlandeContainer" class="w-screen h-screen absolute top-0 left-0 -z-10">
+      <div class="ghirlanda-updx l1" data-speed="0.4">
+        <img src="/assets/img/Ghirlanda-web-up-dx.png" alt="" />
+      </div>
+      <div class="ghirlanda-dwsx l1" data-speed="0.6">
+        <img src="/assets/img/Ghirlanda-web-dw-sx.png" alt="" />
+      </div>
+    </div>
     <div
       id="heroSection"
       class="flex flex-col items-center justify-center h-[calc(100vh-70px)] w-screen"
@@ -20,6 +28,15 @@
       </h2>
     </div>
     <div id="modules" class="px-5 py-6">
+      <div id="rooms">
+        <h2 class="font-medium">Rooms</h2>
+        <p>
+          Leave folders behind. Experience active workspaces that free you from repetitive
+          tasks encoding, watermarking, keeping everyone updated. Enjoy private places
+          where people meet around media, playlists are a given, content is easy to find
+          and move.
+        </p>
+      </div>
       <div id="boxes">
         <h2 class="font-medium">Boxes</h2>
         <p>
@@ -30,17 +47,8 @@
           deliver to stakeholders.
         </p>
       </div>
-      <div id="rooms">
-        <h2 class="font-medium">Rooms</h2>
-        <p>
-          Leave folders behind. Experience active workspaces that free you from repetitive
-          tasks—encoding, watermarking, keeping everyone updated. Enjoy private places
-          where people meet around media, playlists are a given, content is easy to find
-          and move.
-        </p>
-      </div>
       <div id="masters">
-        <h2>Masters</h2>
+        <h2 class="font-medium">Masters</h2>
         <p>
           Get rid of third-party shuttles. With the built-in data exchange facility, you
           can send & receive files and folders of any size and complexity directly from/to
@@ -56,14 +64,31 @@
 //Utilizzo di Gsap!!-----
 import { onMounted } from "vue";
 import { gsap } from "gsap"; //importa gsap
+//solo per il test ghirlande
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 onMounted(() => {
+  //solo fino a quando tengo le ghiralnde per il test
+  gsap.to("[data-speed]", {
+    y: (i, el) =>
+      (1 - parseFloat(el.getAttribute("data-speed"))) * ScrollTrigger.maxScroll(window),
+    ease: "none",
+    scrollTrigger: {
+      start: 0,
+      end: "max",
+      invalidateOnRefresh: true,
+      scrub: 0,
+    },
+  });
+  //fine test
+
   var tl = gsap.timeline({ ease: "power2.in" });
 
   tl.from(".ghirlanda-updx img", {
     opacity: 0,
     filter: "blur(5px)",
-    duration: 2,
+    duration: 3,
   });
 
   tl.from(
@@ -71,14 +96,18 @@ onMounted(() => {
     {
       opacity: 0,
       filter: "blur(5px)",
-      duration: 2,
+      duration: 3,
     },
     "<"
   );
-  tl.from("#logo_mne", {
-    opacity: 0,
-    duration: 2,
-  });
+  tl.from(
+    "#logo_mne",
+    {
+      opacity: 0,
+      duration: 2,
+    },
+    "> -=1.5"
+  );
   tl.from(
     "#H-screen",
     {

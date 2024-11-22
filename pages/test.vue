@@ -1,6 +1,17 @@
 <template>
   <main>
     <div
+      id="ghirlandeContainer"
+      class="test w-screen h-screen absolute top-0 left-0 -z-10"
+    >
+      <div class="test ghirlanda-updx l1" data-speed="0.4">
+        <img src="/assets/img/Ghirlanda-web-up-dx.png" alt="" />
+      </div>
+      <div class="test ghirlanda-dwsx l1" data-speed="0.6">
+        <img src="/assets/img/Ghirlanda-web-dw-sx.png" alt="" />
+      </div>
+    </div>
+    <div
       id="heroSection"
       class="flex flex-col items-center justify-center h-[calc(100vh-70px)] w-screen"
     >
@@ -26,8 +37,25 @@
 //Utilizzo di Gsap!!-----
 import { onMounted } from "vue";
 import { gsap } from "gsap"; //importa gsap
+//solo per il test ghirlande
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 onMounted(() => {
+  //solo fino a quando tengo le ghiralnde per il test
+  gsap.to("[data-speed]", {
+    y: (i, el) =>
+      (1 - parseFloat(el.getAttribute("data-speed"))) * ScrollTrigger.maxScroll(window),
+    ease: "none",
+    scrollTrigger: {
+      start: 0,
+      end: "max",
+      invalidateOnRefresh: true,
+      scrub: 0,
+    },
+  });
+  //fine test
+
   var tl = gsap.timeline({ ease: "power2.in" });
 
   tl.from(".ghirlanda-updx img", {
@@ -42,6 +70,22 @@ onMounted(() => {
       opacity: 0,
       filter: "blur(5px)",
       duration: 2,
+    },
+    "<"
+  );
+  tl.to(".ghirlanda-updx img", {
+    right: "-50px",
+    top: "0",
+    duration: 2,
+    ease: "power3.inOut",
+  });
+  tl.to(
+    ".ghirlanda-dwsx img",
+    {
+      x: "-100%",
+      y: "40%",
+      duration: 2,
+      ease: "power3.inOut",
     },
     "<"
   );
@@ -65,7 +109,7 @@ onMounted(() => {
       opacity: 0,
       duration: 0.5,
     },
-    ">"
+    "> -=0.3"
   );
   tl.from(
     "#H-preserve",
@@ -74,7 +118,7 @@ onMounted(() => {
       opacity: 0,
       duration: 0.5,
     },
-    ">"
+    "> -=0.3"
   );
   tl.from(
     "#heroSubTitle",
