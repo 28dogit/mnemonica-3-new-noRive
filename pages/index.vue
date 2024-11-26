@@ -27,8 +27,31 @@
         Connecting the dots of the digital <br />cinema living ecosystem
       </h2>
     </div>
-    <div id="modules" class="px-5 py-6">
-      <div id="rooms">
+    <div id="modules" class="px-5 py-6 relative overflow-hidden text-center">
+      <div
+        id="module-bg"
+        class="absolute top-[10em] left-0 w-screen flex items-start justify-center"
+      >
+        <img
+          id="bgCircle_1"
+          src="/assets/img/svg/circle-690-50.svg"
+          alt="mne module background"
+          class="absolute w-96"
+        />
+        <img
+          id="bgCircle_2"
+          src="/assets/img/svg/circle-690-50.svg"
+          alt="mne module background"
+          class="absolute"
+        />
+        <img
+          id="bgCircle_3"
+          src="/assets/img/svg/circle-690-50.svg"
+          alt="mne module background"
+          class="absolute"
+        />
+      </div>
+      <div id="rooms" class="module">
         <h2 class="font-medium">Rooms</h2>
         <p>
           Leave folders behind. Experience active workspaces that free you from repetitive
@@ -37,7 +60,7 @@
           and move.
         </p>
       </div>
-      <div id="boxes">
+      <div id="boxes" class="module">
         <h2 class="font-medium">Boxes</h2>
         <p>
           Forget hard drives and LTOs. Welcome to the most advanced and reliable solution
@@ -47,7 +70,7 @@
           deliver to stakeholders.
         </p>
       </div>
-      <div id="masters">
+      <div id="masters" class="module">
         <h2 class="font-medium">Masters</h2>
         <p>
           Get rid of third-party shuttles. With the built-in data exchange facility, you
@@ -148,4 +171,43 @@ onMounted(() => {
 //Gsap-fine
 </script>
 
-<style></style>
+<style>
+/* Impostiamo il contenitore #modules come flex container */
+#modules {
+  display: flex;
+  flex-direction: column; /* Cambia in 'row' se preferisci che i moduli siano affiancati */
+  gap: 1rem; /* Spazio tra i moduli, opzionale */
+}
+
+/* Stili per ogni modulo */
+.module {
+  overflow: hidden;
+  /* border: 1px solid #ccc; */
+  /* padding: 1rem; */
+  transition: all 2s ease-in-out;
+}
+
+/* Nascondiamo il paragrafo di default */
+.module p {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 2s ease-in;
+  margin: 0; /* Rimuovi margini per evitare spazi indesiderati */
+}
+
+/* Stili per il titolo */
+.module h2 {
+  cursor: pointer; /* Indica che è interattivo */
+  margin: 0; /* Rimuovi margini per un allineamento migliore */
+}
+
+/* Quando si passa il mouse sul modulo, espandiamo il paragrafo */
+.module:hover p {
+  max-height: 500px; /* Imposta un valore sufficiente per contenere il testo */
+}
+
+/* Opzionale: Cambiare il background o altri stili al hover */
+.module:hover {
+  /* background-color: #f9f9f9; */
+}
+</style>

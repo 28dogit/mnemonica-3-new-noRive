@@ -76,6 +76,7 @@
   top: 0;
   @include bp.for-phone{
     width: 490px;
+    opacity: 0.4;
   }
 
   img {
@@ -88,8 +89,10 @@
       right: -120px;
     }
     @include bp.for-phone{
-      top: -50px;
-      right: -120px;
+      top: -90px;
+      right: -160px;
+      transform: rotate(-10deg);
+
     }
   }
 }
@@ -202,12 +205,14 @@ left: 50%;
 ///*ANCHOR - Modules
 
 #modules{
-  background-color: $gradient_4;
-  background-image: url("/assets/img/svg/BG-modules-circle.svg");
-  background-repeat: no-repeat;
-  background-position: center;
+  background: linear-gradient(0deg, $gradient_4 55%, transparent 100%);
+  padding-top: 10em;
+  // background-color: $gradient_4;
+  // background-image: url("/assets/img/svg/BG-modules_1.svg");
+  // background-repeat: no-repeat;
+  // background-position: center;
   @include bp.for-phone{
-    background-position: left;
+    //background-position: top;
     p{
       font-size: 14px;
       line-height: 21px;
@@ -215,4 +220,13 @@ left: 50%;
   }
   
 }
+#bgCircle_1{
+ width: 400px;
+}
+#bgCircle_2{
+  width: 500px;
+ }
+ #bgCircle_3{
+  width: 600px;
+ }
 
