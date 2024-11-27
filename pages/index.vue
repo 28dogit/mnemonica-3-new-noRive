@@ -207,7 +207,7 @@ onMounted(() => {
 }
 
 /* Opzionale: Cambiare il background o altri stili al hover */
-.module:hover {
-  /* background-color: #f9f9f9; */
-}
+/*.module:hover {
+   background-color: #f9f9f9;
+}*/
 </style>
