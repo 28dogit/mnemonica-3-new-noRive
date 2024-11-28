@@ -1,13 +1,5 @@
 <template>
   <main>
-    <div id="ghirlandeContainer" class="w-screen h-screen absolute top-0 left-0 -z-10">
-      <div class="ghirlanda-updx l1" data-speed="0.4">
-        <img src="/assets/img/Ghirlanda-web-up-dx.png" alt="" />
-      </div>
-      <div class="ghirlanda-dwsx l1" data-speed="0.6">
-        <img src="/assets/img/Ghirlanda-web-dw-sx.png" alt="" />
-      </div>
-    </div>
     <div
       id="heroSection"
       class="flex flex-col items-center justify-center h-[calc(100vh-70px)] w-screen"
@@ -92,20 +84,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 onMounted(() => {
-  //solo fino a quando tengo le ghiralnde per il test
-  gsap.to("[data-speed]", {
-    y: (i, el) =>
-      (1 - parseFloat(el.getAttribute("data-speed"))) * ScrollTrigger.maxScroll(window),
-    ease: "none",
-    scrollTrigger: {
-      start: 0,
-      end: "max",
-      invalidateOnRefresh: true,
-      scrub: 0,
-    },
-  });
-  //fine test
-
   var tl = gsap.timeline({ ease: "power2.in" });
 
   tl.from(".ghirlanda-updx img", {

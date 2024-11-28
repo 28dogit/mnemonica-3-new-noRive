@@ -1,14 +1,14 @@
 <template>
   <main>
     <div
-      id="ghirlandeContainert"
+      id="ghirlandaContainert"
       class="test w-screen h-screen absolute top-0 left-0 -z-10"
     >
-      <div class="test ghirlanda-dwsxt l1" data-speed="0.6">
-        <img src="/assets/img/Ghirlanda-web-dw-sx.png" alt="" />
-      </div>
-      <div class="test ghirlanda-updxt l1" data-speed="0.4">
-        <img src="/assets/img/Ghirlanda-web-up-dx.png" alt="" />
+      <div id="ghirlanda-full" data-speed="0.6">
+        <img
+          src="/assets/img/Ghirlanda_full_web_800_opt.png"
+          alt="mnemonica ghirlanda ecosystem"
+        />
       </div>
     </div>
     <div
@@ -37,58 +37,9 @@
 //Utilizzo di Gsap!!-----
 import { onMounted } from "vue";
 import { gsap } from "gsap"; //importa gsap
-//solo per il test ghirlande
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
 
 onMounted(() => {
-  //solo fino a quando tengo le ghiralnde per il test
-  gsap.to("[data-speed]", {
-    y: (i, el) =>
-      (1 - parseFloat(el.getAttribute("data-speed"))) * ScrollTrigger.maxScroll(window),
-    ease: "none",
-    scrollTrigger: {
-      start: 0,
-      end: "max",
-      invalidateOnRefresh: true,
-      scrub: 0,
-    },
-  });
-  //fine test
-
   var tl = gsap.timeline({ ease: "power2.in" });
-
-  tl.from(".ghirlanda-updxt", {
-    opacity: 0,
-    filter: "blur(5px)",
-    duration: 2,
-  });
-
-  tl.from(
-    ".ghirlanda-dwsxt",
-    {
-      opacity: 0,
-      filter: "blur(5px)",
-      duration: 2,
-    },
-    "<"
-  );
-  tl.to(".ghirlanda-updxt", {
-    top: "40%",
-    left: "90%",
-    duration: 2,
-    ease: "power3.inOut",
-  });
-  tl.to(
-    ".ghirlanda-dwsxt",
-    {
-      top: "70%",
-      left: "10%",
-      duration: 2,
-      ease: "power3.inOut",
-    },
-    "<"
-  );
   tl.from("#logo_mne", {
     opacity: 0,
     duration: 2,
