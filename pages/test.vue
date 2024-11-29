@@ -46,7 +46,7 @@
           id="m-ecoCircle_2"
         />
         <img
-          src="assets/img/m_ecosystem/m_circle_ecosys_3.svg"
+          src="assets/img/m_ecosystem/m_circle_ecosys_4.svg"
           alt="mnemonica ecosystem market"
           id="m-ecoCircle_3"
         />
@@ -104,30 +104,30 @@ onMounted(() => {
   );
 
   ///ANCHOR - ecosysstem gsap
-  // gsap.to("#m-ecoCircle_0", {
-  //   rotate: 360,
-  //   duration: 2.5,
-  //   ease: "linear",
-  //   repeat: -1,
-  // });
-  // gsap.to("#m-ecoCircle_1", {
-  //   rotate: 360,
-  //   duration: 3.5,
-  //   ease: "linear",
-  //   repeat: -1,
-  // });
-  // gsap.to("#m-ecoCircle_2", {
-  //   rotate: 360,
-  //   duration: 2.8,
-  //   ease: "linear",
-  //   repeat: -1,
-  // });
-  // gsap.to("#m-ecoCircle_3", {
-  //   rotate: 360,
-  //   duration: 4.2,
-  //   ease: "linear",
-  //   repeat: -1,
-  // });
+  gsap.to("#m-ecoCircle_0", {
+    rotate: 360,
+    duration: 2.5,
+    ease: "linear",
+    repeat: -1,
+  });
+  gsap.to("#m-ecoCircle_1", {
+    rotate: 360,
+    duration: 3.5,
+    ease: "linear",
+    repeat: -1,
+  });
+  gsap.to("#m-ecoCircle_2", {
+    rotate: 360,
+    duration: 2.8,
+    ease: "linear",
+    repeat: -1,
+  });
+  gsap.to("#m-ecoCircle_3", {
+    rotate: 360,
+    duration: 4.2,
+    ease: "linear",
+    repeat: -1,
+  });
 });
 //Gsap-fine
 </script>
