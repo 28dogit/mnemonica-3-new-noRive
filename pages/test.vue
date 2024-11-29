@@ -29,6 +29,28 @@
       <h2 id="heroSubTitle" class="text-center min-[680px]:hidden">
         Connecting the dots of the digital <br />cinema living ecosystem
       </h2>
+      <div id="m-ecosys">
+        <img
+          src="/assets/img/m_ecosystem/m_circle_ecosys_0@2x.png"
+          alt="mnemonica ecosystem pre-production"
+          id="mEcoCircle"
+        />
+        <img
+          src="/assets/img/m_ecosystem/m_circle_ecosys_1@2x.png"
+          alt="mnemonica ecosystem production"
+          id="mEcoCircle"
+        />
+        <img
+          src="/assets/img/m_ecosystem/m_circle_ecosys_2@2x.png"
+          alt="mnemonica ecosystem post-production"
+          id="mEcoCircle"
+        />
+        <img
+          src="/assets/img/m_ecosystem/m_circle_ecosys_3@2x.png"
+          alt="mnemonica ecosystem market"
+          id="mEcoCircle"
+        />
+      </div>
     </div>
   </main>
 </template>
