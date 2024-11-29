@@ -140,12 +140,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed;
+  //position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  //overflow: hidden;
 }
 #ghirlanda-full{
   mix-blend-mode: luminosity;
@@ -197,18 +197,22 @@
 ///*ANCHOR - Ecosystem
 
 #ecosystem-container{
+  background: linear-gradient(0deg, $gradient_4 66%, transparent 100%);
+  padding-top: 15em;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100vh;
+  min-height: 900px;
+  box-sizing: content-box;
   img{
     position: absolute;
-    top: 50%;
+    top: calc(50% + 5rem);
     left: 50%;
     transform: translate(-50%, -50%);
-    opacity: 0.4;
+    opacity: 0.3;
   }
 }
 
