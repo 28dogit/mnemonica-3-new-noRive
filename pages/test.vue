@@ -62,10 +62,44 @@ import { gsap } from "gsap"; //importa gsap
 
 onMounted(() => {
   var tl = gsap.timeline({ ease: "power2.in" });
-  tl.from("#logo_mne", {
+  tl.from("#ghirlanda-full", {
     opacity: 0,
-    duration: 2,
+    rotate: -5,
+    filter: "blur(5px)",
+    duration: 3,
   });
+  tl.to("#ghirlanda-full", {
+    opacity: 0,
+    rotate: 5,
+    filter: "blur(5px)",
+    duration: 3,
+  });
+  tl.from(
+    ".ghirlanda-updx img",
+    {
+      opacity: 0,
+      filter: "blur(5px)",
+      duration: 3,
+    },
+    "< +=1"
+  );
+  tl.from(
+    ".ghirlanda-dwsx img",
+    {
+      opacity: 0,
+      filter: "blur(5px)",
+      duration: 3,
+    },
+    "<"
+  );
+  tl.from(
+    "#logo_mne",
+    {
+      opacity: 0,
+      duration: 2,
+    },
+    "<"
+  );
   tl.from(
     "#H-screen",
     {
@@ -104,30 +138,30 @@ onMounted(() => {
   );
 
   ///ANCHOR - ecosysstem gsap
-  gsap.to("#m-ecoCircle_0", {
-    rotate: 360,
-    duration: 7.5,
-    ease: "linear",
-    repeat: -1,
-  });
-  gsap.to("#m-ecoCircle_1", {
-    rotate: 360,
-    duration: 8.5,
-    ease: "linear",
-    repeat: -1,
-  });
-  gsap.to("#m-ecoCircle_2", {
-    rotate: 360,
-    duration: 7.8,
-    ease: "linear",
-    repeat: -1,
-  });
-  gsap.to("#m-ecoCircle_3", {
-    rotate: 360,
-    duration: 9.5,
-    ease: "linear",
-    repeat: -1,
-  });
+  // gsap.to("#m-ecoCircle_0", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  // });
+  // gsap.to("#m-ecoCircle_1", {
+  //   rotate: 360,
+  //   duration: 8.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  // });
+  // gsap.to("#m-ecoCircle_2", {
+  //   rotate: 360,
+  //   duration: 7.8,
+  //   ease: "linear",
+  //   repeat: -1,
+  // });
+  // gsap.to("#m-ecoCircle_3", {
+  //   rotate: 360,
+  //   duration: 9.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  // });
 });
 //Gsap-fine
 </script>

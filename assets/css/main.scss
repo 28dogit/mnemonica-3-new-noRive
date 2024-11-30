@@ -211,8 +211,34 @@
     position: absolute;
     top: calc(50% + 5rem);
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(var(--circle-scale, 1)); /* Permette di scalare i cerchi */
+    height: auto;
     opacity: 0.3;
+  }
+}
+
+/* Gestione della scala con media queries */
+@media (max-width: 1200px) {
+  #ecosystem-container img {
+    --circle-scale: 0.9; /* Scala i cerchi proporzionalmente */
+  }
+}
+
+@media (max-width: 992px) {
+  #ecosystem-container img {
+    --circle-scale: 0.7;
+  }
+}
+
+@media (max-width: 768px) {
+  #ecosystem-container img {
+    --circle-scale: 0.5;
+  }
+}
+
+@media (max-width: 480px) {
+  #ecosystem-container img {
+    --circle-scale: 0.3;
   }
 }
 
