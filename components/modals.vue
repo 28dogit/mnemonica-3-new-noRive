@@ -27,7 +27,7 @@
           </p>
           <NuxtImg
             class="modal-block"
-            src="img/mia2023-mnemonica.jpg"
+            src="assets/img/mia2023-mnemonica.jpg"
             sizes="600px"
           ></NuxtImg>
           <p class="modal-block">

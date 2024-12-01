@@ -1,0 +1,48 @@
+@use "breakpoints.scss" as bp;
+
+//fonts
+$M_Font: "montserrat", sans-serif;
+$J_Font: "jost", sans-serif;
+
+* {
+    font-family: $M_Font;
+}
+
+//colors
+$mne_primary: #11cbee;
+$mne_lighter: #b8effa;
+$mne_secondary: #cef372;
+$mne_text-on-dark: #d9d9d9;
+
+//gradienti
+$gradient_1: hsla(202, 92%, 35%, 0.5);
+$gradient_2: hsla(202, 92%, 15%, 1);
+$gradient_3: hsla(205, 59%, 10%, 0.5);
+$gradient_4: hsla(205, 59%, 10%, 1);
+$gradient_5: hsl(303, 90%, 32%);
+
+@mixin grad-var-phone($x1,$y1,$x2,$y2,$x3,$y3,$gs_1,$gs_2){
+    @include bp.for-phone{
+    background-image: radial-gradient(circle at $x1 $y1, $gradient_1 $gs_1, $gradient_3 $gs_2, transparent),
+    //radial-gradient(circle at $x1 $y1, $gradient_1 0.25%, $gradient_3 50%, transparent),
+    radial-gradient(circle at $x2 $y2, $gradient_2 0.25%, $gradient_4 20%, transparent),
+    radial-gradient(circle at $x3 $y3, $gradient_2 0.25%, $gradient_4 40%);
+    }
+}
+@mixin grad-var-tablet($x1,$y1,$x2,$y2,$x3,$y3,$gs_1,$gs_2){
+    @include bp.for-tablet-up{
+    background-image: radial-gradient(circle at $x1 $y1, $gradient_1 $gs_1, $gradient_3 $gs_2, transparent),
+    //radial-gradient(circle at $x1 $y1, $gradient_1 0.25%, $gradient_3 50%, transparent),
+    radial-gradient(circle at $x2 $y2, $gradient_2 0.25%, $gradient_4 20%, transparent),
+    radial-gradient(circle at $x3 $y3, $gradient_2 0.25%, $gradient_4 40%);
+    }
+}
+
+@mixin grad-var-desktop($x1,$y1,$x2,$y2,$x3,$y3,$gs_1,$gs_2){
+    @include bp.for-desktop-up{
+    background-image: radial-gradient(circle at $x1 $y1, $gradient_1 $gs_1, $gradient_3 $gs_2, transparent),
+    //radial-gradient(circle at $x1 $y1, $gradient_1 0.25%, $gradient_3 50%, transparent),
+    radial-gradient(circle at $x2 $y2, $gradient_2 0.25%, $gradient_4 20%, transparent),
+    radial-gradient(circle at $x3 $y3, $gradient_2 0.25%, $gradient_4 40%);
+    }
+}
