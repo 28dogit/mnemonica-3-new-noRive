@@ -16,10 +16,10 @@
   left: 0px;
   background-size: 180% 180%;
   animation: rotate-background 70s linear infinite;
-  
-  @include grad-var-phone(50%,10%,80%,80%,20%,70%,0.25%,50%);
-  @include grad-var-tablet(50%,10%,80%,80%,20%,70%,0.25%,50%);
-  @include grad-var-desktop(50%,10%,80%,80%,20%,70%,0.25%,50%);
+
+  @include grad-var-phone(50%, 10%, 80%, 80%, 20%, 70%, 0.25%, 50%);
+  @include grad-var-tablet(50%, 10%, 80%, 80%, 20%, 70%, 0.25%, 50%);
+  @include grad-var-desktop(50%, 10%, 80%, 80%, 20%, 70%, 0.25%, 50%);
   //@include grad-var-desktop(50%,10%,80%,80%,20%,70%,25%,5%);
 }
 // @keyframes gradient-animation {
@@ -74,7 +74,7 @@
   position: absolute;
   right: 0;
   top: 0;
-  @include bp.for-phone{
+  @include bp.for-phone {
     width: 490px;
     opacity: 0.4;
   }
@@ -84,15 +84,14 @@
     position: absolute;
     top: 0px;
     right: -50px;
-    @include bp.for-tablet-portrait{
+    @include bp.for-tablet-portrait {
       top: -50px;
       right: -120px;
     }
-    @include bp.for-phone{
+    @include bp.for-phone {
       top: -90px;
       right: -160px;
       transform: rotate(-10deg);
-
     }
   }
 }
@@ -112,7 +111,7 @@
   position: absolute;
   left: 0px;
   bottom: -160px;
-  @include bp.for-phone{
+  @include bp.for-phone {
     max-width: 490px;
   }
 
@@ -121,11 +120,11 @@
     position: absolute;
     bottom: 120px;
     left: -70px;
-    @include bp.for-tablet-portrait{
+    @include bp.for-tablet-portrait {
       bottom: 50px;
       left: -120px;
     }
-    @include bp.for-phone{
+    @include bp.for-phone {
       bottom: 25px;
       left: -70px;
       transform: rotate(-45deg) !important;
@@ -134,9 +133,9 @@
 }
 
 ///*ANCHOR - test ghirlande
-/// 
+///
 
-#ghirlandaContainert{
+#ghirlandaContainert {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -147,10 +146,10 @@
   height: 100vh;
   //overflow: hidden;
 }
-#ghirlanda-full{
+#ghirlanda-full {
   mix-blend-mode: luminosity;
   opacity: 0.6;
-  img{
+  img {
     width: 1000px;
   }
 }
@@ -159,28 +158,28 @@
 
 ///*ANCHOR -  Hero section
 
-#heroSection{
+#heroSection {
   position: relative;
-  top:-50px;
-  @include bp.for-phone{
+  top: -50px;
+  @include bp.for-phone {
     position: relative;
-    top:-50px;
+    top: -50px;
   }
 }
 
-#heroTitle{
-  @include bp.for-tablet-portrait{
+#heroTitle {
+  @include bp.for-tablet-portrait {
     flex-direction: column;
     gap: 0;
-    h1{
+    h1 {
       padding: 0;
     }
   }
-  @include bp.for-phone{
+  @include bp.for-phone {
     flex-direction: column;
     gap: 0;
     margin-bottom: 1.5rem;
-    h1{
+    h1 {
       padding: 0;
       font-size: 2rem;
       margin-bottom: 0.5rem;
@@ -188,15 +187,15 @@
     }
   }
 }
-#logo_mne{
-  @include bp.for-phone{
+#logo_mne {
+  @include bp.for-phone {
     max-width: 80vw;
   }
 }
 
 ///*ANCHOR - Ecosystem
 
-#ecosystem-container{
+#ecosystem-container {
   background: linear-gradient(0deg, $gradient_4 66%, transparent 100%);
   padding-top: 15em;
   position: relative;
@@ -207,66 +206,51 @@
   height: 100vh;
   min-height: 900px;
   box-sizing: content-box;
-  img{
+  img {
     position: absolute;
     top: calc(50% + 5rem);
     left: 50%;
-    transform: translate(-50%, -50%) scale(var(--circle-scale, 1)); /* Permette di scalare i cerchi */
+    //transform: translate(-50%, -50%) scale(var(--circle-scale, 1)); /* Permette di scalare i cerchi */
+    transform: translate(-50%, -50%); /* Centro preciso */
     height: auto;
     opacity: 0.3;
+    width: 44vw; /* Dimensione proporzionale alla larghezza della viewport */
+    &:nth-child(2){
+      width: 36.5vw;
+    }
+    &:nth-child(3){
+      width: 30vw;
+    }
+    &:nth-child(4){
+      width: 25vw;
+    }
   }
 }
 
-/* Gestione della scala con media queries */
-@media (max-width: 1200px) {
-  #ecosystem-container img {
-    --circle-scale: 0.9; /* Scala i cerchi proporzionalmente */
-  }
-}
-
-@media (max-width: 992px) {
-  #ecosystem-container img {
-    --circle-scale: 0.7;
-  }
-}
-
-@media (max-width: 768px) {
-  #ecosystem-container img {
-    --circle-scale: 0.5;
-  }
-}
-
-@media (max-width: 480px) {
-  #ecosystem-container img {
-    --circle-scale: 0.3;
-  }
-}
 
 ///*ANCHOR - Modules
 
-#modules{
+#modules {
   background: linear-gradient(0deg, $gradient_4 55%, transparent 100%);
   padding-top: 10em;
   // background-color: $gradient_4;
   // background-image: url("/assets/img/svg/BG-modules_1.svg");
   // background-repeat: no-repeat;
   // background-position: center;
-  @include bp.for-phone{
+  @include bp.for-phone {
     //background-position: top;
-    p{
+    p {
       font-size: 14px;
       line-height: 21px;
     }
   }
-  
 }
-#bgCircle_1{
- width: 400px;
+#bgCircle_1 {
+  width: 400px;
 }
-#bgCircle_2{
+#bgCircle_2 {
   width: 500px;
- }
- #bgCircle_3{
+}
+#bgCircle_3 {
   width: 600px;
- }
-
+}
