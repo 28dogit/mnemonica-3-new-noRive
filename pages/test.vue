@@ -66,15 +66,18 @@
   </main>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 //Utilizzo di Gsap!!-----
 import { onMounted } from "vue";
-import { gsap } from "gsap"; //importa gsap
+//import { gsap } from "gsap"; //importa gsap
+import { useNuxtApp } from "#app"; // Ottieni NuxtApp
+
+const { $gsap } = useNuxtApp();
 
 onMounted(() => {
-  gsap.set(".ghirlanda-updx img", { opacity: 0 });
-  gsap.set(".ghirlanda-dwsx img", { opacity: 0 });
-  var tl = gsap.timeline({ ease: "power2.in" });
+  $gsap.set(".ghirlanda-updx img", { opacity: 0 });
+  $gsap.set(".ghirlanda-dwsx img", { opacity: 0 });
+  var tl = $gsap.timeline({ ease: "power2.in" });
   tl.from("#ghirlanda-full", {
     opacity: 0,
     rotate: -5,
@@ -181,28 +184,28 @@ onMounted(() => {
   ///ANCHOR - ecosysstem gsap
 
   //SVG
-  gsap.to("#m_100_circle_ecosys_0", {
+  $gsap.to("#m_100_circle_ecosys_0", {
     rotate: 360,
     duration: 7.5,
     ease: "linear",
     repeat: -1,
     transformOrigin: "50% 50%",
   });
-  gsap.to("#m_100_circle_ecosys_1", {
+  $gsap.to("#m_100_circle_ecosys_1", {
     rotate: 360,
     duration: 7.5,
     ease: "linear",
     repeat: -1,
     transformOrigin: "50% 50%",
   });
-  gsap.to("#m_100_circle_ecosys_2", {
+  $gsap.to("#m_100_circle_ecosys_2", {
     rotate: 360,
     duration: 7.5,
     ease: "linear",
     repeat: -1,
     transformOrigin: "50% 50%",
   });
-  gsap.to("#m_100_circle_ecosys_3", {
+  $gsap.to("#m_100_circle_ecosys_3", {
     rotate: 360,
     duration: 7.5,
     ease: "linear",

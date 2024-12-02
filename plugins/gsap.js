@@ -1,6 +1,7 @@
-import gsap from "gsap";
+import gsap from 'gsap';
 
 export default defineNuxtPlugin(nuxtApp => {
-    nuxtApp.provide('gsap', gsap);
-
-})
+  if (process.client) {
+    nuxtApp.provide('gsap', gsap); // Rendo GSAP disponibile come $gsap
+  }
+});
