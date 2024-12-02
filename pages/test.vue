@@ -30,7 +30,7 @@
         Connecting the dots of the digital <br />cinema living ecosystem
       </h2>
     </div>
-    <div id="ecosystem-container">
+    <!-- <div id="ecosystem-container">
       <img
         src="assets/img/m_ecosystem/m_100_circle_ecosys_0.svg"
         alt="mnemonica ecosystem pre-production"
@@ -50,6 +50,17 @@
         src="assets/img/m_ecosystem/m_100_circle_ecosys_3.svg"
         alt="mnemonica ecosystem market"
         id="m-ecoCircle_3"
+      />
+    </div> -->
+    <div id="ecosystem-container_svg">
+      <MarketSvg id="Market_svg"></MarketSvg>
+      <PostSvg id="Post_svg"></PostSvg>
+      <ProductionSvg id="Production_svg"></ProductionSvg>
+      <PreSvg id="Pre_svg"></PreSvg>
+      <NuxtImg
+        id="logoPhase"
+        src="/assets/img/svg/Logo-mne-Vector.svg"
+        alt="Mnemonica logo portrait"
       />
     </div>
   </main>
@@ -138,6 +149,38 @@ onMounted(() => {
   );
 
   ///ANCHOR - ecosysstem gsap
+
+  //SVG
+  gsap.to("#m_100_circle_ecosys_0", {
+    rotate: 360,
+    duration: 7.5,
+    ease: "linear",
+    repeat: -1,
+    transformOrigin: "50% 50%",
+  });
+  gsap.to("#m_100_circle_ecosys_1", {
+    rotate: 360,
+    duration: 7.5,
+    ease: "linear",
+    repeat: -1,
+    transformOrigin: "50% 50%",
+  });
+  gsap.to("#m_100_circle_ecosys_2", {
+    rotate: 360,
+    duration: 7.5,
+    ease: "linear",
+    repeat: -1,
+    transformOrigin: "50% 50%",
+  });
+  gsap.to("#m_100_circle_ecosys_3", {
+    rotate: 360,
+    duration: 7.5,
+    ease: "linear",
+    repeat: -1,
+    transformOrigin: "50% 50%",
+  });
+
+  //NORMALE
   // gsap.to("#m-ecoCircle_0", {
   //   rotate: 360,
   //   duration: 7.5,
