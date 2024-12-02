@@ -72,6 +72,8 @@ import { onMounted } from "vue";
 import { gsap } from "gsap"; //importa gsap
 
 onMounted(() => {
+  gsap.set(".ghirlanda-updx img", { opacity: 0 });
+  gsap.set(".ghirlanda-dwsx img", { opacity: 0 });
   var tl = gsap.timeline({ ease: "power2.in" });
   tl.from("#ghirlanda-full", {
     opacity: 0,
@@ -85,20 +87,48 @@ onMounted(() => {
     filter: "blur(5px)",
     duration: 3,
   });
-  tl.from(
+  // tl.from(
+  //   ".ghirlanda-updx img",
+  //   {
+  //     opacity: 0,
+  //     filter: "blur(5px)",
+  //     duration: 3,
+  //   },
+  //   "< +=1"
+  // );
+  // tl.from(
+  //   ".ghirlanda-dwsx img",
+  //   {
+  //     opacity: 0,
+  //     filter: "blur(5px)",
+  //     duration: 3,
+  //   },
+  //   "<"
+  // );
+  tl.fromTo(
     ".ghirlanda-updx img",
     {
       opacity: 0,
       filter: "blur(5px)",
+      duration: 0.1,
+    },
+    {
+      opacity: 1,
+      filter: "blur(0px)",
       duration: 3,
     },
     "< +=1"
   );
-  tl.from(
+  tl.fromTo(
     ".ghirlanda-dwsx img",
     {
       opacity: 0,
       filter: "blur(5px)",
+      duration: 0.1,
+    },
+    {
+      opacity: 1,
+      filter: "blur(0px)",
       duration: 3,
     },
     "<"

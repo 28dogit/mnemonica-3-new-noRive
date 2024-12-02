@@ -226,7 +226,7 @@
 //     }
 //   }
 // }
-
+$wcircle:1px;
 #ecosystem-container_svg {
   background: linear-gradient(0deg, $gradient_4 66%, transparent 100%);
   padding-top: 20em;
@@ -244,7 +244,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
     height: auto;
-    max-width: 10vw;
+    width: calc(10vw + $wcircle);
+    max-width: 122px;
+    min-width: 72px;
     opacity: 0.1;
   }
   #Market_svg {
@@ -254,11 +256,14 @@
     left: 50%;
     transform: translate(-50%, -50%);
     height: auto;
-    opacity: 0.3;
-    width: 41.5vw; /* Dimensione proporzionale alla larghezza della viewport */
-    // #m_100_circle_ecosys_3 {
-      
-    // }
+    // opacity: 0.3;
+    //width: 41.5vw; /* Dimensione proporzionale alla larghezza della viewport */
+    width: calc(41.5vw + $wcircle);
+    max-width: 500px;
+    min-width: 300px;
+    #m_100_circle_ecosys_3 {
+      opacity: 0.3;
+    }
   }
   #Post_svg {
     position: absolute;
@@ -266,8 +271,13 @@
     left: 50%;
     transform: translate(-50%, -50%);
     height: auto;
-    opacity: 0.3;
-    width: 35.3vw;
+   //width: 35.3vw;
+    width: calc(35.3vw + $wcircle);
+    max-width: 425.66px;
+    min-width: 253px;
+    #m_100_circle_ecosys_2 {
+      opacity: 0.3;
+    }
   }
   #Production_svg {
     position: absolute;
@@ -275,8 +285,13 @@
     left: 50%;
     transform: translate(-50%, -50%);
     height: auto;
-    opacity: 0.3;
-    width: 30vw;
+    //width: 30vw;
+    width: calc(30vw + $wcircle);
+    max-width: 362px;
+    min-width: 213px;
+    #m_100_circle_ecosys_1 {
+      opacity: 0.3;
+    }
   }
   #Pre_svg {
     position: absolute;
@@ -284,8 +299,13 @@
     left: 50%;
     transform: translate(-50%, -50%); /* Centro preciso */
     height: auto;
-    opacity: 0.3;
-    width: 25vw;
+    //width: 25vw;
+    width: calc(25vw + $wcircle);
+    max-width: 302px;
+    min-width: 175px;
+    #m_100_circle_ecosys_0 {
+      opacity: 0.3;
+    }
   }
 }
 
