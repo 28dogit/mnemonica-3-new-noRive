@@ -26,7 +26,7 @@
       </h2>
     </div>
     <div id="modules" class="px-5 py-6 relative overflow-hidden text-center">
-      <div
+      <!-- <div
         id="module-bg"
         class="absolute top-[10em] left-0 w-screen flex items-start justify-center"
       >
@@ -48,7 +48,7 @@
           alt="mne module background"
           class="absolute"
         />
-      </div>
+      </div> -->
       <div id="rooms" class="module">
         <h2 class="font-medium">Rooms</h2>
         <p>
@@ -156,11 +156,11 @@ onMounted(() => {
 </script>
 
 <style>
-/* Impostiamo il contenitore #modules come flex container */
+/*Contenitore #modules come flex container */
 #modules {
   display: flex;
-  flex-direction: column; /* Cambia in 'row' se preferisci che i moduli siano affiancati */
-  gap: 1rem; /* Spazio tra i moduli, opzionale */
+  flex-direction: column;
+  gap: 1rem;
 }
 
 /* Stili per ogni modulo */
@@ -171,27 +171,19 @@ onMounted(() => {
   transition: all 2s ease-in-out;
 }
 
-/* Nascondiamo il paragrafo di default */
 .module p {
   max-height: 0;
   overflow: hidden;
   transition: max-height 2s ease-in;
-  margin: 0; /* Rimuovi margini per evitare spazi indesiderati */
+  margin: 0;
 }
-
 /* Stili per il titolo */
 .module h2 {
-  cursor: pointer; /* Indica che è interattivo */
-  margin: 0; /* Rimuovi margini per un allineamento migliore */
+  cursor: pointer;
+  margin: 0;
 }
 
-/* Quando si passa il mouse sul modulo, espandiamo il paragrafo */
 .module:hover p {
-  max-height: 500px; /* Imposta un valore sufficiente per contenere il testo */
+  max-height: 500px;
 }
-
-/* Opzionale: Cambiare il background o altri stili al hover */
-/*.module:hover {
-   background-color: #f9f9f9;
-}*/
 </style>

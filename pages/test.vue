@@ -4,7 +4,7 @@
       id="ghirlandaContainert"
       class="test w-screen h-screen absolute top-0 left-0 -z-10"
     >
-      <div id="ghirlanda-full" data-speed="0.6">
+      <div id="ghirlanda-full" data-speed="0.6" class="max-w-2xl">
         <NuxtImg
           src="/assets/img/Ghirlanda_full_web_800_opt.png"
           alt="mnemonica ghirlanda ecosystem"
