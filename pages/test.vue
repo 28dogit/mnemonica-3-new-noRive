@@ -15,7 +15,7 @@
       id="heroSection"
       class="flex flex-col items-center justify-center h-[calc(100vh-70px)] w-screen"
     >
-      <div id="logo_mne" class="absolute opacity-5 w-3xl">
+      <div id="logo_mne" class="absolute opacity-5">
         <img src="/assets/img/svg/Logo-mne-Vector.svg" alt="Mnemonica logo portrait" />
       </div>
       <div id="heroTitle" class="flex items-center gap-10 justify-center flex-wrap">

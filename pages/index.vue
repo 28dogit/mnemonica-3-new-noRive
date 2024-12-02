@@ -4,7 +4,13 @@
       id="heroSection"
       class="flex flex-col items-center justify-center h-[calc(100vh-70px)] w-screen"
     >
-      <div id="logo_mne" class="absolute opacity-5 w-3xl">
+      <div id="logo_mne" class="absolute opacity-5">
+        <NuxtImg
+          src="/assets/img/svg/Logo-mne-Vector.svg"
+          alt="Mnemonica logo portrait"
+        />
+      </div>
+      <div id="logo_mne" class="absolute opacity-5">
         <img src="/assets/img/svg/Logo-mne-Vector.svg" alt="Mnemonica logo portrait" />
       </div>
       <div id="heroTitle" class="flex items-center gap-10 justify-center flex-wrap">
@@ -24,19 +30,19 @@
         id="module-bg"
         class="absolute top-[10em] left-0 w-screen flex items-start justify-center"
       >
-        <img
+        <NuxtImg
           id="bgCircle_1"
           src="/assets/img/svg/circle-690-50.svg"
           alt="mne module background"
           class="absolute w-96"
         />
-        <img
+        <NuxtImg
           id="bgCircle_2"
           src="/assets/img/svg/circle-690-50.svg"
           alt="mne module background"
           class="absolute"
         />
-        <img
+        <NuxtImg
           id="bgCircle_3"
           src="/assets/img/svg/circle-690-50.svg"
           alt="mne module background"
