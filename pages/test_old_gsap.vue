@@ -30,6 +30,28 @@
         Connecting the dots of the digital <br />cinema living ecosystem
       </h2>
     </div>
+    <!-- <div id="ecosystem-container">
+      <img
+        src="assets/img/m_ecosystem/m_100_circle_ecosys_0.svg"
+        alt="mnemonica ecosystem pre-production"
+        id="m-ecoCircle_0"
+      />
+      <img
+        src="assets/img/m_ecosystem/m_100_circle_ecosys_1.svg"
+        alt="mnemonica ecosystem production"
+        id="m-ecoCircle_1"
+      />
+      <img
+        src="assets/img/m_ecosystem/m_100_circle_ecosys_2.svg"
+        alt="mnemonica ecosystem post-production"
+        id="m-ecoCircle_2"
+      />
+      <img
+        src="assets/img/m_ecosystem/m_100_circle_ecosys_3.svg"
+        alt="mnemonica ecosystem market"
+        id="m-ecoCircle_3"
+      />
+    </div> -->
     <div id="ecosystem-container_svg">
       <MarketSvg id="Market_svg"></MarketSvg>
       <PostSvg id="Post_svg"></PostSvg>
@@ -68,6 +90,24 @@ onMounted(() => {
     filter: "blur(5px)",
     duration: 3,
   });
+  // tl.from(
+  //   ".ghirlanda-updx img",
+  //   {
+  //     opacity: 0,
+  //     filter: "blur(5px)",
+  //     duration: 3,
+  //   },
+  //   "< +=1"
+  // );
+  // tl.from(
+  //   ".ghirlanda-dwsx img",
+  //   {
+  //     opacity: 0,
+  //     filter: "blur(5px)",
+  //     duration: 3,
+  //   },
+  //   "<"
+  // );
   tl.fromTo(
     ".ghirlanda-updx img",
     {
@@ -140,6 +180,64 @@ onMounted(() => {
     },
     "-=1"
   );
+
+  ///ANCHOR - ecosysstem gsap
+
+  //SVG
+  // $gsap.to("#m_100_circle_ecosys_0", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  // });
+  // $gsap.to("#m_100_circle_ecosys_1", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  // });
+  // $gsap.to("#m_100_circle_ecosys_2", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  // });
+  // $gsap.to("#m_100_circle_ecosys_3", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  // });
+
+  //NORMALE
+  // gsap.to("#m-ecoCircle_0", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  // });
+  // gsap.to("#m-ecoCircle_1", {
+  //   rotate: 360,
+  //   duration: 8.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  // });
+  // gsap.to("#m-ecoCircle_2", {
+  //   rotate: 360,
+  //   duration: 7.8,
+  //   ease: "linear",
+  //   repeat: -1,
+  // });
+  // gsap.to("#m-ecoCircle_3", {
+  //   rotate: 360,
+  //   duration: 9.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  // });
 });
 //Gsap-fine
 </script>
