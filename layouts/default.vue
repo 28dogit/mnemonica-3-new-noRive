@@ -36,6 +36,7 @@ onMounted(() => {
       end: "max",
       invalidateOnRefresh: true,
       scrub: 0,
+      force3D: true,
     },
   });
 });

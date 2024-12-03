@@ -8,7 +8,6 @@
         <NuxtImg
           src="/assets/img/Ghirlanda_full_web_800_opt.png"
           alt="mnemonica ghirlanda ecosystem"
-          densities="x1"
         />
       </div>
     </div>
@@ -17,11 +16,7 @@
       class="flex flex-col items-center justify-center h-[calc(100vh-70px)] w-screen"
     >
       <div id="logo_mne" class="absolute opacity-5">
-        <NuxtImg
-          src="/assets/img/svg/Logo-mne-Vector.svg"
-          densities="x1"
-          alt="Mnemonica logo portrait"
-        />
+        <img src="/assets/img/svg/Logo-mne-Vector.svg" alt="Mnemonica logo portrait" />
       </div>
       <div id="heroTitle" class="flex items-center gap-10 justify-center flex-wrap">
         <h1 id="H-screen" class="uppercase">Screen</h1>
@@ -35,6 +30,28 @@
         Connecting the dots of the digital <br />cinema living ecosystem
       </h2>
     </div>
+    <!-- <div id="ecosystem-container">
+      <img
+        src="assets/img/m_ecosystem/m_100_circle_ecosys_0.svg"
+        alt="mnemonica ecosystem pre-production"
+        id="m-ecoCircle_0"
+      />
+      <img
+        src="assets/img/m_ecosystem/m_100_circle_ecosys_1.svg"
+        alt="mnemonica ecosystem production"
+        id="m-ecoCircle_1"
+      />
+      <img
+        src="assets/img/m_ecosystem/m_100_circle_ecosys_2.svg"
+        alt="mnemonica ecosystem post-production"
+        id="m-ecoCircle_2"
+      />
+      <img
+        src="assets/img/m_ecosystem/m_100_circle_ecosys_3.svg"
+        alt="mnemonica ecosystem market"
+        id="m-ecoCircle_3"
+      />
+    </div> -->
     <div id="ecosystem-container_svg">
       <MarketSvg id="Market_svg"></MarketSvg>
       <PostSvg id="Post_svg"></PostSvg>
@@ -58,36 +75,50 @@ import { useNuxtApp } from "#app"; // Ottieni NuxtApp
 const { $gsap } = useNuxtApp();
 
 onMounted(() => {
-  // $gsap.set(".ghirlanda-updx img", { opacity: 0 });
-  // $gsap.set(".ghirlanda-dwsx img", { opacity: 0 });
+  $gsap.set(".ghirlanda-updx img", { opacity: 0 });
+  $gsap.set(".ghirlanda-dwsx img", { opacity: 0 });
   var tl = $gsap.timeline({ ease: "power2.in" });
   tl.from("#ghirlanda-full", {
     opacity: 0,
     rotate: -5,
     filter: "blur(5px)",
     duration: 3,
-    force3D: true,
   });
   tl.to("#ghirlanda-full", {
     opacity: 0,
     rotate: 5,
     filter: "blur(5px)",
     duration: 3,
-    force3D: true,
   });
+  // tl.from(
+  //   ".ghirlanda-updx img",
+  //   {
+  //     opacity: 0,
+  //     filter: "blur(5px)",
+  //     duration: 3,
+  //   },
+  //   "< +=1"
+  // );
+  // tl.from(
+  //   ".ghirlanda-dwsx img",
+  //   {
+  //     opacity: 0,
+  //     filter: "blur(5px)",
+  //     duration: 3,
+  //   },
+  //   "<"
+  // );
   tl.fromTo(
     ".ghirlanda-updx img",
     {
       opacity: 0,
       filter: "blur(5px)",
       duration: 0.1,
-      force3D: true,
     },
     {
       opacity: 1,
       filter: "blur(0px)",
       duration: 3,
-      force3D: true,
     },
     "< +=1"
   );
@@ -97,13 +128,11 @@ onMounted(() => {
       opacity: 0,
       filter: "blur(5px)",
       duration: 0.1,
-      force3D: true,
     },
     {
       opacity: 1,
       filter: "blur(0px)",
       duration: 3,
-      force3D: true,
     },
     "<"
   );
@@ -151,6 +180,64 @@ onMounted(() => {
     },
     "-=1"
   );
+
+  ///ANCHOR - ecosysstem gsap
+
+  //SVG
+  // $gsap.to("#m_100_circle_ecosys_0", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  // });
+  // $gsap.to("#m_100_circle_ecosys_1", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  // });
+  // $gsap.to("#m_100_circle_ecosys_2", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  // });
+  // $gsap.to("#m_100_circle_ecosys_3", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  // });
+
+  //NORMALE
+  // gsap.to("#m-ecoCircle_0", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  // });
+  // gsap.to("#m-ecoCircle_1", {
+  //   rotate: 360,
+  //   duration: 8.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  // });
+  // gsap.to("#m-ecoCircle_2", {
+  //   rotate: 360,
+  //   duration: 7.8,
+  //   ease: "linear",
+  //   repeat: -1,
+  // });
+  // gsap.to("#m-ecoCircle_3", {
+  //   rotate: 360,
+  //   duration: 9.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  // });
 });
 //Gsap-fine
 </script>

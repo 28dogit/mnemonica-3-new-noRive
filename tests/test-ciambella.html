@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Animazione Circolare con GSAP</title>
+  <style>
+    #contenitore-immagine {
+      width: 300px;
+      height: 300px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contenitore-immagine img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    #maschera-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    /* Imposta la maschera per l'immagine */
+    #contenitore-immagine img {
+      mask: url(#maschera-cerchio);
+      -webkit-mask: url(#maschera-cerchio);
+    }
+  </style>
+</head>
+<body>
+
+<div id="contenitore-immagine">
+  <img src="ghirla.png" alt="Ciambella">
+  <svg id="maschera-svg" width="300" height="300" viewBox="0 0 300 300">
+    <defs>
+      <mask id="maschera-cerchio">
+        <rect width="300" height="300" fill="white" />
+        <circle id="cerchio-maschera" cx="150" cy="150" r="150" fill="none" stroke="black" stroke-width="300" />
+      </mask>
+    </defs>
+  </svg>
+</div>
+
+<!-- Importa GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<script>
+  // Calcola la circonferenza del cerchio
+  const raggio = 150;
+  const circonferenza = 2 * Math.PI * raggio;
+
+  // Imposta i valori iniziali della maschera
+  gsap.set('#cerchio-maschera', {
+    strokeDasharray: circonferenza,
+    strokeDashoffset: 0,
+    rotation: -90,
+    transformOrigin: '50% 50%'
+  });
+
+  // Anima la maschera per far scomparire l'immagine
+  gsap.to('#cerchio-maschera', {
+    duration: 5,
+    strokeDashoffset: circonferenza,
+    ease: 'linear'
+  });
+</script>
+
+</body>
+</html>

@@ -3,6 +3,10 @@
 @use "typography.scss" as typo;
 @use "breakpoints.scss" as bp;
 
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
+
 ///*SECTION - background gradients + animation
 #bbg {
   width: 100vw;
@@ -18,7 +22,17 @@
   @include grad-var-desktop(50%, 10%, 80%, 80%, 20%, 70%, 0.25%, 50%);
   //@include grad-var-desktop(50%,10%,80%,80%,20%,70%,25%,5%);
 }
-
+// @keyframes gradient-animation {
+//   0% {
+//     background-position: 0% 50%;
+//   }
+//   50% {
+//     background-position: 100% 50%;
+//   }
+//   100% {
+//     background-position: 0% 50%;
+//   }
+// }
 @keyframes rotate-background {
   0% {
     background-position: 50% 0%;
@@ -81,7 +95,12 @@
     }
   }
 }
-
+.ghirlanda-updx.l2 {
+  opacity: 0.2;
+  // img {
+  //   transform: rotate(20deg);
+  // }
+}
 ///*ANCHOR -  ghirlanda down sx
 .ghirlanda-dwsx {
   overflow: hidden;
@@ -176,6 +195,38 @@
 
 ///*ANCHOR - Ecosystem
 
+// #ecosystem-container {
+//   background: linear-gradient(0deg, $gradient_4 66%, transparent 100%);
+//   padding-top: 15em;
+//   position: relative;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   width: 100%;
+//   height: 100vh;
+//   min-height: 900px;
+//   box-sizing: content-box;
+//   img {
+//     position: absolute;
+//     top: calc(50% + 5rem);
+//     left: 50%;
+//     //transform: translate(-50%, -50%) scale(var(--circle-scale, 1)); /* Permette di scalare i cerchi */
+//     transform: translate(-50%, -50%); /* Centro preciso */
+//     height: auto;
+//     opacity: 0.3;
+//     width: 44vw; /* Dimensione proporzionale alla larghezza della viewport */
+//     &:nth-child(2) {
+//       width: 36.5vw;
+//     }
+//     &:nth-child(3) {
+//       width: 30vw;
+//     }
+//     &:nth-child(4) {
+//       width: 25vw;
+//     }
+//   }
+// }
+$wcircle:1px;
 #ecosystem-container_svg {
   background: linear-gradient(0deg, $gradient_4 66%, transparent 100%);
   padding-top: 20em;
@@ -193,7 +244,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     height: auto;
-    width: 10vw;
+    width: calc(10vw + $wcircle);
     max-width: 122px;
     min-width: 72px;
     opacity: 0.1;
@@ -206,18 +257,15 @@
     transform: translate(-50%, -50%);
     height: auto;
     // opacity: 0.3;
-    width: 41.5vw; /* Dimensione proporzionale alla larghezza della viewport */
+    //width: 41.5vw; /* Dimensione proporzionale alla larghezza della viewport */
+    width: calc(41.5vw + $wcircle);
     max-width: 500px;
     min-width: 300px;
     #m_100_circle_ecosys_3 {
-      transform: translateZ(0);
-      will-change: transform;
-      backface-visibility: hidden;
       opacity: 0.3;
       transform-origin: center;
       animation: rotate360 9.5s linear infinite;
     }
-
   }
   #Post_svg {
     position: absolute;
@@ -225,13 +273,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     height: auto;
-   width: 35.3vw;
+   //width: 35.3vw;
+    width: calc(35.3vw + $wcircle);
     max-width: 425.66px;
     min-width: 253px;
     #m_100_circle_ecosys_2 {
-      transform: translateZ(0);
-      will-change: transform;
-      backface-visibility: hidden;
       opacity: 0.3;
       transform-origin: center;
       animation: rotate360 7.8s linear infinite;
@@ -243,13 +289,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     height: auto;
-    width: 30vw;
+    //width: 30vw;
+    width: calc(30vw + $wcircle);
     max-width: 362px;
     min-width: 213px;
     #m_100_circle_ecosys_1 {
-      transform: translateZ(0);
-      will-change: transform;
-      backface-visibility: hidden;
       opacity: 0.3;
       transform-origin: center;
       animation: rotate360 8.5s linear infinite;
@@ -261,13 +305,11 @@
     left: 50%;
     transform: translate(-50%, -50%); /* Centro preciso */
     height: auto;
-    width: 25vw;
+    //width: 25vw;
+    width: calc(25vw + $wcircle);
     max-width: 302px;
     min-width: 175px;
     #m_100_circle_ecosys_0 {
-      transform: translateZ(0);
-      will-change: transform;
-      backface-visibility: hidden;
       opacity: 0.3;
       transform-origin: center;
       animation: rotate360 7.5s linear infinite;
