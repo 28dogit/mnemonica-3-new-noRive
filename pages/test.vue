@@ -184,34 +184,34 @@ onMounted(() => {
   ///ANCHOR - ecosysstem gsap
 
   //SVG
-  $gsap.to("#m_100_circle_ecosys_0", {
-    rotate: 360,
-    duration: 7.5,
-    ease: "linear",
-    repeat: -1,
-    transformOrigin: "50% 50%",
-  });
-  $gsap.to("#m_100_circle_ecosys_1", {
-    rotate: 360,
-    duration: 7.5,
-    ease: "linear",
-    repeat: -1,
-    transformOrigin: "50% 50%",
-  });
-  $gsap.to("#m_100_circle_ecosys_2", {
-    rotate: 360,
-    duration: 7.5,
-    ease: "linear",
-    repeat: -1,
-    transformOrigin: "50% 50%",
-  });
-  $gsap.to("#m_100_circle_ecosys_3", {
-    rotate: 360,
-    duration: 7.5,
-    ease: "linear",
-    repeat: -1,
-    transformOrigin: "50% 50%",
-  });
+  // $gsap.to("#m_100_circle_ecosys_0", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  // });
+  // $gsap.to("#m_100_circle_ecosys_1", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  // });
+  // $gsap.to("#m_100_circle_ecosys_2", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  // });
+  // $gsap.to("#m_100_circle_ecosys_3", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  // });
 
   //NORMALE
   // gsap.to("#m-ecoCircle_0", {
@@ -242,4 +242,13 @@ onMounted(() => {
 //Gsap-fine
 </script>
 
-<style></style>
+<style>
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>
