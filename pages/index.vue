@@ -5,13 +5,11 @@
       class="flex flex-col items-center justify-center h-[calc(100vh-70px)] w-screen"
     >
       <div id="logo_mne" class="absolute opacity-5">
-        <!-- <NuxtImg
+        <NuxtImg
           src="/assets/img/svg/Logo-mne-Vector.svg"
           alt="Mnemonica logo portrait"
-        /> -->
-      </div>
-      <div id="logo_mne" class="absolute opacity-5">
-        <img src="/assets/img/svg/Logo-mne-Vector.svg" alt="Mnemonica logo portrait" />
+          densities="x1"
+        />
       </div>
       <div id="heroTitle" class="flex items-center gap-10 justify-center flex-wrap">
         <h1 id="H-screen" class="uppercase">Screen</h1>
