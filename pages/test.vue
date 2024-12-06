@@ -146,6 +146,32 @@ onMounted(() => {
   tl.EnterFrom("#heroSubTitle", { duration: 0.5, y: "15px" }, "-=1");
 
   //SVG
+  $gsap.registerEffect({
+    name: "phaseRotation",
+    effect: (targets, config) => {
+      return $gsap.to(targets, {
+        rotate: 360,
+        ease: config.ease,
+        transformOrigin: "50% 50%",
+        repeat: config.repeat,
+        duration: config.duration,
+        scrollTrigge: config.scrollTrigger,
+      });
+    },
+    defaults: {
+      ease: "linear",
+      repeat: -1,
+    },
+    extendTimeline: false,
+  });
+
+  //Da continuare!!
+
+  // $gsap.effect.phaseRotation("#m_100_circle_ecosys_0", { duration: 7.5 });
+  // $gsap.effect.phaseRotation("#m_100_circle_ecosys_1", { duration: 8.5 });
+  // $gsap.effect.phaseRotation("#m_100_circle_ecosys_2", { duration: 7.8 });
+  // $gsap.effect.phaseRotation("#m_100_circle_ecosys_3", { duration: 9.5 });
+
   $gsap.to("#m_100_circle_ecosys_0", {
     rotate: 360,
     //duration: 7.5,
@@ -214,13 +240,4 @@ onMounted(() => {
 //Gsap-fine
 </script>
 
-<style>
-/* @keyframes rotate360 {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-</style>
+<style></style>
