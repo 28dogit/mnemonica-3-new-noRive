@@ -21,14 +21,14 @@
   },
   "devDependencies": {
     "@egoist/tailwindcss-icons": "^1.8.1",
-    "@iconify-json/lucide": "^1.2.17",
+    "@iconify-json/lucide": "^1.2.18",
     "@iconify-json/mdi": "^1.2.1",
-    "@nuxt/fonts": "^0.10.2",
+    "@nuxt/fonts": "^0.10.3",
     "@nuxt/ui": "^2.19.2",
     "@nuxtjs/apollo": "^5.0.0-alpha.14",
     "@vueuse/nuxt": "^12.0.0",
     "nuxt": "^3.14.1592",
-    "sass": "^1.81.1",
+    "sass": "^1.82.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   }
