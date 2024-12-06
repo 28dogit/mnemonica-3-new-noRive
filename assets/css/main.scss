@@ -210,12 +210,12 @@
     max-width: 500px;
     min-width: 300px;
     #m_100_circle_ecosys_3 {
-      transform: translateZ(0);
-      will-change: transform;
-      backface-visibility: hidden;
+      // transform: translateZ(0);
+      // will-change: transform;
+      // backface-visibility: hidden;
       opacity: 0.3;
-      transform-origin: center;
-      animation: rotate360 9.5s linear infinite;
+      //transform-origin: center;
+      //animation: rotate360 9.5s linear infinite;
     }
 
   }
@@ -229,12 +229,12 @@
     max-width: 425.66px;
     min-width: 253px;
     #m_100_circle_ecosys_2 {
-      transform: translateZ(0);
-      will-change: transform;
-      backface-visibility: hidden;
+      // transform: translateZ(0);
+      // will-change: transform;
+      // backface-visibility: hidden;
       opacity: 0.3;
-      transform-origin: center;
-      animation: rotate360 7.8s linear infinite;
+      //transform-origin: center;
+      //animation: rotate360 7.8s linear infinite;
     }
   }
   #Production_svg {
@@ -247,12 +247,12 @@
     max-width: 362px;
     min-width: 213px;
     #m_100_circle_ecosys_1 {
-      transform: translateZ(0);
-      will-change: transform;
-      backface-visibility: hidden;
+      // transform: translateZ(0);
+      // will-change: transform;
+      // backface-visibility: hidden;
       opacity: 0.3;
-      transform-origin: center;
-      animation: rotate360 8.5s linear infinite;
+      //transform-origin: center;
+      //animation: rotate360 8.5s linear infinite;
     }
   }
   #Pre_svg {
@@ -265,12 +265,12 @@
     max-width: 302px;
     min-width: 175px;
     #m_100_circle_ecosys_0 {
-      transform: translateZ(0);
-      will-change: transform;
-      backface-visibility: hidden;
+      // transform: translateZ(0);
+      // will-change: transform;
+      // backface-visibility: hidden;
       opacity: 0.3;
-      transform-origin: center;
-      animation: rotate360 7.5s linear infinite;
+      //transform-origin: center;
+      //animation: rotate360 7.5s linear infinite;
     }
   }
 }

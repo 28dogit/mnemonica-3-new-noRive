@@ -59,6 +59,10 @@ const { $gsap } = useNuxtApp();
 //il plugin gsap ScrollTrigger lo carico direttamente con $gsap, vedi il plugin configurrato plugins/gsap.js
 
 onMounted(() => {
+  // inutile?
+  // $gsap.set(".ghirlanda-updx img", { opacity: 0 });
+  // $gsap.set(".ghirlanda-dwsx img", { opacity: 0 });
+
   //utilizzo la proprietà di gsap registerEffect per registrare un efetto che poi applico a più ogetti, per rendere il codice migliore, più leggibile e ottimizzato
   $gsap.registerEffect({
     name: "fadeIn", //il nome dell'effetto registrato
@@ -81,25 +85,25 @@ onMounted(() => {
       ease: "power2.in",
     },
     //questo serve per utilizzare l'effetto nelle timeline senza usare add, ma semplicemente richiamando l'effetto
+    // semplifica tl.add($gsap.effect.fadeIn("#ghirlanda-full", { rotate: -5, duration: 3 }))
+    // in tl.fadeIn("#ghirlanda-full", { rotate: -5, duration: 3 })
     extendTimeline: true,
   });
 
-  $gsap.registerEffect({
-    name: "EnterFrom",
-    effect: (targets, config) => {
-      return $gsap.from(targets, {
-        autoAlpha: 0,
-        duration: config.duration,
-        y: config.y,
-      });
-    },
-    defaults: {},
-    extendTimeline: true,
-  });
+  //applico l'effetto registrato agli elementi che voglio oppure in una timeline
+  //$gsap.effect.fadeIn("#ghirlanda-full", { rotate: -5, duration: 3 });
 
   var tl = $gsap.timeline();
   //richiamo l'effetto registrato fadeIn nella timeline
   tl.fadeIn("#ghirlanda-full", { rotate: -5, duration: 3 });
+  // la riga sopra sostituisce quanto sotto grazie alla registrazione degli effetti di gsap
+  //tl.from("#ghirlanda-full", {
+  //   autoAlpha: 0,
+  //   rotate: -5,
+  //   filter: "blur(5px)",
+  //   duration: 3,
+  //   force3D: true,
+  // });
   tl.to("#ghirlanda-full", {
     autoAlpha: 0,
     rotate: 5,
@@ -139,11 +143,50 @@ onMounted(() => {
     },
     "<"
   );
-  tl.EnterFrom("#logo_mne", { duration: 2 }, "<");
-  tl.EnterFrom("#H-screen", { duration: 0.5, y: "-10px" }, "<");
-  tl.EnterFrom("#H-deliver", { duration: 0.5, y: "-10px" }, "> -=0.3");
-  tl.EnterFrom("#H-preserve", { duration: 0.5, y: "-10px" }, "> -=0.3");
-  tl.EnterFrom("#heroSubTitle", { duration: 0.5, y: "15px" }, "-=1");
+  tl.from(
+    "#logo_mne",
+    {
+      opacity: 0,
+      duration: 2,
+    },
+    "<"
+  );
+  tl.from(
+    "#H-screen",
+    {
+      y: "-10px",
+      opacity: 0,
+      duration: 0.5,
+    },
+    "<"
+  );
+  tl.from(
+    "#H-deliver",
+    {
+      y: "-10px",
+      opacity: 0,
+      duration: 0.5,
+    },
+    "> -=0.3"
+  );
+  tl.from(
+    "#H-preserve",
+    {
+      y: "-10px",
+      opacity: 0,
+      duration: 0.5,
+    },
+    "> -=0.3"
+  );
+  tl.from(
+    "#heroSubTitle",
+    {
+      y: "15px",
+      opacity: 0,
+      duration: 0.5,
+    },
+    "-=1"
+  );
 
   //SVG
   $gsap.to("#m_100_circle_ecosys_0", {

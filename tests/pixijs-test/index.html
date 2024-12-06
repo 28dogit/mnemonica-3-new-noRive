@@ -25,6 +25,18 @@
         elapsed += ticker.deltaTime;
         sprite.x = 100.0 + Math.cos(elapsed/50.0) * 100.0;
       });
+
+            // Create a Graphics object and draw a pixel-perfect line
+let graphics = new Graphics()
+  .moveTo(0, 0)
+  .lineTo(100, 100)
+  .stroke({ color: 0xff0000, pixelLine: true });
+
+// Add it to the stage
+app.stage.addChild(graphics);
+
+// Even if we scale the Graphics object, the line remains 1 pixel wide
+graphics.scale.set(2);
       </script>
 
 </body>
