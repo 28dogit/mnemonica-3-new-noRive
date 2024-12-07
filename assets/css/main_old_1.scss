@@ -2,7 +2,6 @@
 @use "buttons.scss" as btn;
 @use "typography.scss" as typo;
 @use "breakpoints.scss" as bp;
-@use "animations.scss" as anim;
 
 ///*SECTION - background gradients + animation
 #bbg {
@@ -14,14 +13,41 @@
   background-size: 180% 180%;
   animation: rotate-background 70s linear infinite;
 
-
   @include grad-var-phone(50%, 10%, 80%, 80%, 20%, 70%, 0.25%, 50%);
   @include grad-var-tablet(50%, 10%, 80%, 80%, 20%, 70%, 0.25%, 50%);
   @include grad-var-desktop(50%, 10%, 80%, 80%, 20%, 70%, 0.25%, 50%);
   //@include grad-var-desktop(50%,10%,80%,80%,20%,70%,25%,5%);
 }
-@include anim.rotateBG;
 
+@keyframes rotate-background {
+  0% {
+    background-position: 50% 0%;
+  }
+  12% {
+    background-position: 75% 25%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  37% {
+    background-position: 75% 75%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  62% {
+    background-position: 25% 75%;
+  }
+  75% {
+    background-position: 0% 50%;
+  }
+  87% {
+    background-position: 25% 25%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
+}
 ///*!SECTION
 ///*SECTION - Ghirlande
 //*ANCHOR -  Ghirlanda up dx
@@ -184,7 +210,12 @@
     max-width: 500px;
     min-width: 300px;
     #m_100_circle_ecosys_3 {
+      // transform: translateZ(0);
+      // will-change: transform;
+      // backface-visibility: hidden;
       opacity: 0.3;
+      //transform-origin: center;
+      //animation: rotate360 9.5s linear infinite;
     }
 
   }
@@ -198,7 +229,12 @@
     max-width: 425.66px;
     min-width: 253px;
     #m_100_circle_ecosys_2 {
+      // transform: translateZ(0);
+      // will-change: transform;
+      // backface-visibility: hidden;
       opacity: 0.3;
+      //transform-origin: center;
+      //animation: rotate360 7.8s linear infinite;
     }
   }
   #Production_svg {
@@ -211,7 +247,12 @@
     max-width: 362px;
     min-width: 213px;
     #m_100_circle_ecosys_1 {
+      // transform: translateZ(0);
+      // will-change: transform;
+      // backface-visibility: hidden;
       opacity: 0.3;
+      //transform-origin: center;
+      //animation: rotate360 8.5s linear infinite;
     }
   }
   #Pre_svg {
@@ -224,7 +265,12 @@
     max-width: 302px;
     min-width: 175px;
     #m_100_circle_ecosys_0 {
+      // transform: translateZ(0);
+      // will-change: transform;
+      // backface-visibility: hidden;
       opacity: 0.3;
+      //transform-origin: center;
+      //animation: rotate360 7.5s linear infinite;
     }
   }
 }
@@ -234,7 +280,12 @@
 #modules {
   background: linear-gradient(0deg, $gradient_4 55%, transparent 100%);
   padding-top: 10em;
+  // background-color: $gradient_4;
+  // background-image: url("/assets/img/svg/BG-modules_1.svg");
+  // background-repeat: no-repeat;
+  // background-position: center;
   @include bp.for-phone {
+    //background-position: top;
     p {
       font-size: 14px;
       line-height: 21px;

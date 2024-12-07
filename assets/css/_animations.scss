@@ -1,0 +1,32 @@
+@mixin rotateBG{
+    @keyframes rotate-background {
+        0% {
+          background-position: 50% 0%;
+        }
+        12% {
+          background-position: 75% 25%;
+        }
+        25% {
+          background-position: 100% 50%;
+        }
+        37% {
+          background-position: 75% 75%;
+        }
+        50% {
+          background-position: 50% 100%;
+        }
+        62% {
+          background-position: 25% 75%;
+        }
+        75% {
+          background-position: 0% 50%;
+        }
+        87% {
+          background-position: 25% 25%;
+        }
+        100% {
+          background-position: 50% 0%;
+        }
+      }
+}
+
