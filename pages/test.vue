@@ -55,10 +55,10 @@ import { onMounted } from "vue";
 //import { gsap } from "gsap"; //importa gsap
 import { useNuxtApp } from "#app"; // Ottieni NuxtApp
 
-const { $gsap } = useNuxtApp();
-//il plugin gsap ScrollTrigger lo carico direttamente con $gsap, vedi il plugin configurrato plugins/gsap.js
-
 onMounted(() => {
+  const { $gsap } = useNuxtApp();
+  //il plugin gsap ScrollTrigger lo carico direttamente con $gsap, vedi il plugin configurrato plugins/gsap.js
+
   //utilizzo la proprietà di gsap registerEffect per registrare un efetto che poi applico a più ogetti, per rendere il codice migliore, più leggibile e ottimizzato
   $gsap.registerEffect({
     name: "fadeIn", //il nome dell'effetto registrato
@@ -154,88 +154,122 @@ onMounted(() => {
         ease: config.ease,
         transformOrigin: "50% 50%",
         repeat: config.repeat,
-        duration: config.duration,
-        scrollTrigge: config.scrollTrigger,
+        //duration: config.duration,
+        //scrollTrigger: config.scrollTrigger,
+        scrollTrigger: {
+          trigger: targets,
+          start: "top 80%",
+          end: "bottom 500px",
+          scrub: 1,
+          markers: true,
+          toggleActions: "resume pause resume pause",
+        },
       });
     },
     defaults: {
       ease: "linear",
-      repeat: -1,
+      //repeat: -1,
     },
     extendTimeline: false,
   });
 
   //Da continuare!!
 
-  // $gsap.effect.phaseRotation("#m_100_circle_ecosys_0", { duration: 7.5 });
-  // $gsap.effect.phaseRotation("#m_100_circle_ecosys_1", { duration: 8.5 });
-  // $gsap.effect.phaseRotation("#m_100_circle_ecosys_2", { duration: 7.8 });
-  // $gsap.effect.phaseRotation("#m_100_circle_ecosys_3", { duration: 9.5 });
+  $gsap.effects.phaseRotation("#m_100_circle_ecosys_0", { duration: 7.5 });
+  $gsap.effects.phaseRotation("#m_100_circle_ecosys_1", { duration: 8.5 });
+  $gsap.effects.phaseRotation("#m_100_circle_ecosys_2", { duration: 7.8 });
+  $gsap.effects.phaseRotation("#m_100_circle_ecosys_3", { duration: 9.5 });
 
-  $gsap.to("#m_100_circle_ecosys_0", {
-    rotate: 360,
-    //duration: 7.5,
-    ease: "linear",
-    //repeat: -1,
-    transformOrigin: "50% 50%",
-    scrollTrigger: {
-      trigger: "#m_100_circle_ecosys_0",
-      toggleActions: "resume pause resume pause",
-      // start: "top 80%",
-      // end: "top 20%",
-      // markers: true,
-      scrub: 2,
-      //pin: true,
-      onEnter: () => {
-        console.log("Entrato da sotto");
-      },
-      onEnterBack: () => {
-        console.log("Rientrato da sopra");
-      },
-      onLeave: () => {
-        console.log("Uscito da sopra");
-      },
-      onLeaveBack: () => {
-        console.log("Riuscito da sotto");
-      },
-      onUpdate: () => {
-        console.log("Aggiornato", self.progress);
-      },
-    },
-  });
-  $gsap.to("#m_100_circle_ecosys_1", {
-    rotate: 360,
-    duration: 7.5,
-    ease: "linear",
-    repeat: -1,
-    transformOrigin: "50% 50%",
-    scrollTrigger: {
-      trigger: "#m_100_circle_ecosys_1",
-      toggleActions: "resume pause resume pause",
-    },
-  });
-  $gsap.to("#m_100_circle_ecosys_2", {
-    rotate: 360,
-    duration: 7.5,
-    ease: "linear",
-    repeat: -1,
-    transformOrigin: "50% 50%",
-    scrollTrigger: {
-      trigger: "#m_100_circle_ecosys_2",
-      toggleActions: "resume pause resume pause",
-    },
-  });
-  $gsap.to("#m_100_circle_ecosys_3", {
-    rotate: 360,
-    duration: 7.5,
-    ease: "linear",
-    repeat: -1,
-    transformOrigin: "50% 50%",
-    scrollTrigger: {
-      trigger: "#m_100_circle_ecosys_3",
-      toggleActions: "resume pause resume pause",
-    },
-  });
+  // ScrollTrigger.batch(
+  //   "#m_100_circle_ecosys_0, #m_100_circle_ecosys_1, #m_100_circle_ecosys_2, #m_100_circle_ecosys_3",
+  //   {
+  //     onEnter: (targets) => {
+  //       $gsap.effect.phaseRotation(targets, {
+  //         scrollTrigger: { toggleActions: "resume" },
+  //       });
+  //     },
+  //     onLeave: (targets) => {
+  //       $gsap.effect.phaseRotation(targets, {
+  //         scrollTrigger: { toggleActions: "pause" },
+  //       });
+  //     },
+  //     onEnterBack: (targets) => {
+  //       $gsap.effect.phaseRotation(targets, {
+  //         scrollTrigger: { toggleActions: "resume" },
+  //       });
+  //     },
+  //     onLeaveBack: (targets) => {
+  //       $gsap.effect.phaseRotation(targets, {
+  //         scrollTrigger: { toggleActions: "pause" },
+  //       });
+  //     },
+  //   }
+  // );
+
+  // $gsap.to("#m_100_circle_ecosys_0", {
+  //   rotate: 360,
+  //   //duration: 7.5,
+  //   ease: "linear",
+  //   //repeat: -1,
+  //   transformOrigin: "50% 50%",
+  //   scrollTrigger: {
+  //     trigger: "#m_100_circle_ecosys_0",
+  //     toggleActions: "resume pause resume pause",
+  //     // start: "top 80%",
+  //     // end: "top 20%",
+  //     // markers: true,
+  //     scrub: 2,
+  //     //pin: true,
+  //     onEnter: () => {
+  //       console.log("Entrato da sotto");
+  //     },
+  //     onEnterBack: () => {
+  //       console.log("Rientrato da sopra");
+  //     },
+  //     onLeave: () => {
+  //       console.log("Uscito da sopra");
+  //     },
+  //     onLeaveBack: () => {
+  //       console.log("Riuscito da sotto");
+  //     },
+  //     onUpdate: () => {
+  //       console.log("Aggiornato", self.progress);
+  //     },
+  //   },
+  // });
+  // $gsap.to("#m_100_circle_ecosys_1", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  //   scrollTrigger: {
+  //     trigger: "#m_100_circle_ecosys_1",
+  //     toggleActions: "resume pause resume pause",
+  //   },
+  // });
+  // $gsap.to("#m_100_circle_ecosys_2", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  //   scrollTrigger: {
+  //     trigger: "#m_100_circle_ecosys_2",
+  //     toggleActions: "resume pause resume pause",
+  //   },
+  // });
+  // $gsap.to("#m_100_circle_ecosys_3", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  //   scrollTrigger: {
+  //     trigger: "#m_100_circle_ecosys_3",
+  //     toggleActions: "resume pause resume pause",
+  //   },
+  // });
 });
 //Gsap-fine
 </script>
