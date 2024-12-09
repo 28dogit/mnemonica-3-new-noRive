@@ -93,6 +93,21 @@ onMounted(() => {
   //applico l'effetto registrato agli elementi che voglio oppure in una timeline
   //$gsap.effect.fadeIn("#ghirlanda-full", { rotate: -5, duration: 3 });
 
+  //altro esempio registrazione effetto
+  $gsap.registerEffect({
+    name: "EnterFrom",
+    effect: (targets, config) => {
+      return $gsap.from(targets, {
+        autoAlpha: 0,
+        duration: config.duration,
+        y: config.y,
+      });
+    },
+    defaults: {},
+    extendTimeline: true,
+  });
+  //con questo andrò a sostituire tutte le animazioni nella timeline dell'entrata del titolo e logo
+
   var tl = $gsap.timeline();
   //richiamo l'effetto registrato fadeIn nella timeline
   tl.fadeIn("#ghirlanda-full", { rotate: -5, duration: 3 });
@@ -143,116 +158,183 @@ onMounted(() => {
     },
     "<"
   );
-  tl.from(
-    "#logo_mne",
-    {
-      opacity: 0,
-      duration: 2,
-    },
-    "<"
-  );
-  tl.from(
-    "#H-screen",
-    {
-      y: "-10px",
-      opacity: 0,
-      duration: 0.5,
-    },
-    "<"
-  );
-  tl.from(
-    "#H-deliver",
-    {
-      y: "-10px",
-      opacity: 0,
-      duration: 0.5,
-    },
-    "> -=0.3"
-  );
-  tl.from(
-    "#H-preserve",
-    {
-      y: "-10px",
-      opacity: 0,
-      duration: 0.5,
-    },
-    "> -=0.3"
-  );
-  tl.from(
-    "#heroSubTitle",
-    {
-      y: "15px",
-      opacity: 0,
-      duration: 0.5,
-    },
-    "-=1"
-  );
+  //con questo effetto registrato "EnterFrom" posso scrivere
+  tl.EnterFrom("#logo_mne", { duration: 2 }, "<");
+  tl.EnterFrom("#H-screen", { duration: 0.5, y: "-10px" }, "<");
+  tl.EnterFrom("#H-deliver", { duration: 0.5, y: "-10px" }, "> -=0.3");
+  tl.EnterFrom("#H-preserve", { duration: 0.5, y: "-10px" }, "> -=0.3");
+  tl.EnterFrom("#heroSubTitle", { duration: 0.5, y: "15px" }, "-=1");
+  //che sostituiscono tutte le righe sttostanti
+  // tl.from(
+  //   "#logo_mne",
+  //   {
+  //     opacity: 0,
+  //     duration: 2,
+  //   },
+  //   "<"
+  // );
+  // tl.from(
+  //   "#H-screen",
+  //   {
+  //     y: "-10px",
+  //     opacity: 0,
+  //     duration: 0.5,
+  //   },
+  //   "<"
+  // );
+  // tl.from(
+  //   "#H-deliver",
+  //   {
+  //     y: "-10px",
+  //     opacity: 0,
+  //     duration: 0.5,
+  //   },
+  //   "> -=0.3"
+  // );
+  // tl.from(
+  //   "#H-preserve",
+  //   {
+  //     y: "-10px",
+  //     opacity: 0,
+  //     duration: 0.5,
+  //   },
+  //   "> -=0.3"
+  // );
+  // tl.from(
+  //   "#heroSubTitle",
+  //   {
+  //     y: "15px",
+  //     opacity: 0,
+  //     duration: 0.5,
+  //   },
+  //   "-=1"
+  // );
 
   //SVG
-  $gsap.to("#m_100_circle_ecosys_0", {
-    rotate: 360,
-    //duration: 7.5,
-    ease: "linear",
-    //repeat: -1,
-    transformOrigin: "50% 50%",
-    scrollTrigger: {
-      trigger: "#m_100_circle_ecosys_0",
-      toggleActions: "resume pause resume pause",
-      // start: "top 80%",
-      // end: "top 20%",
-      // markers: true,
-      scrub: 2,
-      //pin: true,
-      onEnter: () => {
-        console.log("Entrato da sotto");
-      },
-      onEnterBack: () => {
-        console.log("Rientrato da sopra");
-      },
-      onLeave: () => {
-        console.log("Uscito da sopra");
-      },
-      onLeaveBack: () => {
-        console.log("Riuscito da sotto");
-      },
-      onUpdate: () => {
-        console.log("Aggiornato", self.progress);
-      },
+  // per i cerchi , posso registrare un effetto più complesso che comprende anche lo scrollTrigger
+
+  $gsap.registerEffect({
+    name: "phaseRotation",
+    effect: (targets, config) => {
+      return $gsap.to(targets, {
+        rotate: 360,
+        ease: config.ease,
+        transformOrigin: "50% 50%",
+        repeat: config.repeat,
+        duration: config.duration,
+        scrollTrigge: config.scrollTrigger,
+      });
     },
-  });
-  $gsap.to("#m_100_circle_ecosys_1", {
-    rotate: 360,
-    duration: 7.5,
-    ease: "linear",
-    repeat: -1,
-    transformOrigin: "50% 50%",
-    scrollTrigger: {
-      trigger: "#m_100_circle_ecosys_1",
-      toggleActions: "resume pause resume pause",
+    defaults: {
+      ease: "linear",
+      repeat: -1,
     },
+    extendTimeline: false,
   });
-  $gsap.to("#m_100_circle_ecosys_2", {
-    rotate: 360,
-    duration: 7.5,
-    ease: "linear",
-    repeat: -1,
-    transformOrigin: "50% 50%",
-    scrollTrigger: {
-      trigger: "#m_100_circle_ecosys_2",
-      toggleActions: "resume pause resume pause",
-    },
-  });
-  $gsap.to("#m_100_circle_ecosys_3", {
-    rotate: 360,
-    duration: 7.5,
-    ease: "linear",
-    repeat: -1,
-    transformOrigin: "50% 50%",
-    scrollTrigger: {
-      trigger: "#m_100_circle_ecosys_3",
-      toggleActions: "resume pause resume pause",
-    },
-  });
+
+  //posso poi utilizzare ScrollTrigger.batch... per associare l'effetto agli elementi quando entrano nella viewport.
+  //questo passaggio è leggermente controintuitivo in quanto prima realizzavo l'effetto che applicavo all'oggetto e poi includevo anche il comportamento dello scrollTrigger
+  //ora devo raggionare al contrario, creo un batch scrollTrigger a cui poi associo l'effetto all'enter, al leave... e così via.
+
+  ScrollTrigger.batch(
+    "#m_100_circle_ecosys_0, #m_100_circle_ecosys_1, #m_100_circle_ecosys_2, #m_100_circle_ecosys_3",
+    {
+      onEnter: (targets) => {
+        $gsap.effect.phaseRotation(targets, {
+          scrollTrigger: { toggleActions: "resume" },
+        });
+      },
+      onLeave: (targets) => {
+        $gsap.effect.phaseRotation(targets, {
+          scrollTrigger: { toggleActions: "pause" },
+        });
+      },
+      onEnterBack: (targets) => {
+        $gsap.effect.phaseRotation(targets, {
+          scrollTrigger: { toggleActions: "resume" },
+        });
+      },
+      onLeaveBack: (targets) => {
+        $gsap.effect.phaseRotation(targets, {
+          scrollTrigger: { toggleActions: "pause" },
+        });
+      },
+    }
+  );
+
+  // fatto questo non ho più bisogno di elencare le associazioni ai targets (vedi righe sotto)
+
+  // $gsap.effect.phaseRotation("#m_100_circle_ecosys_0", { duration: 7.5 });
+  // $gsap.effect.phaseRotation("#m_100_circle_ecosys_1", { duration: 8.5 });
+  // $gsap.effect.phaseRotation("#m_100_circle_ecosys_2", { duration: 7.8 });
+  // $gsap.effect.phaseRotation("#m_100_circle_ecosys_3", { duration: 9.5 });
+
+  //che andavano a sostituire le righe sottostanti
+
+  // $gsap.to("#m_100_circle_ecosys_0", {
+  //   rotate: 360,
+  //   //duration: 7.5,
+  //   ease: "linear",
+  //   //repeat: -1,
+  //   transformOrigin: "50% 50%",
+  //   scrollTrigger: {
+  //     trigger: "#m_100_circle_ecosys_0",
+  //     toggleActions: "resume pause resume pause",
+  //     // start: "top 80%",
+  //     // end: "top 20%",
+  //     // markers: true,
+  //     scrub: 2,
+  //     //pin: true,
+  //     onEnter: () => {
+  //       console.log("Entrato da sotto");
+  //     },
+  //     onEnterBack: () => {
+  //       console.log("Rientrato da sopra");
+  //     },
+  //     onLeave: () => {
+  //       console.log("Uscito da sopra");
+  //     },
+  //     onLeaveBack: () => {
+  //       console.log("Riuscito da sotto");
+  //     },
+  //     onUpdate: () => {
+  //       console.log("Aggiornato", self.progress);
+  //     },
+  //   },
+  // });
+  // $gsap.to("#m_100_circle_ecosys_1", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  //   scrollTrigger: {
+  //     trigger: "#m_100_circle_ecosys_1",
+  //     toggleActions: "resume pause resume pause",
+  //   },
+  // });
+  // $gsap.to("#m_100_circle_ecosys_2", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  //   scrollTrigger: {
+  //     trigger: "#m_100_circle_ecosys_2",
+  //     toggleActions: "resume pause resume pause",
+  //   },
+  // });
+  // $gsap.to("#m_100_circle_ecosys_3", {
+  //   rotate: 360,
+  //   duration: 7.5,
+  //   ease: "linear",
+  //   repeat: -1,
+  //   transformOrigin: "50% 50%",
+  //   scrollTrigger: {
+  //     trigger: "#m_100_circle_ecosys_3",
+  //     toggleActions: "resume pause resume pause",
+  //   },
+  // });
 });
 //Gsap-fine
 </script>
