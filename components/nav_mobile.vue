@@ -22,21 +22,6 @@
         <li class="dark:hover:text-chenin-300 hover:text-seagull-400" @click="close_mNav">
           <nuxt-link to="/">Home</nuxt-link>
         </li>
-        <li class="dark:hover:text-chenin-300 hover:text-seagull-400" @click="close_mNav">
-          <nuxt-link to="/test">Test</nuxt-link>
-        </li>
-        <!-- <li class="dark:hover:text-chenin-300 hover:text-seagull-400" @click="close_mNav">
-          <nuxt-link to="/animations">Animations</nuxt-link>
-        </li>
-        <li class="dark:hover:text-chenin-300 hover:text-seagull-400" @click="close_mNav">
-          <nuxt-link to="/modal">Modals</nuxt-link>
-        </li>
-        <li class="dark:hover:text-chenin-300 hover:text-seagull-400" @click="close_mNav">
-          <nuxt-link to="/news">News</nuxt-link>
-        </li>
-        <li class="dark:hover:text-chenin-300 hover:text-seagull-400" @click="close_mNav">
-          <nuxt-link to="/focusTransition">Transitions</nuxt-link>
-        </li> -->
       </ul>
     </nav>
   </div>

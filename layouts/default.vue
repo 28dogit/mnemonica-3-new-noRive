@@ -23,10 +23,11 @@ import { onMounted } from "vue";
 import { gsap } from "gsap"; //importa gsap
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+//gsap.registerPlugin(ScrollTrigger); la registrazione avviene grazie al plugin gsapp.js
 
 // Aggiunge animazione quando il componente viene montato
 onMounted(() => {
+  console.log("gsap-- ", gsap, "scrollTrigger----- ", ScrollTrigger);
   gsap.to("[data-speed]", {
     y: (i, el) =>
       (1 - parseFloat(el.getAttribute("data-speed"))) * ScrollTrigger.maxScroll(window),
