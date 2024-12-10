@@ -35,6 +35,36 @@
         Connecting the dots of the digital <br />cinema living ecosystem
       </h2>
     </div>
+    <div id="modules" class="px-5 py-6 relative overflow-hidden text-center">
+      <div id="rooms" class="module">
+        <h2 class="font-medium">Rooms</h2>
+        <p>
+          Leave folders behind. Experience active workspaces that free you from repetitive
+          tasks encoding, watermarking, keeping everyone updated. Enjoy private places
+          where people meet around media, playlists are a given, content is easy to find
+          and move.
+        </p>
+      </div>
+      <div id="boxes" class="module">
+        <h2 class="font-medium">Boxes</h2>
+        <p>
+          Forget hard drives and LTOs. Welcome to the most advanced and reliable solution
+          for long-term preservation of digital film works that also keeps them always
+          available for business opportunities and cultural outreach. Arrange immediate
+          screenings with integrated Rooms, easily retrieve relevant assets, securely
+          deliver to stakeholders.
+        </p>
+      </div>
+      <div id="masters" class="module">
+        <h2 class="font-medium">Masters</h2>
+        <p>
+          Get rid of third-party shuttles. With the built-in data exchange facility, you
+          can send & receive files and folders of any size and complexity directly from/to
+          Rooms, as well as local drives. Only between registered users, without leaving
+          Mnemonica safe walls.
+        </p>
+      </div>
+    </div>
     <div id="ecosystem-container_svg">
       <MarketSvg id="Market_svg"></MarketSvg>
       <PostSvg id="Post_svg"></PostSvg>
@@ -107,7 +137,7 @@ onMounted(() => {
     autoAlpha: 0,
     rotate: 5,
     filter: "blur(5px)",
-    duration: 3,
+    duration: 1.5,
     scale: 5,
     force3D: true,
     ease: "power1.in",
@@ -205,6 +235,21 @@ onMounted(() => {
   //     },
   //   }
   // );
+
+  //ANCHOR - MODULES
+  $gsap.from("#modules", {
+    autoAlpha: 0,
+    duration: 0.8,
+    scrollTrigger: {
+      trigger: "#rooms",
+      pin: "#rooms",
+      start: "top center",
+      end: "bottom center",
+      toggleActions: "play none none none",
+      scrub: 1,
+      markers: true,
+    },
+  });
 });
 //Gsap-fine
 </script>
