@@ -23,11 +23,7 @@
           alt="Mnemonica logo portrait"
         />
       </div>
-      <div
-        id="heroTitle"
-        class="flex items-center gap-10 justify-center flex-wrap"
-        data-speed="0.6"
-      >
+      <div id="heroTitle" class="flex items-center gap-10 justify-center flex-wrap">
         <h1 id="H-screen" class="uppercase">Screen</h1>
         <h1 id="H-deliver" class="uppercase">Deliver</h1>
         <h1 id="H-preserve" class="uppercase">Preserve</h1>
@@ -56,7 +52,8 @@
 <script setup>
 //Utilizzo di Gsap!!-----
 import { onMounted } from "vue";
-import { useNuxtApp } from "#app"; // Ottieni NuxtApp dla plugin gsap.js > con $gsap carico sia gsap che i relativi plugins come scrollTrigger
+import { useNuxtApp } from "#app"; // Ottieni NuxtApp dla plugin gsap.js > con $gsap registro sia gsap che i relativi plugins come scrollTrigger
+import { _scale } from "#tailwind-config/theme";
 
 onMounted(() => {
   //per i riferimenti vedi test_old_2_gsap_explained.vue
@@ -101,12 +98,19 @@ onMounted(() => {
   var tl = $gsap.timeline();
 
   tl.fadeIn("#ghirlanda-full", { rotate: -5, duration: 3 });
+  tl.EnterFrom("#logo_mne", { duration: 2 });
+  tl.EnterFrom("#H-screen", { duration: 0.5, y: "-10px" }, "<");
+  tl.EnterFrom("#H-deliver", { duration: 0.5, y: "-10px" }, "> -=0.3");
+  tl.EnterFrom("#H-preserve", { duration: 0.5, y: "-10px" }, "> -=0.3");
+  tl.EnterFrom("#heroSubTitle", { duration: 0.5, y: "15px" }, "-=1");
   tl.to("#ghirlanda-full", {
     autoAlpha: 0,
     rotate: 5,
     filter: "blur(5px)",
     duration: 3,
+    scale: 5,
     force3D: true,
+    ease: "power1.in",
   });
   tl.fromTo(
     ".ghirlanda-updx img",
@@ -140,11 +144,6 @@ onMounted(() => {
     },
     "<"
   );
-  tl.EnterFrom("#logo_mne", { duration: 2 }, "<");
-  tl.EnterFrom("#H-screen", { duration: 0.5, y: "-10px" }, "<");
-  tl.EnterFrom("#H-deliver", { duration: 0.5, y: "-10px" }, "> -=0.3");
-  tl.EnterFrom("#H-preserve", { duration: 0.5, y: "-10px" }, "> -=0.3");
-  tl.EnterFrom("#heroSubTitle", { duration: 0.5, y: "15px" }, "-=1");
 
   //SVG
   $gsap.registerEffect({
@@ -162,7 +161,7 @@ onMounted(() => {
           start: "top 80%",
           end: "bottom 500px",
           scrub: 1,
-          markers: true,
+          //markers: true,
           toggleActions: "resume pause resume pause",
         },
       });

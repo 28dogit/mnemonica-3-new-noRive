@@ -12,15 +12,20 @@
   top: 0px;
   left: 0px;
   background-size: 180% 180%;
-  animation: rotate-background 70s linear infinite;
-
+  @include bp.for-desktop-small{
+    animation: rotateBackground 70s linear infinite;
+    @include anim.rotateBG;
+  }
+  @include bp.for-desktop-big-up{
+    animation: rotateBackground 70s linear infinite;
+    @include anim.rotateBG;
+  }
 
   @include grad-var-phone(50%, 10%, 80%, 80%, 20%, 70%, 0.25%, 50%);
   @include grad-var-tablet(50%, 10%, 80%, 80%, 20%, 70%, 0.25%, 50%);
   @include grad-var-desktop(50%, 10%, 80%, 80%, 20%, 70%, 0.25%, 50%);
   //@include grad-var-desktop(50%,10%,80%,80%,20%,70%,25%,5%);
 }
-@include anim.rotateBG;
 
 ///*!SECTION
 ///*SECTION - Ghirlande

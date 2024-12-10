@@ -4,7 +4,7 @@ import typography from '@tailwindcss/typography'
 // import { _textDecorationColor } from '#tailwind-config/theme'
 
 export default <Partial<Config>>{
-  darkMode: 'class',
+  //darkMode: 'class',
     content: [
       "./assets/css/**/*.{css,scss}",
       "./components/**/*.{vue,js}",

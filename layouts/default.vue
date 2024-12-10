@@ -20,15 +20,16 @@
 <script setup>
 //Utilizzo di Gsap!!-----
 import { onMounted } from "vue";
-import { gsap } from "gsap"; //importa gsap
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollTrigger } from "gsap/ScrollTrigger"; // importato qui l'ho importato per tutto il progetto
+import { useNuxtApp } from "#app"; //import gsap from plugins gsap.js
 
-//gsap.registerPlugin(ScrollTrigger); la registrazione avviene grazie al plugin gsapp.js
+//gsap.registerPlugin(ScrollTrigger); la registrazione avviene grazie al plugin gsap.js
 
 // Aggiunge animazione quando il componente viene montato
 onMounted(() => {
-  console.log("gsap-- ", gsap, "scrollTrigger----- ", ScrollTrigger);
-  gsap.to("[data-speed]", {
+  const { $gsap } = useNuxtApp();
+  // console.log("gsap-- ", $gsap, "scrollTrigger----- ", ScrollTrigger);
+  $gsap.to("[data-speed]", {
     y: (i, el) =>
       (1 - parseFloat(el.getAttribute("data-speed"))) * ScrollTrigger.maxScroll(window),
     ease: "none",
