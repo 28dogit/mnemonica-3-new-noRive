@@ -2,7 +2,7 @@
   <main>
     <div
       id="ghirlandaContainert"
-      class="test w-screen h-screen absolute top-0 left-0 -z-10"
+      class="test w-screen h-screen absolute top-0 left-0 -z-10 overflow-hidden"
     >
       <div id="ghirlanda-full" data-speed="0.6" class="max-w-2xl">
         <NuxtImg
@@ -44,6 +44,7 @@
           where people meet around media, playlists are a given, content is easy to find
           and move.
         </p>
+        <div id="rooms--circleBG"></div>
       </div>
       <div id="boxes" class="module">
         <h2 class="font-medium">Boxes</h2>
@@ -54,6 +55,7 @@
           screenings with integrated Rooms, easily retrieve relevant assets, securely
           deliver to stakeholders.
         </p>
+        <div id="boxes--circleBG"></div>
       </div>
       <div id="masters" class="module">
         <h2 class="font-medium">Masters</h2>
@@ -63,6 +65,7 @@
           Rooms, as well as local drives. Only between registered users, without leaving
           Mnemonica safe walls.
         </p>
+        <div id="masters--circleBG"></div>
       </div>
     </div>
     <div id="ecosystem-container_svg">
@@ -187,11 +190,11 @@ onMounted(() => {
         //duration: config.duration,
         //scrollTrigger: config.scrollTrigger,
         scrollTrigger: {
-          trigger: targets,
+          trigger: targets, // problema di lettura degli ingombri!!! arrivano troppo presto
           start: "top 80%",
           end: "bottom 500px",
           scrub: 1,
-          //markers: true,
+          markers: true,
           toggleActions: "resume pause resume pause",
         },
       });
@@ -237,17 +240,80 @@ onMounted(() => {
   // );
 
   //ANCHOR - MODULES
-  $gsap.from("#modules", {
+  $gsap.from("#rooms--circleBG", {
+    transformOrigin: "50% 35%",
+    rotate: 120,
+    //autoAlpha: 0,
+    scrollTrigger: {
+      trigger: "#rooms",
+      //pin: "#rooms--circleBG",
+      start: "center center",
+      end: "+300px center",
+      toggleActions: "play reverse play none",
+      scrub: 2,
+      //markers: true,
+    },
+  });
+  $gsap.from("#rooms", {
     autoAlpha: 0,
     duration: 0.8,
     scrollTrigger: {
       trigger: "#rooms",
       pin: "#rooms",
-      start: "top center",
-      end: "bottom center",
-      toggleActions: "play none none none",
+      start: "center center",
+      end: "+300px center",
+      //toggleActions: "play reverse play none",
       scrub: 1,
-      markers: true,
+      //markers: true,
+    },
+  });
+  $gsap.from("#boxes--circleBG", {
+    transformOrigin: "30% 50%",
+    rotate: -120,
+    //autoAlpha: 0,
+    scrollTrigger: {
+      trigger: "#boxes",
+      start: "center center",
+      end: "+300px center",
+      scrub: 2,
+      //markers: true,
+    },
+  });
+  $gsap.from("#boxes", {
+    autoAlpha: 0,
+    duration: 0.8,
+    scrollTrigger: {
+      trigger: "#boxes",
+      pin: "#boxes",
+      start: "center center",
+      end: "+300px center",
+      //toggleActions: "play none none none",
+      scrub: 1,
+      //markers: true,
+    },
+  });
+  $gsap.from("#masters--circleBG", {
+    transformOrigin: "30% 50%",
+    rotate: 80,
+    //autoAlpha: 0,
+    scrollTrigger: {
+      trigger: "#masters",
+      start: "center center",
+      end: "+300px center",
+      scrub: 2,
+      //markers: true,
+    },
+  });
+  $gsap.from("#masters", {
+    autoAlpha: 0,
+    duration: 0.8,
+    scrollTrigger: {
+      trigger: "#masters",
+      pin: "#masters",
+      start: "center center",
+      end: "+300px center",
+      scrub: 1,
+      //markers: true,
     },
   });
 });
