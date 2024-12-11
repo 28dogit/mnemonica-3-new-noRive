@@ -1,31 +1,21 @@
 <template>
   <main>
     <div
+      id="ghirlandaContainert"
+      class="test w-screen h-screen absolute top-0 left-0 -z-10 overflow-x-hidden"
+    >
+      <div id="ghirlanda-full" data-speed="0.6" class="max-w-2xl">
+        <NuxtImg
+          src="/assets/img/Ghirlanda_full_web_800_opt.png"
+          alt="mnemonica ghirlanda ecosystem"
+          densities="x1"
+        />
+      </div>
+    </div>
+    <div
       id="heroSection"
       class="flex flex-col items-center justify-center h-[calc(100vh-70px)] w-screen overflow-x-hidden"
     >
-      <div
-        id="ghirlandaContainert"
-        class="test w-screen h-screen absolute top-0 left-0 -z-10 overflow-x-hidden"
-      >
-        <div id="ghirlanda-full" data-speed="0.6" class="max-w-2xl">
-          <NuxtImg
-            src="/assets/img/Ghirlanda_full_web_800_opt.png"
-            alt="mnemonica ghirlanda ecosystem"
-            densities="x1"
-          />
-        </div>
-      </div>
-
-      <div id="ghirlandeContainer" class="w-screen h-screen absolute top-0 left-0 -z-10">
-        <div class="ghirlanda-updx l1" data-speed="0.4">
-          <NuxtImg src="/assets/img/Ghirlanda-web-up-dx-500.png" densities="x1" alt="" />
-        </div>
-        <div class="ghirlanda-dwsx l1" data-speed="0.6">
-          <NuxtImg src="/assets/img/Ghirlanda-web-dw-sx-500.png" densities="x1" alt="" />
-        </div>
-      </div>
-
       <div id="logo_mne" class="absolute opacity-5">
         <NuxtImg
           src="/assets/img/svg/Logo-mne-Vector.svg"
@@ -45,7 +35,7 @@
         Connecting the dots of the digital <br />cinema living ecosystem
       </h2>
     </div>
-    <div id="modules" class="px-5 py-6 relative text-center">
+    <div id="modulesSection" class="px-5 py-6 relative text-center">
       <div id="rooms" class="module">
         <h2 class="font-medium">Rooms</h2>
         <p>
@@ -78,7 +68,14 @@
         <div id="masters--circleBG"></div>
       </div>
     </div>
-    <div id="ecosystem-container_svg">
+    <div id="modulesSection_2" class="modules test2">
+      <div id="rooms" class="module2">
+        <h1>Rooms</h1>
+      </div>
+      <div id="boxes" class="module2"><h1>Boxes</h1></div>
+      <div id="masters" class="module2"><h1>Masters</h1></div>
+    </div>
+    <div id="ecosystemSection">
       <MarketSvg id="Market_svg"></MarketSvg>
       <PostSvg id="Post_svg"></PostSvg>
       <ProductionSvg id="Production_svg"></ProductionSvg>
@@ -202,67 +199,6 @@ onMounted(() => {
     "<"
   );
 
-  //SVG
-  $gsap.registerEffect({
-    name: "phaseRotation",
-    effect: (targets, config) => {
-      return $gsap.to(targets, {
-        rotate: 360,
-        ease: config.ease,
-        transformOrigin: "50% 50%",
-        repeat: config.repeat,
-        //duration: config.duration,
-        //scrollTrigger: config.scrollTrigger,
-        scrollTrigger: {
-          trigger: targets, // problema di lettura degli ingombri!!! arrivano troppo presto
-          start: "top 80%",
-          end: "bottom 500px",
-          scrub: 1,
-          //markers: true,
-          toggleActions: "resume pause resume pause",
-        },
-      });
-    },
-    defaults: {
-      ease: "linear",
-      //repeat: -1,
-    },
-    extendTimeline: false,
-  });
-
-  //Da continuare!!
-
-  $gsap.effects.phaseRotation("#m_100_circle_ecosys_0", { duration: 7.5 });
-  $gsap.effects.phaseRotation("#m_100_circle_ecosys_1", { duration: 8.5 });
-  $gsap.effects.phaseRotation("#m_100_circle_ecosys_2", { duration: 7.8 });
-  $gsap.effects.phaseRotation("#m_100_circle_ecosys_3", { duration: 9.5 });
-
-  // ScrollTrigger.batch(
-  //   "#m_100_circle_ecosys_0, #m_100_circle_ecosys_1, #m_100_circle_ecosys_2, #m_100_circle_ecosys_3",
-  //   {
-  //     onEnter: (targets) => {
-  //       $gsap.effect.phaseRotation(targets, {
-  //         scrollTrigger: { toggleActions: "resume" },
-  //       });
-  //     },
-  //     onLeave: (targets) => {
-  //       $gsap.effect.phaseRotation(targets, {
-  //         scrollTrigger: { toggleActions: "pause" },
-  //       });
-  //     },
-  //     onEnterBack: (targets) => {
-  //       $gsap.effect.phaseRotation(targets, {
-  //         scrollTrigger: { toggleActions: "resume" },
-  //       });
-  //     },
-  //     onLeaveBack: (targets) => {
-  //       $gsap.effect.phaseRotation(targets, {
-  //         scrollTrigger: { toggleActions: "pause" },
-  //       });
-  //     },
-  //   }
-  // );
-
   //ANCHOR - MODULES
   $gsap.from("#rooms--circleBG", {
     transformOrigin: "50% 35%",
@@ -338,8 +274,150 @@ onMounted(() => {
       end: "+300px center",
       scrub: 1,
       //markers: true,
+      onLeave: () => {
+        //ho risolto in modo diverso
+        $gsap.set("#modulesSection", {
+          css: {
+            overflowY: "visible",
+          },
+        });
+        //console.log("Masters Y Uscito da sotto");
+      },
     },
   });
+
+  //--------
+  const lines = document.querySelectorAll(".module2");
+
+  // Timeline GSAP
+  //const tl2 = $gsap.timeline({ paused: false });
+
+  // Primo h1: parte da sotto e si porta al centro
+  // $gsap.from(lines[0], {
+  //   y: 100,
+  //   autoAlpha: 0,
+  //   //duration: 1,
+  //   ease: "power4.out",
+  //   scrollTrigger: {
+  //     trigger: lines[0],
+  //     scrub: 1,
+  //     start: "top 60%",
+  //     end: "bottom center",
+  //     pin: ".module2",
+  //     markers: true,
+  //   },
+  // });
+  $gsap.from("#rooms.module2", {
+    autoAlpha: 0,
+    duration: 0.8,
+    scrollTrigger: {
+      trigger: "#rooms.module2",
+      pin: "#rooms.module2",
+      start: "top 60%",
+      end: "bottom center",
+      //toggleActions: "play reverse play none",
+      scrub: 1,
+      markers: true,
+    },
+  });
+
+  // $gsap.to(lines[0], {
+  //   y: -20,
+  //   duration: 0.5,
+  //   ease: "power4.out",
+  // });
+  // $gsap.from(
+  //   lines[1],
+  //   {
+  //     y: 100,
+  //     opacity: 0,
+  //     duration: 1,
+  //     ease: "power4.out",
+  //   },
+  //   "<"
+  // );
+
+  // Terzo h1: spinge sia il primo che il secondo h1 verso l'alto.
+  // In questo caso il primo andrà a -40px, il secondo a -20px,
+  // mentre il terzo rimarrà al centro (0).
+  // $gsap.to([lines[0], lines[1]], {
+  //   y: (i) => -20 * (i + 2), // lines[0]: -40, lines[1]: -20
+  //   duration: 0.5,
+  //   ease: "power4.out",
+  // });
+  // $gsap.from(
+  //   lines[2],
+  //   {
+  //     y: 100,
+  //     opacity: 0,
+  //     duration: 1,
+  //     ease: "power4.out",
+  //   },
+  //   "<"
+  // );
+
+  //--------
+
+  //ANCHOR - SVG ecosystem
+  $gsap.registerEffect({
+    name: "phaseRotation",
+    effect: (targets, config) => {
+      return $gsap.to(targets, {
+        rotate: 360,
+        ease: config.ease,
+        transformOrigin: "50% 50%",
+        repeat: config.repeat,
+        //duration: config.duration,
+        //scrollTrigger: config.scrollTrigger,
+        scrollTrigger: {
+          trigger: "#ecosystemSection", // problema di lettura degli ingombri!!! arrivano troppo presto
+          start: "top 80%",
+          end: "bottom 500px",
+          scrub: 1,
+          //markers: true,
+          toggleActions: "resume pause resume pause",
+        },
+      });
+    },
+    defaults: {
+      ease: "linear",
+      //repeat: -1,
+    },
+    extendTimeline: false,
+  });
+
+  //Da continuare!!
+
+  $gsap.effects.phaseRotation("#m_100_circle_ecosys_0", { duration: 7.5 });
+  $gsap.effects.phaseRotation("#m_100_circle_ecosys_1", { duration: 8.5 });
+  $gsap.effects.phaseRotation("#m_100_circle_ecosys_2", { duration: 7.8 });
+  $gsap.effects.phaseRotation("#m_100_circle_ecosys_3", { duration: 9.5 });
+
+  // ScrollTrigger.batch(
+  //   "#m_100_circle_ecosys_0, #m_100_circle_ecosys_1, #m_100_circle_ecosys_2, #m_100_circle_ecosys_3",
+  //   {
+  //     onEnter: (targets) => {
+  //       $gsap.effect.phaseRotation(targets, {
+  //         scrollTrigger: { toggleActions: "resume" },
+  //       });
+  //     },
+  //     onLeave: (targets) => {
+  //       $gsap.effect.phaseRotation(targets, {
+  //         scrollTrigger: { toggleActions: "pause" },
+  //       });
+  //     },
+  //     onEnterBack: (targets) => {
+  //       $gsap.effect.phaseRotation(targets, {
+  //         scrollTrigger: { toggleActions: "resume" },
+  //       });
+  //     },
+  //     onLeaveBack: (targets) => {
+  //       $gsap.effect.phaseRotation(targets, {
+  //         scrollTrigger: { toggleActions: "pause" },
+  //       });
+  //     },
+  //   }
+  // );
 });
 //Gsap-fine
 </script>

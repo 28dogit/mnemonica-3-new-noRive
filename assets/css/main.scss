@@ -104,7 +104,8 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  //overflow: hidden;
+  overflow-x: hidden;
+  //overflow-y: visible;
 }
 #ghirlanda-full {
   mix-blend-mode: luminosity;
@@ -153,19 +154,85 @@
   }
 }
 
+///*ANCHOR - Modules
+
+#modulesSection {
+  position:relative;
+  overflow-y: visible;
+  overflow-x: hidden;
+  //background: linear-gradient(0deg, $gradient_4 55%, transparent 100%);
+  //padding-top: 10em;
+  padding-bottom: 200px;
+  @include bp.for-phone {
+    p {
+      font-size: 14px;
+      line-height: 21px;
+    }
+  }
+}
+#rooms{
+  position: relative;
+}
+#rooms--circleBG{
+  z-index: -1;
+  opacity: 0.5;
+  width: 400px;
+  height:400px;
+  background-color: $gradient_4;
+  position: absolute;
+  top:-50%;
+  left:-30%;
+  //top:-2%;
+  border-radius: 50%;
+}
+#boxes--circleBG{
+  z-index: -1;
+  opacity: 0.5;
+  width: 450px;
+  height:450px;
+  background-color: $gradient_3;
+  position: absolute;
+  top:-30%;
+  left:-5%;
+  //top:-2%;
+  border-radius: 50%;
+}
+#masters--circleBG{
+  z-index: -1;
+  opacity: 0.5;
+  width: 400px;
+  height:400px;
+  background-color: $gradient_4;
+  position: absolute;
+  top:-50%;
+  left:-5%;
+  //top:-2%;
+  border-radius: 50%;
+}
+
+#modulesSection_2.modules.test2{
+  div h1{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+}
+
 ///*ANCHOR - Ecosystem
 
-#ecosystem-container_svg {
+#ecosystemSection {
   background: linear-gradient(0deg, $gradient_4 66%, transparent 100%);
-  padding-top: 20em;
+  //padding-top: 20em;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100vh;
+  //height: 100vh;
   min-height: 900px;
-  box-sizing: content-box;
+  @include bp.for-phone{
+    min-height: 400px;
+  }
   #logoPhase{
     position: absolute;
     top: 50%;
@@ -232,68 +299,4 @@
       opacity: 0.3;
     }
   }
-}
-
-///*ANCHOR - Modules
-
-#modules {
-  position:relative;
-  overflow-y: visible;
-  overflow-x: hidden;
-  // background: linear-gradient(0deg, $gradient_4 55%, transparent 100%);
-  padding-top: 10em;
-  @include bp.for-phone {
-    p {
-      font-size: 14px;
-      line-height: 21px;
-    }
-  }
-}
-#rooms{
-  position: relative;
-}
-#rooms--circleBG{
-  z-index: -1;
-  opacity: 0.5;
-  width: 400px;
-  height:400px;
-  background-color: $gradient_4;
-  position: absolute;
-  top:-50%;
-  left:-30%;
-  //top:-2%;
-  border-radius: 50%;
-}
-#boxes--circleBG{
-  z-index: -1;
-  opacity: 0.5;
-  width: 450px;
-  height:450px;
-  background-color: $gradient_3;
-  position: absolute;
-  top:-30%;
-  left:-5%;
-  //top:-2%;
-  border-radius: 50%;
-}
-#masters--circleBG{
-  z-index: -1;
-  opacity: 0.5;
-  width: 400px;
-  height:400px;
-  background-color: $gradient_4;
-  position: absolute;
-  top:-50%;
-  left:-5%;
-  //top:-2%;
-  border-radius: 50%;
-}
-#bgCircle_1 {
-  width: 400px;
-}
-#bgCircle_2 {
-  width: 500px;
-}
-#bgCircle_3 {
-  width: 600px;
 }

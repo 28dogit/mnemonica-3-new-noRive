@@ -2,14 +2,14 @@
   <div id="mainContainer" class="min-h-screen flex flex-col flex-grow relative">
     <div id="bbg" class="-z-20"></div>
 
-    <!-- <div id="ghirlandeContainer" class="w-screen h-screen absolute top-0 left-0 -z-10">
+    <div id="ghirlandeContainer" class="w-screen h-screen absolute top-0 left-0 -z-10">
       <div class="ghirlanda-updx l1" data-speed="0.4">
         <NuxtImg src="/assets/img/Ghirlanda-web-up-dx-500.png" densities="x1" alt="" />
       </div>
       <div class="ghirlanda-dwsx l1" data-speed="0.6">
         <NuxtImg src="/assets/img/Ghirlanda-web-dw-sx-500.png" densities="x1" alt="" />
       </div>
-    </div> -->
+    </div>
 
     <Header />
     <slot class="min-h-screen" />
