@@ -69,11 +69,11 @@
       </div>
     </div>
     <div id="modulesSection_2" class="modules test2">
-      <div id="rooms" class="module2">
+      <div id="rooms2" class="module2">
         <h1>Rooms</h1>
       </div>
-      <div id="boxes" class="module2"><h1>Boxes</h1></div>
-      <div id="masters" class="module2"><h1>Masters</h1></div>
+      <div id="boxes2" class="module2"><h1>Boxes</h1></div>
+      <div id="masters2" class="module2"><h1>Masters</h1></div>
     </div>
     <div id="ecosystemSection">
       <MarketSvg id="Market_svg"></MarketSvg>
@@ -287,7 +287,7 @@ onMounted(() => {
   });
 
   //--------
-  const lines = document.querySelectorAll(".module2");
+  //const lines = document.querySelectorAll(".module2");
 
   // Timeline GSAP
   //const tl2 = $gsap.timeline({ paused: false });
@@ -307,15 +307,28 @@ onMounted(() => {
   //     markers: true,
   //   },
   // });
-  $gsap.from("#rooms.module2", {
+  $gsap.from("#rooms2", {
     autoAlpha: 0,
-    duration: 0.8,
+    //duration: 0.8,
     scrollTrigger: {
-      trigger: "#rooms.module2",
-      pin: "#rooms.module2",
+      trigger: "#rooms2",
+      pin: "#rooms2",
       start: "top 60%",
       end: "bottom center",
       //toggleActions: "play reverse play none",
+      scrub: 1,
+      markers: true,
+    },
+  });
+  $gsap.from("#boxes2", {
+    autoAlpha: 0,
+    //duration: 0.8,
+    scrollTrigger: {
+      trigger: "#boxes2",
+      pin: "#boxes2",
+      start: "top 60%",
+      end: "bottom center",
+      toggleActions: "play pause play pause",
       scrub: 1,
       markers: true,
     },
