@@ -1,31 +1,21 @@
 <template>
   <main>
     <div
-      id="heroSection"
-      class="flex flex-col items-center justify-center h-[calc(100vh-70px)] w-screen overflow-x-hidden"
+      id="ghirlandaContainert"
+      class="test w-screen h-screen absolute top-0 left-0 -z-10 overflow-hidden"
     >
-      <div
-        id="ghirlandaContainert"
-        class="test w-screen h-screen absolute top-0 left-0 -z-10 overflow-x-hidden"
-      >
-        <div id="ghirlanda-full" data-speed="0.6" class="max-w-2xl">
-          <NuxtImg
-            src="/assets/img/Ghirlanda_full_web_800_opt.png"
-            alt="mnemonica ghirlanda ecosystem"
-            densities="x1"
-          />
-        </div>
+      <div id="ghirlanda-full" data-speed="0.6" class="max-w-2xl">
+        <NuxtImg
+          src="/assets/img/Ghirlanda_full_web_800_opt.png"
+          alt="mnemonica ghirlanda ecosystem"
+          densities="x1"
+        />
       </div>
-
-      <div id="ghirlandeContainer" class="w-screen h-screen absolute top-0 left-0 -z-10">
-        <div class="ghirlanda-updx l1" data-speed="0.4">
-          <NuxtImg src="/assets/img/Ghirlanda-web-up-dx-500.png" densities="x1" alt="" />
-        </div>
-        <div class="ghirlanda-dwsx l1" data-speed="0.6">
-          <NuxtImg src="/assets/img/Ghirlanda-web-dw-sx-500.png" densities="x1" alt="" />
-        </div>
-      </div>
-
+    </div>
+    <div
+      id="heroSection"
+      class="flex flex-col items-center justify-center h-[calc(100vh-70px)] w-screen"
+    >
       <div id="logo_mne" class="absolute opacity-5">
         <NuxtImg
           src="/assets/img/svg/Logo-mne-Vector.svg"
@@ -45,7 +35,7 @@
         Connecting the dots of the digital <br />cinema living ecosystem
       </h2>
     </div>
-    <div id="modules" class="px-5 py-6 relative text-center">
+    <div id="modules" class="px-5 py-6 relative overflow-hidden text-center">
       <div id="rooms" class="module">
         <h2 class="font-medium">Rooms</h2>
         <p>
@@ -95,26 +85,12 @@
 <script setup>
 //Utilizzo di Gsap!!-----
 import { onMounted } from "vue";
-import { ScrollTrigger } from "gsap/ScrollTrigger"; // importato qui l'ho importato per tutto il progetto
 import { useNuxtApp } from "#app"; // Ottieni NuxtApp dla plugin gsap.js > con $gsap registro sia gsap che i relativi plugins come scrollTrigger
 import { _scale } from "#tailwind-config/theme";
 
 onMounted(() => {
   //per i riferimenti vedi test_old_2_gsap_explained.vue
   const { $gsap } = useNuxtApp();
-
-  $gsap.to("[data-speed]", {
-    y: (i, el) =>
-      (1 - parseFloat(el.getAttribute("data-speed"))) * ScrollTrigger.maxScroll(window),
-    ease: "none",
-    scrollTrigger: {
-      start: 0,
-      end: "max",
-      invalidateOnRefresh: true,
-      scrub: 0,
-      force3D: true,
-    },
-  });
 
   $gsap.registerEffect({
     // effetto per l'entrata in Fade
@@ -218,7 +194,7 @@ onMounted(() => {
           start: "top 80%",
           end: "bottom 500px",
           scrub: 1,
-          //markers: true,
+          markers: true,
           toggleActions: "resume pause resume pause",
         },
       });
