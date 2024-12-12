@@ -69,11 +69,22 @@
       </div>
     </div>
     <div id="modulesSection_2" class="modules test2">
-      <div id="rooms2" class="module2">
-        <h1>Rooms</h1>
+      <div id="titeles2">
+        <div id="rooms2" class="module2">
+          <h1>Rooms</h1>
+        </div>
+        <div id="boxes2" class="module2">
+          <h1>Boxes</h1>
+        </div>
+        <div id="masters2" class="module2">
+          <h1>Masters</h1>
+        </div>
       </div>
-      <div id="boxes2" class="module2"><h1>Boxes</h1></div>
-      <div id="masters2" class="module2"><h1>Masters</h1></div>
+      <div id="bgCircles2">
+        <div id="rooms2--circleBG"></div>
+        <div id="boxes2--circleBG"></div>
+        <div id="masters2--circleBG"></div>
+      </div>
     </div>
     <div id="ecosystemSection">
       <MarketSvg id="Market_svg"></MarketSvg>
@@ -91,10 +102,13 @@
 
 <script setup>
 //Utilizzo di Gsap!!-----
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger"; // importato qui l'ho importato per tutto il progetto
 import { useNuxtApp } from "#app"; // Ottieni NuxtApp dla plugin gsap.js > con $gsap registro sia gsap che i relativi plugins come scrollTrigger
 import { _scale } from "#tailwind-config/theme";
+
+const main = ref();
+let ctx;
 
 onMounted(() => {
   //per i riferimenti vedi test_old_2_gsap_explained.vue
@@ -287,89 +301,56 @@ onMounted(() => {
   });
 
   //--------
-  //const lines = document.querySelectorAll(".module2");
 
-  // Timeline GSAP
-  //const tl2 = $gsap.timeline({ paused: false });
+  //ANCHOR - test modules2
 
-  // Primo h1: parte da sotto e si porta al centro
-  // $gsap.from(lines[0], {
-  //   y: 100,
-  //   autoAlpha: 0,
-  //   //duration: 1,
-  //   ease: "power4.out",
-  //   scrollTrigger: {
-  //     trigger: lines[0],
-  //     scrub: 1,
-  //     start: "top 60%",
-  //     end: "bottom center",
-  //     pin: ".module2",
-  //     markers: true,
-  //   },
-  // });
-  $gsap.from("#rooms2", {
-    autoAlpha: 0,
-    //duration: 0.8,
-    scrollTrigger: {
-      trigger: "#rooms2",
-      pin: "#rooms2",
-      start: "top 60%",
-      end: "bottom center",
-      //toggleActions: "play reverse play none",
-      scrub: 1,
-      markers: true,
-    },
-  });
-  $gsap.from("#boxes2", {
-    autoAlpha: 0,
-    //duration: 0.8,
-    scrollTrigger: {
-      trigger: "#boxes2",
-      pin: "#boxes2",
-      start: "top 60%",
-      end: "bottom center",
-      toggleActions: "play pause play pause",
-      scrub: 1,
-      markers: true,
-    },
-  });
+  //creo il contesto
+  ctx = $gsap.context(() => {
+    const boxes = document.querySelectorAll(".module2");
+    const circles = document.querySelectorAll("#bgCircles2 div");
+    $gsap.to("#modulesSection_2", {
+      scrollTrigger: {
+        trigger: "#modulesSection_2",
+        pin: "#modulesSection_2",
+        start: "center center",
+        end: "bottom 20%",
+        //markers: true,
+      },
+    });
+    boxes.forEach((box) => {
+      $gsap.from(box, {
+        autoAlpha: 0,
+        y: 100,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: box,
+          start: "top 60%",
+          end: "bottom +200px",
+          scrub: true,
+          //markers: true,
+        },
+      });
+    });
+    circles.forEach((circle) => {
+      $gsap.from(circle, {
+        autoAlpha: 0,
+        x: -100,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: circle,
+          start: "center 60%",
+          end: "bottom +200px",
+          scrub: 1,
+          //markers: true,
+        },
+      });
+    });
+  }, main.value);
 
-  // $gsap.to(lines[0], {
-  //   y: -20,
-  //   duration: 0.5,
-  //   ease: "power4.out",
-  // });
-  // $gsap.from(
-  //   lines[1],
-  //   {
-  //     y: 100,
-  //     opacity: 0,
-  //     duration: 1,
-  //     ease: "power4.out",
-  //   },
-  //   "<"
-  // );
+  //annullo il contesto
+  //ctx.revert();
 
-  // Terzo h1: spinge sia il primo che il secondo h1 verso l'alto.
-  // In questo caso il primo andrà a -40px, il secondo a -20px,
-  // mentre il terzo rimarrà al centro (0).
-  // $gsap.to([lines[0], lines[1]], {
-  //   y: (i) => -20 * (i + 2), // lines[0]: -40, lines[1]: -20
-  //   duration: 0.5,
-  //   ease: "power4.out",
-  // });
-  // $gsap.from(
-  //   lines[2],
-  //   {
-  //     y: 100,
-  //     opacity: 0,
-  //     duration: 1,
-  //     ease: "power4.out",
-  //   },
-  //   "<"
-  // );
-
-  //--------
+  //-----------------------
 
   //ANCHOR - SVG ecosystem
   $gsap.registerEffect({

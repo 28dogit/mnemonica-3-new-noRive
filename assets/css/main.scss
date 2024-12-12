@@ -211,10 +211,86 @@
 }
 
 #modulesSection_2.modules.test2{
-  div h1{
-    margin: 0;
-    padding: 0;
-    text-align: center;
+  // overflow-x: hidden;
+  // overflow-y: visible;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  padding: 100px 0;
+  //background-color:royalblue;
+  #titeles2 {
+    flex-grow: 1;
+    h1{
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+  }
+  #bgCircles2{
+    position: absolute;
+    top: 50%;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    #rooms2--circleBG {
+      opacity: 0.5;
+      width: 10rem;
+      height: 20rem;
+      background-color: $gradient_4;
+      border-radius: 0rem 10rem 10rem 0;
+      position: absolute;
+      // top: 50%;
+    }
+    #boxes2--circleBG {
+      opacity: 0.5;
+      width: 12rem;
+      height: 24rem;
+      background-color: $gradient_3;
+      border-radius: 0rem 12rem 12rem 0;
+      position: absolute;
+      // top: 50%;
+    }
+    #masters2--circleBG {
+      opacity: 0.5;
+      width: 14rem;
+      height: 28rem;
+      background-color: $gradient_4;
+      border-radius: 0rem 14rem 14rem 0;
+      position: absolute;
+      // top: 50%;
+    }
+
+
+    // #rooms2--circleBG{
+    //   z-index: -1;
+    //   opacity: 0.5;
+    //   width: 100px;
+    //   height:100px;
+    //   background-color: $gradient_4;
+    //   position: absolute;
+    //   border-radius: 50%;
+    // }
+    // #boxes2--circleBG{
+    //   z-index: -1;
+    //   opacity: 0.5;
+    //   width: 150px;
+    //   height:150px;
+    //   background-color: $gradient_3;
+    //   position: absolute;
+    //   border-radius: 50%;
+    // }
+    // #masters2--circleBG{
+    //   z-index: -1;
+    //   opacity: 0.5;
+    //   width: 200px;
+    //   height:200px;
+    //   background-color: $gradient_4;
+    //   position: absolute;
+    //   // top:-50%;
+    //   // left:-15%;
+    //   //top:-2%;
+    //   border-radius: 50%;
+    // }
   }
 }
 
