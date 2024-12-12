@@ -70,8 +70,14 @@
     </div>
     <div id="modulesSection_2" class="modules test2">
       <div id="titeles2">
-        <div id="rooms2" class="module2">
+        <div id="rooms2" class="module2" @click="openTxt">
           <h1>Rooms</h1>
+          <p>
+            Leave folders behind. Experience active workspaces that free you from
+            repetitive tasks encoding, watermarking, keeping everyone updated. Enjoy
+            private places where people meet around media, playlists are a given, content
+            is easy to find and move.
+          </p>
         </div>
         <div id="boxes2" class="module2">
           <h1>Boxes</h1>
@@ -108,6 +114,7 @@ import { useNuxtApp } from "#app"; // Ottieni NuxtApp dla plugin gsap.js > con $
 import { _scale } from "#tailwind-config/theme";
 
 const main = ref();
+const openTxt = ref(null);
 let ctx;
 
 onMounted(() => {
@@ -333,19 +340,28 @@ onMounted(() => {
     });
     circles.forEach((circle) => {
       $gsap.from(circle, {
-        autoAlpha: 0,
-        x: -100,
-        ease: "power4.out",
+        autoAlpha: 0.5,
+        x: "-14rem",
+        ease: "power2.out",
         scrollTrigger: {
           trigger: circle,
           start: "center 60%",
           end: "bottom +200px",
-          scrub: 1,
+          scrub: 2,
           //markers: true,
         },
       });
     });
   }, main.value);
+
+  openTxt.value = () => {
+    console.log("cliccato");
+    $gsap.to("#rooms2 p", {
+      opacity: 1,
+      duration: 2,
+      ease: "power2.out",
+    });
+  };
 
   //annullo il contesto
   //ctx.revert();

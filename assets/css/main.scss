@@ -211,6 +211,7 @@
 }
 
 #modulesSection_2.modules.test2{
+  margin: 50px 0 200px 0;
   // overflow-x: hidden;
   // overflow-y: visible;
   display: flex;
@@ -225,6 +226,12 @@
       padding: 0;
       text-align: center;
     }
+    #rooms2{
+      p{
+        //display:none;
+        opacity: 0;
+      }
+    }
   }
   #bgCircles2{
     position: absolute;
@@ -233,16 +240,16 @@
     display: flex;
     align-items: center;
     #rooms2--circleBG {
-      opacity: 0.5;
-      width: 10rem;
-      height: 20rem;
-      background-color: $gradient_4;
-      border-radius: 0rem 10rem 10rem 0;
+      opacity: 0.8;
+      width: 14rem;
+      height: 28rem;
+      background-color: $gradient_3;
+      border-radius: 0rem 14rem 14rem 0;
       position: absolute;
       // top: 50%;
     }
     #boxes2--circleBG {
-      opacity: 0.5;
+      opacity: 0.8;
       width: 12rem;
       height: 24rem;
       background-color: $gradient_3;
@@ -252,10 +259,10 @@
     }
     #masters2--circleBG {
       opacity: 0.5;
-      width: 14rem;
-      height: 28rem;
+      width: 10rem;
+      height: 20rem;
       background-color: $gradient_4;
-      border-radius: 0rem 14rem 14rem 0;
+      border-radius: 0rem 10rem 10rem 0;
       position: absolute;
       // top: 50%;
     }
