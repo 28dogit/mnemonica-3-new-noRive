@@ -358,6 +358,7 @@ onMounted(() => {
     console.log("cliccato");
     $gsap.to("#rooms2 p", {
       opacity: 1,
+      height: "auto",
       duration: 2,
       ease: "power2.out",
     });
