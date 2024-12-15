@@ -4,6 +4,8 @@
 @use "breakpoints.scss" as bp;
 @use "animations.scss" as anim;
 
+@use "main_2.scss" as *;
+
 ///*SECTION - background gradients + animation
 #bbg {
   width: 100vw;

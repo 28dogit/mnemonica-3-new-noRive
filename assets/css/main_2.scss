@@ -1,0 +1,27 @@
+@use "globals" as *; //(espone direttamente le variabili senza bisogno di un namespace)
+@use "buttons.scss" as btn;
+@use "typography.scss" as typo;
+@use "breakpoints.scss" as bp;
+@use "animations.scss" as anim;
+
+#ghirlanda-element, #modules-element, #phases-element{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+svg.circle-place-holder{
+    width: 80vw;
+}
+
+#hero-content-wrapper, #modules-content-wrapper, #phases-content-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#hero-content,#modules-content,#phases-content{
+    width: 80vw;
+    height: 40vh;
+    background-color: red;
+    color:white;  
+}
