@@ -42,8 +42,8 @@ onMounted(() => {
   const tl = $gsap.timeline({
     scrollTrigger: {
       trigger: "#hero-section", // Elemento che attiva l'animazione
-      start: "top +=70", // Quando inizia l'animazione
-      end: "bottom +=50", // Durata dello scroll
+      start: "top +=60", // Quando inizia l'animazione
+      end: "bottom +=40", // Durata dello scroll
       scrub: true, // Sincronizzazione con lo scroll
       pin: true, // Fissa il contenitore #hero-section
       snap: {
