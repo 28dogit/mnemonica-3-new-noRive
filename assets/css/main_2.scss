@@ -9,8 +9,11 @@
     align-items: center;
     justify-content: center;
 }
-svg.circle-place-holder{
+#pseudoG{
     width: 80vw;
+    height: 30vh;
+    border-radius: 10px;
+    background-color: antiquewhite;
 }
 
 #hero-content-wrapper, #modules-content-wrapper, #phases-content-wrapper{
