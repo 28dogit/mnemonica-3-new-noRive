@@ -4,17 +4,13 @@
 @use "breakpoints.scss" as bp;
 @use "animations.scss" as anim;
 
-#ghirlanda-element, #modules-element, #phases-element{
+#ghirlanda-element, #phases-element{
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
-#pseudoG{
-    width: 80vw;
-    height: 30vh;
-    border-radius: 10px;
-    background-color: antiquewhite;
-}
+
 
 #hero-content-wrapper, #modules-content-wrapper, #phases-content-wrapper{
     display: flex;
@@ -25,6 +21,45 @@
 #hero-content,#modules-content,#phases-content{
     width: 80vw;
     height: 40vh;
-    background-color: red;
+    //background-color: red;
     color:white;  
+}
+
+//*ANCHOR - Modules section
+
+#modules-element{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    min-height: 50vh;
+}
+#modules_svg{
+    width: 80vw;
+    position: absolute;
+}
+// #made-for{
+
+// }
+#modules-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#modules-content div{
+    position: absolute;
+    max-width: 80%;
+    h2, p{
+        text-align: center;
+    }
+}
+// #module-txt_1{
+
+// }
+#module-txt_2{
+    opacity: 0;
+}
+#module-txt_3{
+    opacity: 0;
 }

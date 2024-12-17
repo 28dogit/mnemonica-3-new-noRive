@@ -2,27 +2,68 @@
   <main>
     <div id="hero-section">
       <div id="ghirlanda-element">
-        <div id="pseudoG"></div>
+        <svg viewBox="0 0 100 100" class="circle-place-holder">
+          <circle cx="50" cy="50" r="50"></circle>
+        </svg>
       </div>
       <div id="hero-content-wrapper">
-        <div id="hero-content"><p>HERO</p></div>
+        <div id="hero-content">
+          <p>Hero Section</p>
+        </div>
       </div>
     </div>
     <div id="modules-section">
       <div id="modules-element">
-        <svg viewBox="0 0 100 100" class="circle-place-holder">
-          <circle cx="50" cy="50" r="50"></circle>
-        </svg>
+        <Modules id="modules_svg"></Modules>
+        <p id="made_for">MADE FOR</p>
       </div>
       <div id="modules-content-wrapper">
-        <div id="modules-content"><p>MODULES</p></div>
+        <div id="modules-content">
+          <div id="module-txt_1">
+            <p>Hero Section</p>
+            <h2>Rooms</h2>
+            <p>
+              Leave folders behind. Experience active workspaces that free you from
+              repetitive tasks encoding, watermarking, keeping everyone updated. Enjoy
+              private places where people meet around media, playlists are a given,
+              content is easy to find and move.
+            </p>
+          </div>
+          <div id="module-txt_2">
+            <h2>Boxes</h2>
+            <p>
+              Forget hard drives and LTOs. Welcome to the most advanced and reliable
+              solution for long-term preservation of digital film works that also keeps
+              them always available for business opportunities and cultural outreach.
+              Arrange immediate screenings with integrated Rooms, easily retrieve relevant
+              assets, securely deliver to stakeholders.
+            </p>
+          </div>
+          <div id="module-txt_3">
+            <h2>Masters</h2>
+            <p>
+              Get rid of third-party shuttles. With the built-in data exchange facility,
+              you can send & receive files and folders of any size and complexity directly
+              from/to Rooms, as well as local drives. Only between registered users,
+              without leaving Mnemonica safe walls.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
     <div id="phases-section">
       <div id="phases-element">
-        <svg viewBox="0 0 100 100" class="circle-place-holder">
-          <circle cx="50" cy="50" r="50"></circle>
-        </svg>
+        <div id="ecosystemSection">
+          <MarketSvg id="Market_svg"></MarketSvg>
+          <PostSvg id="Post_svg"></PostSvg>
+          <ProductionSvg id="Production_svg"></ProductionSvg>
+          <PreSvg id="Pre_svg"></PreSvg>
+          <NuxtImg
+            id="logoPhase"
+            src="/assets/img/svg/Logo-mne-Vector.svg"
+            alt="Mnemonica logo portrait"
+          />
+        </div>
       </div>
       <div id="phases-content-wrapper">
         <div id="phases-content"><p>PHASES</p></div>
@@ -41,59 +82,105 @@ onMounted(() => {
 
   const tl = $gsap.timeline({
     scrollTrigger: {
-      trigger: "#hero-section", // Elemento che attiva l'animazione
+      trigger: "#modules-section", // Elemento che attiva l'animazione
       start: "top +=60", // Quando inizia l'animazione
       end: "bottom +=40", // Durata dello scroll
       scrub: true, // Sincronizzazione con lo scroll
       pin: true, // Fissa il contenitore #hero-section
       snap: {
         snapTo: "labels",
-        duration: 0.3,
-        ease: "power1.in",
+        duration: 0.1,
+        ease: "linear",
       },
     },
   });
 
-  // console.log(tl.labels); // Mostra tutte le etichette della timeline
+  console.log(tl.labels); // Mostra tutte le etichette della timeline
 
   tl.to(
-    "#pseudoG",
+    "#modules_svg",
     {
       rotate: 120,
-      duration: 0.3,
+      duration: 3,
       ease: "power4.out",
     },
     0
   );
-  tl.addLabel("pseudoEnd1", 0.3);
-  tl.from(
-    "#hero-content",
+  tl.addLabel("pseudoEnd1", 3);
+  tl.to(
+    "#modules-content #module-txt_1",
     {
       opacity: 0,
-      duration: 0.3, // Durata relativa nella timeline
+      duration: 1.5, // Durata relativa nella timeline
       ease: "power1.out",
     },
     0
   );
   tl.to(
-    "#pseudoG",
+    "#modules-content #module-txt_2",
+    {
+      opacity: 1,
+      duration: 1.5, // Durata relativa nella timeline
+      ease: "power1.out",
+    },
+    0
+  );
+  tl.to(
+    "#modules_svg",
     {
       rotate: 240,
-      duration: 0.3,
+      duration: 3,
       ease: "power4.out",
     },
-    0.3
+    3
   );
-  tl.addLabel("pseudoEnd2", 0.6);
+  tl.addLabel("pseudoEnd2", 6);
   tl.to(
-    "#hero-content",
+    "#modules-content #module-txt_2",
     {
       opacity: 0,
-      duration: 0.3, // Durata relativa nella timeline
+      duration: 1.5, // Durata relativa nella timeline
       ease: "power1.out",
     },
-    0.3
+    3
   );
+  tl.to(
+    "#modules-content #module-txt_3",
+    {
+      opacity: 1,
+      duration: 1.5, // Durata relativa nella timeline
+      ease: "power1.out",
+    },
+    3
+  );
+  // tl.to(
+  //   "#modules-content",
+  //   {
+  //     autoAlpha: 0,
+  //     duration: 3, // Durata relativa nella timeline
+  //     ease: "power1.out",
+  //   },
+  //   3
+  // );
+  // tl.to(
+  //   "#modules_svg",
+  //   {
+  //     rotate: 360,
+  //     duration: 4,
+  //     ease: "power4.out",
+  //   },
+  //   6
+  // );
+  // tl.addLabel("pseudoEnd3", 10);
+  // tl.to(
+  //   "#modules-content",
+  //   {
+  //     opacity: 1,
+  //     duration: 4, // Durata relativa nella timeline
+  //     ease: "power1.out",
+  //   },
+  //   6
+  // );
   // tl.from(
   //   "#ghirlanda-element",
   //   {
