@@ -17,6 +17,10 @@ h2 {
     color: $mne_text-on-dark;
     font-weight: 400;
     font-optical-sizing: auto;
+    @include bp.for-phone{
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
 }
 // h3 {
 //     padding: 10px 0;
