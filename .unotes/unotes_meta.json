@@ -44,14 +44,14 @@
       "folders": {},
       "files": {}
     },
-    "composables": {
-      "name": "composables",
+    "tests": {
+      "name": "tests",
       "isOrdered": true,
       "folders": {},
       "files": {}
     },
-    "tests": {
-      "name": "tests",
+    "dist": {
+      "name": "dist",
       "isOrdered": true,
       "folders": {},
       "files": {}

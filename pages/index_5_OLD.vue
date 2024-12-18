@@ -98,7 +98,6 @@
 import { onMounted, ref } from "vue";
 import { useNuxtApp } from "#app";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Observer } from "gsap/Observer";
 
 onMounted(() => {
   const { $gsap } = useNuxtApp();
@@ -141,66 +140,6 @@ onMounted(() => {
   intro.EnterFrom("#H-deliver", { duration: 0.7 }, "> -=0.3");
   intro.EnterFrom("#H-preserve", { duration: 0.7 }, "> -=0.3");
   intro.EnterFrom("#heroSubTitle", { duration: 0.5, y: "-25px" }, "-=0.7");
-
-  //-------------------------
-  let isAnimating = false;
-  let lastScrollTime = 0;
-
-  function rotate_up(value) {
-    if (isAnimating) return; // Previene nuove animazioni durante una già in corso
-    isAnimating = true;
-
-    $gsap.to("#modules_svg", {
-      rotate: `+=${value}`,
-      //rotate: value + "_cw",
-      duration: 0.5,
-      ease: "power4.out",
-      overwrite: true,
-      onComplete: () => (isAnimating = false), // Reimposta lo stato al termine
-    });
-  }
-  function rotate_dw(value) {
-    if (isAnimating) return; // Previene nuove animazioni durante una già in corso
-    isAnimating = true;
-
-    $gsap.to("#modules_svg", {
-      rotate: `-=${value}`,
-      //rotate: value + "_ccw",
-      duration: 0.5,
-      ease: "power4.out",
-      overwrite: true,
-      onComplete: () => (isAnimating = false), // Reimposta lo stato al termine
-    });
-  }
-
-  Observer.create({
-    target: "#modules-section",
-    type: "wheel,touch",
-    tolerance: 20,
-    preventDefault: true,
-    debounce: 6,
-    onUp: () => {
-      const now = Date.now();
-      if (now - lastScrollTime < 300) return; // Ignora eventi troppo ravvicinati
-      lastScrollTime = now;
-
-      rotate_up(120);
-      console.log("UP");
-    },
-    onDown: () => {
-      const now = Date.now();
-      if (now - lastScrollTime < 300) return; // Ignora eventi troppo ravvicinati
-      lastScrollTime = now;
-
-      rotate_dw(120);
-      console.log("Down");
-    },
-    onChange: (self) => {
-      console.log(self.deltaY, "deltaY");
-    },
-  });
-
-  //----------------
 
   // let lastDirection = null;
   // let isRotating = false; // Per prevenire animazioni multiple contemporaneamente
