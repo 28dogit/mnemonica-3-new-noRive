@@ -147,12 +147,16 @@ onMounted(() => {
       start: "top +=60", // Quando inizia l'animazione
       end: "bottom +=40", // Durata dello scroll
       scrub: true, // Sincronizzazione con lo scroll
+      anticipatePin: 1,
       pin: true, // Fissa il contenitore #hero-section
       snap: {
         snapTo: "labels",
+        directional: false,
         duration: 0.1,
         ease: "linear",
       },
+      onSnapComplete: ({ progress, direction, isActive }) =>
+        console.log(progress, direction, isActive),
     },
   });
 
