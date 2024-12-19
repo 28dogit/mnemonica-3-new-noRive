@@ -16,7 +16,7 @@
         />
       </div>
       <div id="hero-content-wrapper" class="wrapper">
-        <div id="hero-content">
+        <div id="hero-content" class="content">
           <div id="heroTitle" class="flex items-center gap-10 justify-center flex-wrap">
             <div class="overflowMask overflow-hidden">
               <h1 id="H-screen" class="uppercase">Screen</h1>
@@ -43,7 +43,7 @@
         <p id="made_for">MADE FOR</p>
       </div>
       <div id="modules-content-wrapper" class="wrapper">
-        <div id="modules-content">
+        <div id="modules-content" class="content">
           <div id="module-txt_1" class="module_txt">
             <h2>Rooms</h2>
             <p>
@@ -88,7 +88,9 @@
         />
       </div>
       <div id="phases-content-wrapper" class="wrapper">
-        <div id="phases-content"><p>PHASES</p></div>
+        <div id="phases-content" class="content">
+          <PhasesChips></PhasesChips>
+        </div>
       </div>
     </div>
   </main>
@@ -144,15 +146,24 @@ onMounted(() => {
 
   ///ANCHOR - Modules section
 
+  $gsap.to("#made_for", {
+    textShadow: `0 0 7px rgba(184, 239, 250, 0.1), 0 0 10px rgba(184, 239, 250, 0.1), 0 0 42px rgba(184, 239, 250, 0.1)`,
+    duration: 1.2,
+    repeat: -1,
+    yoyo: true,
+    ease: "linear",
+  });
+
   const modules_tl = $gsap.timeline({
     scrollTrigger: {
       trigger: "#modules-section", // Elemento che attiva l'animazione
-      start: "top +=65", // Quando inizia l'animazione
-      end: "bottom +=40", // Durata dello scroll
+      start: "top +=75", // Quando inizia l'animazione
+      end: "bottom top", // Durata dello scroll
+      invalidateOnRefresh: true,
       scrub: true, // Sincronizzazione con lo scroll
       anticipatePin: 1,
       pin: true, // Fissa il contenitore #hero-section
-      markers: true,
+      //markers: true,
       snap: {
         snapTo: (progress) => Math.round(progress * 3) / 3, // Aggancia a ogni 1/3 di progresso (120 gradi)
         duration: { min: 0.2, max: 0.5 }, // Durata dell'animazione di aggancio
@@ -290,6 +301,20 @@ onMounted(() => {
       },
       0.9
     );
+
+  $gsap.from("#pre-chips-container", {
+    autoAlpha: 0,
+    duration: 1,
+    scrollTrigger: {
+      trigger: "#pre-chips-container",
+      start: "top 80%",
+      end: "bottom 80%",
+      toggleActions: "play none none none",
+      scrub: 1,
+      markers: true,
+    },
+    //display: "block",
+  });
 });
 </script>
 

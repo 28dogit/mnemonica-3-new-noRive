@@ -44,11 +44,18 @@ body{
     align-items: center;
     justify-content: center;
 }
+.content{
+  width: 80vw;
+  height: 40vh;
+  //background-color: red;
+  color:white;  
+}
 
 //*SECTION - Hero
 #ghirlanda-element{
     opacity:0.6;
     max-height: 50vh;
+    mix-blend-mode: luminosity;
 }
 
 #logo_mne {
@@ -78,13 +85,6 @@ body{
       }
     }
   }
-
-#hero-content,#modules-content,#phases-content{
-    width: 80vw;
-    height: 40vh;
-    //background-color: red;
-    color:white;  
-}
 //*!SECTION
 
 // SECTION - Modules
@@ -101,7 +101,7 @@ body{
 // }
 #modules-content{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
 #modules-content div{
@@ -111,9 +111,15 @@ body{
         text-align: center;
     }
 }
-// #module-txt_1{
-
-// }
+#made_for {
+  color: #fff;
+  font-size: 1.3rem;
+  margin-bottom: 0;
+  text-shadow:
+      0 0 7px rgba(184, 239, 250, 1),
+      0 0 10px rgba(184, 239, 250, 1),
+      0 0 42px rgba(184, 239, 250, 1);
+ }
 #module-txt_2{
     opacity: 0;
 }
@@ -196,6 +202,9 @@ body{
         opacity: 0.3;
       }
     }
+  }
+  #phases-content{
+    width: 95vw; 
   }
   
 //*!SECTION
