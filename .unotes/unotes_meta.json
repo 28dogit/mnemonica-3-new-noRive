@@ -50,8 +50,8 @@
       "folders": {},
       "files": {}
     },
-    "dist": {
-      "name": "dist",
+    "composables": {
+      "name": "composables",
       "isOrdered": true,
       "folders": {},
       "files": {}

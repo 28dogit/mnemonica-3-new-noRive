@@ -13,15 +13,10 @@ Thu, Jun 20, 2024 6:08 PM
 
 # Gsap Animazioni
 
-1. 
-    * [ ] Sistemare la gestione dello Snap (attualmente è troppo lento e spesso anche se vicino alla fine torna indietro)
-2. 
-    * [ ] Sistemare (fare controlli più approfonditi) la versione mobile più piccola e più bassa, la hero section non entra, e il resto sportattutto la parte delle phases (con le cips) non entra in così poco spazio
-3. 
-    * [ ] controllare su iPad la fluidità delle animazioni (eventualmente testare scrollSmoother versione a pagamento)
-4. 
-    * [ ] Sistemare la zona del content di Modules
-5. 
-    * [ ] Inventare la zona content di phases
-6. 
-    * [ ] Studiare una soluzione per il poco spazio del content Pahses e come potrebbe avvenira la transizione delle scritte pre, production, post e market
+1. **Unire la mia timeline con l'esempio dei observe delle immagini (https://codepen.io/GreenSock/pen/XWzRraJ)**
+2. Sistemare la gestione dello Snap (attualmente è troppo lento e spesso anche se vicino alla fine torna indietro)
+3. Sistemare (fare controlli più approfonditi) la versione mobile più piccola e più bassa, la hero section non entra, e il resto sportattutto la parte delle phases (con le cips) non entra in così poco spazio
+4. controllare su iPad la fluidità delle animazioni (eventualmente testare scrollSmoother versione a pagamento)
+5. Sistemare la zona del content di Modules
+6. Inventare la zona content di phases
+7. Studiare una soluzione per il poco spazio del content Pahses e come potrebbe avvenira la transizione delle scritte pre, production, post e market

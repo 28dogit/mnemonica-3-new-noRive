@@ -44,7 +44,7 @@
       </div>
       <div id="modules-content-wrapper" class="wrapper">
         <div id="modules-content">
-          <div id="module-txt_1">
+          <div id="module-txt_1" class="module_txt">
             <h2>Rooms</h2>
             <p>
               Leave folders behind. Experience active workspaces that free you from
@@ -53,7 +53,7 @@
               content is easy to find and move.
             </p>
           </div>
-          <div id="module-txt_2">
+          <div id="module-txt_2" class="module_txt">
             <h2>Boxes</h2>
             <p>
               Forget hard drives and LTOs. Welcome to the most advanced and reliable
@@ -63,7 +63,7 @@
               assets, securely deliver to stakeholders.
             </p>
           </div>
-          <div id="module-txt_3">
+          <div id="module-txt_3" class="module_txt">
             <h2>Masters</h2>
             <p>
               Get rid of third-party shuttles. With the built-in data exchange facility,
@@ -143,62 +143,94 @@ onMounted(() => {
   intro.EnterFrom("#heroSubTitle", { duration: 0.5, y: "-25px" }, "-=0.7");
 
   //-------------------------
-  let isAnimating = false;
-  let lastScrollTime = 0;
 
-  function rotate_up(value) {
-    if (isAnimating) return; // Previene nuove animazioni durante una già in corso
-    isAnimating = true;
+  let animating;
+  let m_txt = $gsap.utils.toArray(".module_txt");
+  let wrap_txt = $gsap.utils.wrap(0, m_txt.length);
+  let lastEventTime = 0; // Per gestire il debounce
 
-    $gsap.to("#modules_svg", {
-      rotate: `+=${value}`,
-      //rotate: value + "_cw",
-      duration: 0.5,
-      ease: "power4.out",
-      overwrite: true,
-      onComplete: () => (isAnimating = false), // Reimposta lo stato al termine
+  function gotoSection(index, val, dir) {
+    animating = true;
+    index = wrap_txt(index);
+    let tl = $gsap.timeline({
+      defaults: { duration: 0.25, ease: "back.out" },
+      onComplete: () => (animating = false),
     });
-  }
-  function rotate_dw(value) {
-    if (isAnimating) return; // Previene nuove animazioni durante una già in corso
-    isAnimating = true;
-
-    $gsap.to("#modules_svg", {
-      rotate: `-=${value}`,
-      //rotate: value + "_ccw",
-      duration: 0.5,
-      ease: "power4.out",
-      overwrite: true,
-      onComplete: () => (isAnimating = false), // Reimposta lo stato al termine
+    tl.to("#modules_svg", {
+      rotate: `${dir}=${val}`,
+      onComplete: () => {
+        console.log("ciao", ".module_txt");
+      },
+    });
+    tl.to("#module-txt_1", {
+      autoAlpha: 0,
+    });
+    tl.to("#module-txt_2", {
+      autoAlpha: 1,
     });
   }
 
-  Observer.create({
-    target: "#modules-section",
+  // Configura ScrollTrigger per bloccare il div nella viewport
+  ScrollTrigger.create({
+    trigger: "#modules-section",
+    start: "top +=65", // Quando inizia l'animazione
+    end: "bottom +=40", // Durata dello scroll
+    pin: true, // Blocca il div nella viewport
+    onEnter: () => enableObserver(),
+    onLeave: () => disableObserver(),
+    onEnterBack: () => enableObserver(),
+    onLeaveBack: () => disableObserver(),
+    //markers: true, // Marker per debug, rimuovere in produzione
+  });
+
+  let observerInstance = Observer.create({
     type: "wheel,touch",
-    tolerance: 20,
-    preventDefault: true,
-    debounce: 6,
-    onUp: () => {
-      const now = Date.now();
-      if (now - lastScrollTime < 300) return; // Ignora eventi troppo ravvicinati
-      lastScrollTime = now;
-
-      rotate_up(120);
-      console.log("UP");
+    target: "#modules-element",
+    wheelSpeed: 0.5,
+    tolerance: 10,
+    //preventDefault: true,
+    debounce: true,
+    // onUp: () => !animating && gotoSection(1, 120, "-"),
+    // onDown: () => !animating && gotoSection(1, 120, "+"),
+    onUp: (event) => {
+      handleMomentum(event, () => !animating && gotoSection(1, 120, "-"));
     },
-    onDown: () => {
-      const now = Date.now();
-      if (now - lastScrollTime < 300) return; // Ignora eventi troppo ravvicinati
-      lastScrollTime = now;
-
-      rotate_dw(120);
-      console.log("Down");
-    },
-    onChange: (self) => {
-      console.log(self.deltaY, "deltaY");
+    onDown: (event) => {
+      handleMomentum(event, () => !animating && gotoSection(1, 120, "+"));
     },
   });
+
+  // Funzione per abilitare l'Observer
+  function enableObserver() {
+    console.log("Observer abilitato");
+    observerInstance.enable();
+  }
+
+  // Funzione per disabilitare l'Observer
+  function disableObserver() {
+    console.log("Observer disabilitato");
+    observerInstance.disable();
+  }
+
+  // Funzione per gestire eventi generati dall'inerzia
+  function handleMomentum(event, callback) {
+    const now = Date.now();
+    const momentumThreshold = 300; // Tempo minimo tra eventi (in ms)
+
+    if (now - lastEventTime < momentumThreshold) {
+      console.log("Evento ignorato a causa dell'inerzia:", event.deltaY);
+      return;
+    }
+
+    // Ignora eventi con delta troppo piccolo (inerzia residua)
+    if (Math.abs(event.deltaY) < 15) {
+      console.log("Evento ignorato per delta troppo piccolo:", event.deltaY);
+      return;
+    }
+
+    lastEventTime = now;
+    callback(); // Esegui la callback se supera tutti i controlli
+  }
 
   //----------------
 
