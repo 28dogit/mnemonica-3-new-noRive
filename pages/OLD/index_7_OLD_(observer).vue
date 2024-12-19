@@ -144,69 +144,104 @@ onMounted(() => {
 
   ///ANCHOR - Modules section
 
-  const modules_tl = $gsap.timeline({
-    scrollTrigger: {
-      trigger: "#modules-section", // Elemento che attiva l'animazione
-      start: "top +=65", // Quando inizia l'animazione
-      end: "bottom +=40", // Durata dello scroll
-      scrub: true, // Sincronizzazione con lo scroll
-      anticipatePin: 1,
-      pin: true, // Fissa il contenitore #hero-section
-      markers: true,
-      snap: {
-        snapTo: (progress) => Math.round(progress * 3) / 3, // Aggancia a ogni 1/3 di progresso (120 gradi)
-        duration: { min: 0.2, max: 0.5 }, // Durata dell'animazione di aggancio
-        ease: "back.out(1.7)", // Easing dell'animazione di aggancio
-        // ease: "linear",
+  //dichiarazione delle variabili per la gestione del modulo
+  let animating;
+  let m_txt = $gsap.utils.toArray(".module_txt");
+  let wrap_txt = $gsap.utils.wrap(0, m_txt.length);
+  let lastEventTime = 0; // Per gestire il debounce
+  let currentIndex = 1; // Variabile per tenere traccia dell'indice corrente
+
+  function gotoSection(val, dir) {
+    animating = true;
+    // index = wrap_txt(index);
+    let tl = $gsap.timeline({
+      defaults: { duration: 0.25, ease: "back.out" },
+      onComplete: () => (animating = false),
+    });
+    tl.to("#modules_svg", {
+      rotate: `${dir}=${val}`,
+      onComplete: () => {
+        console.log("ciao", m_txt[index]);
       },
-      onSnapComplete: ({ progress, direction, isActive }) =>
-        console.log(progress, direction, isActive),
-    },
-    defaults: { duration: 0.75, ease: "back.out" },
+    });
+    tl.to(`#module-txt_${currentIndex}`, {
+      autoAlpha: 0,
+    });
+    tl.to(`#module-txt_${currentIndex + 1}`, {
+      autoAlpha: 1,
+    });
+
+    //currentIndex++; // Incrementa l'indice corrente
+    //currentIndex += dir === "+" ? 1 : -1; // Incrementa o decrementa l'indice corrente
+    if (dir === "+" && currentIndex < 3) {
+      currentIndex += 1;
+    } else if (dir === "-" && currentIndex > 1) {
+      currentIndex -= 1;
+    }
+  }
+
+  // Configura ScrollTrigger per bloccare il div nella viewport
+  ScrollTrigger.create({
+    trigger: "#modules-section",
+    start: "top +=65", // Quando inizia l'animazione
+    //end: "bottom +=40", // Durata dello scroll
+    end: "+=700", // Durata dello scroll
+    pin: true, // Blocca il div nella viewport
+    onEnter: () => enableObserver(),
+    onLeave: () => disableObserver(),
+    onEnterBack: () => enableObserver(),
+    onLeaveBack: () => disableObserver(),
+    markers: true, // Marker per debug, rimuovere in produzione
   });
 
-  modules_tl.to(
-    "#modules_svg",
-    {
-      rotate: 120,
+  let observerInstance = Observer.create({
+    type: "wheel,touch,scroll,pointer",
+    target: "#modules-element",
+    wheelSpeed: 0.5,
+    tolerance: 10,
+    preventDefault: true,
+    debounce: true,
+    // onUp: () => !animating && gotoSection(1, 120, "-"),
+    // onDown: () => !animating && gotoSection(1, 120, "+"),
+    onUp: (event) => {
+      handleMomentum(event, () => !animating && gotoSection(120, "-"));
     },
-    1
-  );
-  modules_tl.to(
-    "#modules-content #module-txt_1",
-    {
-      opacity: 0,
+    onDown: (event) => {
+      handleMomentum(event, () => !animating && gotoSection(120, "+"));
     },
-    1
-  );
-  modules_tl.to(
-    "#modules-content #module-txt_2",
-    {
-      opacity: 1,
-    },
-    1
-  );
-  modules_tl.to(
-    "#modules_svg",
-    {
-      rotate: 240,
-    },
-    2
-  );
-  modules_tl.to(
-    "#modules-content #module-txt_2",
-    {
-      opacity: 0,
-    },
-    2
-  );
-  modules_tl.to(
-    "#modules-content #module-txt_3",
-    {
-      opacity: 1,
-    },
-    2
-  );
+  });
+
+  // Funzione per abilitare l'Observer
+  function enableObserver() {
+    console.log("Observer abilitato");
+    observerInstance.enable();
+  }
+
+  // Funzione per disabilitare l'Observer
+  function disableObserver() {
+    console.log("Observer disabilitato");
+    observerInstance.disable();
+  }
+
+  // Funzione per gestire eventi generati dall'inerzia
+  function handleMomentum(event, callback) {
+    const now = Date.now();
+    const momentumThreshold = 300; // Tempo minimo tra eventi (in ms)
+
+    if (now - lastEventTime < momentumThreshold) {
+      console.log("Evento ignorato a causa dell'inerzia:", event.deltaY);
+      return;
+    }
+
+    // Ignora eventi con delta troppo piccolo (inerzia residua)
+    if (Math.abs(event.deltaY) < 15) {
+      console.log("Evento ignorato per delta troppo piccolo:", event.deltaY);
+      return;
+    }
+
+    lastEventTime = now;
+    callback(); // Esegui la callback se supera tutti i controlli
+  }
 
   //ANCHOR - Phases Section
 

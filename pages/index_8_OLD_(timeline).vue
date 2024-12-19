@@ -169,13 +169,18 @@ onMounted(() => {
     "#modules_svg",
     {
       rotate: 120,
+      // duration: 1,
+      // ease: "power4.out",
     },
     1
   );
+  //modules_tl.addLabel("rotationEnd1", 2);
   modules_tl.to(
     "#modules-content #module-txt_1",
     {
       opacity: 0,
+      // duration: 1.5, // Durata relativa nella timeline
+      // ease: "power1.out",
     },
     1
   );
@@ -183,6 +188,8 @@ onMounted(() => {
     "#modules-content #module-txt_2",
     {
       opacity: 1,
+      // duration: 1.5, // Durata relativa nella timeline
+      // ease: "power1.out",
     },
     1
   );
@@ -190,13 +197,18 @@ onMounted(() => {
     "#modules_svg",
     {
       rotate: 240,
+      // duration: 1,
+      // ease: "power4.out",
     },
     2
   );
+  //modules_tl.addLabel("pseudoEnd2", 3);
   modules_tl.to(
     "#modules-content #module-txt_2",
     {
       opacity: 0,
+      // duration: 1.5, // Durata relativa nella timeline
+      // ease: "power1.out",
     },
     2
   );
@@ -204,6 +216,8 @@ onMounted(() => {
     "#modules-content #module-txt_3",
     {
       opacity: 1,
+      // duration: 1.5, // Durata relativa nella timeline
+      // ease: "power1.out",
     },
     2
   );

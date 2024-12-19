@@ -89,10 +89,9 @@ body{
 
 // SECTION - Modules
 
-// #modules-element{
-//     width: 100%;
-//     min-height: 50vh;
-// }
+#modules-element{
+    overflow:hidden
+}
 #modules_svg{
     width: 80vw;
     position: absolute;
