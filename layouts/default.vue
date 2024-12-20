@@ -1,5 +1,5 @@
 <template>
-  <div id="mainContainer" class="min-h-screen flex flex-col flex-grow relative">
+  <div id="mainContainer">
     <div id="bbg" class="-z-20"></div>
 
     <!-- <div id="ghirlandeContainer" class="w-screen h-screen absolute top-0 left-0 -z-10">

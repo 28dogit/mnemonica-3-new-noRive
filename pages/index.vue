@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div id="hero-section">
+    <div id="hero-section" class="section">
       <div id="ghirlanda-element" class="element">
         <div id="logo_mne" class="">
           <NuxtImg
@@ -37,7 +37,7 @@
         </div>
       </div>
     </div>
-    <div id="modules-section">
+    <div id="modules-section" class="section">
       <div id="modules-element" class="element">
         <Modules id="modules_svg"></Modules>
         <p id="made_for">MADE FOR</p>
@@ -75,7 +75,7 @@
         </div>
       </div>
     </div>
-    <div id="phases-section">
+    <div id="phases-section" class="section">
       <div id="phases-element" class="element">
         <MarketSvg id="Market_svg"></MarketSvg>
         <PostSvg id="Post_svg"></PostSvg>
@@ -103,6 +103,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Observer } from "gsap/Observer";
 
 onMounted(() => {
+  console.log("Home mounted!!");
   const { $gsap } = useNuxtApp();
   // registro effetto per l'entrata delle scritte e del logo in Hero section
   $gsap.registerEffect({
@@ -175,6 +176,17 @@ onMounted(() => {
     },
     defaults: { duration: 0.75, ease: "back.out" },
   });
+
+  modules_tl.to(
+    "#modules_svg",
+    {
+      rotate: 120,
+      onComplete: () => {
+        console.log("ho fatt la prima rotate 120");
+      },
+    },
+    0
+  );
 
   modules_tl.to(
     "#modules_svg",
@@ -301,20 +313,6 @@ onMounted(() => {
       },
       0.9
     );
-
-  $gsap.from("#pre-chips-container", {
-    autoAlpha: 0,
-    duration: 1,
-    scrollTrigger: {
-      trigger: "#pre-chips-container",
-      start: "top 80%",
-      end: "bottom 80%",
-      toggleActions: "play none none none",
-      scrub: 1,
-      markers: true,
-    },
-    //display: "block",
-  });
 });
 </script>
 

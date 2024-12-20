@@ -11,7 +11,7 @@
     <div id="post-chips-container" class="container">
       <div v-for="chip in postChips" :key="chip" class="post phase-chips">{{ chip }}</div>
     </div>
-    <div id="market-chips-container" class="container">
+    <div id="market-chips-container" class="container h-max">
       <div v-for="chip in marketChips" :key="chip" class="market phase-chips">
         {{ chip }}
       </div>
@@ -19,28 +19,50 @@
   </div>
 </template>
 <script setup>
-//i principali import li eseguo già nella pagina
+//i principali import li eseguo già nella pagina home
+import { nextTick } from "vue";
 let preChips = ["Ingestion", "Camera", "Tests", "Locations", "Casting"];
 let productionChips = ["Near Set Lab", "Dailies", "Review & Approval"];
 let postChips = ["Editorial", "Visual FX", "Audio"];
 let marketChips = ["Archive", "Library", "Festivals", "Screenings"];
 
 onMounted(() => {
-  //const { $gsap } = useNuxtApp();
+  const { $gsap } = useNuxtApp();
   console.log("PhasesChips mounted");
-  //   $gsap.from("#pre-chips-container", {
-  //     autoAlpha: 0,
-  //     duration: 1,
-  //     scrollTrigger: {
-  //       trigger: "#pre-chips-container",
-  //       start: "top 80%",
-  //       end: "bottom 80%",
-  //       toggleActions: "play none none none",
-  //       scrub: 1,
-  //       markers: true,
-  //     },
-  //     //display: "block",
-  //   });
+  // uso nexTick per far partire l'animazione dopo il rendering del main page
+  nextTick(() => {
+    const containers = [
+      "#pre-chips-container",
+      "#production-chips-container",
+      "#post-chips-container",
+      "#market-chips-container",
+    ];
+    const tl = $gsap.timeline({
+      scrollTrigger: {
+        trigger: "#chips-wrapper",
+        start: "top 80%",
+        end: "bottom 50%",
+        toggleActions: "play reverse play reverse",
+        markers: true,
+      },
+    });
+
+    containers.forEach((container, index) => {
+      const chips = document.querySelectorAll(`${container} .phase-chips`);
+      tl.from(container, {
+        autoAlpha: 0,
+        duration: 0.5,
+      }).from(
+        chips,
+        {
+          autoAlpha: 0,
+          duration: 0.5,
+          stagger: 0.2,
+        }
+        //`-=${0.5 * index}`
+      ); // Sovrappone leggermente le animazioni dei contenitori
+    });
+  });
 });
 </script>
 <style scoped lang="scss">
@@ -50,6 +72,8 @@ onMounted(() => {
   flex-direction: column;
   gap: 1rem;
   position: relative;
+  width: 100%;
+  //height:
 }
 .container {
   display: flex;

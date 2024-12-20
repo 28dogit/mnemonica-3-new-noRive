@@ -1,5 +1,5 @@
 <template>
-  <header id="hWrapper" class="sticky top-0 py-5 z-[999] backdrop-blur-[0.5rem]">
+  <header id="hWrapper" class="w-screen sticky top-0 py-5 z-[999] backdrop-blur-[0.5rem]">
     <!-- <div
       id="menuWrapper"
       class="flex min-h-[100px] items-center text-black bg-slate-200 dark:text-slate-300 dark:bg-slate-800 rounded-3xl m-auto"
