@@ -43,7 +43,7 @@ onMounted(() => {
         start: "top 80%",
         end: "bottom 50%",
         toggleActions: "play reverse play reverse",
-        markers: true,
+        //markers: true,
       },
     });
 
@@ -96,6 +96,8 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
+  // box-shadow: 2px 2px 30px hsla(202, 92%, 35%, 0.5),
+  //   -2px -2px 30px hsla(202, 92%, 35%, 0.5);
 }
 #production-chips-container,
 #post-chips-container,

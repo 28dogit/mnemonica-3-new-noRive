@@ -12,7 +12,7 @@
     xmlns:xlink="http://www.w3.org/1999/xlink"
   >
     <g id="Pre">
-      <g id="m_100_circle_ecosys_0" style="mix-blend-mode: screen">
+      <g id="m_100_circle_ecosys_0" class="innerCircle" style="mix-blend-mode: screen">
         <mask
           id="mask0_4067_146"
           style="mask-type: luminance"

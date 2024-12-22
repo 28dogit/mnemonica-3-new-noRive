@@ -65,15 +65,21 @@ body{
     width: 100%;
     min-height: 50vh;
     @include bp.for-tablet-up{
-      width:50vw;
+      width:40vw;
     }
-}
+    @include bp.for-desktop-big-up{
+      width: 30%;
+    }
+  }
 .wrapper{
     display: flex;
     align-items: center;
     justify-content: center;
     @include bp.for-tablet-up{
-      width: 50vw
+      width: 60vw
+    }
+    @include bp.for-desktop-big-up{
+      width: 70%;
     }
 }
 .content{
@@ -91,6 +97,9 @@ body{
     opacity:0.6;
     max-height: 50vh;
     mix-blend-mode: luminosity;
+    @include bp.for-desktop-big-up{
+      width: 550px;
+    }
 }
 
 #logo_mne {

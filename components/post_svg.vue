@@ -12,7 +12,7 @@
     xmlns:xlink="http://www.w3.org/1999/xlink"
   >
     <g id="Post">
-      <g id="m_100_circle_ecosys_2" style="mix-blend-mode: screen">
+      <g id="m_100_circle_ecosys_2" class="innerCircle" style="mix-blend-mode: screen">
         <mask
           id="mask0_4067_144"
           style="mask-type: luminance"
