@@ -38,21 +38,28 @@ onMounted(() => {
       "#post-chips-container",
       "#market-chips-container",
     ]; // creo un array con i container delle chips delle fasi
+    // console.log(phasesItems[0]);
 
     let intentObserver = ScrollTrigger.observe({
+      //target: "#phases-section",
       type: "wheel,touch",
       onUp() {
+        console.log(allowScroll, " - onUp");
         allowScroll && circleAnimation(currentIndex - 1, false);
+        console.log(allowScroll, " - onUp2");
       },
       onDown() {
+        console.log(allowScroll, " - onDown");
         allowScroll && circleAnimation(currentIndex + 1, true);
+        console.log(allowScroll, " - onDown2");
       },
       tolerance: 10,
       preventDefault: true,
       debounce: false,
       onEnable(self) {
+        //console.log("Observer enabled - ----");
         allowScroll = false; // blocca lo scroll
-        scrollTimeout.restart(true); //riattiva lo scroll dopo un secondo
+        scrollTimeout.restart(true); //riattiva lo scroll dopo un secondo (cioè riattiva la funzionalità dello scroll)
         //registro la posizione dello scroll
         let savedScroll = self.scrollY();
         // Per bloccare il div in posizione durante l'animazione
@@ -63,7 +70,8 @@ onMounted(() => {
       },
       onDisable: (self) => {
         document.removeEventListener("scroll", self._restoreScroll);
-        // Tolgo il listener e riattivo lo scroll
+        //console.log("Observer Disabled - ----");
+        // come disabilito l'observer tolgo il listener e riattivo lo scroll
       },
     });
     intentObserver.disable(); //disabilito l'observer inizialemnte
@@ -77,7 +85,6 @@ onMounted(() => {
         intentObserver.disable();
         return;
       }
-      //non servono più perchè gestiti con la timeline onStart e onComplete
       // allowScroll = false;
       // scrollTimeout.restart(true);
 
@@ -91,41 +98,57 @@ onMounted(() => {
         ? containers[currentIndex]
         : containers[index];
 
-      //ricavo le chips per ogni container in base a currentIndex
-      let targetChips = $gsap.utils.toArray(`${containers[currentIndex]} .phase-chips`);
-
       let phases_tl = $gsap.timeline({
         onStart: () => {
+          console.log(allowScroll, " - onStart prima di false");
           allowScroll = false;
+          console.log(allowScroll, " - onStart dopo false");
         },
         onComplete: () => {
-          allowScroll = true; //riattivo solo dopo la fine dell'animazione
+          console.log("complete");
+          allowScroll = true;
+          //scrollTimeout.restart(true);
+          console.log(scrollTimeout);
         },
       });
 
       phases_tl
-        .to(txtTarget, {
-          autoAlpha: isScrollingDown ? 1 : 0,
-          duration: 1,
-          ease: "power2.out",
-        })
         .to(target, {
           rotate: isScrollingDown ? 120 : -120,
           transformOrigin: "50% 50%",
           ease: "back.out",
+          //yPercent: isScrollingDown ? -100 : 0,
           duration: 0.75,
+          // onStart: () => {
+          //   console.log("start");
+          //   allowScroll = false;
+          //   console.log(allowScroll);
+          // },
+          // onComplete: () => {
+          //   console.log("complete");
+          //   scrollTimeout.restart(true);
+          //   console.log(scrollTimeout);
+          // },
         })
-        .to(targetContainer, {
-          autoAlpha: isScrollingDown ? 1 : 0,
-          // filter: "blur(5px)",
-          duration: 1,
-          ease: "back.out",
-        })
-        .from(targetChips, {
-          autoAlpha: 0,
-          duration: 0.5,
-          stagger: 0.2,
-        });
+        .to(
+          txtTarget,
+          {
+            autoAlpha: isScrollingDown ? 1 : 0,
+            duration: 1,
+            ease: "back.out",
+          },
+          "-=1"
+        )
+        .to(
+          targetContainer,
+          {
+            autoAlpha: isScrollingDown ? 1 : 0,
+            // filter: "blur(5px)",
+            duration: 1,
+            ease: "back.out",
+          },
+          "<"
+        );
 
       currentIndex = index;
     }
@@ -140,6 +163,13 @@ onMounted(() => {
         if (intentObserver.isEnabled) {
           return;
         } // in case the native scroll jumped past the end and then we force it back to where it should be.
+
+        // const targetY = self.start + 1;
+        // // Use ScrollToOptions
+        // self.scroll({
+        //   top: targetY,
+        //   behavior: "instant", // or 'smooth' for smooth scrolling
+        // });
         self.scroll(self.start + 1); // jump to just one pixel past the start of this section so we can hold there.
         intentObserver.enable(); // STOP native scrolling
       },
@@ -147,7 +177,15 @@ onMounted(() => {
         if (intentObserver.isEnabled) {
           return;
         } // in case the native scroll jumped backward past the start and then we force it back to where it should be.
-        self.scroll(self.end - 1); // jump to one pixel before the end of this section so we can hold there.
+        // Calculate the target scroll position (adjust as needed)
+        const targetY = self.end - 1;
+
+        // Use ScrollToOptions
+        self.scroll({
+          top: targetY,
+          behavior: "instant", // or 'smooth' for smooth scrolling
+        });
+        //self.scroll(self.end - 1); // jump to one pixel before the end of this section so we can hold there.
         intentObserver.enable(); // STOP native scrolling
       },
     });

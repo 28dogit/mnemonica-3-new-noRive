@@ -56,62 +56,72 @@ onMounted(() => {
       scrollTrigger: {
         trigger: "#modules-section", // Elemento che attiva l'animazione
         start: "top +=75", // Quando inizia l'animazione
+        //end: "bottom top", // Durata dello scroll
         end: "+=2000", // allungata la fine per rendere lo scroll più lento
+        //invalidateOnRefresh: false,
         scrub: true, // Sincronizzazione con lo scroll
         anticipatePin: 1,
         pin: true, // Fissa il contenitore #hero-section
         markers: true,
         snap: {
           snapTo: 1 / 3,
-          //snapTo: (progress) => Math.round(progress * 3) / 3, // Aggancia a ogni 1/3 di progresso (120 gradi)
           duration: 0.5,
-          ease: "back.out",
+          ease: "back.Out",
         },
-        onSnapComplete: ({ progress, direction, isActive }) =>
-          console.log(progress, direction, isActive),
+        // snap: {
+        //   snapTo: (progress) => Math.round(progress * 3) / 3, // Aggancia a ogni 1/3 di progresso (120 gradi)
+        //   duration: { min: 0.2, max: 0.5 }, // Durata dell'animazione di aggancio
+        //   ease: "back.out(1.7)", // Easing dell'animazione di aggancio
+        //   ease: "linear",
+        // },
+        // onSnapComplete: ({ progress, direction, isActive }) =>
+        //   console.log(progress, direction, isActive),
       },
+      //eliminati  i defaults
+      // defaults: { duration: 0.75 },
+      // defaults: { duration: 0.75, ease: "back.out" },
     });
     modules_tl.to(
       "#modules_svg",
       {
         rotate: 120,
       },
-      1
+      0
     );
     modules_tl.to(
       "#modules-content #module-txt_1",
       {
         opacity: 0,
       },
-      1
+      0
     );
     modules_tl.to(
       "#modules-content #module-txt_2",
       {
         opacity: 1,
       },
-      1
+      0
     );
     modules_tl.to(
       "#modules_svg",
       {
         rotate: 240,
       },
-      2
+      1
     );
     modules_tl.to(
       "#modules-content #module-txt_2",
       {
         opacity: 0,
       },
-      2
+      1
     );
     modules_tl.to(
       "#modules-content #module-txt_3",
       {
         opacity: 1,
       },
-      2
+      1
     );
   });
 });
