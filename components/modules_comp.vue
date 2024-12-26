@@ -117,4 +117,19 @@ onMounted(() => {
 });
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.module_txt {
+  position: absolute;
+  border-radius: 10px;
+  border: 2px solid #fff;
+  text-align: left;
+  padding: 10px;
+  //width: 90vw;
+  max-width: 90%;
+  h2,
+  p {
+    text-align: left;
+  }
+  box-shadow: 0 0 10px #fff;
+}
+</style>

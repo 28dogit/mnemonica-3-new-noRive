@@ -121,11 +121,15 @@ onMounted(() => {
           duration: 1,
           ease: "back.out",
         })
-        .from(targetChips, {
-          autoAlpha: 0,
-          duration: 0.5,
-          stagger: 0.2,
-        });
+        .from(
+          targetChips,
+          {
+            autoAlpha: isScrollingDown ? 0 : 1,
+            duration: 0.5,
+            stagger: 0.2,
+          },
+          "<"
+        );
 
       currentIndex = index;
     }
