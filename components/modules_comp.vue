@@ -6,7 +6,10 @@
   <div id="modules-content-wrapper" class="wrapper">
     <div id="modules-content" class="content">
       <div id="module-txt_1" class="module_txt">
-        <h2>Rooms</h2>
+        <div class="module_title">
+          <h2>Rooms</h2>
+          <span class="focus">+</span>
+        </div>
         <p>
           Leave folders behind. Experience active workspaces that free you from repetitive
           tasks encoding, watermarking, keeping everyone updated. Enjoy private places
@@ -118,10 +121,12 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+@use "@/assets/css/_globals.scss" as *;
+
 .module_txt {
   position: absolute;
   border-radius: 10px;
-  border: 2px solid #fff;
+  border: 2px solid rgba(225, 225, 225, 0.1);
   text-align: left;
   padding: 10px;
   //width: 90vw;
@@ -130,6 +135,23 @@ onMounted(() => {
   p {
     text-align: left;
   }
-  box-shadow: 0 0 10px #fff;
+  box-shadow: 0 0 42px rgba(184, 239, 250, 0.1);
+}
+.module_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  span {
+    font-size: 2rem;
+    line-height: 2rem;
+    color: #fff;
+    margin: 0;
+    background-color: $gradient_4;
+    width: 30px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border-radius: 15px;
+  }
 }
 </style>
