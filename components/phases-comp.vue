@@ -93,6 +93,9 @@ onMounted(() => {
 
       //ricavo le chips per ogni container in base a currentIndex
       let targetChips = $gsap.utils.toArray(`${containers[currentIndex]} .phase-chips`);
+      console.log("targetChips", targetChips);
+      let targetChipsOut = $gsap.utils.toArray(`${containers[index]} .phase-chips`);
+      console.log("targetChipsOut", targetChipsOut);
 
       let phases_tl = $gsap.timeline({
         onStart: () => {
@@ -104,32 +107,29 @@ onMounted(() => {
       });
 
       phases_tl
-        .to(txtTarget, {
-          autoAlpha: isScrollingDown ? 1 : 0,
-          duration: 1,
-          ease: "power2.out",
-        })
         .to(target, {
           rotate: isScrollingDown ? 120 : -120,
           transformOrigin: "50% 50%",
           ease: "back.out",
-          duration: 0.75,
+          duration: 0.25,
         })
-        .to(targetContainer, {
+        .to(txtTarget, {
           autoAlpha: isScrollingDown ? 1 : 0,
-          // filter: "blur(5px)",
-          duration: 1,
-          ease: "back.out",
+          duration: 0.5,
+          ease: "power2.out",
         })
-        .from(
-          targetChips,
-          {
-            autoAlpha: isScrollingDown ? 0 : 1,
-            duration: 0.5,
-            stagger: 0.2,
-          },
-          "<"
-        );
+        // .set(targetContainer, {
+        //   autoAlpha: isScrollingDown ? 1 : 0,
+        //   // filter: "blur(5px)",
+        //   // duration: 0.5,
+        //   // ease: "back.out",
+        // })
+        .from(targetChips, {
+          autoAlpha: isScrollingDown ? 0 : 1,
+          //filter: isScrollingDown ? "blur(0px)" : "blur(5px)",
+          duration: 0.5,
+          stagger: 0.2,
+        });
 
       currentIndex = index;
     }
@@ -141,18 +141,25 @@ onMounted(() => {
       pin: true,
       //markers: true,
       onEnter: (self) => {
+        circleAnimation(currentIndex + 1, true);
         if (intentObserver.isEnabled) {
           return;
-        } // in case the native scroll jumped past the end and then we force it back to where it should be.
+        }
         self.scroll(self.start + 1); // jump to just one pixel past the start of this section so we can hold there.
-        intentObserver.enable(); // STOP native scrolling
+        intentObserver.enable();
       },
-      onEnterBack: () => {
+      onEnterBack: (self) => {
         if (intentObserver.isEnabled) {
           return;
-        } // in case the native scroll jumped backward past the start and then we force it back to where it should be.
-        self.scroll(self.end - 1); // jump to one pixel before the end of this section so we can hold there.
-        intentObserver.enable(); // STOP native scrolling
+        }
+
+        // Assuming self.end represents the vertical scroll position
+        window.scrollTo({
+          top: self.end - 1,
+          behavior: "instant", // or 'smooth' for a smooth scroll
+        });
+
+        intentObserver.enable();
       },
     });
   });

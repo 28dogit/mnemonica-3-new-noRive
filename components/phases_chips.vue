@@ -72,6 +72,7 @@ let marketChips = ["Archive", "Library", "Festivals", "Screenings"];
   gap: 1rem;
   position: relative;
   width: 100%;
+  height: 100%;
 }
 .container {
   display: flex;
@@ -81,6 +82,7 @@ let marketChips = ["Archive", "Library", "Festivals", "Screenings"];
   position: absolute;
 }
 .phase-chips {
+  opacity: 0;
   font-size: 0.85rem;
   font-weight: 300;
   background-color: $gradient_3;
@@ -94,9 +96,9 @@ let marketChips = ["Archive", "Library", "Festivals", "Screenings"];
   justify-content: center;
   box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
 }
-#production-chips-container,
-#post-chips-container,
-#market-chips-container {
-  opacity: 0;
-}
+// #production-chips-container,
+// #post-chips-container,
+// #market-chips-container {
+//   opacity: 0;
+// }
 </style>

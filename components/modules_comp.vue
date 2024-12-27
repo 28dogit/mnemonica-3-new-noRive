@@ -18,7 +18,10 @@
         </p>
       </div>
       <div id="module-txt_2" class="module_txt">
-        <h2>Boxes</h2>
+        <div class="module_title">
+          <h2>Boxes</h2>
+          <span class="focus">+</span>
+        </div>
         <p>
           Forget hard drives and LTOs. Welcome to the most advanced and reliable solution
           for long-term preservation of digital film works that also keeps them always
@@ -28,7 +31,10 @@
         </p>
       </div>
       <div id="module-txt_3" class="module_txt">
-        <h2>Masters</h2>
+        <div class="module_title">
+          <h2>Masters</h2>
+          <span class="focus">+</span>
+        </div>
         <p>
           Get rid of third-party shuttles. With the built-in data exchange facility, you
           can send & receive files and folders of any size and complexity directly from/to
@@ -122,6 +128,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 @use "@/assets/css/_globals.scss" as *;
+@use "@/assets/css/_breakpoints.scss" as bp;
 
 .module_txt {
   position: absolute;
@@ -141,16 +148,17 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
   span {
-    font-size: 2rem;
-    line-height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
     color: #fff;
     margin: 0;
     background-color: $gradient_4;
     width: 30px;
-    width: 30px;
     height: 30px;
-    text-align: center;
     border-radius: 15px;
   }
 }
