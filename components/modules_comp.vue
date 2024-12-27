@@ -69,7 +69,7 @@ onMounted(() => {
         scrub: true, // Sincronizzazione con lo scroll
         anticipatePin: 1,
         pin: true, // Fissa il contenitore #hero-section
-        markers: true,
+        //markers: true,
         snap: {
           snapTo: 1 / 3,
           //snapTo: (progress) => Math.round(progress * 3) / 3, // Aggancia a ogni 1/3 di progresso (120 gradi)
@@ -130,36 +130,79 @@ onMounted(() => {
 @use "@/assets/css/_globals.scss" as *;
 @use "@/assets/css/_breakpoints.scss" as bp;
 
-.module_txt {
-  position: absolute;
-  border-radius: 10px;
-  border: 2px solid rgba(225, 225, 225, 0.1);
-  text-align: left;
-  padding: 10px;
-  //width: 90vw;
-  max-width: 90%;
-  h2,
-  p {
-    text-align: left;
+#modules-section {
+  #modules-element {
+    overflow: hidden;
   }
-  box-shadow: 0 0 42px rgba(184, 239, 250, 0.1);
-}
-.module_title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  span {
+  #modules_svg {
+    width: 95%;
+    position: absolute;
+  }
+  // #made-for{
+
+  // }
+  #modules-content {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    font-size: 1.5rem;
+    @include bp.for-tablet-up {
+      align-items: center;
+    }
+  }
+  // #modules-content div{
+  //     position: absolute;
+  //     max-width: 80%;
+  //     h2, p{
+  //         text-align: center;
+  //     }
+  // }
+  #made_for {
     color: #fff;
-    margin: 0;
-    background-color: $gradient_4;
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
+    font-size: 1.3rem;
+    margin-bottom: 0;
+    text-shadow: 0 0 7px rgba(184, 239, 250, 1), 0 0 10px rgba(184, 239, 250, 1),
+      0 0 42px rgba(184, 239, 250, 1);
+  }
+  #module-txt_2 {
+    opacity: 0;
+  }
+  #module-txt_3 {
+    opacity: 0;
+  }
+
+  .module_txt {
+    position: absolute;
+    border-radius: 10px;
+    border: 2px solid rgba(225, 225, 225, 0.1);
+    text-align: left;
+    padding: 10px;
+    width: 90%;
+    box-shadow: 0 0 42px rgba(184, 239, 250, 0.1);
+    h2,
+    p {
+      text-align: left;
+    }
+    @include bp.for-tablet-up {
+      width: 50%;
+    }
+  }
+  .module_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #fff;
+      margin: 0;
+      background-color: $gradient_4;
+      width: 30px;
+      height: 30px;
+      border-radius: 15px;
+    }
   }
 }
 </style>

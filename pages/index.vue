@@ -2,14 +2,16 @@
   <main>
     <div id="hero-section" class="section">
       <div id="ghirlanda-element" class="element">
-        <div id="logo_mne" class="">
-          <NuxtImg
-            src="/assets/img/svg/Logo-mne-Vector.svg"
-            densities="x1"
-            alt="Mnemonica logo portrait"
-          />
-        </div>
+        <!-- <div id="logo_mne" class=""> -->
         <NuxtImg
+          id="logo_mne"
+          src="/assets/img/svg/Logo-mne-Vector.svg"
+          densities="x1"
+          alt="Mnemonica logo portrait"
+        />
+        <!-- </div> -->
+        <NuxtImg
+          id="ghirlanda_img"
           src="/assets/img/Ghirlanda_full_web_800_opt.png"
           alt="mnemonica ghirlanda ecosystem"
           densities="x1"
@@ -17,7 +19,7 @@
       </div>
       <div id="hero-content-wrapper" class="wrapper">
         <div id="hero-content" class="content">
-          <div id="heroTitle" class="flex items-center gap-10 justify-center flex-wrap">
+          <div id="heroTitle" class="flex items-center justify-center flex-wrap">
             <div class="overflowMask overflow-hidden">
               <h1 id="H-screen" class="uppercase">Screen</h1>
             </div>

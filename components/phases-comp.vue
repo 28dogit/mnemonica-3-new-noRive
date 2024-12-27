@@ -81,7 +81,7 @@ onMounted(() => {
       // allowScroll = false;
       // scrollTimeout.restart(true);
 
-      console.log("currentIndex", currentIndex, "_", "index", index);
+      // console.log("currentIndex", currentIndex, "_", "index", index);
 
       let target = isScrollingDown ? phasesItems[currentIndex] : phasesItems[index];
       let txtTarget = isScrollingDown
@@ -92,10 +92,17 @@ onMounted(() => {
         : containers[index];
 
       //ricavo le chips per ogni container in base a currentIndex
-      let targetChips = $gsap.utils.toArray(`${containers[currentIndex]} .phase-chips`);
-      console.log("targetChips", targetChips);
-      let targetChipsOut = $gsap.utils.toArray(`${containers[index]} .phase-chips`);
-      console.log("targetChipsOut", targetChipsOut);
+      let targetChips_pre = isScrollingDown
+        ? $gsap.utils.toArray(`${containers[currentIndex - 1]} .phase-chips`)
+        : $gsap.utils.toArray(`${containers[index - 1]} .phase-chips`);
+
+      let targetChips = isScrollingDown
+        ? $gsap.utils.toArray(`${containers[currentIndex]} .phase-chips`)
+        : $gsap.utils.toArray(`${containers[index]} .phase-chips`);
+
+      let targetChips_post = isScrollingDown
+        ? $gsap.utils.toArray(`${containers[currentIndex + 1]} .phase-chips`)
+        : $gsap.utils.toArray(`${containers[index + 1]} .phase-chips`);
 
       let phases_tl = $gsap.timeline({
         onStart: () => {
@@ -118,18 +125,32 @@ onMounted(() => {
           duration: 0.5,
           ease: "power2.out",
         })
-        // .set(targetContainer, {
-        //   autoAlpha: isScrollingDown ? 1 : 0,
-        //   // filter: "blur(5px)",
-        //   // duration: 0.5,
-        //   // ease: "back.out",
-        // })
-        .from(targetChips, {
-          autoAlpha: isScrollingDown ? 0 : 1,
+        .to(targetChips, {
+          autoAlpha: isScrollingDown ? 1 : 0,
           //filter: isScrollingDown ? "blur(0px)" : "blur(5px)",
           duration: 0.5,
           stagger: 0.2,
-        });
+        })
+        .to(
+          targetChips_pre,
+          {
+            autoAlpha: isScrollingDown ? 0 : 1,
+            //filter: isScrollingDown ? "blur(0px)" : "blur(5px)",
+            duration: 0.3,
+            stagger: 0.2,
+          },
+          "<"
+        )
+        .to(
+          targetChips_post,
+          {
+            autoAlpha: 0,
+            //filter: isScrollingDown ? "blur(0px)" : "blur(5px)",
+            duration: 0.3,
+            stagger: 0.2,
+          },
+          "<"
+        );
 
       currentIndex = index;
     }
@@ -139,7 +160,7 @@ onMounted(() => {
       start: "top +=65",
       end: "+=100",
       pin: true,
-      //markers: true,
+      markers: true,
       onEnter: (self) => {
         circleAnimation(currentIndex + 1, true);
         if (intentObserver.isEnabled) {
