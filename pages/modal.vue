@@ -11,8 +11,13 @@
         itaque saepe veritatis soluta, dicta, ipsa ab ea officia ducimus doloribus
         blanditiis a odio.
         <span>
-          <button @click="openModal" class="bg-slate-800 text-orange-500 px-3">
+          <button @click="isModalOpen = true" class="bg-slate-800 text-orange-500 px-3">
             Focus
+          </button>
+        </span>
+        <span>
+          <button @click="isModalOpen2 = true" class="bg-slate-800 text-orange-500 px-3">
+            Focus - rooms
           </button>
         </span>
       </p>
@@ -24,6 +29,7 @@
     </article>
   </div>
   <Modals :isOpen="isModalOpen" @close="closeModal" />
+  <FocusRooms :isOpen="isModalOpen2" @close="closeModal" />
 </template>
 
 <script setup>
@@ -31,13 +37,15 @@ import { ref } from "vue";
 import Modals from "~/components/modals.vue";
 
 const isModalOpen = ref(false);
+const isModalOpen2 = ref(false);
 
-const openModal = () => {
-  isModalOpen.value = true;
-};
+// const openModal = () => {
+//   isModalOpen.value = true;
+// };
 
 const closeModal = () => {
   isModalOpen.value = false;
+  isModalOpen2.value = false;
 };
 
 //--------

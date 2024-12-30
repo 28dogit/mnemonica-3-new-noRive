@@ -1,5 +1,5 @@
 <template>
-  <div id="modules-element" class="element zxzx">
+  <div id="modules-element" class="element">
     <Modules id="modules_svg"></Modules>
     <p id="made_for">MADE FOR</p>
   </div>
@@ -8,7 +8,7 @@
       <div id="module-txt_1" class="module_txt">
         <div class="module_title">
           <h2>Rooms</h2>
-          <span class="focus">+</span>
+          <button @click="isModalOpen1 = true"><span class="focus">+</span></button>
         </div>
         <p>
           Leave folders behind. Experience active workspaces that free you from repetitive
@@ -20,7 +20,7 @@
       <div id="module-txt_2" class="module_txt">
         <div class="module_title">
           <h2>Boxes</h2>
-          <span class="focus">+</span>
+          <button @click="isModalOpen2 = true"><span class="focus">+</span></button>
         </div>
         <p>
           Forget hard drives and LTOs. Welcome to the most advanced and reliable solution
@@ -33,7 +33,7 @@
       <div id="module-txt_3" class="module_txt">
         <div class="module_title">
           <h2>Masters</h2>
-          <span class="focus">+</span>
+          <button @click="isModalOpen3 = true"><span class="focus">+</span></button>
         </div>
         <p>
           Get rid of third-party shuttles. With the built-in data exchange facility, you
@@ -44,11 +44,26 @@
       </div>
     </div>
   </div>
+  <FocusRooms :isOpen="isModalOpen1" @close="closeModal" />
+  <FocusBoxes :isOpen="isModalOpen2" @close="closeModal" />
+  <FocusMasters :isOpen="isModalOpen3" @close="closeModal" />
 </template>
 
 <script setup>
 //le altre importazioni derivano dalla pagina principale
+import { _zIndex } from "#tailwind-config/theme";
 import { nextTick } from "vue";
+
+const isModalOpen1 = ref(false);
+const isModalOpen2 = ref(false);
+const isModalOpen3 = ref(false);
+
+const closeModal = () => {
+  isModalOpen1.value = false;
+  isModalOpen2.value = false;
+  isModalOpen3.value = false;
+};
+
 onMounted(() => {
   const { $gsap } = useNuxtApp();
   console.log("ModulesComp mounted");
@@ -87,10 +102,24 @@ onMounted(() => {
       },
       1
     );
+    modules_tl.set(
+      "#modules-content #module-txt_1",
+      {
+        zIndex: 0,
+      },
+      1
+    );
     modules_tl.to(
       "#modules-content #module-txt_1",
       {
         opacity: 0,
+      },
+      1
+    );
+    modules_tl.set(
+      "#modules-content #module-txt_2",
+      {
+        zIndex: 110,
       },
       1
     );
@@ -108,10 +137,24 @@ onMounted(() => {
       },
       2
     );
+    modules_tl.set(
+      "#modules-content #module-txt_2",
+      {
+        zIndex: 0,
+      },
+      2
+    );
     modules_tl.to(
       "#modules-content #module-txt_2",
       {
         opacity: 0,
+      },
+      2
+    );
+    modules_tl.set(
+      "#modules-content #module-txt_3",
+      {
+        zIndex: 110,
       },
       2
     );
@@ -163,6 +206,10 @@ onMounted(() => {
     text-shadow: 0 0 7px rgba(184, 239, 250, 1), 0 0 10px rgba(184, 239, 250, 1),
       0 0 42px rgba(184, 239, 250, 1);
   }
+  #module-txt_1 {
+    opacity: 1;
+    z-index: 110;
+  }
   #module-txt_2 {
     opacity: 0;
   }
@@ -171,6 +218,7 @@ onMounted(() => {
   }
 
   .module_txt {
+    z-index: 100;
     position: absolute;
     border-radius: 10px;
     border: 2px solid rgba(225, 225, 225, 0.1);
