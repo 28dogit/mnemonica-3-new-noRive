@@ -54,7 +54,7 @@ import { useNuxtApp } from "#app";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 onMounted(() => {
-  console.log("Home mounted!!");
+  //console.log("Home mounted!!");
   const { $gsap } = useNuxtApp();
   // registro effetto per l'entrata delle scritte e del logo in Hero section
   $gsap.registerEffect({

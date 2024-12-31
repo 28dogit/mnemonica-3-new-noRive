@@ -1,11 +1,13 @@
 import {gsap} from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Observer } from "gsap/Observer";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 export default defineNuxtPlugin((nuxtApp) => {
   if (import.meta.client) { // Uso import.meta.client invece di process.client
     gsap.registerPlugin(ScrollTrigger);
     gsap.registerPlugin(Observer);
+    gsap.registerPlugin(ScrollToPlugin);
     nuxtApp.provide('gsap', gsap);
   }
 });

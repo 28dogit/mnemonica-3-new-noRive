@@ -1,82 +1,99 @@
 <template>
-  <!-- <teleport to="body"> -->
-  <div>
-    <dialog
-      id="mioModale"
-      class="bg-slate-500"
-      ref="myModal"
-      :class="{ horizontal: !isPortrait }"
-    >
-      <!-- aggiungo una classe dinamica horizontal che viene aggiunta quando la viewport non è portrait -->
+  <teleport to="body">
+    <div>
+      <dialog
+        id="mioModale"
+        class="bg-slate-500"
+        ref="myModal"
+        :class="{ horizontal: isMounted && !isPortrait }"
+      >
+        <!-- aggiungo una classe dinamica horizontal che viene aggiunta quando la viewport non è portrait -->
 
-      <div ref="modalContent" class="modal-content" id="m-content">
-        <button
-          @click="closeModal"
-          class="modal-x-btn bg-orange-500 rounded-full absolute top-[20px] left-[20px] w-9 h-9 flex items-center justify-center"
-        >
-          <UIcon name="i-heroicons-x-mark" class="text-woodsmoke-950 w-5 h-5"></UIcon>
-        </button>
-        <svg width="100" height="100">
-          <circle id="x-circle" cx="38" cy="38" r="17" stroke-width="0" fill="#ffffff" />
-        </svg>
-        <div ref="modalInner" class="modal-inner">
-          <p class="modal-block">MASTERS</p>
-          <NuxtImg
-            class="modal-block"
-            src="assets/img/mia2023-mnemonica.jpg"
-            sizes="600px"
-          ></NuxtImg>
-          <p class="modal-block">
-            Blocco 1 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
-            quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
-            perspiciatis deleniti.
-          </p>
-          <div class="modal-block min-w-80">
-            <h1>Titolo blocco 3</h1>
-            <h3>
-              Blocco 2 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
+        <div ref="modalContent" class="modal-content" id="m-content">
+          <button
+            @click="closeModal"
+            class="modal-x-btn bg-orange-500 rounded-full absolute top-[20px] left-[20px] w-9 h-9 flex items-center justify-center"
+          >
+            <UIcon name="i-heroicons-x-mark" class="text-woodsmoke-950 w-5 h-5"></UIcon>
+          </button>
+          <svg width="100" height="100">
+            <circle
+              id="x-circle"
+              cx="38"
+              cy="38"
+              r="17"
+              stroke-width="0"
+              fill="#ffffff"
+            />
+          </svg>
+          <div ref="modalInner" class="modal-inner">
+            <p class="modal-block">MSTERS</p>
+            <NuxtImg
+              class="modal-block"
+              src="assets/img/mia2023-mnemonica.jpg"
+              sizes="600px"
+              placeholder="assets/img/placeholder.jpg"
+            ></NuxtImg>
+            <p class="modal-block">
+              Blocco 1 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
               elit. Eligendi, earum facilis labore voluptatum nemo optio iste voluptates,
               ducimus quas autem atque! Aspernatur temporibus fuga assumenda! Impedit
               neque amet perspiciatis deleniti.
-            </h3>
+            </p>
+            <div class="modal-block min-w-80">
+              <h1>Titolo blocco 3</h1>
+              <h3>
+                Blocco 2 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Eligendi, earum facilis labore voluptatum nemo optio iste
+                voluptates, ducimus quas autem atque! Aspernatur temporibus fuga
+                assumenda! Impedit neque amet perspiciatis deleniti.
+              </h3>
+            </div>
+            <p class="modal-block">
+              Blocco 3 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
+              elit. Eligendi, earum facilis labore voluptatum nemo optio iste voluptates,
+              ducimus quas autem atque! Aspernatur temporibus fuga assumenda! Impedit
+              neque amet perspiciatis deleniti.
+            </p>
+            <p class="modal-block">
+              Blocco 4 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
+              elit. Eligendi, earum facilis labore voluptatum nemo optio iste voluptates,
+              ducimus quas autem atque! Aspernatur temporibus fuga assumenda! Impedit
+              neque amet perspiciatis deleniti.
+            </p>
+            <p class="modal-block">
+              Blocco 5 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
+              elit. Eligendi, earum facilis labore voluptatum nemo optio iste voluptates,
+              ducimus quas autem atque! Aspernatur temporibus fuga assumenda! Impedit
+              neque amet perspiciatis deleniti.
+            </p>
+            <p class="modal-block">
+              Blocco 6 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
+              elit. Eligendi, earum facilis labore voluptatum nemo optio iste voluptates,
+              ducimus quas autem atque! Aspernatur temporibus fuga assumenda! Impedit
+              neque amet perspiciatis deleniti.
+            </p>
           </div>
-          <p class="modal-block">
-            Blocco 3 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
-            quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
-            perspiciatis deleniti.
-          </p>
-          <p class="modal-block">
-            Blocco 4 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
-            quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
-            perspiciatis deleniti.
-          </p>
-          <p class="modal-block">
-            Blocco 5 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
-            quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
-            perspiciatis deleniti.
-          </p>
-          <p class="modal-block">
-            Blocco 6 del modale, Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Eligendi, earum facilis labore voluptatum nemo optio iste voluptates, ducimus
-            quas autem atque! Aspernatur temporibus fuga assumenda! Impedit neque amet
-            perspiciatis deleniti.
-          </p>
         </div>
-      </div>
-    </dialog>
-  </div>
-  <!-- </teleport> -->
+      </dialog>
+    </div>
+  </teleport>
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed, watch } from "vue";
-import { gsap } from "gsap/gsap-core";
+import {
+  ref,
+  onMounted,
+  onBeforeUnmount,
+  onUnmounted,
+  computed,
+  watch,
+  nextTick,
+} from "vue";
+import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { useWindowSize } from "@vueuse/core";
+gsap.registerPlugin(ScrollToPlugin);
 
 const props = defineProps({
   isOpen: {
@@ -87,15 +104,28 @@ const props = defineProps({
 
 const emit = defineEmits(["close"]);
 
-gsap.registerPlugin(ScrollToPlugin);
-
+const isMounted = ref(false);
 const myModal = ref(null);
 const modalContent = ref(null);
 const modalInner = ref(null);
-const { width, height } = useWindowSize();
+const { width, height } = useWindowSize({
+  initialWidth: 0,
+  initialHeight: 0,
+});
+
+// Function to disable body scroll
+const disableBodyScroll = () => {
+  document.body.style.overflow = "hidden";
+};
+
+// Function to enable body scroll
+const enableBodyScroll = () => {
+  document.body.style.overflow = "auto";
+};
 
 //controllo il rapporto tra altezza e larghezza della viewport
 const isPortrait = computed(() => {
+  if (!isMounted.value) return true;
   return height.value > width.value;
 });
 
@@ -167,12 +197,19 @@ watch(
   () => props.isOpen,
   (newVal) => {
     if (newVal) {
+      disableBodyScroll();
       openModal();
+    } else {
+      enableBodyScroll();
     }
   }
 );
 
 onMounted(() => {
+  nextTick(() => {
+    isMounted.value = true;
+    isPortrait.value = height.value > width.value;
+  });
   //metto in pausa l'animazione di apertura del modale
   gsap
     .fromTo(
@@ -209,6 +246,10 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   modalInner.value.removeEventListener("wheel", handleScroll);
+});
+
+onUnmounted(() => {
+  enableBodyScroll();
 });
 </script>
 

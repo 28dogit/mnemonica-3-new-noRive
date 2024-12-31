@@ -66,11 +66,10 @@ const closeModal = () => {
 
 onMounted(() => {
   const { $gsap } = useNuxtApp();
-  console.log("ModulesComp mounted");
   nextTick(() => {
-    console.log("ModulesComp nexttick mounted");
+    //console.log("ModulesComp nexttick mounted");
     $gsap.to("#made_for", {
-      textShadow: `0 0 7px rgba(184, 239, 250, 0.1), 0 0 10px rgba(184, 239, 250, 0.1), 0 0 42px rgba(184, 239, 250, 0.1)`,
+      textShadow: `0 0 7px rgba(184, 239, 250, 0.1), 0 0 10px rgba(184, 239, 250, 0.1), 0 0 22px rgba(184, 239, 250, 0.1)`,
       duration: 1.2,
       repeat: -1,
       yoyo: true,
@@ -91,8 +90,8 @@ onMounted(() => {
           duration: 0.5,
           ease: "back.out",
         },
-        onSnapComplete: ({ progress, direction, isActive }) =>
-          console.log(progress, direction, isActive),
+        // onSnapComplete: ({ progress, direction, isActive }) =>
+        //   console.log(progress, direction, isActive),
       },
     });
     modules_tl.to(
@@ -204,7 +203,7 @@ onMounted(() => {
     font-size: 1.3rem;
     margin-bottom: 0;
     text-shadow: 0 0 7px rgba(184, 239, 250, 1), 0 0 10px rgba(184, 239, 250, 1),
-      0 0 42px rgba(184, 239, 250, 1);
+      0 0 22px rgba(184, 239, 250, 1);
   }
   #module-txt_1 {
     opacity: 1;

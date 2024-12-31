@@ -2,10 +2,10 @@
   <teleport to="body">
     <div>
       <dialog
-        id="mioModale-boxes"
+        id="mioModale"
         class="bg-slate-500"
         ref="myModal"
-        :class="{ horizontal: !isPortrait }"
+        :class="{ horizontal: isMounted && !isPortrait }"
       >
         <!-- aggiungo una classe dinamica horizontal che viene aggiunta quando la viewport non è portrait -->
 
@@ -32,6 +32,7 @@
               class="modal-block"
               src="assets/img/mia2023-mnemonica.jpg"
               sizes="600px"
+              placeholder="assets/img/placeholder.jpg"
             ></NuxtImg>
             <p class="modal-block">
               Blocco 1 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
@@ -80,10 +81,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed, watch } from "vue";
-import { gsap } from "gsap/gsap-core";
+import {
+  ref,
+  onMounted,
+  onBeforeUnmount,
+  onUnmounted,
+  computed,
+  watch,
+  nextTick,
+} from "vue";
+import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { useWindowSize } from "@vueuse/core";
+gsap.registerPlugin(ScrollToPlugin);
 
 const props = defineProps({
   isOpen: {
@@ -94,15 +104,28 @@ const props = defineProps({
 
 const emit = defineEmits(["close"]);
 
-gsap.registerPlugin(ScrollToPlugin);
-
+const isMounted = ref(false);
 const myModal = ref(null);
 const modalContent = ref(null);
 const modalInner = ref(null);
-const { width, height } = useWindowSize();
+const { width, height } = useWindowSize({
+  initialWidth: 0,
+  initialHeight: 0,
+});
+
+// Function to disable body scroll
+const disableBodyScroll = () => {
+  document.body.style.overflow = "hidden";
+};
+
+// Function to enable body scroll
+const enableBodyScroll = () => {
+  document.body.style.overflow = "auto";
+};
 
 //controllo il rapporto tra altezza e larghezza della viewport
 const isPortrait = computed(() => {
+  if (!isMounted.value) return true;
   return height.value > width.value;
 });
 
@@ -174,12 +197,19 @@ watch(
   () => props.isOpen,
   (newVal) => {
     if (newVal) {
+      disableBodyScroll();
       openModal();
+    } else {
+      enableBodyScroll();
     }
   }
 );
 
 onMounted(() => {
+  nextTick(() => {
+    isMounted.value = true;
+    isPortrait.value = height.value > width.value;
+  });
   //metto in pausa l'animazione di apertura del modale
   gsap
     .fromTo(
@@ -216,6 +246,10 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   modalInner.value.removeEventListener("wheel", handleScroll);
+});
+
+onUnmounted(() => {
+  enableBodyScroll();
 });
 </script>
 
