@@ -52,6 +52,7 @@ body{
     justify-content: center;
     position: relative;
     overflow:hidden;
+    margin-bottom: 6rem;
     @include bp.for-tablet-up{ // 576px up
       flex-direction: row;
     }
@@ -95,7 +96,7 @@ body{
 //*SECTION - Hero
 #ghirlanda-element{
     opacity:0.6;
-    max-height: 50vh;
+    //max-height: 50vh;
     mix-blend-mode: luminosity;
     @include bp.for-desktop-big-up{
       width: 550px;
