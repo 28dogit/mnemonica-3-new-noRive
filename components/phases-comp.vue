@@ -40,7 +40,7 @@ onMounted(() => {
     ]; // creo un array con i container delle chips delle fasi
 
     let intentObserver = ScrollTrigger.observe({
-      type: "wheel,touch",
+      type: "wheel,touch,pointer",
 
       //vecchio metodo che non teneva conto dello scroll naturale di MacOS
       // onUp() {
@@ -51,16 +51,19 @@ onMounted(() => {
       // },
       tolerance: 10,
       preventDefault: true,
-      debounce: false,
+      //debounce: false,
       //nuovo metodo che tiene conto dello scroll naturale di MacOS cioè si basa sulla direzione indicata da deltaY
       onChange: (self) => {
-        const delta = self.deltaY;
-        if (delta > 0) {
-          //console.log("Scrolling down");
-          allowScroll && circleAnimation(currentIndex + 1, true);
-        } else if (delta < 0) {
-          //console.log("Scrolling up");
-          allowScroll && circleAnimation(currentIndex - 1, false);
+        const delta = self.deltaY || self.touchDeltaY;
+        const threshold = 5;
+        if (Math.abs(delta) > threshold) {
+          if (delta > 0) {
+            //console.log("Scrolling down");
+            allowScroll && circleAnimation(currentIndex + 1, true);
+          } else if (delta < 0) {
+            //console.log("Scrolling up");
+            allowScroll && circleAnimation(currentIndex - 1, false);
+          }
         }
       },
       onEnable(self) {
