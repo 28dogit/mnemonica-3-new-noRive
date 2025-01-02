@@ -5,7 +5,7 @@
   </div>
   <div id="modules-content-wrapper" class="wrapper">
     <div id="modules-content" class="content">
-      <div id="module-txt_1" class="module_txt">
+      <div id="module-txt_1" class="module_card">
         <div class="module_title">
           <h2>Rooms</h2>
           <button @click="isModalOpen1 = true"><span class="focus">+</span></button>
@@ -17,7 +17,7 @@
           and move.
         </p>
       </div>
-      <div id="module-txt_2" class="module_txt">
+      <div id="module-txt_2" class="module_card">
         <div class="module_title">
           <h2>Boxes</h2>
           <button @click="isModalOpen2 = true"><span class="focus">+</span></button>
@@ -30,7 +30,7 @@
           deliver to stakeholders.
         </p>
       </div>
-      <div id="module-txt_3" class="module_txt">
+      <div id="module-txt_3" class="module_card">
         <div class="module_title">
           <h2>Masters</h2>
           <button @click="isModalOpen3 = true"><span class="focus">+</span></button>
@@ -93,6 +93,11 @@ onMounted(() => {
         // onSnapComplete: ({ progress, direction, isActive }) =>
         //   console.log(progress, direction, isActive),
       },
+    });
+    //modules_tl.set("#ghirlandeContainer", { filter: "blur(10px)" });
+    modules_tl.from(".ghirlanda-updx, .ghirlanda-dwsx ", {
+      autoAlpha: 0,
+      filter: "blur(5px)",
     });
     modules_tl.to(
       "#modules_svg",
@@ -216,7 +221,7 @@ onMounted(() => {
     opacity: 0;
   }
 
-  .module_txt {
+  .module_card {
     z-index: 100;
     position: absolute;
     border-radius: 10px;
@@ -224,6 +229,7 @@ onMounted(() => {
     text-align: left;
     padding: 10px;
     width: 90%;
+    backdrop-filter: blur(5px);
     box-shadow: 0 0 42px rgba(184, 239, 250, 0.1);
     h2,
     p {

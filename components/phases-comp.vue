@@ -41,15 +41,28 @@ onMounted(() => {
 
     let intentObserver = ScrollTrigger.observe({
       type: "wheel,touch",
-      onUp() {
-        allowScroll && circleAnimation(currentIndex - 1, false);
-      },
-      onDown() {
-        allowScroll && circleAnimation(currentIndex + 1, true);
-      },
+
+      //vecchio metodo che non teneva conto dello scroll naturale di MacOS
+      // onUp() {
+      //   allowScroll && circleAnimation(currentIndex - 1, false);
+      // },
+      // onDown() {
+      //   allowScroll && circleAnimation(currentIndex + 1, true);
+      // },
       tolerance: 10,
       preventDefault: true,
       debounce: false,
+      //nuovo metodo che tiene conto dello scroll naturale di MacOS cioè si basa sulla direzione indicata da deltaY
+      onChange: (self) => {
+        const delta = self.deltaY;
+        if (delta > 0) {
+          //console.log("Scrolling down");
+          allowScroll && circleAnimation(currentIndex + 1, true);
+        } else if (delta < 0) {
+          //console.log("Scrolling up");
+          allowScroll && circleAnimation(currentIndex - 1, false);
+        }
+      },
       onEnable(self) {
         allowScroll = false; // blocca lo scroll
         scrollTimeout.restart(true); //riattiva lo scroll dopo un secondo
