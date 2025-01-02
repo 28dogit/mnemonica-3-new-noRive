@@ -25,6 +25,44 @@ let preChips = ["Ingestion", "Camera", "Tests", "Locations", "Casting"];
 let productionChips = ["Near Set Lab", "Dailies", "Review & Approval"];
 let postChips = ["Editorial", "Visual FX", "Audio"];
 let marketChips = ["Archive", "Library", "Festivals", "Screenings"];
+
+// onMounted(() => {
+//   // const { $gsap } = useNuxtApp();
+//   // uso nexTick per caricare le animazioni gsap dopo il rendering del main page
+//   nextTick(() => {
+//     // console.log("PhasesChips nexttick mounted");
+//     // const containers = [
+//     //   "#pre-chips-container",
+//     //   "#production-chips-container",
+//     //   "#post-chips-container",
+//     //   "#market-chips-container",
+//     // ];
+//     // const tl = $gsap.timeline({
+//     //   scrollTrigger: {
+//     //     trigger: "#chips-wrapper",
+//     //     start: "top 80%",
+//     //     end: "bottom 50%",
+//     //     toggleActions: "play reverse play reverse",
+//     //     markers: true,
+//     //   },
+//     // });
+//     // containers.forEach((container, index) => {
+//     //   const chips = document.querySelectorAll(`${container} .phase-chips`);
+//     //   tl.from(container, {
+//     //     autoAlpha: 0,
+//     //     duration: 0.5,
+//     //   }).from(
+//     //     chips,
+//     //     {
+//     //       autoAlpha: 0,
+//     //       duration: 0.5,
+//     //       stagger: 0.2,
+//     //     }
+//     //     //`-=${0.5 * index}`
+//     //   ); // Sovrappone leggermente le animazioni dei contenitori
+//     // });
+//   });
+// });
 </script>
 <style scoped lang="scss">
 @use "@/assets/css/_globals.scss" as *;
@@ -58,4 +96,9 @@ let marketChips = ["Archive", "Library", "Festivals", "Screenings"];
   justify-content: center;
   box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
 }
+// #production-chips-container,
+// #post-chips-container,
+// #market-chips-container {
+//   opacity: 0;
+// }
 </style>

@@ -160,7 +160,7 @@ onMounted(() => {
       start: "top +=65",
       end: "+=100",
       pin: true,
-      markers: true,
+      //markers: true,
       onEnter: (self) => {
         circleAnimation(currentIndex + 1, true);
         if (intentObserver.isEnabled) {
