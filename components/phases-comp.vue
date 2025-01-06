@@ -169,7 +169,7 @@ onMounted(() => {
         );
 
       currentIndex = index;
-    }
+    } //NOTE - chiusura CircleAnimation
 
     ScrollTrigger.create({
       trigger: "#phases-section",
@@ -198,9 +198,9 @@ onMounted(() => {
 
         intentObserver.enable();
       },
-    });
-  });
-});
+    }); //NOTE - chiusura ScrollTrigger
+  }); //NOTE - chiusura nextTick
+}); //NOTE - chiusura onMounted
 </script>
 
 <style scoped></style>

@@ -28,52 +28,42 @@
             />
           </svg>
           <div ref="modalInner" class="modal-inner">
-            <p class="modal-block">BOXES</p>
+            <div class="modal-block">
+              <h1>BOXES</h1>
+            </div>
             <NuxtImg
-              class="modal-block"
+              class="img-modal-block"
               src="assets/img/mia2023-mnemonica.jpg"
               sizes="600px"
               placeholder="https://placehold.co/600x400"
             ></NuxtImg>
-            <p class="modal-block">
-              Blocco 1 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Eligendi, earum facilis labore voluptatum nemo optio iste voluptates,
-              ducimus quas autem atque! Aspernatur temporibus fuga assumenda! Impedit
-              neque amet perspiciatis deleniti.
-            </p>
-            <div class="modal-block min-w-80">
-              <h1>Titolo blocco 3</h1>
-              <h3>
+            <div class="modal-block">
+              <h1>Titolo blocco 1</h1>
+              <p>
+                Blocco 1 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Eligendi, earum facilis labore voluptatum nemo optio iste
+                voluptates, ducimus quas autem atque! Aspernatur temporibus fuga
+                assumenda! Impedit neque amet perspiciatis deleniti.
+              </p>
+            </div>
+            <div class="modal-block">
+              <h1>Titolo blocco 2</h1>
+              <p>
                 Blocco 2 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
                 elit. Eligendi, earum facilis labore voluptatum nemo optio iste
                 voluptates, ducimus quas autem atque! Aspernatur temporibus fuga
                 assumenda! Impedit neque amet perspiciatis deleniti.
-              </h3>
+              </p>
             </div>
-            <p class="modal-block">
-              Blocco 3 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Eligendi, earum facilis labore voluptatum nemo optio iste voluptates,
-              ducimus quas autem atque! Aspernatur temporibus fuga assumenda! Impedit
-              neque amet perspiciatis deleniti.
-            </p>
-            <p class="modal-block">
-              Blocco 4 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Eligendi, earum facilis labore voluptatum nemo optio iste voluptates,
-              ducimus quas autem atque! Aspernatur temporibus fuga assumenda! Impedit
-              neque amet perspiciatis deleniti.
-            </p>
-            <p class="modal-block">
-              Blocco 5 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Eligendi, earum facilis labore voluptatum nemo optio iste voluptates,
-              ducimus quas autem atque! Aspernatur temporibus fuga assumenda! Impedit
-              neque amet perspiciatis deleniti.
-            </p>
-            <p class="modal-block">
-              Blocco 6 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Eligendi, earum facilis labore voluptatum nemo optio iste voluptates,
-              ducimus quas autem atque! Aspernatur temporibus fuga assumenda! Impedit
-              neque amet perspiciatis deleniti.
-            </p>
+            <div class="modal-block">
+              <h1>Titolo blocco 3</h1>
+              <p>
+                Blocco 3 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Eligendi, earum facilis labore voluptatum nemo optio iste
+                voluptates, ducimus quas autem atque! Aspernatur temporibus fuga
+                assumenda! Impedit neque amet perspiciatis deleniti.
+              </p>
+            </div>
           </div>
         </div>
       </dialog>
@@ -253,60 +243,6 @@ onUnmounted(() => {
 });
 </script>
 
-<style>
-dialog {
-  opacity: 0;
-  max-width: none;
-  max-height: none;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  margin: 0;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  z-index: 9999999999;
-}
-.modal-content {
-  height: 100%;
-}
-.modal-inner {
-  padding: 80px 3% 20px 3%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  overflow: auto;
-  white-space: normal;
-}
-.modal-inner .modal-block {
-  margin-bottom: 4%;
-}
-
-.horizontal .modal-inner {
-  flex-direction: row;
-  white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-  height: 100%;
-  padding-left: 60px;
-}
-
-.modal-inner p {
-  font-size: 30px;
-  line-height: 45px;
-  color: black;
-}
-.horizontal .modal-inner .modal-block {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-right: 20px;
-  text-wrap: wrap;
-}
-.horizontal .modal-inner p.modal-block {
-  min-width: 400px;
-  height: 100%;
-}
+<style lang="scss" scoped>
+@use "~/assets/css/modals.scss";
 </style>

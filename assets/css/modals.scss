@@ -1,0 +1,61 @@
+@use "globals.scss" as *;
+dialog {
+  background-color: $gradient_4;
+    opacity: 0;
+    max-width: none;
+    max-height: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    z-index: 9999999999;
+  }
+  .modal-content {
+    height: 100%;
+  }
+  .modal-x-btn{
+    background-color: $mne_secondary;
+  }
+  .modal-inner {
+    padding: 80px 3% 20px 3%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto;
+    white-space: normal;
+  }
+  .modal-inner .modal-block {
+    margin-bottom: 4%;
+  }
+  
+  .horizontal .modal-inner {
+    flex-direction: row;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 100%;
+    padding-left: 60px;
+  }
+  
+  .modal-inner p {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    // color: black;
+    color: $mne_text-on-dark;
+  }
+  .horizontal .modal-inner .modal-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto 20px;
+    text-wrap: wrap;
+  }
+  .horizontal .modal-inner .modal-block {
+    min-width: 400px;
+    height: 100%;
+  }

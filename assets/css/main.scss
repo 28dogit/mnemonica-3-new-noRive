@@ -53,8 +53,10 @@ body{
     position: relative;
     overflow:hidden;
     margin-bottom: 6rem;
-    @include bp.for-tablet-up{ // 576px up
-      flex-direction: row;
+    &:not(#hero-section){
+      @include bp.for-tablet-up{ // 576px up
+        flex-direction: row;
+      }
     }
 }
 
@@ -140,6 +142,12 @@ body{
     //     //font-weight: 500;
     //   }
     // }
+  }
+  #hero-content{
+    @include bp.for-desktop-big-up-h-reduced{ // W-1200px H-750px up
+      margin-top: -100px;
+      margin-bottom: 100px;
+    }
   }
 //*!SECTION
 

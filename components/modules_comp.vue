@@ -295,7 +295,8 @@ onMounted(() => {
       align-items: center;
       justify-content: center;
       font-size: 1.5rem;
-      color: #cef372;
+      //color: #cef372;
+      color: $mne_secondary;
       margin: 0;
       background-color: $gradient_4;
       width: 30px;
