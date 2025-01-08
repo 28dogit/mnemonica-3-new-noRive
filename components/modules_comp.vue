@@ -1,10 +1,18 @@
 <template>
   <div id="modules-element" class="element">
     <Modules id="modules_svg"></Modules>
-    <p id="made_for">MADE FOR</p>
+    <p id="allinOne">All in One</p>
   </div>
   <div id="modules-content-wrapper" class="wrapper">
     <div id="modules-content" class="content">
+      <div id="moduleRooms">
+        <h2 class="mTitle">Screening Rooms</h2>
+        <h3 class="mSubTitle">streaming and discussion</h3>
+        <div class="focusWrapper">
+          <span class="focusTxt">Focus</span>
+          <button @click="isModalOpen1 = true"><span class="focusBtn">+</span></button>
+        </div>
+      </div>
       <div id="module-txt_1" class="module_card">
         <div class="module_title">
           <h2>Rooms</h2>
@@ -68,13 +76,13 @@ onMounted(() => {
   const { $gsap } = useNuxtApp();
   nextTick(() => {
     //console.log("ModulesComp nexttick mounted");
-    $gsap.to("#made_for", {
-      textShadow: `0 0 7px rgba(184, 239, 250, 0.1), 0 0 10px rgba(184, 239, 250, 0.1), 0 0 22px rgba(184, 239, 250, 0.1)`,
-      duration: 1.2,
-      repeat: -1,
-      yoyo: true,
-      ease: "linear",
-    });
+    // $gsap.to("#allinOne", {
+    //   textShadow: `0 0 7px rgba(184, 239, 250, 0.1), 0 0 10px rgba(184, 239, 250, 0.1), 0 0 22px rgba(184, 239, 250, 0.1)`,
+    //   duration: 1.2,
+    //   repeat: -1,
+    //   yoyo: true,
+    //   ease: "linear",
+    // });
 
     let mm = $gsap.matchMedia(); // Creo un'istanza matchMedia per gestire lo start dello scrollTrigger
     mm.add(
@@ -231,9 +239,6 @@ onMounted(() => {
     width: 95%;
     position: absolute;
   }
-  // #made-for{
-
-  // }
   #modules-content {
     display: flex;
     align-items: flex-start;
@@ -249,12 +254,46 @@ onMounted(() => {
   //         text-align: center;
   //     }
   // }
-  #made_for {
+  #allinOne {
     color: #fff;
     font-size: 1.3rem;
     margin-bottom: 0;
     text-shadow: 0 0 7px rgba(184, 239, 250, 1), 0 0 10px rgba(184, 239, 250, 1),
       0 0 22px rgba(184, 239, 250, 1);
+  }
+  #moduleRooms {
+    text-align: center;
+    .mTitle {
+      color: $mne_text-on-dark;
+    }
+    .mSubTitle {
+      color: $mne_secondary;
+      font-weight: 300;
+    }
+    .focusWrapper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 1rem;
+      height: 30px;
+      border-radius: 30px;
+      width: fit-content;
+      padding-left: 1rem;
+      margin-top: 1rem;
+      background-color: $gradient_2;
+      span.focusBtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: $mne_secondary;
+        margin: 0;
+        background-color: $gradient_4;
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+      }
+    }
   }
   #module-txt_1 {
     opacity: 1;
