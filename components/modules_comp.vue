@@ -1,4 +1,5 @@
 <template>
+  <!-- //SECTION - TEMPLATE -->
   <div id="modules-element" class="element">
     <Modules id="modules_svg"></Modules>
     <p id="allinOne">All in One</p>
@@ -8,15 +9,20 @@
       <div id="moduleRooms">
         <h2 class="mTitle">Screening Rooms</h2>
         <h3 class="mSubTitle">streaming and discussion</h3>
-        <div class="focusWrapper">
-          <span class="focusTxt">Focus</span>
-          <button @click="isModalOpen1 = true"><span class="focusBtn">+</span></button>
-        </div>
+        <button @click="isModalOpen1 = true">
+          <div class="focusWrapper">
+            <span class="focusTxt">Focus</span>
+            <span class="focusBtn">+</span>
+          </div>
+        </button>
       </div>
+
       <div id="module-txt_1" class="module_card">
         <div class="module_title">
           <h2>Rooms</h2>
-          <button @click="isModalOpen1 = true"><span class="focus">+</span></button>
+          <button @click="isModalOpen1 = true">
+            <span class="focus">+</span>
+          </button>
         </div>
         <p>
           Leave folders behind. Experience active workspaces that free you from repetitive
@@ -28,7 +34,9 @@
       <div id="module-txt_2" class="module_card">
         <div class="module_title">
           <h2>Boxes</h2>
-          <button @click="isModalOpen2 = true"><span class="focus">+</span></button>
+          <button @click="isModalOpen2 = true">
+            <span class="focus">+</span>
+          </button>
         </div>
         <p>
           Forget hard drives and LTOs. Welcome to the most advanced and reliable solution
@@ -41,7 +49,9 @@
       <div id="module-txt_3" class="module_card">
         <div class="module_title">
           <h2>Masters</h2>
-          <button @click="isModalOpen3 = true"><span class="focus">+</span></button>
+          <button @click="isModalOpen3 = true">
+            <span class="focus">+</span>
+          </button>
         </div>
         <p>
           Get rid of third-party shuttles. With the built-in data exchange facility, you
@@ -55,9 +65,11 @@
   <FocusRooms :isOpen="isModalOpen1" @close="closeModal" />
   <FocusBoxes :isOpen="isModalOpen2" @close="closeModal" />
   <FocusMasters :isOpen="isModalOpen3" @close="closeModal" />
+  <!-- //!SECTION -->
 </template>
 
 <script setup>
+// SECTION - SCRIPT
 //le altre importazioni derivano dalla pagina principale
 import { _zIndex } from "#tailwind-config/theme";
 import { nextTick } from "vue";
@@ -95,6 +107,8 @@ onMounted(() => {
         //definisco il contesto in cui applicare le condizioni
         let { isTabletUp, isMobile } = context.conditions;
         //NOTE - inserisco la logica dell'animazione gsap nel context per poter utilizzare le condizioni isTabletUp e isMobile
+        const focusWrappertoAnimate = document.querySelector(".focusWrapper");
+
         const modules_tl = $gsap.timeline({
           scrollTrigger: {
             trigger: "#modules-section", // Elemento che attiva l'animazione
@@ -137,6 +151,18 @@ onMounted(() => {
           },
           1
         );
+        modules_tl.add(() => {
+          const state = Flip.getState(focusWrappertoAnimate); // Cattura lo stato iniziale
+
+          // Aggiungi la classe finale per attivare lo stato CSS
+          focusWrappertoAnimate.classList.add("opened");
+
+          // Applica l'animazione Flip
+          Flip.from(state, {
+            duration: 1,
+            ease: "power2.inOut",
+          });
+        }, 1);
         modules_tl.to(
           "#Modules_3a #Boxes path",
           {
@@ -225,9 +251,11 @@ onMounted(() => {
     ); //NOTE - end mm.add
   }); //NOTE - end nextTick
 }); //NOTE - end onMounted
+//!SECTION
 </script>
 
 <style lang="scss" scoped>
+//SECTION - SCSS
 @use "@/assets/css/_globals.scss" as *;
 @use "@/assets/css/_breakpoints.scss" as bp;
 
@@ -262,7 +290,9 @@ onMounted(() => {
       0 0 22px rgba(184, 239, 250, 1);
   }
   #moduleRooms {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .mTitle {
       color: $mne_text-on-dark;
     }
@@ -273,20 +303,26 @@ onMounted(() => {
     .focusWrapper {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: flex-start;
       gap: 1rem;
       height: 30px;
       border-radius: 30px;
       width: fit-content;
+      min-width: 120px;
       padding-left: 1rem;
       margin-top: 1rem;
       background-color: $gradient_2;
+      span.focusTxt {
+        opacity: 0;
+        display: none;
+      }
       span.focusBtn {
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 1.5rem;
-        color: $mne_secondary;
+        // color: $mne_secondary;
+        color: $mne_text-on-dark;
         margin: 0;
         background-color: $gradient_4;
         width: 30px;
@@ -295,14 +331,29 @@ onMounted(() => {
       }
     }
   }
+
+  .focusWrapper .opened {
+    justify-content: flex-end;
+    .flocusTxt {
+      opacity: 1;
+      display: block;
+    }
+    span.focusBtn {
+      color: $mne_secondary;
+    }
+  }
+
   #module-txt_1 {
+    display: none;
     opacity: 1;
     z-index: 110;
   }
   #module-txt_2 {
+    display: none;
     opacity: 0;
   }
   #module-txt_3 {
+    display: none;
     opacity: 0;
   }
 
@@ -344,4 +395,5 @@ onMounted(() => {
     }
   }
 }
+//!SECTION
 </style>
