@@ -4,14 +4,11 @@
     <ProductionSvg id="Production_svg" class="phaseCircle"></ProductionSvg>
     <PostSvg id="Post_svg" class="phaseCircle"></PostSvg>
     <MarketSvg id="Market_svg" class="phaseCircle"></MarketSvg>
-    <div id="phasesTitle" class="title">
-      <h2>All Phases</h2>
-    </div>
-    <!-- <NuxtImg
+    <NuxtImg
       id="logoPhase"
       src="/assets/img/svg/Logo-mne-Vector.svg"
       alt="Mnemonica logo portrait"
-    /> -->
+    />
   </div>
   <div id="phases-content-wrapper" class="wrapper">
     <div id="phases-content" class="content">
@@ -24,7 +21,6 @@
 //le altre importazioni derivano dalla pagina principale
 import { nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { _opacity } from "#tailwind-config/theme";
 onMounted(() => {
   const { $gsap } = useNuxtApp();
 
@@ -42,14 +38,6 @@ onMounted(() => {
       "#post-chips-container",
       "#market-chips-container",
     ]; // creo un array con i container delle chips delle fasi
-
-    $gsap.to(phasesItems, {
-      rotate: 360,
-      transformOrigin: "50% 50%",
-      duration: 4,
-      ease: "linear",
-      repeat: -1,
-    });
 
     let intentObserver = ScrollTrigger.observe({
       type: "wheel,touch,pointer",
@@ -115,7 +103,6 @@ onMounted(() => {
       let txtTarget = isScrollingDown
         ? phasesTxtItems[currentIndex]
         : phasesTxtItems[index];
-      //console.log("Array dei testi delle fasi", `${txtTarget} path`);
       let targetContainer = isScrollingDown
         ? containers[currentIndex]
         : containers[index];
@@ -144,15 +131,13 @@ onMounted(() => {
 
       phases_tl
         .to(target, {
-          // rotate: isScrollingDown ? 120 : -120,
-          // transformOrigin: "50% 50%",
-          opacity: 1,
+          rotate: isScrollingDown ? 120 : -120,
+          transformOrigin: "50% 50%",
           ease: "back.out",
           duration: 0.25,
         })
-        .to(txtTarget.querySelectorAll("path"), {
-          //autoAlpha: isScrollingDown ? 1 : 0,
-          fill: isScrollingDown ? "#cef372" : "#6DCFF6",
+        .to(txtTarget, {
+          autoAlpha: isScrollingDown ? 1 : 0,
           duration: 0.5,
           ease: "power2.out",
         })

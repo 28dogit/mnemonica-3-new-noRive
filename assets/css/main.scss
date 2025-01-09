@@ -203,6 +203,9 @@ body{
     // @include bp.for-phone{
     //   min-height: 400px;
     // }
+    #phasesTitle{
+      text-align: center;
+    }
     #logoPhase{
       position: absolute;
       top: 50%;
@@ -282,7 +285,7 @@ body{
     width: 95vw; 
   }
   .phaseCircle .innerTxt{
-    opacity: 0;
+    opacity: 1;
   }
   
 //*!SECTION
