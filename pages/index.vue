@@ -52,12 +52,10 @@
 import { onMounted, ref } from "vue";
 import { useNuxtApp } from "#app";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Flip } from "gsap/Flip";
 
 onMounted(() => {
   //console.log("Home mounted!!");
   const { $gsap } = useNuxtApp();
-
   // registro effetto per l'entrata delle scritte e del logo in Hero section
   $gsap.registerEffect({
     name: "EnterFrom",

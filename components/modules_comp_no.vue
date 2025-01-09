@@ -6,26 +6,70 @@
   </div>
   <div id="modules-content-wrapper" class="wrapper">
     <div id="modules-content" class="content">
-      <div id="module-txt_1" class="module_card">
+      <div id="moduleRooms" class="module_content">
         <h2 class="mTitle">Screening Rooms</h2>
         <h3 class="mSubTitle">streaming and discussion</h3>
         <button @click="isModalOpen1 = true">
           <FocusBTN></FocusBTN>
         </button>
       </div>
-      <div id="module-txt_2" class="module_card">
+      <div id="moduleBoxes" class="module_content">
         <h2 class="mTitle">Sharing Boxes</h2>
         <h3 class="mSubTitle">data transfer</h3>
         <button @click="isModalOpen2 = true">
           <FocusBTN></FocusBTN>
         </button>
       </div>
-      <div id="module-txt_3" class="module_card">
+      <div id="moduleMasters" class="module_content">
         <h2 class="mTitle">HQ Masters</h2>
         <h3 class="mSubTitle">perennial availability</h3>
         <button @click="isModalOpen3 = true">
           <FocusBTN></FocusBTN>
         </button>
+      </div>
+
+      <div id="module-txt_1" class="module_card">
+        <div class="module_title">
+          <h2>Rooms</h2>
+          <button @click="isModalOpen1 = true">
+            <span class="focus">+</span>
+          </button>
+        </div>
+        <p>
+          Leave folders behind. Experience active workspaces that free you from repetitive
+          tasks encoding, watermarking, keeping everyone updated. Enjoy private places
+          where people meet around media, playlists are a given, content is easy to find
+          and move.
+        </p>
+      </div>
+      <div id="module-txt_2" class="module_card">
+        <div class="module_title">
+          <h2>Boxes</h2>
+          <button @click="isModalOpen2 = true">
+            <span class="focus">+</span>
+          </button>
+        </div>
+        <p>
+          Forget hard drives and LTOs. Welcome to the most advanced and reliable solution
+          for long-term preservation of digital film works that also keeps them always
+          available for business opportunities and cultural outreach. Arrange immediate
+          screenings with integrated Rooms, easily retrieve relevant assets, securely
+          deliver to stakeholders.
+        </p>
+      </div>
+      <div id="module-txt_3" class="module_card">
+        <div class="module_title">
+          <h2>Masters</h2>
+          <button @click="isModalOpen3 = true">
+            <span class="focus">+</span>
+          </button>
+        </div>
+        <p>
+          Get rid of third-party shuttles. With the built-in data exchange facility, you
+          can send & receive files and folders of any size and complexity directly from/to
+          Rooms, as well as local drives. Only between registered users, without leaving
+          Mnemonica safe walls.
+        </p>
       </div>
     </div>
   </div>
@@ -55,6 +99,14 @@ onMounted(() => {
   const { $gsap } = useNuxtApp();
   nextTick(() => {
     //console.log("ModulesComp nexttick mounted");
+    // $gsap.to("#allinOne", {
+    //   textShadow: `0 0 7px rgba(184, 239, 250, 0.1), 0 0 10px rgba(184, 239, 250, 0.1), 0 0 22px rgba(184, 239, 250, 0.1)`,
+    //   duration: 1.2,
+    //   repeat: -1,
+    //   yoyo: true,
+    //   ease: "linear",
+    // });
+
     let mm = $gsap.matchMedia(); // Creo un'istanza matchMedia per gestire lo start dello scrollTrigger
     mm.add(
       //aggiungo una o più media query (conditions)
@@ -66,7 +118,6 @@ onMounted(() => {
         //definisco il contesto in cui applicare le condizioni
         let { isTabletUp, isMobile } = context.conditions;
         //NOTE - inserisco la logica dell'animazione gsap nel context per poter utilizzare le condizioni isTabletUp e isMobile
-
         const modules_tl = $gsap.timeline({
           scrollTrigger: {
             trigger: "#modules-section", // Elemento che attiva l'animazione
@@ -80,7 +131,7 @@ onMounted(() => {
             snap: {
               snapTo: 1 / 3,
               //snapTo: (progress) => Math.round(progress * 3) / 3, // Aggancia a ogni 1/3 di progresso (120 gradi)
-              duration: 2.5,
+              duration: 0.5,
               ease: "back.out",
             },
             // onSnapComplete: ({ progress, direction, isActive }) =>
@@ -95,23 +146,6 @@ onMounted(() => {
         modules_tl.to("#Modules_3a #Rooms path", {
           fill: "#CEF372",
         });
-        modules_tl.from(
-          "#module-txt_1 .focusWrapper .focusBtn",
-          {
-            // justifyContent: "flex-end",
-            x: "-90",
-            color: "#CEF372",
-          },
-          "<"
-        );
-        modules_tl.to(
-          "#module-txt_1 .focusWrapper .focusTxt",
-          {
-            // justifyContent: "flex-end",
-            opacity: 1,
-          },
-          "< +=0.3"
-        );
         modules_tl.to(
           "#modules_svg",
           {
@@ -125,6 +159,22 @@ onMounted(() => {
             fill: "#B8EFFA",
           },
           1
+        );
+        modules_tl.from(
+          ".focusWrapper .focusBtn",
+          {
+            // justifyContent: "flex-end",
+            x: "-90",
+          },
+          "<"
+        );
+        modules_tl.to(
+          ".focusWrapper .focusTxt",
+          {
+            // justifyContent: "flex-end",
+            opacity: 1,
+          },
+          "< +=0.3"
         );
         modules_tl.to(
           "#Modules_3a #Boxes path",
@@ -245,17 +295,10 @@ onMounted(() => {
     text-shadow: 0 0 7px rgba(184, 239, 250, 1), 0 0 10px rgba(184, 239, 250, 1),
       0 0 22px rgba(184, 239, 250, 1);
   }
-  .module_card {
+  .module_content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 100;
-    position: absolute;
-    padding: 10px;
-    width: 90%;
-    @include bp.for-tablet-up {
-      width: 50%;
-    }
     .mTitle {
       color: $mne_text-on-dark;
     }
@@ -264,19 +307,77 @@ onMounted(() => {
       font-weight: 300;
     }
   }
-  #module-txt_1 {
-    // display: none;
+
+  #moduleRooms {
+    display: none;
     opacity: 1;
     z-index: 110;
   }
-  #module-txt_2 {
-    // display: none;
+  #moduleBoxes {
+    display: none;
     opacity: 0;
   }
-  #module-txt_3 {
-    // display: none;
+  #moduleMasters {
+    display: none;
     opacity: 0;
   }
+
+  .module_content {
+    z-index: 100;
+    position: absolute;
+    border-radius: 10px;
+    border: 2px solid rgba(225, 225, 225, 0.1);
+    text-align: left;
+    padding: 10px;
+    width: 90%;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 42px rgba(184, 239, 250, 0.1);
+    h2,
+    p {
+      text-align: left;
+    }
+    @include bp.for-tablet-up {
+      width: 50%;
+    }
+  }
+
+  // .module_card {
+  //   z-index: 100;
+  //   position: absolute;
+  //   border-radius: 10px;
+  //   border: 2px solid rgba(225, 225, 225, 0.1);
+  //   text-align: left;
+  //   padding: 10px;
+  //   width: 90%;
+  //   backdrop-filter: blur(5px);
+  //   box-shadow: 0 0 42px rgba(184, 239, 250, 0.1);
+  //   h2,
+  //   p {
+  //     text-align: left;
+  //   }
+  //   @include bp.for-tablet-up {
+  //     width: 50%;
+  //   }
+  // }
+  // .module_title {
+  //   display: flex;
+  //   justify-content: space-between;
+  //   align-items: center;
+  //   margin-bottom: 1rem;
+  //   span {
+  //     display: flex;
+  //     align-items: center;
+  //     justify-content: center;
+  //     font-size: 1.5rem;
+  //     //color: #cef372;
+  //     color: $mne_secondary;
+  //     margin: 0;
+  //     background-color: $gradient_4;
+  //     width: 30px;
+  //     height: 30px;
+  //     border-radius: 15px;
+  //   }
+  // }
 }
 //!SECTION
 </style>
