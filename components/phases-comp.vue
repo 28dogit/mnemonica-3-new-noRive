@@ -25,6 +25,7 @@
 import { nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { _opacity } from "#tailwind-config/theme";
+import { _bottom } from "#tailwind-config/theme/backgroundPosition";
 onMounted(() => {
   const { $gsap } = useNuxtApp();
 
@@ -36,20 +37,75 @@ onMounted(() => {
     let phasesItems = $gsap.utils.toArray(".phaseCircle .innerCircle"); //creo l'array dei cerchi delle Fasi
     let phasesTxtItems = $gsap.utils.toArray(".phaseCircle .innerTxt"); //creo l'array dei testi delle Fasi
 
+    //SECTION - sezione animazione dei cerchi delle Fasi
+
+    //registro l'effetto di rotazione
+    $gsap.registerEffect({
+      name: "phaseRotation",
+      effect: (targets, config) => {
+        return $gsap.to(targets, {
+          rotate: 360,
+          ease: config.ease,
+          transformOrigin: "50% 50%",
+          repeat: config.repeat,
+          duration: config.duration,
+          scrollTrigge: config.scrollTrigger,
+        });
+      },
+      defaults: {
+        ease: "linear",
+        repeat: -1,
+        duration: 0.4,
+      },
+      extendTimeline: false,
+    });
+
+    // lo applico ai vari cerchi allo scroll con uno scrollTrigger che gestisce l'entrata e luscita per fermarlo quando non è visibile
+    // "#m_100_circle_ecosys_0, #m_100_circle_ecosys_1, #m_100_circle_ecosys_2, #m_100_circle_ecosys_3"
+    ScrollTrigger.batch(phasesItems, {
+      trigger: "#phases-section",
+      //pinnedContainer: true,
+      markers: true,
+      start: "top center",
+      end: "center center",
+      onEnter: (targets) => {
+        $gsap.effects.phaseRotation(targets, {
+          scrollTrigger: { toggleActions: "resume" },
+        });
+      },
+      onLeave: (targets) => {
+        $gsap.effects.phaseRotation(targets, {
+          scrollTrigger: { toggleActions: "pause" },
+        });
+      },
+      onEnterBack: (targets) => {
+        $gsap.effects.phaseRotation(targets, {
+          scrollTrigger: { toggleActions: "resume" },
+        });
+      },
+      onLeaveBack: (targets) => {
+        $gsap.effects.phaseRotation(targets, {
+          scrollTrigger: { toggleActions: "pause" },
+        });
+      },
+    });
+
+    // $gsap.to(phasesItems, {
+    //   rotate: 360,
+    //   transformOrigin: "50% 50%",
+    //   duration: 4,
+    //   ease: "linear",
+    //   repeat: -1,
+    // });
+
+    //!SECTION
+
     const containers = [
       "#pre-chips-container",
       "#production-chips-container",
       "#post-chips-container",
       "#market-chips-container",
     ]; // creo un array con i container delle chips delle fasi
-
-    $gsap.to(phasesItems, {
-      rotate: 360,
-      transformOrigin: "50% 50%",
-      duration: 4,
-      ease: "linear",
-      repeat: -1,
-    });
 
     let intentObserver = ScrollTrigger.observe({
       type: "wheel,touch,pointer",

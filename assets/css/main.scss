@@ -6,7 +6,8 @@
 
 //impedisco lo scroll fino alla fine dell'animazione iniziale
 body{
-    overflow: hidden;
+    overflow: auto;
+    //da ripristinare su hidden per la produzione
   }
 
   #mainContainer{
