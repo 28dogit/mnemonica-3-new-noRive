@@ -40,6 +40,7 @@
 //le altre importazioni derivano dalla pagina principale
 import { _zIndex } from "#tailwind-config/theme";
 import { nextTick } from "vue";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const isModalOpen1 = ref(false);
 const isModalOpen2 = ref(false);
@@ -68,25 +69,47 @@ onMounted(() => {
         //NOTE - inserisco la logica dell'animazione gsap nel context per poter utilizzare le condizioni isTabletUp e isMobile
 
         const modules_tl = $gsap.timeline({
-          scrollTrigger: {
-            trigger: "#modules-section", // Elemento che attiva l'animazione
-            //start: "top +=75", // Quando inizia l'animazione
-            start: isTabletUp ? "center center" : "top +=75", // Quando inizia l'animazione
-            end: "+=2000", // allungata la fine per rendere lo scroll più lento
-            scrub: true, // Sincronizzazione con lo scroll
-            anticipatePin: 1,
-            pin: true, // Fissa il contenitore #hero-section
-            //markers: true,
-            // snap: {
-            //   snapTo: 1 / 3,
-            //   //snapTo: (progress) => Math.round(progress * 3) / 3, // Aggancia a ogni 1/3 di progresso (120 gradi)
-            //   duration: 2.5,
-            //   ease: "back.out",
-            // },
-            // onSnapComplete: ({ progress, direction, isActive }) =>
-            //   console.log(progress, direction, isActive),
-          },
+          paused: true,
+          // scrollTrigger: {
+          //   trigger: "#modules-section", // Elemento che attiva l'animazione
+          //   //start: "top +=75", // Quando inizia l'animazione
+          //   start: isTabletUp ? "center center" : "top +=75", // Quando inizia l'animazione
+          //   end: "+=2000", // allungata la fine per rendere lo scroll più lento
+          //   scrub: true, // Sincronizzazione con lo scroll
+          //   anticipatePin: 1,
+          //   pin: true, // Fissa il contenitore #hero-section
+          //   //markers: true,
+          //   // snap: {
+          //   //   snapTo: 1 / 3,
+          //   //   //snapTo: (progress) => Math.round(progress * 3) / 3, // Aggancia a ogni 1/3 di progresso (120 gradi)
+          //   //   duration: 2.5,
+          //   //   ease: "back.out",
+          //   // },
+          //   // onSnapComplete: ({ progress, direction, isActive }) =>
+          //   //   console.log(progress, direction, isActive),
+          // },
         });
+
+        const modules_st = ScrollTrigger.create({
+          animation: "modules_tl",
+          trigger: "#modules-section", // Elemento che attiva l'animazione
+          //start: "top +=75", // Quando inizia l'animazione
+          start: isTabletUp ? "center center" : "top +=75", // Quando inizia l'animazione
+          end: "+=2000", // allungata la fine per rendere lo scroll più lento
+          //scrub: true, // Sincronizzazione con lo scroll
+          anticipatePin: 1,
+          pin: true, // Fissa il contenitore #hero-section
+          //markers: true,
+          // snap: {
+          //   snapTo: 1 / 3,
+          //   //snapTo: (progress) => Math.round(progress * 3) / 3, // Aggancia a ogni 1/3 di progresso (120 gradi)
+          //   duration: 2.5,
+          //   ease: "back.out",
+          // },
+          // onSnapComplete: ({ progress, direction, isActive }) =>
+          //   console.log(progress, direction, isActive),
+        });
+
         //modules_tl.set("#ghirlandeContainer", { filter: "blur(10px)" });
         modules_tl.from(".ghirlanda-updx, .ghirlanda-dwsx ", {
           autoAlpha: 0,
@@ -210,6 +233,11 @@ onMounted(() => {
           },
           2
         );
+
+        defineExpose({
+          modules_tl,
+          modules_st,
+        });
       } //NOTE - end context
     ); //NOTE - end mm.add
   }); //NOTE - end nextTick

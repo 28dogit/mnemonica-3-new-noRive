@@ -44,16 +44,21 @@
       <!-- </section> -->
       <!-- <section class="section_fixed modules">Modules Section</section> -->
       <div id="modules-section" class="section_fixed modules">
-        <ModulesComp></ModulesComp>
+        <ModulesComp ref="moduleRef"></ModulesComp>
       </div>
       <section class="section_fixed phases">Phases Section</section>
     </div>
+    <div class="nofixed w-[100vw] h-[1600px] bg-orange-500"></div>
   </main>
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount } from "vue";
+import { onMounted, onBeforeUnmount, ref } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// import ModulesComp from "@/components/modules_comp.vue";
+
+// const moduleRef = ref(null);
 
 // import { gsap } from "gsap";
 // gsap.registerPlugin(ScrollTrigger);
@@ -120,6 +125,8 @@ onMounted(() => {
       //rendo dinamica l'altezza di #app usando js per creare la variabile css dell'altezza in base a quante sezioni ci sono, per evitare errori o dimenticanze scrivendolo a mano
       // questa variabile la userò nel css
       const totalAppHeight = sections.length * 100;
+      console.log("totalAppHeight mod", (sections.length - 1) * 100);
+      console.log("totalAppHeight", totalAppHeight);
       document.documentElement.style.setProperty("--total-height", `${totalAppHeight}vh`);
 
       //   console.log(
@@ -138,19 +145,26 @@ onMounted(() => {
         markers: true,
         //pin: true,
         trigger: "#app", // Trigger sull'intero contenitore
-        start:
-          index === 0
-            ? `${index * SectionHeight}vh +=85` //per la prima sezione tengo lo start in alto
-            : `${index * SectionHeight}vh bottom`, //per le altre sezioni sposto lo start in basso
-        //end: `${(index + 1) * SectionHeight}vh top`,
-        end:
-          index === 0
-            ? `${(index + 1) * SectionHeight}vh bottom` // per la prima sezione sposto l'end in basso perchè non mi serve atrraversarne tutta l'altezza
-            : `${(index + 1) * SectionHeight}vh top`, //per le altre sezioni sposto l'end in alto
+        start: `${index * SectionHeight}vh center`, // Inizio della sezione
+        end: `${(index + 1) * SectionHeight}vh center`, // fine della sezione
+
+        // sistema per calcolare un inzione e una fine differente per la 1 sezione che però crea un buco alla fine
+        // lo sfalzamento tra lo start e end della prima sezione spsta verso l'alto il contenuto di #app che avendo altezza fissa
+        // ha un vuoto alla fine.
+        // start:
+        //   index === 0
+        //     ? `${index * SectionHeight}vh +=85` //per la prima sezione tengo lo start in alto
+        //     : `${index * SectionHeight}vh bottom`, //per le altre sezioni sposto lo start in basso
+        // //end: `${(index + 1) * SectionHeight}vh top`,
+        // end:
+        //   index === 0
+        //     ? `${(index + 1) * SectionHeight}vh bottom` // per la prima sezione sposto l'end in basso perchè non mi serve atrraversarne tutta l'altezza
+        //     : `${index * SectionHeight}vh top`, //per le altre sezioni sposto l'end in alto
         invalidateOnRefresh: true,
         onEnter: () => {
           console.log("onEnter", index);
           $gsap.to(section, { opacity: 1, duration: 0.5 });
+          //moduleRef.value.modules_st.disable();
         },
         onLeave: () => {
           console.log("onLeave", index);
