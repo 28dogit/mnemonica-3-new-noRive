@@ -77,12 +77,12 @@ onMounted(() => {
             anticipatePin: 1,
             pin: true, // Fissa il contenitore #hero-section
             //markers: true,
-            snap: {
-              snapTo: 1 / 3,
-              //snapTo: (progress) => Math.round(progress * 3) / 3, // Aggancia a ogni 1/3 di progresso (120 gradi)
-              duration: 2.5,
-              ease: "back.out",
-            },
+            // snap: {
+            //   snapTo: 1 / 3,
+            //   //snapTo: (progress) => Math.round(progress * 3) / 3, // Aggancia a ogni 1/3 di progresso (120 gradi)
+            //   duration: 2.5,
+            //   ease: "back.out",
+            // },
             // onSnapComplete: ({ progress, direction, isActive }) =>
             //   console.log(progress, direction, isActive),
           },
