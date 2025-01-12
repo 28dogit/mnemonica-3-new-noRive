@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div id="app">
+    <div id="sectionsWrapper">
       <!-- <section class="sectionN hero"> -->
       <div id="hero-section" class="section_fixed hero">
         <div id="ghirlanda-element" class="element">
@@ -56,6 +56,12 @@
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+const gino = useTestComposable();
+console.log("Trovato gino composable ", gino);
+
+const { modules_tl, getScrollTrigger } = useGsapModules();
+console.log("Trovato modules_tl ", modules_tl);
+
 // import ModulesComp from "@/components/modules_comp.vue";
 
 // const moduleRef = ref(null);
@@ -65,6 +71,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 onMounted(() => {
   const { $gsap } = useNuxtApp();
+  console.log("Trovato modules_tl on mouted", modules_tl);
+  const scrollTrigger = getScrollTrigger(); // Chiama la funzione
+  if (scrollTrigger) {
+    console.log("Scrub:", scrollTrigger.scrub);
+    console.log("Start:", scrollTrigger.start);
+    console.log("End:", scrollTrigger.end);
+  } else {
+    console.error("ScrollTrigger non trovato.");
+  }
 
   //SECTION - animazioni interne
   // registro effetto per l'entrata delle scritte e del logo in Hero section
@@ -122,7 +137,7 @@ onMounted(() => {
       //calcolo l'altezza della section per gestire i markers di gsap
       const SectionHeight = section.offsetHeight;
 
-      //rendo dinamica l'altezza di #app usando js per creare la variabile css dell'altezza in base a quante sezioni ci sono, per evitare errori o dimenticanze scrivendolo a mano
+      //rendo dinamica l'altezza di #sectionsWrapper usando js per creare la variabile css dell'altezza in base a quante sezioni ci sono, per evitare errori o dimenticanze scrivendolo a mano
       // questa variabile la userò nel css
       const totalAppHeight = sections.length * 100;
       console.log("totalAppHeight mod", (sections.length - 1) * 100);
@@ -144,7 +159,7 @@ onMounted(() => {
       ScrollTrigger.create({
         markers: true,
         //pin: true,
-        trigger: "#app", // Trigger sull'intero contenitore
+        trigger: "#sectionsWrapper", // Trigger sull'intero contenitore
         start: `${index * SectionHeight}vh center`, // Inizio della sezione
         end: `${(index + 1) * SectionHeight}vh center`, // fine della sezione
 
@@ -200,7 +215,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-#app {
+#sectionsWrapper {
   width: 100vw;
   height: var(--total-height, 100vh);
   //height: 300vh; /* Altezza totale virtuale: 100vh per ogni sezione */

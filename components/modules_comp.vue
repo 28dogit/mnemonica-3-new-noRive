@@ -233,11 +233,6 @@ onMounted(() => {
           },
           2
         );
-
-        defineExpose({
-          modules_tl,
-          modules_st,
-        });
       } //NOTE - end context
     ); //NOTE - end mm.add
   }); //NOTE - end nextTick
