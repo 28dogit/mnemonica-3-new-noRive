@@ -54,9 +54,9 @@ const closeModal = () => {
 
 onMounted(() => {
   nextTick(() => {
-    console.log(
-      "la logica di Gsap per questo componente eè affidata al composable useGsapModules.ts"
-    );
+    // console.log(
+    //   "la logica di Gsap per questo componente eè affidata al composable useGsapModules.ts"
+    // );
   }); //NOTE - end nextTick
 }); //NOTE - end onMounted
 //!SECTION

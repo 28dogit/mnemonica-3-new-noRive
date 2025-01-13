@@ -15,6 +15,18 @@ export const useGsapModules=()=>{
   //dichiaro la timeline fuori da mm in modo da esporla fuori dalla funzione stessa cosa per onComplete
   let modules_tl: gsap.core.Timeline | null = null;
   let onCompleteCallback: (() => void) | null = null; // Callback per onComplete
+  let onEnterCallback: (() => void) | null = null; // Callback per onEnter
+  // let onLeaveCallback: (() => void) | null = null; // Callback per onLeave
+
+  // Function to disable body scroll
+  const disableBodyScroll = () => {
+    document.body.style.overflow = "hidden";
+  };
+
+  // Function to enable body scroll
+  const enableBodyScroll = () => {
+    document.body.style.overflow = "auto";
+  };
   
   mm.add(
     //aggiungo una o più media query (conditions)
@@ -50,6 +62,12 @@ export const useGsapModules=()=>{
           // },
           // onSnapComplete: ({ progress, direction, isActive }) =>
           //   console.log(progress, direction, isActive),
+        },
+        onEnter(){
+          console.log("composables entrato");
+          if (onEnterCallback) {
+            onEnterCallback(); // Esegue la callback se definita
+          }
         },
         onComplete() {
           console.log("modules_tl è stata eseguita tutta");
@@ -191,10 +209,18 @@ export const useGsapModules=()=>{
   const setOnComplete = (callback: () => void) => {
     onCompleteCallback = callback;
   };
+  const setOnEnter = (callback: () => void) => {
+    onEnterCallback = callback;
+  };
+  // const setOnLeave = (callback: () => void) => {
+  //   onLeaveCallback = callback;
+  // };
+
 
 
         // Funzione per accedere allo ScrollTrigger della timeline
   const getScrollTrigger = () => modules_tl?.scrollTrigger || null;
 
-  return { modules_tl, getScrollTrigger , setOnComplete};
+  return { modules_tl, getScrollTrigger , setOnComplete, setOnEnter };
+  //return { modules_tl, getScrollTrigger , setOnComplete, setOnEnter, setOnLeave };
 }

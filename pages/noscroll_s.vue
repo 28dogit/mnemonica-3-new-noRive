@@ -114,7 +114,7 @@ onMounted(() => {
   //qui richiamerò anche il composables di Phase (da implementare ancora)
 
   //composables di Modules
-  const { modules_tl, getScrollTrigger, setOnComplete } = useGsapModules();
+  const { modules_tl, getScrollTrigger, setOnComplete, setOnEnter } = useGsapModules();
   const scrollTrigger = getScrollTrigger();
   scrollTrigger.disable();
 
@@ -140,30 +140,30 @@ onMounted(() => {
         trigger: "#sectionsWrapper", // Trigger sull'intero contenitore
         start: `${index * SectionHeight}vh center`, // Inizio della sezione
         end: `${(index + 1) * SectionHeight}vh center`, // fine della sezione
-        invalidateOnRefresh: true,
+        //invalidateOnRefresh: true,
 
         onEnter: () => {
+          //mainScrollTrigger.disable();
           console.log("onEnter", index);
           $gsap.to(section, { opacity: 1, zIndex: "999999999", duration: 0.5 });
           if (index === 1) {
             scrollTrigger.enable();
-            // scrollTrigger.vars.scrub = false;
-            console.log("Scrub (via vars) per index 1:", scrollTrigger.vars.scrub);
+            setOnEnter(() => {
+              // mainScrollTrigger.disable();
+              // scrollTrigger.enable();
+            });
+            //scrollTrigger.enable();
+            //console.log("Scrub (via vars) per index 1:", scrollTrigger.vars.scrub);
             setOnComplete(() => {
-              console.log("Re-enabling Main ScrollTrigger");
-              //mainScrollTrigger.enable();
+              //console.log("Re-enabling Main ScrollTrigger");
+              // mainScrollTrigger.enable();
+              // scrollTrigger.disable();
             });
           }
           if (index === 2) {
-            //scrollTrigger.disable();
-            console.log("ho disabilitato lo scroll di modules");
+            console.log("entrato index2 ");
             //mainScrollTrigger.disable();
           }
-          console.log(
-            "Scrub (via vars) da dentro on enter master:",
-            scrollTrigger.vars.scrub
-          );
-          //moduleRef.value.modules_st.disable();
         },
         onLeave: () => {
           console.log("onLeave", index);
@@ -172,6 +172,9 @@ onMounted(() => {
         onEnterBack: () => {
           console.log("onEnterBack", index);
           $gsap.to(section, { opacity: 1, zIndex: "999999999", duration: 0.5 });
+          if (index === 0) {
+            console.log("devo forzare l'uscita di index1");
+          }
         },
         onLeaveBack: () => {
           console.log("onLeaveBack", index);
