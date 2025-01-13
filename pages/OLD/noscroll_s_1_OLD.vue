@@ -56,17 +56,13 @@
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// import { gsap } from "gsap";
+// gsap.registerPlugin(ScrollTrigger);
+
 onMounted(() => {
   const { $gsap } = useNuxtApp();
 
   //SECTION - animazioni interne
-  // implemento la timeline intro che sbloccherà alla fine l'overflow hidden del body per ripristinare lo scroll
-  const intro = $gsap.timeline({
-    onComplete: () => {
-      //console.log("Ripristino scroll");
-      $gsap.set("body", { overflow: "auto" });
-    },
-  });
   // registro effetto per l'entrata delle scritte e del logo in Hero section
   $gsap.registerEffect({
     name: "EnterFrom",
@@ -83,6 +79,13 @@ onMounted(() => {
       y: "100",
     },
     extendTimeline: true,
+  });
+  // implemento la timeline intro che sbloccherà alla fine l'overflow hidden del body per ripristinare lo scroll
+  const intro = $gsap.timeline({
+    onComplete: () => {
+      //console.log("Ripristino scroll");
+      $gsap.set("body", { overflow: "auto" });
+    },
   });
 
   intro.from("#ghirlanda-element", {
@@ -109,16 +112,11 @@ onMounted(() => {
     return;
   }
 
-  //SECTION - Richiamo Compsables e varie esposte
   //richiamo del composable useGsapModules che contiene tutta la timeline di modules
-  //qui richiamerò anche il composables di Phase (da implementare ancora)
-
-  //composables di Modules
   const { modules_tl, getScrollTrigger, setOnComplete } = useGsapModules();
   const scrollTrigger = getScrollTrigger();
   scrollTrigger.disable();
-
-  //!SECTION
+  console.log("ModulesComp nexttick mounted");
 
   //creo la funzione updateTriger per legarla ad un listner sul resize
   const updateTriggers = () => {
@@ -134,17 +132,41 @@ onMounted(() => {
       console.log("totalAppHeight", totalAppHeight);
       document.documentElement.style.setProperty("--total-height", `${totalAppHeight}vh`);
 
+      //   console.log(
+      //     "SectionHeight: ",
+      //     SectionHeight,
+      //     " - TotalAppHeight: ",
+      //     totalAppHeight
+      //   );
+      //   console.log("INDEX * 100", index * 100);
+      //   console.log(`Sezione ${index}:`, {
+      //     offsetTop: section.offsetTop,
+      //     offsetHeight: section.offsetHeight,
+      //   });
+
       let mainScrollTrigger = ScrollTrigger.create({
         //markers: true,
         //pin: true,
         trigger: "#sectionsWrapper", // Trigger sull'intero contenitore
         start: `${index * SectionHeight}vh center`, // Inizio della sezione
         end: `${(index + 1) * SectionHeight}vh center`, // fine della sezione
-        invalidateOnRefresh: true,
 
+        // sistema per calcolare un inzione e una fine differente per la 1 sezione che però crea un buco alla fine
+        // lo sfalzamento tra lo start e end della prima sezione spsta verso l'alto il contenuto di #app che avendo altezza fissa
+        // ha un vuoto alla fine.
+        // start:
+        //   index === 0
+        //     ? `${index * SectionHeight}vh +=85` //per la prima sezione tengo lo start in alto
+        //     : `${index * SectionHeight}vh bottom`, //per le altre sezioni sposto lo start in basso
+        // //end: `${(index + 1) * SectionHeight}vh top`,
+        // end:
+        //   index === 0
+        //     ? `${(index + 1) * SectionHeight}vh bottom` // per la prima sezione sposto l'end in basso perchè non mi serve atrraversarne tutta l'altezza
+        //     : `${index * SectionHeight}vh top`, //per le altre sezioni sposto l'end in alto
+        invalidateOnRefresh: true,
         onEnter: () => {
           console.log("onEnter", index);
-          $gsap.to(section, { opacity: 1, zIndex: "999999999", duration: 0.5 });
+          $gsap.to(section, { opacity: 1, duration: 0.5 });
           if (index === 1) {
             scrollTrigger.enable();
             // scrollTrigger.vars.scrub = false;
@@ -167,15 +189,15 @@ onMounted(() => {
         },
         onLeave: () => {
           console.log("onLeave", index);
-          $gsap.to(section, { opacity: 0, zIndex: "0", duration: 0.5 });
+          $gsap.to(section, { opacity: 0, duration: 0.5 });
         },
         onEnterBack: () => {
           console.log("onEnterBack", index);
-          $gsap.to(section, { opacity: 1, zIndex: "999999999", duration: 0.5 });
+          $gsap.to(section, { opacity: 1, duration: 0.5 });
         },
         onLeaveBack: () => {
           console.log("onLeaveBack", index);
-          $gsap.to(section, { opacity: 0, zIndex: "0", duration: 0.5 });
+          $gsap.to(section, { opacity: 0, duration: 0.5 });
         },
       });
     });
@@ -205,5 +227,29 @@ onMounted(() => {
   //height: 300vh; /* Altezza totale virtuale: 100vh per ogni sezione */
   position: relative; /* Contenitore relativo per le sezioni sovrapposte */
 }
-//.section_fixed è gestita in main.scss
+
+// .sectionN {
+//   position: fixed; /* Sovrappone le sezioni */
+//   top: 70px;
+//   left: 0;
+//   width: 100vw;
+//   height: 100vh;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   opacity: 0; /* Inizialmente nascoste */
+//   transition: opacity 0.5s ease;
+
+//   // &.hero {
+//   //   background-color: #ff7675;
+//   // }
+
+//   &.modules {
+//     background-color: #74b9ff;
+//   }
+
+//   &.phases {
+//     background-color: #55efc4;
+//   }
+// }
 </style>

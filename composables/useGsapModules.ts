@@ -4,14 +4,18 @@ export const useGsapModules=()=>{
   if (import.meta.env.SSR) return { modules_tl: null, getScrollTrigger: null, mm: null };
 
   const { $gsap } = useNuxtApp();
+
   if (!$gsap) {
     console.error('GSAP is not available.');
     return { modules_tl: null, getScrollTrigger: null, mm: null };
   }
 
   const mm = $gsap.matchMedia();
-  let modules_tl: gsap.core.Timeline | null = null;
 
+  //dichiaro la timeline fuori da mm in modo da esporla fuori dalla funzione stessa cosa per onComplete
+  let modules_tl: gsap.core.Timeline | null = null;
+  let onCompleteCallback: (() => void) | null = null; // Callback per onComplete
+  
   mm.add(
     //aggiungo una o più media query (conditions)
     {
@@ -26,17 +30,33 @@ export const useGsapModules=()=>{
         isMobile: boolean;
         isTabletUp: boolean;
       };
-
-      modules_tl = $gsap.timeline({paused: true,
+      
+      modules_tl = $gsap.timeline({
+        paused: true,
         scrollTrigger: {
-            trigger: "#modules-section", // Elemento che attiva l'animazione
-            //start: "top +=75", // Quando inizia l'animazione
-            start: "top +=75", // Quando inizia l'animazione
-            end: "+=2000", // allungata la fine per rendere lo scroll più lento
-            //scrub: true, // Sincronizzazione con lo scroll
-            anticipatePin: 1,
-            pin: true, // Fissa il contenitore #hero-section
-          },
+          trigger: "#modules-section", // Elemento che attiva l'animazione
+          //start: "top +=75", // Quando inizia l'animazione
+          start: conditions.isTabletUp ? "center center" : "top +=75", // Quando inizia l'animazione
+          end: "+=2000", // allungata la fine per rendere lo scroll più lento
+          scrub: true, // Sincronizzazione con lo scroll
+          //anticipatePin: 1,
+          //pin: true, // Fissa il contenitore #hero-section
+          markers: true,
+          // snap: {
+          //   snapTo: 1 / 3,
+          //   //snapTo: (progress) => Math.round(progress * 3) / 3, // Aggancia a ogni 1/3 di progresso (120 gradi)
+          //   duration: 2.5,
+          //   ease: "back.out",
+          // },
+          // onSnapComplete: ({ progress, direction, isActive }) =>
+          //   console.log(progress, direction, isActive),
+        },
+        onComplete() {
+          console.log("modules_tl è stata eseguita tutta");
+          if (onCompleteCallback) {
+            onCompleteCallback(); // Esegue la callback se definita
+          }
+        },
       });
 
       //modules_tl.set("#ghirlandeContainer", { filter: "blur(10px)" });
@@ -45,7 +65,8 @@ export const useGsapModules=()=>{
           filter: "blur(5px)",
         });
         modules_tl.to("#Modules_3a #Rooms path", {
-          fill: "#CEF372",
+          //fill: "#CEF372",
+          fill: "#000FFF",
         });
         modules_tl.from(
           "#module-txt_1 .focusWrapper .focusBtn",
@@ -166,9 +187,14 @@ export const useGsapModules=()=>{
 
     });
 
+    // Funzione per impostare una callback per onComplete
+  const setOnComplete = (callback: () => void) => {
+    onCompleteCallback = callback;
+  };
+
 
         // Funzione per accedere allo ScrollTrigger della timeline
   const getScrollTrigger = () => modules_tl?.scrollTrigger || null;
 
-  return { modules_tl, getScrollTrigger };
+  return { modules_tl, getScrollTrigger , setOnComplete};
 }
