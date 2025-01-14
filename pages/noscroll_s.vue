@@ -103,22 +103,33 @@ onMounted(() => {
   //!SECTION
 
   const sections = document.querySelectorAll(".section_fixed");
+  //console.log("sections", sections);
 
   if (!sections.length) {
     console.error("Nessuna sezione trovata.");
     return;
   }
 
-  //SECTION - Richiamo Compsables e varie esposte
+  //SECTION - Richiamo Composables e le varie esposte
   //richiamo del composable useGsapModules che contiene tutta la timeline di modules
   //qui richiamerò anche il composables di Phase (da implementare ancora)
 
   //composables di Modules
-  const { modules_tl, getScrollTrigger, setOnComplete, setOnEnter } = useGsapModules();
+  const { modules_tl, getScrollTrigger, setOnEnter, setOnComplete } = useGsapModules();
   const scrollTrigger = getScrollTrigger();
   scrollTrigger.disable();
 
   //!SECTION
+
+  // Function to disable body scroll
+  const disableBodyScroll = () => {
+    document.body.style.overflow = "hidden";
+  };
+
+  // Function to enable body scroll
+  const enableBodyScroll = () => {
+    document.body.style.overflow = "auto";
+  };
 
   //creo la funzione updateTriger per legarla ad un listner sul resize
   const updateTriggers = () => {
@@ -138,26 +149,26 @@ onMounted(() => {
         //markers: true,
         //pin: true,
         trigger: "#sectionsWrapper", // Trigger sull'intero contenitore
+        //trigger: section, // Trigger sull'intero contenitore
         start: `${index * SectionHeight}vh center`, // Inizio della sezione
         end: `${(index + 1) * SectionHeight}vh center`, // fine della sezione
         //invalidateOnRefresh: true,
 
         onEnter: () => {
-          //mainScrollTrigger.disable();
           console.log("onEnter", index);
           $gsap.to(section, { opacity: 1, zIndex: "999999999", duration: 0.5 });
           if (index === 1) {
+            // mainScrollTrigger.disable();
+            // document.body.style.overflow = "hidden";
             scrollTrigger.enable();
             setOnEnter(() => {
-              // mainScrollTrigger.disable();
-              // scrollTrigger.enable();
+              // ScrollTrigger.getAll().forEach((trigger) => trigger.disable());
+              //mainScrollTrigger.disable();
+              //disableBodyScroll();
             });
-            //scrollTrigger.enable();
-            //console.log("Scrub (via vars) per index 1:", scrollTrigger.vars.scrub);
             setOnComplete(() => {
-              //console.log("Re-enabling Main ScrollTrigger");
-              // mainScrollTrigger.enable();
-              // scrollTrigger.disable();
+              //enableBodyScroll();
+              //mainScrollTrigger.enable();
             });
           }
           if (index === 2) {
