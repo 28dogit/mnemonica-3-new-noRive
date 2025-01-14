@@ -55,7 +55,7 @@ onMounted(() => {
       defaults: {
         ease: "linear",
         repeat: -1,
-        duration: 0.4,
+        duration: 7,
       },
       extendTimeline: false,
     });
@@ -64,7 +64,7 @@ onMounted(() => {
     // "#m_100_circle_ecosys_0, #m_100_circle_ecosys_1, #m_100_circle_ecosys_2, #m_100_circle_ecosys_3"
     ScrollTrigger.batch(phasesItems, {
       trigger: "#phases-section",
-      //pinnedContainer: true,
+      pinnedContainer: true,
       markers: true,
       start: "top center",
       end: "center center",

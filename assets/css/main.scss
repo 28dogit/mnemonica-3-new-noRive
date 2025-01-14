@@ -126,27 +126,27 @@ body{
 #ghirlanda-element{
     opacity:0.6;
     //max-height: 50vh;
-    //mix-blend-mode: luminosity;
+    mix-blend-mode: luminosity;
     @include bp.for-desktop-big-up{
       width: 550px;
     }
 }
-#ghirlanda-element::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('/assets/img/Ghirlanda_full_web_800_opt.png') no-repeat center;
-  background-size: cover;
-  mix-blend-mode: luminosity;
-  z-index: -1;
-}
+// #ghirlanda-element::before {
+//   content: '';
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background: url('/assets/img/Ghirlanda_full_web_800_opt.png') no-repeat center;
+//   background-size: cover;
+//   mix-blend-mode: luminosity;
+//   z-index: -1;
+// }
 
 #ghirlanda_img{
   width: 90%;
-  display: none;
+  //display: none;
 }
 
 #logo_mne {

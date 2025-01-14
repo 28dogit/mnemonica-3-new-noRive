@@ -171,6 +171,7 @@ const closeModal = () => {
 
 const handleScroll = (event) => {
   if (!isPortrait.value) {
+    console.log("Focus", modalInner.value.scrollLeft);
     event.preventDefault();
     $gsap.to(modalInner.value, {
       scrollTo: {

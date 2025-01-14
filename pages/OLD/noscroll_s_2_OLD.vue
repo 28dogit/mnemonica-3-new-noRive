@@ -117,9 +117,16 @@ onMounted(() => {
   //qui richiamerò anche il composables di Phase (da implementare ancora)
 
   //composables di Modules
-  const { modules_tl, getScrollTrigger, setOnEnter, setOnComplete } = useGsapModules();
+  const {
+    modules_tl,
+    getScrollTrigger,
+    setOnEnter,
+    setOnComplete,
+    attachScrollHandler,
+    detachScrollHandler,
+  } = useGsapModules();
   const scrollTrigger = getScrollTrigger();
-  //scrollTrigger.disable();
+  scrollTrigger.disable();
 
   //!SECTION
 
@@ -135,80 +142,55 @@ onMounted(() => {
 
   //creo la funzione updateTriger per legarla ad un listner sul resize
   const updateTriggers = () => {
-    let allScrollHeight = 0;
-    let scrollTriggerHeights = [];
     // Loop per creare transizioni tra sezioni
     sections.forEach((section, index) => {
       //calcolo l'altezza della section per gestire i markers di gsap
-      let scrollHeight = ref(null);
-      let Sstart = 0;
-      let Send = 0;
-
-      if (index === 0) {
-        scrollHeight = section.offsetHeight;
-        Sstart = 0;
-        Send = section.offsetHeight;
-      }
-      if (index === 1) {
-        scrollHeight = scrollTrigger.end;
-        Sstart = section.offsetHeight;
-        Send = section.offsetHeight + scrollTrigger.end;
-      }
-      if (index === 2) {
-        scrollHeight = section.offsetHeight;
-        Sstart = section.offsetHeight + scrollTrigger.end;
-        Send = section.offsetHeight * 2 + scrollTrigger.end;
-      }
-
-      allScrollHeight += scrollHeight;
-      scrollTriggerHeights.push(scrollHeight);
-
       const SectionHeight = section.offsetHeight;
-
-      console.log("SecrollHeight", scrollHeight);
-      console.log("allScrollHeight", allScrollHeight);
-      console.log("scrollTriggerHeights", scrollTriggerHeights);
-
-      console.log("test Calcolo Start", Sstart);
-
-      console.log("test Calcolo End", Send);
 
       //rendo dinamica l'altezza di #sectionsWrapper usando js per creare la variabile css dell'altezza in base a quante sezioni ci sono, per evitare errori o dimenticanze scrivendolo a mano
       // questa variabile la userò nel css
-      const totalAppHeight = allScrollHeight;
-      document.documentElement.style.setProperty("--total-height", `${totalAppHeight}px`);
+      const totalAppHeight = sections.length * 100;
+      console.log("totalAppHeight mod", (sections.length - 1) * 100);
+      console.log("totalAppHeight", totalAppHeight);
+      document.documentElement.style.setProperty("--total-height", `${totalAppHeight}vh`);
 
       let mainScrollTrigger = ScrollTrigger.create({
-        markers: true,
+        //markers: true,
         //pin: true,
         trigger: "#sectionsWrapper", // Trigger sull'intero contenitore
         //trigger: section, // Trigger sull'intero contenitore
-
-        start: `${Sstart}px center`, // Inizio della sezione
-        end: `${Send}px center`, // fine della sezione
+        start: `${index * SectionHeight}vh center`, // Inizio della sezione
+        end: `${(index + 1) * SectionHeight}vh center`, // fine della sezione
         //invalidateOnRefresh: true,
 
         onEnter: () => {
           console.log("onEnter", index);
           $gsap.to(section, { opacity: 1, zIndex: "999999999", duration: 0.5 });
           if (index === 1) {
-            console.log("SectionHeight1", SectionHeight);
             // mainScrollTrigger.disable();
             // document.body.style.overflow = "hidden";
-            //scrollTrigger.enable();
+            scrollTrigger.enable();
             setOnEnter(() => {
               //mainScrollTrigger.disable();
+              nextTick(() => {
+                if (moduleSection.value) {
+                  attachScrollHandler(moduleSection.value);
+                  scrollTrigger.enable();
+                } else {
+                  console.error("moduleSection is null, cannot attach scroll handler.");
+                }
+              });
               // ScrollTrigger.getAll().forEach((trigger) => trigger.disable());
               //mainScrollTrigger.disable();
               //disableBodyScroll();
             });
             setOnComplete(() => {
+              detachScrollHandler();
               //enableBodyScroll();
               //mainScrollTrigger.enable();
             });
           }
           if (index === 2) {
-            console.log("SectionHeight2", SectionHeight);
             console.log("entrato index2 ");
             //mainScrollTrigger.disable();
           }
@@ -253,8 +235,7 @@ onMounted(() => {
 <style lang="scss">
 #sectionsWrapper {
   width: 100vw;
-  //height: 600vh;
-  height: var(--total-height);
+  height: var(--total-height, 100vh);
   //height: 300vh; /* Altezza totale virtuale: 100vh per ogni sezione */
   position: relative; /* Contenitore relativo per le sezioni sovrapposte */
 }
