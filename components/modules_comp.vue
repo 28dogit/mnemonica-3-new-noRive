@@ -79,12 +79,12 @@ onMounted(() => {
             anticipatePin: 1,
             pin: true, // Fissa il contenitore #hero-section
             //markers: true,
-            // snap: {
-            //   snapTo: 1 / 3,
-            //   //snapTo: (progress) => Math.round(progress * 3) / 3, // Aggancia a ogni 1/3 di progresso (120 gradi)
-            //   duration: 2.5,
-            //   ease: "back.out",
-            // },
+            snap: {
+              snapTo: 1 / 3,
+              //snapTo: (progress) => Math.round(progress * 3) / 3, // Aggancia a ogni 1/3 di progresso (120 gradi)
+              duration: 2.5,
+              ease: "back.out",
+            },
             // onSnapComplete: ({ progress, direction, isActive }) =>
             //   console.log(progress, direction, isActive),
           },
@@ -165,6 +165,14 @@ onMounted(() => {
           1
         );
         modules_tl.to(
+          "#module-txt_2 .focusWrapper .focusTxt",
+          {
+            // justifyContent: "flex-end",
+            opacity: 1,
+          },
+          "< +=0.3"
+        );
+        modules_tl.to(
           "#modules_svg",
           {
             rotate: 240,
@@ -212,6 +220,14 @@ onMounted(() => {
             opacity: 1,
           },
           2
+        );
+        modules_tl.to(
+          "#module-txt_3 .focusWrapper .focusTxt",
+          {
+            // justifyContent: "flex-end",
+            opacity: 1,
+          },
+          "< +=0.3"
         );
       } //NOTE - end context
     ); //NOTE - end mm.add

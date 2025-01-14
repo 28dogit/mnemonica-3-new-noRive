@@ -119,7 +119,7 @@ onMounted(() => {
   //composables di Modules
   const { modules_tl, getScrollTrigger, setOnEnter, setOnComplete } = useGsapModules();
   const scrollTrigger = getScrollTrigger();
-  //scrollTrigger.disable();
+  scrollTrigger.disable();
 
   //!SECTION
 
@@ -193,24 +193,15 @@ onMounted(() => {
           $gsap.to(section, { opacity: 1, zIndex: "999999999", duration: 0.5 });
           if (index === 1) {
             console.log("SectionHeight1", SectionHeight);
-            // mainScrollTrigger.disable();
-            // document.body.style.overflow = "hidden";
-            //scrollTrigger.enable();
-            setOnEnter(() => {
-              //mainScrollTrigger.disable();
-              // ScrollTrigger.getAll().forEach((trigger) => trigger.disable());
-              //mainScrollTrigger.disable();
-              //disableBodyScroll();
-            });
+            //mainScrollTrigger.disable();
+            scrollTrigger.enable();
+            setOnEnter(() => {});
             setOnComplete(() => {
-              //enableBodyScroll();
-              //mainScrollTrigger.enable();
+              //scrollTrigger.disable();
             });
           }
           if (index === 2) {
-            console.log("SectionHeight2", SectionHeight);
             console.log("entrato index2 ");
-            //mainScrollTrigger.disable();
           }
         },
         onLeave: () => {
@@ -220,8 +211,9 @@ onMounted(() => {
         onEnterBack: () => {
           console.log("onEnterBack", index);
           $gsap.to(section, { opacity: 1, zIndex: "999999999", duration: 0.5 });
-          if (index === 0) {
-            console.log("devo forzare l'uscita di index1");
+          if (index === 1) {
+            scrollTrigger.enable();
+            console.log("riattivo scroll trigger");
           }
         },
         onLeaveBack: () => {

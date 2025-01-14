@@ -16,6 +16,7 @@ export const useGsapModules=()=>{
   let modules_tl: gsap.core.Timeline | null = null;
   let onCompleteCallback: (() => void) | null = null; // Callback per onComplete
   let onEnterCallback: (() => void) | null = null; // Callback per onEnter
+  let onEnterBackCallback: (() => void) | null = null; // Callback per onEnter
   // let onLeaveCallback: (() => void) | null = null; // Callback per onLeave
   //___________
   
@@ -74,6 +75,12 @@ export const useGsapModules=()=>{
             console.log("composables entrato");
             if (onEnterCallback) {
               onEnterCallback(); // Esegue la callback se definita
+            }
+          },
+          onEnterBack(){
+            console.log("composables entrato back");
+            if (onEnterBackCallback) {
+              onEnterBackCallback(); // Esegue la callback se definita
             }
           },
         },
@@ -244,15 +251,15 @@ export const useGsapModules=()=>{
   const setOnEnter = (callback: () => void) => {
     onEnterCallback = callback;
   };
-  // const setOnLeave = (callback: () => void) => {
-  //   onLeaveCallback = callback;
-  // };
+  const setOnEnterBack = (callback: () => void) => {
+    onEnterBackCallback = callback;
+  };
 
 
 
         // Funzione per accedere allo ScrollTrigger della timeline
   const getScrollTrigger = () => modules_tl?.scrollTrigger || null;
 
-  return { modules_tl, getScrollTrigger, setOnEnter, setOnComplete, attachScrollHandler, detachScrollHandler, };
+  return { modules_tl, getScrollTrigger, setOnEnter, setOnComplete, setOnEnterBack, attachScrollHandler, detachScrollHandler, };
   //return { modules_tl, getScrollTrigger , setOnComplete, setOnEnter, setOnLeave };
 }

@@ -77,9 +77,9 @@ body{
   // &.modules {
   //   background-color: #74b9ff;
   // }
-  &.phases {
-    background-color: #55efc33c;
-  }
+  // &.phases {
+  //   background-color: #55efc33c;
+  // }
   &:not(#hero-section){
     @include bp.for-tablet-up{ // 576px up
       flex-direction: row;
