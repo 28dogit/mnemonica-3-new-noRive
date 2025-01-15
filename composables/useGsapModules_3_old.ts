@@ -1,6 +1,6 @@
 import { useNuxtApp } from "#app";
 
-export const useGsapModules=()=>{
+export const useGsapModules_3_old=()=>{
   if (import.meta.env.SSR) return { modules_tl: null, getScrollTrigger: null, mm: null };
 
   const { $gsap } = useNuxtApp();
@@ -18,7 +18,25 @@ export const useGsapModules=()=>{
   let onEnterCallback: (() => void) | null = null; // Callback per onEnter
   let onEnterBackCallback: (() => void) | null = null; // Callback per onEnter
   // let onLeaveCallback: (() => void) | null = null; // Callback per onLeave
+  //___________
+  
+  //const moduleSection = ref(null);
+  const moduleSection = ref<HTMLElement | null>(null);
 
+  const handleScroll = (event: WheelEvent) => {
+    if (moduleSection.value) {
+      event.preventDefault();
+      console.log(moduleSection.value.scrollTop);
+      $gsap.to(moduleSection.value, {
+        scrollTo: {
+          y: moduleSection.value.scrollTop + event.deltaY * 6,
+        },
+        ease: "power2",
+        duration: 0.5,
+      });
+    }
+  };
+  //_____________
   mm.add(
     //aggiungo una o più media query (conditions)
     {
@@ -203,6 +221,29 @@ export const useGsapModules=()=>{
 
     });
 
+    const attachScrollHandler = (element: HTMLElement) => {
+      moduleSection.value = element;
+    
+      // Controllo di null prima di aggiungere il listener
+      if (moduleSection.value) {
+        moduleSection.value.addEventListener("wheel", handleScroll, { passive: false });
+      } else {
+        console.error("ModulSection_comp is null, cannot attach scroll handler.");
+      }
+    };
+    
+    // const attachScrollHandler = (element: HTMLElement) => {
+    //   moduleSection.value = element;
+    //   moduleSection.value.addEventListener("wheel", handleScroll, { passive: false });
+    // };
+  
+    const detachScrollHandler = () => {
+      if (moduleSection.value) {
+        moduleSection.value.removeEventListener("wheel", handleScroll);
+        moduleSection.value = null;
+      }
+    };
+
     // Funzione per impostare una callback per onComplete
   const setOnComplete = (callback: () => void) => {
     onCompleteCallback = callback;
@@ -215,9 +256,10 @@ export const useGsapModules=()=>{
   };
 
 
+
         // Funzione per accedere allo ScrollTrigger della timeline
   const getScrollTrigger = () => modules_tl?.scrollTrigger || null;
 
-  return { modules_tl, getScrollTrigger, setOnEnter, setOnComplete, setOnEnterBack, };
+  return { modules_tl, getScrollTrigger, setOnEnter, setOnComplete, setOnEnterBack, attachScrollHandler, detachScrollHandler, };
   //return { modules_tl, getScrollTrigger , setOnComplete, setOnEnter, setOnLeave };
 }

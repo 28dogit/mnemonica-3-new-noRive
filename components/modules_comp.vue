@@ -90,7 +90,7 @@ onMounted(() => {
           },
         });
 
-        //modules_tl.set("#ghirlandeContainer", { filter: "blur(10px)" });
+        modules_tl.set("#ghirlandeContainer", { autoAlpha: "0" });
         modules_tl.from(".ghirlanda-updx, .ghirlanda-dwsx ", {
           autoAlpha: 0,
           filter: "blur(5px)",

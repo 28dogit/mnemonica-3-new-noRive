@@ -3,12 +3,12 @@
     <div id="hero-section" class="section">
       <div id="ghirlanda-element" class="element">
         <!-- <div id="logo_mne" class=""> -->
-        <NuxtImg
+        <!-- <NuxtImg
           id="logo_mne"
           src="/assets/img/svg/Logo-mne-Vector.svg"
           densities="x1"
           alt="Mnemonica logo portrait"
-        />
+        /> -->
         <!-- </div> -->
         <NuxtImg
           id="ghirlanda_img"

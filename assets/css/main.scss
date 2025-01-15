@@ -30,6 +30,7 @@ body{
     position: fixed;
     top: 0px;
     left: 0px;
+    z-index: -20;
     background-size: 180% 180%;
     @include bp.for-desktop-small{
       animation: rotateBackground 70s linear infinite;
@@ -149,11 +150,11 @@ body{
   //display: none;
 }
 
-#logo_mne {
-    opacity:0.2;
-    position: absolute;
-    width: 40%;
-  }
+// #logo_mne {
+//     opacity:0.2;
+//     position: absolute;
+//     width: 40%;
+//   }
   #heroTitle {
     flex-direction: column;
       gap: 0;

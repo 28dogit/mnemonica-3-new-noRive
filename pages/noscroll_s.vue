@@ -1,17 +1,9 @@
 <template>
   <main>
-    <div id="sectionsWrapper">
+    <div id="sectionsWrapper" class="z-20">
       <!-- <section class="sectionN hero"> -->
       <div id="hero-section" class="section_fixed hero">
         <div id="ghirlanda-element" class="element">
-          <!-- <div id="logo_mne" class=""> -->
-          <NuxtImg
-            id="logo_mne"
-            src="/assets/img/svg/Logo-mne-Vector.svg"
-            densities="x1"
-            alt="Mnemonica logo portrait"
-          />
-          <!-- </div> -->
           <NuxtImg
             id="ghirlanda_img"
             src="/assets/img/Ghirlanda_full_web_800_opt.png"
@@ -43,20 +35,22 @@
       </div>
       <!-- </section> -->
       <!-- <section class="section_fixed modules">Modules Section</section> -->
-      <div id="modules-section" ref="moduleSection" class="section_fixed modules">
+      <div id="modules-section" class="section_fixed modules">
         <ModulesCompNs></ModulesCompNs>
       </div>
-      <section class="section_fixed phases">Phases Section</section>
+      <div id="phases-section" class="section_fixed phases">
+        <PhasesComp></PhasesComp>
+      </div>
+      <!-- <section class="section_fixed phases">Phases Section</section> -->
     </div>
-    <div class="nofixed w-[100vw] h-[1600px] bg-orange-500"></div>
+    <div class="nofixed w-[100vw] h-[1600px] bg-orange-500 z-30"></div>
   </main>
 </template>
 
 <script setup>
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-const moduleSection = ref(null); // Riferimento al div target
+import PhasesComp from "~/components/phases-comp.vue";
 
 onMounted(() => {
   const { $gsap } = useNuxtApp();
@@ -135,10 +129,11 @@ onMounted(() => {
 
   //creo la funzione updateTriger per legarla ad un listner sul resize
   const updateTriggers = () => {
-    let allScrollHeight = 0;
+    let allScrollHeight = 200;
     let scrollTriggerHeights = [];
     // Loop per creare transizioni tra sezioni
     sections.forEach((section, index) => {
+      const viewportHeight = section.offsetHeight;
       //calcolo l'altezza della section per gestire i markers di gsap
       let scrollHeight = ref(null);
       let Sstart = 0;
@@ -153,30 +148,30 @@ onMounted(() => {
         scrollHeight = scrollTrigger.end;
         Sstart = section.offsetHeight;
         Send = section.offsetHeight + scrollTrigger.end;
+        console.log("test1", scrollTriggerHeights[index - 1]);
       }
       if (index === 2) {
         scrollHeight = section.offsetHeight;
         Sstart = section.offsetHeight + scrollTrigger.end;
         Send = section.offsetHeight * 2 + scrollTrigger.end;
+        console.log("test2", scrollTriggerHeights[index - 1]);
       }
 
       allScrollHeight += scrollHeight;
       scrollTriggerHeights.push(scrollHeight);
 
-      const SectionHeight = section.offsetHeight;
-
       console.log("SecrollHeight", scrollHeight);
       console.log("allScrollHeight", allScrollHeight);
       console.log("scrollTriggerHeights", scrollTriggerHeights);
-
       console.log("test Calcolo Start", Sstart);
-
       console.log("test Calcolo End", Send);
 
       //rendo dinamica l'altezza di #sectionsWrapper usando js per creare la variabile css dell'altezza in base a quante sezioni ci sono, per evitare errori o dimenticanze scrivendolo a mano
       // questa variabile la userò nel css
-      const totalAppHeight = allScrollHeight;
-      document.documentElement.style.setProperty("--total-height", `${totalAppHeight}px`);
+      document.documentElement.style.setProperty(
+        "--total-height",
+        `${allScrollHeight}px`
+      );
 
       let mainScrollTrigger = ScrollTrigger.create({
         markers: true,
@@ -192,7 +187,6 @@ onMounted(() => {
           console.log("onEnter", index);
           $gsap.to(section, { opacity: 1, zIndex: "999999999", duration: 0.5 });
           if (index === 1) {
-            console.log("SectionHeight1", SectionHeight);
             //mainScrollTrigger.disable();
             scrollTrigger.enable();
             setOnEnter(() => {});
@@ -234,7 +228,6 @@ onMounted(() => {
   // Rimuovi il listener quando il componente viene smontato
   onBeforeUnmount(() => {
     window.removeEventListener("resize", updateTriggers);
-    detachScrollHandler(); // Assicura la pulizia degli eventi
   });
 
   // Imposta la prima sezione visibile all'inizio
