@@ -136,24 +136,35 @@ onMounted(() => {
       const viewportHeight = section.offsetHeight;
       //calcolo l'altezza della section per gestire i markers di gsap
       let scrollHeight = ref(null);
-      let Sstart = 0;
-      let Send = 0;
+      let start_S = 0;
+      let end_S = 0;
+      let sectionHeight0 = section.offsetHeight;
+      let sectionHeight1 = scrollTrigger.end;
+      let sectionHeight2 = section.offsetHeight;
+      console.log(
+        "le altezze Reali :) - ",
+        sectionHeight0,
+        " - ",
+        sectionHeight1,
+        " - ",
+        sectionHeight2
+      );
 
       if (index === 0) {
-        scrollHeight = section.offsetHeight;
-        Sstart = 0;
-        Send = section.offsetHeight;
+        scrollHeight = sectionHeight0;
+        start_S = 0;
+        end_S = sectionHeight0;
       }
       if (index === 1) {
         scrollHeight = scrollTrigger.end;
-        Sstart = section.offsetHeight;
-        Send = section.offsetHeight + scrollTrigger.end;
+        start_S = section.offsetHeight;
+        end_S = section.offsetHeight + scrollTrigger.end;
         console.log("test1", scrollTriggerHeights[index - 1]);
       }
       if (index === 2) {
         scrollHeight = section.offsetHeight;
-        Sstart = section.offsetHeight + scrollTrigger.end;
-        Send = section.offsetHeight * 2 + scrollTrigger.end;
+        start_S = section.offsetHeight + scrollTrigger.end;
+        end_S = section.offsetHeight * 2 + scrollTrigger.end;
         console.log("test2", scrollTriggerHeights[index - 1]);
       }
 
@@ -163,8 +174,8 @@ onMounted(() => {
       console.log("SecrollHeight", scrollHeight);
       console.log("allScrollHeight", allScrollHeight);
       console.log("scrollTriggerHeights", scrollTriggerHeights);
-      console.log("test Calcolo Start", Sstart);
-      console.log("test Calcolo End", Send);
+      console.log("test Calcolo Start", start_S);
+      console.log("test Calcolo End", end_S);
 
       //rendo dinamica l'altezza di #sectionsWrapper usando js per creare la variabile css dell'altezza in base a quante sezioni ci sono, per evitare errori o dimenticanze scrivendolo a mano
       // questa variabile la userò nel css
@@ -179,8 +190,8 @@ onMounted(() => {
         trigger: "#sectionsWrapper", // Trigger sull'intero contenitore
         //trigger: section, // Trigger sull'intero contenitore
 
-        start: `${Sstart}px center`, // Inizio della sezione
-        end: `${Send}px center`, // fine della sezione
+        start: `${start_S}px center`, // Inizio della sezione
+        end: `${end_S}px center`, // fine della sezione
         //invalidateOnRefresh: true,
 
         onEnter: () => {
