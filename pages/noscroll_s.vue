@@ -207,10 +207,7 @@ onMounted(async () => {
             });
           }
           if (index === 2) {
-            // if (PhasesRef.value?.rotationTL) {
             PhasesRef.value.rotationTL.play();
-            //   console.log("Rotation TL", PhasesRef.value.rotationTL);
-            // }
             PhasesRef.value.intentObserver.enable();
             console.log("entrato index2 ");
           }
@@ -219,6 +216,7 @@ onMounted(async () => {
           console.log("onLeave", index);
           $gsap.to(section, { opacity: 0, zIndex: "0", duration: 0.5 });
           PhasesRef.value.rotationTL.pause();
+          PhasesRef.value.intentObserver.disable();
         },
         onEnterBack: () => {
           console.log("onEnterBack", index);
@@ -227,10 +225,17 @@ onMounted(async () => {
             scrollTrigger.enable();
             console.log("riattivo scroll trigger");
           }
+          if (index === 2) {
+            PhasesRef.value.rotationTL.play();
+            PhasesRef.value.intentObserver.enable();
+            console.log("entrato back index2 ");
+          }
         },
         onLeaveBack: () => {
           console.log("onLeaveBack", index);
           $gsap.to(section, { opacity: 0, zIndex: "0", duration: 0.5 });
+          PhasesRef.value.rotationTL.pause();
+          PhasesRef.value.intentObserver.disable();
         },
       });
     });

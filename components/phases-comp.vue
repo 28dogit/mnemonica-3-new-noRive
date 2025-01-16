@@ -127,6 +127,18 @@ onMounted(() => {
         ? containers[currentIndex]
         : containers[index];
 
+      let Chips_Title = isScrollingDown
+        ? `${containers[currentIndex]} .title`
+        : `${containers[index]} .title`;
+
+      let Chips_Title_pre = isScrollingDown
+        ? `${containers[currentIndex - 1]} .title`
+        : `${containers[index - 1]} .title`;
+
+      let Chips_Title_post = isScrollingDown
+        ? `${containers[currentIndex + 1]} .title`
+        : `${containers[index + 1]} .title`;
+
       //ricavo le chips per ogni container in base a currentIndex
       let targetChips_pre = isScrollingDown
         ? $gsap.utils.toArray(`${containers[currentIndex - 1]} .phase-chips`)
@@ -150,25 +162,56 @@ onMounted(() => {
       });
 
       phases_tl
-        .to(target, {
-          // rotate: isScrollingDown ? 120 : -120,
-          // transformOrigin: "50% 50%",
-          opacity: 1,
-          ease: "back.out",
-          duration: 0.25,
-        })
-        .to(txtTarget.querySelectorAll("path"), {
-          //autoAlpha: isScrollingDown ? 1 : 0,
-          fill: isScrollingDown ? "#cef372" : "#6DCFF6",
-          duration: 0.5,
-          ease: "power2.out",
-        })
+        // .to(target, {
+        //   opacity: 1,
+        //   ease: "back.out",
+        //   duration: 0.25,
+        // })
+        // .to(txtTarget.querySelectorAll("path"), {
+        //   //autoAlpha: isScrollingDown ? 1 : 0,
+        //   fill: isScrollingDown ? "#cef372" : "#6DCFF6",
+        //   duration: 0.5,
+        //   ease: "power2.out",
+        // })
+        .fromTo(
+          Chips_Title,
+          {
+            y: isScrollingDown ? -10 : 0,
+            //autoAlpha: isScrollingDown ? 0 : 1,
+          },
+          {
+            y: isScrollingDown ? 0 : -10,
+            autoAlpha: isScrollingDown ? 1 : 0,
+            duration: 0.5,
+          }
+        )
+        .fromTo(
+          Chips_Title_pre,
+          {
+            y: isScrollingDown ? 0 : 10,
+          },
+          {
+            y: isScrollingDown ? 10 : 0,
+            autoAlpha: isScrollingDown ? 0 : 1,
+            duration: 0.3,
+          },
+          "<"
+        )
         .to(targetChips, {
           autoAlpha: isScrollingDown ? 1 : 0,
           //filter: isScrollingDown ? "blur(0px)" : "blur(5px)",
           duration: 0.5,
           stagger: 0.2,
         })
+        // .to(
+        //   Chips_Title_pre,
+        //   {
+        //     //y: isScrollingDown ? 100 : -100,
+        //     autoAlpha: isScrollingDown ? 0 : 1,
+        //     duration: 0.3,
+        //   },
+        //   "<"
+        // )
         .to(
           targetChips_pre,
           {
@@ -178,17 +221,25 @@ onMounted(() => {
             stagger: 0.2,
           },
           "<"
-        )
-        .to(
-          targetChips_post,
-          {
-            autoAlpha: 0,
-            //filter: isScrollingDown ? "blur(0px)" : "blur(5px)",
-            duration: 0.3,
-            stagger: 0.2,
-          },
-          "<"
         );
+      // .to(
+      //   Chips_Title_post,
+      //   {
+      //     autoAlpha: 0,
+      //     duration: 0.3,
+      //   },
+      //   "<"
+      // )
+      // .to(
+      //   targetChips_post,
+      //   {
+      //     autoAlpha: 0,
+      //     //filter: isScrollingDown ? "blur(0px)" : "blur(5px)",
+      //     duration: 0.3,
+      //     stagger: 0.2,
+      //   },
+      //   "<"
+      // );
 
       currentIndex = index;
     } //NOTE - chiusura CircleAnimation
