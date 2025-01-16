@@ -39,7 +39,7 @@
         <ModulesCompNs></ModulesCompNs>
       </div>
       <div id="phases-section" class="section_fixed phases">
-        <PhasesComp></PhasesComp>
+        <PhasesComp ref="PhasesRef"></PhasesComp>
       </div>
       <!-- <section class="section_fixed phases">Phases Section</section> -->
     </div>
@@ -50,9 +50,12 @@
 <script setup>
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import PhasesComp from "~/components/phases-comp.vue";
+//import PhasesComp from "~/components/phases-comp.vue";
 
-onMounted(() => {
+const PhasesRef = ref(null);
+
+onMounted(async () => {
+  await nextTick();
   const { $gsap } = useNuxtApp();
 
   //SECTION - animazioni interne
@@ -115,19 +118,17 @@ onMounted(() => {
   const scrollTrigger = getScrollTrigger();
   scrollTrigger.disable();
 
+  //phases
+  console.log(
+    "Rotazione tl fase suo scrolltrigger - ",
+    PhasesRef.value.rotationTL,
+    "intent observer? - ",
+    PhasesRef.value.intentObserver
+  );
+
   //!SECTION
 
-  // Function to disable body scroll
-  const disableBodyScroll = () => {
-    document.body.style.overflow = "hidden";
-  };
-
-  // Function to enable body scroll
-  const enableBodyScroll = () => {
-    document.body.style.overflow = "auto";
-  };
-
-  //creo la funzione updateTriger per legarla ad un listner sul resize
+  //creo la funzione updateTriger per aggiornarla con un listner sul resize
   const updateTriggers = () => {
     let allScrollHeight = 200;
     let scrollTriggerHeights = [];
@@ -206,12 +207,18 @@ onMounted(() => {
             });
           }
           if (index === 2) {
+            // if (PhasesRef.value?.rotationTL) {
+            PhasesRef.value.rotationTL.play();
+            //   console.log("Rotation TL", PhasesRef.value.rotationTL);
+            // }
+            PhasesRef.value.intentObserver.enable();
             console.log("entrato index2 ");
           }
         },
         onLeave: () => {
           console.log("onLeave", index);
           $gsap.to(section, { opacity: 0, zIndex: "0", duration: 0.5 });
+          PhasesRef.value.rotationTL.pause();
         },
         onEnterBack: () => {
           console.log("onEnterBack", index);
