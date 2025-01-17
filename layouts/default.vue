@@ -61,6 +61,7 @@ onMounted(() => {});
 @media screen and (max-width: 600px) {
   #ghirlandeContainer {
     img {
+      //opacity: 0;
       width: 200px; /* Set a fixed size */
       height: 200px; /* Set a fixed size */
     }

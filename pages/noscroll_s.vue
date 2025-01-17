@@ -43,7 +43,11 @@
       </div>
       <!-- <section class="section_fixed phases">Phases Section</section> -->
     </div>
-    <div class="nofixed w-[100vw] h-[1600px] bg-orange-500 z-30"><h2>Made For</h2></div>
+    <div class="nofixed_section w-[100vw] h-[1600px] z-30">
+      <div id="made-for" class="max-w-[1200px]">
+        <h2>Made For</h2>
+      </div>
+    </div>
   </main>
 </template>
 
@@ -119,12 +123,12 @@ onMounted(async () => {
   scrollTrigger.disable();
 
   //phases
-  console.log(
-    "Rotazione tl fase suo scrolltrigger - ",
-    PhasesRef.value.rotationTL,
-    "intent observer? - ",
-    PhasesRef.value.intentObserver
-  );
+  // console.log(
+  //   "Rotazione tl fase suo scrolltrigger - ",
+  //   PhasesRef.value.rotationTL,
+  //   "intent observer? - ",
+  //   PhasesRef.value.intentObserver
+  // );
 
   //!SECTION
 
@@ -142,14 +146,14 @@ onMounted(async () => {
       let sectionHeight0 = section.offsetHeight;
       let sectionHeight1 = scrollTrigger.end;
       let sectionHeight2 = section.offsetHeight;
-      console.log(
-        "le altezze Reali :) - ",
-        sectionHeight0,
-        " - ",
-        sectionHeight1,
-        " - ",
-        sectionHeight2
-      );
+      // console.log(
+      //   "le altezze Reali :) - ",
+      //   sectionHeight0,
+      //   " - ",
+      //   sectionHeight1,
+      //   " - ",
+      //   sectionHeight2
+      // );
 
       if (index === 0) {
         scrollHeight = sectionHeight0;
@@ -160,23 +164,23 @@ onMounted(async () => {
         scrollHeight = scrollTrigger.end;
         start_S = section.offsetHeight;
         end_S = section.offsetHeight + scrollTrigger.end;
-        console.log("test1", scrollTriggerHeights[index - 1]);
+        //console.log("test1", scrollTriggerHeights[index - 1]);
       }
       if (index === 2) {
         scrollHeight = section.offsetHeight;
         start_S = section.offsetHeight + scrollTrigger.end;
         end_S = section.offsetHeight * 2 + scrollTrigger.end;
-        console.log("test2", scrollTriggerHeights[index - 1]);
+        //console.log("test2", scrollTriggerHeights[index - 1]);
       }
 
       allScrollHeight += scrollHeight;
       scrollTriggerHeights.push(scrollHeight);
 
-      console.log("SecrollHeight", scrollHeight);
-      console.log("allScrollHeight", allScrollHeight);
-      console.log("scrollTriggerHeights", scrollTriggerHeights);
-      console.log("test Calcolo Start", start_S);
-      console.log("test Calcolo End", end_S);
+      // console.log("SecrollHeight", scrollHeight);
+      // console.log("allScrollHeight", allScrollHeight);
+      // console.log("scrollTriggerHeights", scrollTriggerHeights);
+      // console.log("test Calcolo Start", start_S);
+      // console.log("test Calcolo End", end_S);
 
       //rendo dinamica l'altezza di #sectionsWrapper usando js per creare la variabile css dell'altezza in base a quante sezioni ci sono, per evitare errori o dimenticanze scrivendolo a mano
       // questa variabile la userò nel css
@@ -186,7 +190,7 @@ onMounted(async () => {
       );
 
       let mainScrollTrigger = ScrollTrigger.create({
-        markers: true,
+        //markers: true,
         //pin: true,
         trigger: "#sectionsWrapper", // Trigger sull'intero contenitore
         //trigger: section, // Trigger sull'intero contenitore
@@ -196,47 +200,105 @@ onMounted(async () => {
         //invalidateOnRefresh: true,
 
         onEnter: () => {
-          console.log("onEnter", index);
           $gsap.to(section, { opacity: 1, zIndex: "999999999", duration: 0.5 });
           if (index === 1) {
-            //mainScrollTrigger.disable();
             scrollTrigger.enable();
-            setOnEnter(() => {});
-            setOnComplete(() => {
-              //scrollTrigger.disable();
-            });
           }
           if (index === 2) {
             PhasesRef.value.rotationTL.play();
             PhasesRef.value.intentObserver.enable();
-            console.log("entrato index2 ");
           }
         },
         onLeave: () => {
-          console.log("onLeave", index);
           $gsap.to(section, { opacity: 0, zIndex: "0", duration: 0.5 });
-          PhasesRef.value.rotationTL.pause();
-          PhasesRef.value.intentObserver.disable();
+          if (index === 1) {
+            scrollTrigger.disable();
+            modules_tl.set(".ghirlanda-updx, .ghirlanda-dwsx", { autoAlpha: 1 }); //mantengo visibili le ghirlande
+          }
+          if (index === 2) {
+            PhasesRef.value.rotationTL.pause();
+            PhasesRef.value.intentObserver.disable();
+          }
         },
         onEnterBack: () => {
-          console.log("onEnterBack", index);
           $gsap.to(section, { opacity: 1, zIndex: "999999999", duration: 0.5 });
           if (index === 1) {
             scrollTrigger.enable();
-            console.log("riattivo scroll trigger");
+            ScrollTrigger.refresh();
           }
           if (index === 2) {
             PhasesRef.value.rotationTL.play();
             PhasesRef.value.intentObserver.enable();
-            console.log("entrato back index2 ");
           }
         },
         onLeaveBack: () => {
-          console.log("onLeaveBack", index);
           $gsap.to(section, { opacity: 0, zIndex: "0", duration: 0.5 });
-          PhasesRef.value.rotationTL.pause();
-          PhasesRef.value.intentObserver.disable();
+          if (index === 1) {
+            scrollTrigger.disable();
+          }
+          if (index === 2) {
+            PhasesRef.value.rotationTL.pause();
+            PhasesRef.value.intentObserver.disable();
+          }
         },
+
+        // onEnter: () => {
+        //   console.log("onEnter", index);
+        //   $gsap.to(section, { opacity: 1, zIndex: "999999999", duration: 0.5 });
+        //   if (index === 1) {
+        //     scrollTrigger.enable();
+        //     setOnEnter(() => {});
+        //     setOnComplete(() => {
+        //       //scrollTrigger.disable();
+        //     });
+        //     console.log("on enter index 1 - ", index);
+        //   }
+        //   if (index === 2) {
+        //     PhasesRef.value.rotationTL.play();
+        //     PhasesRef.value.intentObserver.enable();
+        //     console.log("Observer enabled on Enter:", PhasesRef.value.intentObserver);
+        //     console.log("on enter index 2 - ", index);
+        //   }
+        // },
+        // onLeave: () => {
+        //   console.log("onLeave", index);
+        //   $gsap.to(section, { opacity: 0, zIndex: "0", duration: 0.5 });
+        //   if (index === 1) {
+        //     scrollTrigger.disable();
+        //   }
+        //   if (index === 2) {
+        //     PhasesRef.value.rotationTL.pause();
+        //     PhasesRef.value.intentObserver.disable();
+        //   }
+        //   console.log("Observer enabled on leave:", PhasesRef.value.intentObserver);
+        // },
+        // onEnterBack: () => {
+        //   console.log("onEnterBack", index);
+        //   $gsap.to(section, { opacity: 1, zIndex: "999999999", duration: 0.5 });
+        //   if (index === 1) {
+        //     scrollTrigger.enable();
+        //     console.log("riattivo scroll trigger");
+        //     console.log("on enter Back index 1 - ", index);
+        //   }
+        //   if (index === 2) {
+        //     PhasesRef.value.rotationTL.play();
+        //     PhasesRef.value.intentObserver.enable();
+        //     console.log("Observer enabled onEnterB:", PhasesRef.value.intentObserver);
+        //     console.log("on enter Back index 2 - ", index);
+        //   }
+        // },
+        // onLeaveBack: () => {
+        //   console.log("onLeaveBack", index);
+        //   $gsap.to(section, { opacity: 0, zIndex: "0", duration: 0.5 });
+        //   if (index === 1) {
+        //     scrollTrigger.disable();
+        //   }
+        //   if (index === 2) {
+        //     PhasesRef.value.rotationTL.pause();
+        //     PhasesRef.value.intentObserver.disable();
+        //   }
+        //   console.log("Observer enabled onLeaveB:", PhasesRef.value.intentObserver);
+        // },
       });
     });
     ScrollTrigger.refresh();
@@ -262,14 +324,20 @@ onMounted(async () => {
 @use "@/assets/css/_globals.scss" as *;
 #sectionsWrapper {
   width: 100vw;
+  max-width: 1200px;
   //height: 600vh;
   height: var(--total-height);
   //height: 300vh; /* Altezza totale virtuale: 100vh per ogni sezione */
   position: relative; /* Contenitore relativo per le sezioni sovrapposte */
 }
 //.section_fixed è gestita in main.scss
-.nofixed {
+.nofixed_section {
   background: $gradient_4;
   background: linear-gradient(0deg, $gradient_4 80%, $gradient_4_0 100%);
+  z-index: 30;
+  padding-top: 5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 </style>

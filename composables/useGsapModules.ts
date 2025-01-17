@@ -38,6 +38,7 @@ export const useGsapModules=()=>{
         //paused: true,
         scrollTrigger: {
           trigger: "#modules-section", // Elemento che attiva l'animazione
+          //invalidateOnRefresh: false, // evita di resttare i valori al disable (mantengo così le ghirlande visibili dopo il disable)
           //start: "top +=75", // Quando inizia l'animazione
           start: conditions.isTabletUp ? "center center" : "top +=75", // Quando inizia l'animazione
           end: "+=2000", // allungata la fine per rendere lo scroll più lento
@@ -73,9 +74,6 @@ export const useGsapModules=()=>{
           }
         },
       });
-
-      //modules_tl.set("#ghirlandeContainer", { filter: "blur(10px)" });
-
       //modules_tl.set("body", { overflow: "hidden" });
         modules_tl.from(".ghirlanda-updx, .ghirlanda-dwsx ", {
           autoAlpha: 0,

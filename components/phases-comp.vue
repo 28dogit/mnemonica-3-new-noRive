@@ -52,7 +52,7 @@ onMounted(() => {
     rotationTL.value.to(phasesItems, {
       rotate: 360,
       transformOrigin: "50% 50%",
-      duration: 4,
+      duration: 7,
       ease: "linear",
       repeat: -1,
     });
