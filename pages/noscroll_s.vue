@@ -43,7 +43,7 @@
       </div>
       <!-- <section class="section_fixed phases">Phases Section</section> -->
     </div>
-    <div class="nofixed w-[100vw] h-[1600px] bg-orange-500 z-30"></div>
+    <div class="nofixed w-[100vw] h-[1600px] bg-orange-500 z-30"><h2>Made For</h2></div>
   </main>
 </template>
 
@@ -259,6 +259,7 @@ onMounted(async () => {
 </script>
 
 <style lang="scss">
+@use "@/assets/css/_globals.scss" as *;
 #sectionsWrapper {
   width: 100vw;
   //height: 600vh;
@@ -267,4 +268,8 @@ onMounted(async () => {
   position: relative; /* Contenitore relativo per le sezioni sovrapposte */
 }
 //.section_fixed è gestita in main.scss
+.nofixed {
+  background: $gradient_4;
+  background: linear-gradient(0deg, $gradient_4 80%, $gradient_4_0 100%);
+}
 </style>

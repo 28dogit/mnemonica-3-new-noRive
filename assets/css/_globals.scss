@@ -20,6 +20,7 @@ $gradient_1: hsla(202, 92%, 35%, 0.5);
 $gradient_2: hsla(202, 92%, 15%, 1);
 $gradient_3: hsla(205, 59%, 10%, 0.5);
 $gradient_4: hsla(205, 59%, 10%, 1);
+$gradient_4_0: hsla(205, 59%, 10%, 0);
 $gradient_5: hsl(303, 90%, 32%);
 
 @mixin grad-var-phone($x1,$y1,$x2,$y2,$x3,$y3,$gs_1,$gs_2){
