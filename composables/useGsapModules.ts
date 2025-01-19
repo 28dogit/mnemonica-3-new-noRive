@@ -14,10 +14,9 @@ export const useGsapModules=()=>{
 
   //dichiaro la timeline fuori da mm in modo da esporla fuori dalla funzione stessa cosa per onComplete
   let modules_tl: gsap.core.Timeline | null = null;
-  let onCompleteCallback: (() => void) | null = null; // Callback per onComplete
-  let onEnterCallback: (() => void) | null = null; // Callback per onEnter
-  let onEnterBackCallback: (() => void) | null = null; // Callback per onEnter
-  // let onLeaveCallback: (() => void) | null = null; // Callback per onLeave
+  let onCompleteCallback: (() => void) | null = null; // Callback per onComplete della timeline
+  let onEnterCallback: (() => void) | null = null; // Callback per onEnter dello scrollTrigger
+  let onEnterBackCallback: (() => void) | null = null; // Callback per onEnter Back dello scrollTrigger
 
   mm.add(
     //aggiungo una o più media query (conditions)
@@ -35,16 +34,12 @@ export const useGsapModules=()=>{
       };
       
       modules_tl = $gsap.timeline({
-        //paused: true,
         scrollTrigger: {
           trigger: "#modules-section", // Elemento che attiva l'animazione
-          //invalidateOnRefresh: false, // evita di resttare i valori al disable (mantengo così le ghirlande visibili dopo il disable)
-          //start: "top +=75", // Quando inizia l'animazione
+          invalidateOnRefresh: false, // evita di resttare i valori al disable (mantengo così le ghirlande visibili dopo il disable)
           start: conditions.isTabletUp ? "center center" : "top +=75", // Quando inizia l'animazione
           end: "+=2000", // allungata la fine per rendere lo scroll più lento
           scrub: true, // Sincronizzazione con lo scroll
-          //anticipatePin: 1,
-          //pin: true, // Fissa il contenitore #hero-section
           //markers: true,
           // snap: {
           //   snapTo: 1 / 3,
@@ -52,8 +47,6 @@ export const useGsapModules=()=>{
           //   duration: 2.5,
           //   ease: "back.out",
           // },
-          // onSnapComplete: ({ progress, direction, isActive }) =>
-          //   console.log(progress, direction, isActive),
           onEnter(){
             console.log("composables entrato");
             if (onEnterCallback) {
@@ -81,7 +74,7 @@ export const useGsapModules=()=>{
         });
         modules_tl.to("#Modules_3a #Rooms path", {
           fill: "#CEF372",
-        });
+        },"<");
         modules_tl.from(
           "#module-txt_1 .focusWrapper .focusBtn",
           {

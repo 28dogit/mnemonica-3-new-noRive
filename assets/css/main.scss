@@ -32,6 +32,8 @@ body{
     left: 0px;
     z-index: -20;
     background-size: 180% 180%;
+    animation: rotateBackground 50s linear infinite;
+    @include anim.rotateBG;
     @include bp.for-desktop-small{
       animation: rotateBackground 70s linear infinite;
       @include anim.rotateBG;
