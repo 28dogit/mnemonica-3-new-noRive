@@ -49,14 +49,16 @@ onMounted(() => {});
   top: 0;
   right: 0;
   mix-blend-mode: luminosity;
-  opacity: 0.6;
+  opacity: 0;
+  filter: blur(5px);
 }
 
 .ghirlanda-dwsx {
   bottom: 0;
   left: 0;
   mix-blend-mode: luminosity;
-  opacity: 0.6;
+  opacity: 0;
+  filter: blur(5px);
 }
 @media screen and (max-width: 600px) {
   #ghirlandeContainer {

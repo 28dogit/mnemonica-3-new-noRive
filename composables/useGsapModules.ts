@@ -34,13 +34,19 @@ export const useGsapModules=()=>{
       };
       
       modules_tl = $gsap.timeline({
+        //paused:true,
         scrollTrigger: {
           trigger: "#modules-section", // Elemento che attiva l'animazione
-          invalidateOnRefresh: false, // evita di resttare i valori al disable (mantengo così le ghirlande visibili dopo il disable)
+          //invalidateOnRefresh: false, // evita di resttare i valori al disable (mantengo così le ghirlande visibili dopo il disable)
           start: conditions.isTabletUp ? "center center" : "top +=75", // Quando inizia l'animazione
-          end: "+=2000", // allungata la fine per rendere lo scroll più lento
-          scrub: true, // Sincronizzazione con lo scroll
-          //markers: true,
+          end: "+=4000", // allungata la fine per rendere lo scroll più lento
+          scrub: 2, // Sincronizzazione con lo scroll
+          markers: true,
+          snap:{
+            snapTo:1/4,
+            duration: 0.5,
+            ease: "back.out",
+          },
           // snap: {
           //   snapTo: 1 / 3,
           //   //snapTo: (progress) => Math.round(progress * 3) / 3, // Aggancia a ogni 1/3 di progresso (120 gradi)
@@ -69,9 +75,9 @@ export const useGsapModules=()=>{
       });
       //modules_tl.set("body", { overflow: "hidden" });
       modules_tl.set("#module-txt_1 .focusWrapper .focusTxt",{opacity: 0});
-        modules_tl.from(".ghirlanda-updx, .ghirlanda-dwsx ", {
-          autoAlpha: 0,
-          filter: "blur(5px)",
+        modules_tl.to(".ghirlanda-updx, .ghirlanda-dwsx ", {
+          opacity: 0.6,
+          filter: "blur(0px)",
         });
         modules_tl.to("#Modules_3a #Rooms path", {
           fill: "#CEF372",
@@ -93,6 +99,7 @@ export const useGsapModules=()=>{
           },
           "< +=0.3"
         );
+        //fine primo step
         modules_tl.to(
           "#modules_svg",
           {
@@ -142,6 +149,7 @@ export const useGsapModules=()=>{
           },
           1
         );
+        //fine secondo step
         modules_tl.to(
           "#modules_svg",
           {
@@ -191,6 +199,15 @@ export const useGsapModules=()=>{
           },
           2
         );
+        //fine terzo step
+        modules_tl.to(
+          "#Modules_3a #Masters path",
+          {
+            fill: "#B8EFFA",
+          },
+          3
+        );
+
 
 
     });
