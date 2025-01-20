@@ -135,15 +135,30 @@ onMounted(() => {
         ? `${containers[currentIndex - 1]} .title`
         : `${containers[index - 1]} .title`;
 
+      let Chips_Title_post = isScrollingDown
+        ? `${containers[currentIndex + 1]} .title`
+        : `${containers[index + 1]} .title`;
+
       //ricavo le chips per ogni container in base a currentIndex
+      // let targetChips_pre = isScrollingDown
+      //   ? $gsap.utils.toArray(`${containers[currentIndex - 1]} .phase-chips`)
+      //   : $gsap.utils.toArray(`${containers[index - 1]} .phase-chips`);
+
+      let targetChips_pre = isScrollingDown
+        ? `${containers[currentIndex - 1]} .phase-chips`
+        : `${containers[index - 1]} .phase-chips`;
+
+      // let targetChips = isScrollingDown
+      //   ? $gsap.utils.toArray(`${containers[currentIndex]} .phase-chips`)
+      //   : $gsap.utils.toArray(`${containers[index]} .phase-chips`);
 
       let targetChips = isScrollingDown
         ? `${containers[currentIndex]} .phase-chips`
         : `${containers[index]} .phase-chips`;
 
-      let targetChips_pre = isScrollingDown
-        ? `${containers[currentIndex - 1]} .phase-chips`
-        : `${containers[index - 1]} .phase-chips`;
+      // let targetChips_post = isScrollingDown
+      //   ? $gsap.utils.toArray(`${containers[currentIndex + 1]} .phase-chips`)
+      //   : $gsap.utils.toArray(`${containers[index + 1]} .phase-chips`);
 
       let phases_tl = $gsap.timeline({
         onStart: () => {
@@ -159,6 +174,7 @@ onMounted(() => {
           Chips_Title,
           {
             y: isScrollingDown ? -10 : 0,
+            //autoAlpha: isScrollingDown ? 0 : 1,
           },
           {
             y: isScrollingDown ? 0 : -10,
@@ -181,26 +197,74 @@ onMounted(() => {
         .fromTo(
           targetChips,
           {
-            y: isScrollingDown ? 10 : 0,
+            y: isScrollingDown ? 0 : 10,
           },
           {
-            y: isScrollingDown ? 0 : 10,
+            y: isScrollingDown ? 10 : 0,
             autoAlpha: isScrollingDown ? 1 : 0,
-            duration: 0.5,
+            duration: 0.3,
+            //stagger: 0.2,
           }
         )
+        // .to(targetChips, {
+        //   autoAlpha: isScrollingDown ? 1 : 0,
+        //   //filter: isScrollingDown ? "blur(0px)" : "blur(5px)",
+        //   duration: 0.5,
+        //   stagger: 0.2,
+        // })
+        //---------
+        // .to(
+        //   Chips_Title_pre,
+        //   {
+        //     //y: isScrollingDown ? 100 : -100,
+        //     autoAlpha: isScrollingDown ? 0 : 1,
+        //     duration: 0.3,
+        //   },
+        //   "<"
+        // )
+        //-----
         .fromTo(
           targetChips_pre,
           {
-            y: isScrollingDown ? 0 : -10,
+            y: isScrollingDown ? -10 : 0,
           },
           {
-            y: isScrollingDown ? -10 : 0,
+            y: isScrollingDown ? 0 : -10,
             autoAlpha: isScrollingDown ? 0 : 1,
             duration: 0.3,
+            //stagger: 0.2,
           },
           "<"
         );
+      // .to(
+      //   targetChips_pre,
+      //   {
+      //     autoAlpha: isScrollingDown ? 0 : 1,
+      //     //filter: isScrollingDown ? "blur(0px)" : "blur(5px)",
+      //     duration: 0.3,
+      //     stagger: 0.2,
+      //   },
+      //   "<"
+      // );
+      //------
+      // .to(
+      //   Chips_Title_post,
+      //   {
+      //     autoAlpha: 0,
+      //     duration: 0.3,
+      //   },
+      //   "<"
+      // )
+      // .to(
+      //   targetChips_post,
+      //   {
+      //     autoAlpha: 0,
+      //     //filter: isScrollingDown ? "blur(0px)" : "blur(5px)",
+      //     duration: 0.3,
+      //     stagger: 0.2,
+      //   },
+      //   "<"
+      // );
 
       currentIndex = index;
     } //NOTE - chiusura CircleAnimation

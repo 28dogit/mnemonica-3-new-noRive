@@ -127,6 +127,23 @@ onMounted(() => {
         ? containers[currentIndex]
         : containers[index];
 
+      let targetContainer_pre = isScrollingDown
+        ? containers[currentIndex - 1]
+        : containers[index - 1];
+
+      let targetContainer_post = isScrollingDown
+        ? containers[currentIndex + 1]
+        : containers[index + 1];
+
+      console.log(
+        "tragetContainer - pre - post: ",
+        targetContainer,
+        " - ",
+        targetContainer_pre,
+        " - ",
+        targetContainer_post
+      );
+
       let Chips_Title = isScrollingDown
         ? `${containers[currentIndex]} .title`
         : `${containers[index]} .title`;
@@ -135,15 +152,22 @@ onMounted(() => {
         ? `${containers[currentIndex - 1]} .title`
         : `${containers[index - 1]} .title`;
 
+      let Chips_Title_post = isScrollingDown
+        ? `${containers[currentIndex + 1]} .title`
+        : `${containers[index + 1]} .title`;
+
       //ricavo le chips per ogni container in base a currentIndex
+      let targetChips_pre = isScrollingDown
+        ? $gsap.utils.toArray(`${containers[currentIndex - 1]} .phase-chips`)
+        : $gsap.utils.toArray(`${containers[index - 1]} .phase-chips`);
 
       let targetChips = isScrollingDown
-        ? `${containers[currentIndex]} .phase-chips`
-        : `${containers[index]} .phase-chips`;
+        ? $gsap.utils.toArray(`${containers[currentIndex]} .phase-chips`)
+        : $gsap.utils.toArray(`${containers[index]} .phase-chips`);
 
-      let targetChips_pre = isScrollingDown
-        ? `${containers[currentIndex - 1]} .phase-chips`
-        : `${containers[index - 1]} .phase-chips`;
+      let targetChips_post = isScrollingDown
+        ? $gsap.utils.toArray(`${containers[currentIndex + 1]} .phase-chips`)
+        : $gsap.utils.toArray(`${containers[index + 1]} .phase-chips`);
 
       let phases_tl = $gsap.timeline({
         onStart: () => {
@@ -155,10 +179,22 @@ onMounted(() => {
       });
 
       phases_tl
+        // .to(target, {
+        //   opacity: 1,
+        //   ease: "back.out",
+        //   duration: 0.25,
+        // })
+        // .to(txtTarget.querySelectorAll("path"), {
+        //   //autoAlpha: isScrollingDown ? 1 : 0,
+        //   fill: isScrollingDown ? "#cef372" : "#6DCFF6",
+        //   duration: 0.5,
+        //   ease: "power2.out",
+        // })
         .fromTo(
           Chips_Title,
           {
             y: isScrollingDown ? -10 : 0,
+            //autoAlpha: isScrollingDown ? 0 : 1,
           },
           {
             y: isScrollingDown ? 0 : -10,
@@ -178,29 +214,49 @@ onMounted(() => {
           },
           "<"
         )
-        .fromTo(
-          targetChips,
-          {
-            y: isScrollingDown ? 10 : 0,
-          },
-          {
-            y: isScrollingDown ? 0 : 10,
-            autoAlpha: isScrollingDown ? 1 : 0,
-            duration: 0.5,
-          }
-        )
-        .fromTo(
+        .to(targetChips, {
+          autoAlpha: isScrollingDown ? 1 : 0,
+          //filter: isScrollingDown ? "blur(0px)" : "blur(5px)",
+          duration: 0.5,
+          stagger: 0.2,
+        })
+        // .to(
+        //   Chips_Title_pre,
+        //   {
+        //     //y: isScrollingDown ? 100 : -100,
+        //     autoAlpha: isScrollingDown ? 0 : 1,
+        //     duration: 0.3,
+        //   },
+        //   "<"
+        // )
+        .to(
           targetChips_pre,
           {
-            y: isScrollingDown ? 0 : -10,
-          },
-          {
-            y: isScrollingDown ? -10 : 0,
             autoAlpha: isScrollingDown ? 0 : 1,
+            //filter: isScrollingDown ? "blur(0px)" : "blur(5px)",
             duration: 0.3,
+            stagger: 0.2,
           },
           "<"
         );
+      // .to(
+      //   Chips_Title_post,
+      //   {
+      //     autoAlpha: 0,
+      //     duration: 0.3,
+      //   },
+      //   "<"
+      // )
+      // .to(
+      //   targetChips_post,
+      //   {
+      //     autoAlpha: 0,
+      //     //filter: isScrollingDown ? "blur(0px)" : "blur(5px)",
+      //     duration: 0.3,
+      //     stagger: 0.2,
+      //   },
+      //   "<"
+      // );
 
       currentIndex = index;
     } //NOTE - chiusura CircleAnimation
