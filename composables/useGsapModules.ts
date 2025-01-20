@@ -68,6 +68,7 @@ export const useGsapModules=()=>{
         },
       });
       //modules_tl.set("body", { overflow: "hidden" });
+      modules_tl.set("#module-txt_1 .focusWrapper .focusTxt",{opacity: 0});
         modules_tl.from(".ghirlanda-updx, .ghirlanda-dwsx ", {
           autoAlpha: 0,
           filter: "blur(5px)",

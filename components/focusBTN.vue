@@ -21,7 +21,7 @@
   margin-top: 1rem;
   background-color: $gradient_2;
   .focusTxt {
-    opacity: 0;
+    opacity: 1;
     //display: none;
   }
   .focusBtn {
