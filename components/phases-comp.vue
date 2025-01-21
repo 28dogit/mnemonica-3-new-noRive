@@ -1,5 +1,5 @@
 <template>
-  <div id="phases-element" class="element hjhjhj">
+  <div id="phases-element" class="element">
     <PreSvg id="Pre_svg" class="phaseCircle"></PreSvg>
     <ProductionSvg id="Production_svg" class="phaseCircle"></ProductionSvg>
     <PostSvg id="Post_svg" class="phaseCircle"></PostSvg>

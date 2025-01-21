@@ -19,9 +19,9 @@
     </div>
 
     <Header />
-    <div id="ghirlanda-elemen2" class="element2">
+    <div id="ghirlanda-element_start" class="element_start">
       <NuxtImg
-        id="ghirlanda_img2"
+        id="ghirlanda_img"
         src="/assets/img/Ghirlanda_full_web_800_opt.png"
         alt="mnemonica ghirlanda ecosystem"
         densities="x1"
@@ -39,6 +39,7 @@ onMounted(() => {});
 
 <style lang="scss" scoped>
 @use "@/assets/css/_breakpoints.scss" as bp;
+
 #ghirlandeContainer {
   position: fixed;
   width: 100vw;
@@ -77,36 +78,36 @@ onMounted(() => {});
     }
   }
 }
-
-#ghirlanda-element2 {
+#ghirlanda-element_start {
   opacity: 0.6;
-  //max-height: 50vh;
+  height: 300px;
   @include bp.for-desktop-big-up {
     width: 550px;
   }
+  #ghirlanda_img {
+    width: 90%;
+  }
 }
-#ghirlanda_img2 {
-  width: 90%;
-  //mix-blend-mode: luminosity;
-  //display: none;
-}
-.element2 {
+
+.element_start {
   display: flex;
   align-items: center;
   justify-content: center;
   position: fixed;
+  top: 70px;
   width: 100%;
-  min-height: 75vh;
+  min-height: 50vh;
+  mix-blend-mode: plus-lighter;
   mix-blend-mode: luminosity;
   @include bp.for-tablet-up {
     // 576px up
     width: 40%;
-    min-height: 95vh;
+    //min-height: 95vh;
   }
   @include bp.for-desktop-big-up {
     // 1200px up
     width: 30%;
-    min-height: 100vh;
+    //min-height: 100vh;
   }
 }
 </style>

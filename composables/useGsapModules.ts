@@ -41,7 +41,7 @@ export const useGsapModules=()=>{
           start: conditions.isTabletUp ? "center center" : "top +=75", // Quando inizia l'animazione
           end: "+=4000", // allungata la fine per rendere lo scroll più lento
           scrub: 2, // Sincronizzazione con lo scroll
-          markers: true,
+          //markers: true,
           snap:{
             snapTo:1/4,
             duration: 0.5,

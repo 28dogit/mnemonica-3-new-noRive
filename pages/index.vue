@@ -4,12 +4,12 @@
       <!-- <section class="sectionN hero"> -->
       <div id="hero-section" class="section_fixed hero">
         <div id="ghirlanda-element" class="element">
-          <NuxtImg
+          <!-- <NuxtImg
             id="ghirlanda_img"
             src="/assets/img/Ghirlanda_full_web_800_opt.png"
             alt="mnemonica ghirlanda ecosystem"
             densities="x1"
-          />
+          /> -->
         </div>
         <div id="hero-content-wrapper" class="wrapper">
           <div id="hero-content" class="content">
@@ -89,7 +89,7 @@ onMounted(() => {
       extendTimeline: true,
     });
 
-    intro.from("#ghirlanda-element", {
+    intro.from("#ghirlanda-element_start", {
       autoAlpha: 0,
       rotate: 5,
       filter: "blur(5px)",
@@ -206,15 +206,40 @@ onMounted(() => {
             if (index === 1) {
               scrollTrigger.enable();
             }
+            // if (index === 2) {
+            //   PhasesRef.value.rotationTL.play();
+            //   PhasesRef.value.intentObserver.enable();
+            //   console.log("play", PhasesRef.value.rotationTL);
+            //   console.log("enable", PhasesRef.value.intentObserver);
+            // }
             if (index === 2) {
-              PhasesRef.value.rotationTL.play();
-              PhasesRef.value.intentObserver.enable();
+              if (!PhasesRef.value.isPlaying) {
+                // Controllo per evitare ripetizioni
+                PhasesRef.value.isPlaying = true; // Stato interno per evitare richiami multipli
+                PhasesRef.value.rotationTL.play();
+                PhasesRef.value.intentObserver.enable();
+
+                // Controlla lo stato dell'osservatore dopo averlo abilitato
+                console.log("play", PhasesRef.value.rotationTL);
+                console.log("observer enabled:", PhasesRef.value.intentObserver);
+              }
+
+              // Esegui un debounce per sicurezza
+              setTimeout(() => {
+                PhasesRef.value.isPlaying = false; // Reimposta lo stato dopo un breve ritardo
+              }, 500); // Regola il tempo secondo necessità
             }
           },
           onLeave: () => {
             $gsap.to(section, { opacity: 0, zIndex: "0", duration: 0.5 });
+            $gsap.to("#ghirlanda-element_start", {
+              opacity: 0,
+              zIndex: "0",
+              duration: 0.5,
+            });
+
             if (index === 1) {
-              //scrollTrigger.disable();
+              scrollTrigger.disable();
             }
             if (index === 2) {
               PhasesRef.value.rotationTL.pause();
@@ -223,19 +248,45 @@ onMounted(() => {
           },
           onEnterBack: () => {
             $gsap.to(section, { opacity: 1, zIndex: "999999999", duration: 0.5 });
+            if (index === 0) {
+              $gsap.to("#ghirlanda-element_start", {
+                opacity: 0.6,
+                zIndex: "999999999",
+                duration: 0.5,
+              });
+            }
             if (index === 1) {
               scrollTrigger.enable();
               ScrollTrigger.refresh();
             }
+            // if (index === 2) {
+            //   PhasesRef.value.rotationTL.play();
+            //   PhasesRef.value.intentObserver.enable();
+            //   console.log("play", PhasesRef.value.rotationTL);
+            //   console.log("enable", PhasesRef.value.intentObserver);
+            // }
             if (index === 2) {
-              PhasesRef.value.rotationTL.play();
-              PhasesRef.value.intentObserver.enable();
+              if (!PhasesRef.value.isPlaying) {
+                // Controllo per evitare ripetizioni
+                PhasesRef.value.isPlaying = true; // Stato interno per evitare richiami multipli
+                PhasesRef.value.rotationTL.play();
+                PhasesRef.value.intentObserver.enable();
+
+                // Controlla lo stato dell'osservatore dopo averlo abilitato
+                console.log("play", PhasesRef.value.rotationTL);
+                console.log("observer enabled:", PhasesRef.value.intentObserver);
+              }
+
+              // Esegui un debounce per sicurezza
+              setTimeout(() => {
+                PhasesRef.value.isPlaying = false; // Reimposta lo stato dopo un breve ritardo
+              }, 500); // Regola il tempo secondo necessità
             }
           },
           onLeaveBack: () => {
             $gsap.to(section, { opacity: 0, zIndex: "0", duration: 0.5 });
             if (index === 1) {
-              //scrollTrigger.disable();
+              scrollTrigger.disable();
             }
             if (index === 2) {
               PhasesRef.value.rotationTL.pause();
