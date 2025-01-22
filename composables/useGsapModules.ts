@@ -37,7 +37,7 @@ export const useGsapModules=()=>{
         //paused:true,
         scrollTrigger: {
           trigger: "#modules-section", // Elemento che attiva l'animazione
-          //invalidateOnRefresh: false, // evita di resttare i valori al disable (mantengo così le ghirlande visibili dopo il disable)
+          invalidateOnRefresh: false, // evita di resttare i valori al disable (mantengo così le ghirlande visibili dopo il disable)
           start: conditions.isTabletUp ? "center center" : "top +=75", // Quando inizia l'animazione
           end: "+=4000", // allungata la fine per rendere lo scroll più lento
           scrub: 2, // Sincronizzazione con lo scroll
