@@ -41,11 +41,17 @@ export const useGsapModules=()=>{
           end: "+=4000", // allungata la fine per rendere lo scroll più lento
           scrub: true, // Sincronizzazione con lo scroll
           //markers: true,
-          snap:{
-            snapTo:1/4,
-            duration: 0.5,
-            ease: "back.out",
+          snap: {
+            snapTo: "labels", // Snap automatico sulle labels
+            duration: { min: 0.2, max: 0.5 }, // Durata dello snap
+            delay: 0.1, // Ritardo prima dello snap
+            ease: "power1.inOut"
           },
+          // snap:{
+          //   snapTo:1/4,
+          //   duration: 0.5,
+          //   ease: "back.out",
+          // },
           // snap: {
           //   snapTo: 1 / 3,
           //   //snapTo: (progress) => Math.round(progress * 3) / 3, // Aggancia a ogni 1/3 di progresso (120 gradi)
@@ -98,6 +104,7 @@ export const useGsapModules=()=>{
           },
           "< +=0.3"
         );
+        modules_tl.addLabel("modulo1");
         modules_tl.to(
           "#modules_svg",
           {
@@ -147,6 +154,7 @@ export const useGsapModules=()=>{
           },
           1
         );
+        modules_tl.addLabel("modulo2");
         modules_tl.to(
           "#modules_svg",
           {
