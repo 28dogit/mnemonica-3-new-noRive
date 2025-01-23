@@ -148,9 +148,10 @@ onMounted(() => {
         let scrollHeight = ref(null);
         let start_S = 0;
         let end_S = 0;
-        let sectionHeight0 = section.offsetHeight;
-        let sectionHeight1 = scrollTrigger.end;
-        let sectionHeight2 = section.offsetHeight;
+        let sectionHeight0 = section.offsetHeight + 70;
+        let sectionHeight1 = scrollTrigger.end + 70;
+        let sectionHeight2 = PhasesRef.value.phasesTL.scrollTrigger.end + 70;
+
         // console.log(
         //   "le altezze Reali :) - ",
         //   sectionHeight0,
@@ -164,17 +165,20 @@ onMounted(() => {
           scrollHeight = sectionHeight0;
           start_S = 0;
           end_S = sectionHeight0;
+          console.log("test0", scrollHeight);
         }
         if (index === 1) {
-          scrollHeight = scrollTrigger.end;
-          start_S = section.offsetHeight;
-          end_S = section.offsetHeight + scrollTrigger.end;
+          scrollHeight = sectionHeight1;
+          start_S = sectionHeight0;
+          end_S = sectionHeight0 + sectionHeight1;
+          console.log("test1", scrollHeight);
           //console.log("test1", scrollTriggerHeights[index - 1]);
         }
         if (index === 2) {
-          scrollHeight = section.offsetHeight;
-          start_S = section.offsetHeight + scrollTrigger.end;
-          end_S = section.offsetHeight * 2 + scrollTrigger.end;
+          scrollHeight = sectionHeight2;
+          start_S = sectionHeight0 + sectionHeight1;
+          end_S = sectionHeight0 + sectionHeight1 + sectionHeight2;
+          console.log("test2", scrollHeight);
           //console.log("test2", scrollTriggerHeights[index - 1]);
         }
 
@@ -182,10 +186,10 @@ onMounted(() => {
         scrollTriggerHeights.push(scrollHeight);
 
         // console.log("SecrollHeight", scrollHeight);
-        // console.log("allScrollHeight", allScrollHeight);
+        console.log("allScrollHeight", allScrollHeight);
         // console.log("scrollTriggerHeights", scrollTriggerHeights);
-        // console.log("test Calcolo Start", start_S);
-        // console.log("test Calcolo End", end_S);
+        console.log("test Calcolo Start", start_S);
+        console.log("test Calcolo End", end_S);
 
         //rendo dinamica l'altezza di #sectionsWrapper usando js per creare la variabile css dell'altezza in base a quante sezioni ci sono, per evitare errori o dimenticanze scrivendolo a mano
         // questa variabile la userò nel css
@@ -275,7 +279,7 @@ onMounted(() => {
                 PhasesRef.value.isPlaying = true; // Stato interno per evitare richiami multipli
                 PhasesRef.value.rotationTL.play();
                 PhasesRef.value.phasesTL.scrollTrigger.enable();
-                PhasesRef.value.phasesTL.scrollTrigger.refresh();
+                ScrollTrigger.refresh();
                 //PhasesRef.value.intentObserver.enable();
 
                 // Controlla lo stato dell'osservatore dopo averlo abilitato
@@ -325,12 +329,12 @@ onMounted(() => {
 
 <style lang="scss">
 @use "@/assets/css/_globals.scss" as *;
+
 #sectionsWrapper {
   width: 100vw;
   max-width: 1200px;
   //height: 600vh;
   height: var(--total-height);
-  //height: 300vh; /* Altezza totale virtuale: 100vh per ogni sezione */
   position: relative; /* Contenitore relativo per le sezioni sovrapposte */
 }
 //.section_fixed è gestita in main.scss

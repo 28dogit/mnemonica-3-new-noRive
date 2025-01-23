@@ -10,7 +10,7 @@
   </div>
   <div id="phases-content-wrapper" class="wrapper">
     <div id="phases-content" class="content">
-      <PhasesChips></PhasesChips>
+      <PhasesChips2></PhasesChips2>
     </div>
   </div>
 </template>
@@ -21,6 +21,7 @@ import { nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { _opacity } from "#tailwind-config/theme";
 import { _bottom } from "#tailwind-config/theme/backgroundPosition";
+import { PhasesChips2 } from "#components";
 
 //definisco le costanti da esporre con defineExpose, che userò all'interno di onMounted utilizzando .value
 // utilizzo shallowRef per non covertire le proprietà interne di Gsap in oggetti reattivi di vue
@@ -40,9 +41,13 @@ onMounted(() => {
     let phasesTxtItems = $gsap.utils.toArray(".phaseCircle .innerTxt"); //creo l'array dei testi delle Fasi
     let phasesChipsTitle = $gsap.utils.toArray("#chips-wrapper .container .title");
     let phasesChips = $gsap.utils.toArray("#chips-wrapper .phase-chips");
+    let phasesChipsContainer = $gsap.utils.toArray(
+      "#chips-wrapper .container .chipsContainer"
+    );
 
     console.log("phasesChipsTitle", phasesChipsTitle);
-    console.log("phasesChipsContainer", phasesChips);
+    console.log("phasesChips", phasesChips);
+    console.log("phasesChipsContainer", phasesChipsContainer);
 
     //SECTION - sezione animazione continua dei cerchi delle Fasi
 
@@ -63,11 +68,15 @@ onMounted(() => {
     //SECTION - sezione animazione delle chips delle fasi
     phasesTL.value = $gsap.timeline({
       scrollTrigger: {
-        trigger: "#phases-element",
-        start: "top top",
+        trigger: ".container",
+        start: "top center", //devo allinearmi al fire dello scrollTrigger principale "center"
         end: "+=1000px",
         scrub: true,
         markers: true,
+        snap: {
+          snapTo: "labels", // snap to one of the labels, or use a function
+          duration: { min: 0.2, max: 3 }, // the snap animation should be at least 0.2 seconds, but no more than 3 seconds (determined by velocity)
+        },
       },
     });
 
@@ -76,28 +85,20 @@ onMounted(() => {
         ChipTitle,
         {
           y: -10,
+          autoAlpha: 0,
         },
         {
           y: 0,
           autoAlpha: 1,
-          duration: 1,
-          //stagger: 0.4,
+          duration: 0.5,
+          //stagger: 1,
         }
       );
-    });
-
-    phasesChips.forEach((Chip, i) => {
+      phasesTL.value.addLabel(`label${i}`);
       phasesTL.value.fromTo(
-        Chip,
-        {
-          y: -10,
-        },
-        {
-          y: 0,
-          autoAlpha: 1,
-          duration: 1,
-          //stagger: 0.4,
-        }
+        phasesChipsContainer[i], // Usa l'elemento corrispondente
+        { y: -10, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.5 }
       );
     });
     //!SECTION
