@@ -199,7 +199,7 @@ onMounted(() => {
         );
 
         let mainScrollTrigger = ScrollTrigger.create({
-          //markers: true,
+          markers: true,
           //pin: true,
           trigger: "#sectionsWrapper", // Trigger sull'intero contenitore
           //trigger: section, // Trigger sull'intero contenitore
@@ -212,30 +212,45 @@ onMounted(() => {
             $gsap.to(section, { opacity: 1, zIndex: "999999999", duration: 0.5 });
             if (index === 1) {
               scrollTrigger.enable();
+
+              // $gsap.to(window, {
+              //   scrollTo: scrollTrigger.labelToScroll("ghirlande"),
+              //   ease: "power2.inOut",
+              //   duration: 3,
+              //   onStart: () => {
+              //     console.log("scrollTo start", scrollTrigger.labelToScroll("ghirlande"));
+              //   },
+              //   onComplete: () => {
+              //     console.log(
+              //       "scrollTo complete",
+              //       scrollTrigger.labelToScroll("ghirlande")
+              //     );
+              //   },
+              // });
+            }
+            if (index === 2) {
+              PhasesRef.value.rotationTL.play();
+              PhasesRef.value.phasesTL.scrollTrigger.enable();
+              console.log("play", PhasesRef.value.rotationTL);
+              console.log("enable", PhasesRef.value.phasesTL.scrollTrigger.enabled);
             }
             // if (index === 2) {
-            //   PhasesRef.value.rotationTL.play();
-            //   PhasesRef.value.intentObserver.enable();
-            //   console.log("play", PhasesRef.value.rotationTL);
-            //   console.log("enable", PhasesRef.value.intentObserver);
+            //   if (!PhasesRef.value.isPlaying) {
+            //     // Controllo per evitare ripetizioni
+            //     PhasesRef.value.isPlaying = true; // Stato interno per evitare richiami multipli
+            //     PhasesRef.value.rotationTL.play();
+            //     PhasesRef.value.phasesTL.scrollTrigger.enable();
+            //     console.log("phasesTL_SC_enter", PhasesRef.value.phasesTL.scrollTrigger);
+
+            //     // Controlla lo stato dell'osservatore dopo averlo abilitato
+            //     console.log("play", PhasesRef.value.rotationTL);
+            //   }
+
+            //   // Esegui un debounce per sicurezza
+            //   setTimeout(() => {
+            //     PhasesRef.value.isPlaying = false; // Reimposta lo stato dopo un breve ritardo
+            //   }, 500); // Regola il tempo secondo necessità
             // }
-            if (index === 2) {
-              if (!PhasesRef.value.isPlaying) {
-                // Controllo per evitare ripetizioni
-                PhasesRef.value.isPlaying = true; // Stato interno per evitare richiami multipli
-                PhasesRef.value.rotationTL.play();
-                PhasesRef.value.phasesTL.scrollTrigger.enable();
-                console.log("phasesTL_SC_enter", PhasesRef.value.phasesTL.scrollTrigger);
-
-                // Controlla lo stato dell'osservatore dopo averlo abilitato
-                console.log("play", PhasesRef.value.rotationTL);
-              }
-
-              // Esegui un debounce per sicurezza
-              setTimeout(() => {
-                PhasesRef.value.isPlaying = false; // Reimposta lo stato dopo un breve ritardo
-              }, 500); // Regola il tempo secondo necessità
-            }
           },
           onLeave: () => {
             $gsap.to(section, { opacity: 0, zIndex: "0", duration: 0.5 });
@@ -251,6 +266,7 @@ onMounted(() => {
             if (index === 2) {
               PhasesRef.value.rotationTL.pause();
               PhasesRef.value.phasesTL.scrollTrigger.disable();
+              console.log("enable", PhasesRef.value.phasesTL.scrollTrigger.enabled);
               //PhasesRef.value.intentObserver.disable();
             }
           },
@@ -267,31 +283,35 @@ onMounted(() => {
               scrollTrigger.enable();
               ScrollTrigger.refresh();
             }
-            // if (index === 2) {
-            //   PhasesRef.value.rotationTL.play();
-            //   PhasesRef.value.intentObserver.enable();
-            //   console.log("play", PhasesRef.value.rotationTL);
-            //   console.log("enable", PhasesRef.value.intentObserver);
-            // }
             if (index === 2) {
-              if (!PhasesRef.value.isPlaying) {
-                // Controllo per evitare ripetizioni
-                PhasesRef.value.isPlaying = true; // Stato interno per evitare richiami multipli
-                PhasesRef.value.rotationTL.play();
-                PhasesRef.value.phasesTL.scrollTrigger.enable();
-                ScrollTrigger.refresh();
-                //PhasesRef.value.intentObserver.enable();
-
-                // Controlla lo stato dell'osservatore dopo averlo abilitato
-                console.log("play", PhasesRef.value.rotationTL);
-                //console.log("observer enabled:", PhasesRef.value.intentObserver);
-              }
-
-              // Esegui un debounce per sicurezza
-              setTimeout(() => {
-                PhasesRef.value.isPlaying = false; // Reimposta lo stato dopo un breve ritardo
-              }, 500); // Regola il tempo secondo necessità
+              PhasesRef.value.rotationTL.play();
+              PhasesRef.value.phasesTL.scrollTrigger.enable();
+              ScrollTrigger.refresh();
+              console.log("play", PhasesRef.value.rotationTL);
+              console.log(
+                "enable + refresh",
+                PhasesRef.value.phasesTL.scrollTrigger.enabled
+              );
             }
+            // if (index === 2) {
+            //   if (!PhasesRef.value.isPlaying) {
+            //     // Controllo per evitare ripetizioni
+            //     PhasesRef.value.isPlaying = true; // Stato interno per evitare richiami multipli
+            //     PhasesRef.value.rotationTL.play();
+            //     PhasesRef.value.phasesTL.scrollTrigger.enable();
+            //     ScrollTrigger.refresh();
+            //     //PhasesRef.value.intentObserver.enable();
+
+            //     // Controlla lo stato dell'osservatore dopo averlo abilitato
+            //     console.log("play", PhasesRef.value.rotationTL);
+            //     //console.log("observer enabled:", PhasesRef.value.intentObserver);
+            //   }
+
+            //   // Esegui un debounce per sicurezza
+            //   setTimeout(() => {
+            //     PhasesRef.value.isPlaying = false; // Reimposta lo stato dopo un breve ritardo
+            //   }, 500); // Regola il tempo secondo necessità
+            // }
           },
           onLeaveBack: () => {
             $gsap.to(section, { opacity: 0, zIndex: "0", duration: 0.5 });
@@ -301,7 +321,7 @@ onMounted(() => {
             if (index === 2) {
               PhasesRef.value.rotationTL.pause();
               PhasesRef.value.phasesTL.scrollTrigger.disable();
-              //PhasesRef.value.intentObserver.disable();
+              console.log("enable", PhasesRef.value.phasesTL.scrollTrigger.enabled);
             }
           },
         });

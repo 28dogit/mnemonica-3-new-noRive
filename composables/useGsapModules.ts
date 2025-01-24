@@ -13,7 +13,8 @@ export const useGsapModules=()=>{
   const mm = $gsap.matchMedia();
 
   //dichiaro la timeline fuori da mm in modo da esporla fuori dalla funzione stessa cosa per onComplete
-  let modules_tl: gsap.core.Timeline | null = null;
+  //let modules_tl: gsap.core.Timeline | null = null;
+  let modules_tl = $gsap.timeline();
   let onCompleteCallback: (() => void) | null = null; // Callback per onComplete della timeline
   let onEnterCallback: (() => void) | null = null; // Callback per onEnter dello scrollTrigger
   let onEnterBackCallback: (() => void) | null = null; // Callback per onEnter Back dello scrollTrigger
@@ -40,18 +41,45 @@ export const useGsapModules=()=>{
           start: conditions.isTabletUp ? "center center" : "top +=75", // Quando inizia l'animazione
           end: "+=4000", // allungata la fine per rendere lo scroll più lento
           scrub: true, // Sincronizzazione con lo scroll
-          //markers: true,
-          snap: {
-            snapTo: "labels", // Snap automatico sulle labels
-            duration: { min: 0.2, max: 0.5 }, // Durata dello snap
-            delay: 0.1, // Ritardo prima dello snap
-            ease: "power1.inOut"
-          },
-          // snap:{
-          //   snapTo:1/4,
-          //   duration: 0.5,
-          //   ease: "back.out",
+          // snap: {
+          //   snapTo: (progress) => {
+          //     // Lista di labels convertite in valori di progressione (0 a 1)
+          //     const labelPositions = modules_tl.labels; // Ottiene le labels dalla timeline
+          //     const positions = Object.values(labelPositions).map(time => time / modules_tl.duration());
+      
+          //     let closest = progress;
+          //     let minDist = Infinity;
+              
+          //     positions.forEach(pos => {
+          //       const distance = Math.abs(progress - pos);
+      
+          //       // Snap solo se siamo entro 10px (scala relativa alla durata totale)
+          //       if (distance < (300 / 4000)) {  // 10px su un'area di scroll di 2000px
+          //         if (distance < minDist) {
+          //           minDist = distance;
+          //           closest = pos;
+          //         }
+          //       }
+          //     });
+      
+          //     return closest;
+          //   },
+          //   duration: { min: 0.2, max: 0.5 }, // Durata dello snap
+          //   delay: 0.1,
+          //   ease: "power1.inOut"
           // },
+          //markers: true,
+          // snap: {
+          //   snapTo: "labels", // Snap automatico sulle labels
+          //   duration: { min: 0.2, max: 0.5 }, // Durata dello snap
+          //   delay: 0.1, // Ritardo prima dello snap
+          //   ease: "power1.inOut"
+          // },
+          snap:{
+            snapTo:1/4,
+            duration: 0.5,
+            ease: "back.out",
+          },
           // snap: {
           //   snapTo: 1 / 3,
           //   //snapTo: (progress) => Math.round(progress * 3) / 3, // Aggancia a ogni 1/3 di progresso (120 gradi)
@@ -80,10 +108,11 @@ export const useGsapModules=()=>{
       });
       //modules_tl.set("body", { overflow: "hidden" });
       modules_tl.set("#module-txt_1 .focusWrapper .focusTxt",{opacity: 0});
-        modules_tl.from(".ghirlanda-updx, .ghirlanda-dwsx ", {
-          autoAlpha: 0,
-          filter: "blur(5px)",
+        modules_tl.to(".ghirlanda-updx, .ghirlanda-dwsx ", {
+          autoAlpha: 1,
+          filter: "blur(0px)",
         });
+        modules_tl.addLabel("ghirlande");
         modules_tl.to("#Modules_3a #Rooms path", {
           fill: "#CEF372",
         },"<");
@@ -190,6 +219,7 @@ export const useGsapModules=()=>{
           },
           2
         );
+        modules_tl.addLabel("end");
         modules_tl.set(
           "#modules-content #module-txt_3",
           {

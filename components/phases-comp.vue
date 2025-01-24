@@ -68,39 +68,79 @@ onMounted(() => {
     //SECTION - sezione animazione delle chips delle fasi
     phasesTL.value = $gsap.timeline({
       scrollTrigger: {
-        trigger: ".container",
+        trigger: "#chips-wrapper",
         start: "top center", //devo allinearmi al fire dello scrollTrigger principale "center"
-        end: "+=1000px",
+        end: "+=6000px",
         scrub: true,
-        markers: true,
+        //markers: true,
         snap: {
           snapTo: "labels", // snap to one of the labels, or use a function
-          duration: { min: 0.2, max: 3 }, // the snap animation should be at least 0.2 seconds, but no more than 3 seconds (determined by velocity)
+          duration: { min: 0.2, max: 0.5 }, // the snap animation should be at least 0.2 seconds, but no more than 3 seconds (determined by velocity)
         },
       },
     });
 
     phasesChipsTitle.forEach((ChipTitle, i) => {
-      phasesTL.value.fromTo(
-        ChipTitle,
-        {
-          y: -10,
+      // Nasconde il chip precedente prima di mostrare il nuovo
+      if (i > 0) {
+        phasesTL.value.to(phasesChipsTitle[i - 1], {
           autoAlpha: 0,
-        },
-        {
-          y: 0,
-          autoAlpha: 1,
-          duration: 0.5,
-          //stagger: 1,
-        }
-      );
-      phasesTL.value.addLabel(`label${i}`);
+          duration: 0.3,
+        });
+
+        phasesTL.value.to(
+          phasesChipsContainer[i - 1],
+          {
+            autoAlpha: 0,
+            duration: 0.3,
+          },
+          "<"
+        );
+      }
+
+      // Mostra il nuovo titolo
+      phasesTL.value.fromTo(ChipTitle, { y: -10, autoAlpha: 0 }, { y: 0, autoAlpha: 1 });
+
+      // Mostra il nuovo contenitore di chips
       phasesTL.value.fromTo(
-        phasesChipsContainer[i], // Usa l'elemento corrispondente
-        { y: -10, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 0.5 }
+        phasesChipsContainer[i],
+        { y: 10, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1 },
+        "<"
       );
+
+      phasesTL.value.addLabel(`label_end${i}`);
     });
+
+    // phasesChipsTitle.forEach((ChipTitle, i) => {
+    //   phasesTL.value.fromTo(
+    //     ChipTitle,
+    //     {
+    //       y: -10,
+    //       autoAlpha: 0,
+    //     },
+    //     {
+    //       y: 0,
+    //       autoAlpha: 1,
+    //       //duration: 0.5,
+    //       //stagger: 1,
+    //     }
+    //     // `label_start${i}`
+    //   );
+    //   //phasesTL.value.addLabel(`label_start${i}`);
+    //   phasesTL.value.fromTo(
+    //     phasesChipsContainer[i], // Usa l'elemento corrispondente
+    //     { y: 10, autoAlpha: 0 },
+    //     {
+    //       y: 0,
+    //       autoAlpha: 1,
+    //       //duration: 0.5
+    //     },
+    //     //`label_end${i}`,
+    //     "<"
+    //   );
+    //   phasesTL.value.addLabel(`label_end${i}`);
+    // });
     //!SECTION
 
     const containers = [
