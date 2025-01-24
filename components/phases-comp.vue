@@ -18,7 +18,7 @@
 <script setup>
 //le altre importazioni derivano dalla pagina principale
 import { nextTick } from "vue";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+//import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { _opacity } from "#tailwind-config/theme";
 import { _bottom } from "#tailwind-config/theme/backgroundPosition";
 import { PhasesChips2 } from "#components";
@@ -33,21 +33,13 @@ onMounted(() => {
   const { $gsap } = useNuxtApp();
 
   nextTick(() => {
-    //console.log("PhasesComp nexttick mounted");
-    // let allowScroll = true; // Variabile per bloccare lo scroll
-    // let scrollTimeout = $gsap.delayedCall(1, () => (allowScroll = true)).pause(); // Timeout per evitare doppio scroll, indichiamo quanto tempo dobbiamo aspettare, prima di permettere nuovamente lo scroll naturale
     let currentIndex = 0;
     let phasesItems = $gsap.utils.toArray(".phaseCircle .innerCircle"); //creo l'array dei cerchi delle Fasi
-    let phasesTxtItems = $gsap.utils.toArray(".phaseCircle .innerTxt"); //creo l'array dei testi delle Fasi
     let phasesChipsTitle = $gsap.utils.toArray("#chips-wrapper .container .title");
-    let phasesChips = $gsap.utils.toArray("#chips-wrapper .phase-chips");
+    //let phasesChips = $gsap.utils.toArray("#chips-wrapper .phase-chips");
     let phasesChipsContainer = $gsap.utils.toArray(
       "#chips-wrapper .container .chipsContainer"
     );
-
-    console.log("phasesChipsTitle", phasesChipsTitle);
-    console.log("phasesChips", phasesChips);
-    console.log("phasesChipsContainer", phasesChipsContainer);
 
     //SECTION - sezione animazione continua dei cerchi delle Fasi
 
@@ -67,17 +59,18 @@ onMounted(() => {
 
     //SECTION - sezione animazione delle chips delle fasi
     phasesTL.value = $gsap.timeline({
-      scrollTrigger: {
-        trigger: "#chips-wrapper",
-        start: "top center", //devo allinearmi al fire dello scrollTrigger principale "center"
-        end: "+=6000px",
-        scrub: true,
-        //markers: true,
-        snap: {
-          snapTo: "labels", // snap to one of the labels, or use a function
-          duration: { min: 0.2, max: 0.5 }, // the snap animation should be at least 0.2 seconds, but no more than 3 seconds (determined by velocity)
-        },
-      },
+      paused: true,
+      // scrollTrigger: {
+      //   trigger: "#chips-wrapper",
+      //   start: "top center", //devo allinearmi al fire dello scrollTrigger principale "center"
+      //   end: "+=6000px",
+      //   scrub: true,
+      //   //markers: true,
+      //   snap: {
+      //     snapTo: "labels", // snap to one of the labels, or use a function
+      //     duration: { min: 0.2, max: 0.5 }, // the snap animation should be at least 0.2 seconds, but no more than 3 seconds (determined by velocity)
+      //   },
+      // },
     });
 
     phasesChipsTitle.forEach((ChipTitle, i) => {
@@ -99,185 +92,159 @@ onMounted(() => {
       }
 
       // Mostra il nuovo titolo
-      phasesTL.value.fromTo(ChipTitle, { y: -10, autoAlpha: 0 }, { y: 0, autoAlpha: 1 });
+      phasesTL.value.fromTo(
+        ChipTitle,
+        { y: -10, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.3 }
+      );
 
       // Mostra il nuovo contenitore di chips
       phasesTL.value.fromTo(
         phasesChipsContainer[i],
         { y: 10, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1 },
+        { y: 0, autoAlpha: 1, duration: 0.3 },
         "<"
       );
 
       phasesTL.value.addLabel(`label_end${i}`);
     });
 
-    // phasesChipsTitle.forEach((ChipTitle, i) => {
-    //   phasesTL.value.fromTo(
-    //     ChipTitle,
-    //     {
-    //       y: -10,
-    //       autoAlpha: 0,
-    //     },
-    //     {
-    //       y: 0,
-    //       autoAlpha: 1,
-    //       //duration: 0.5,
-    //       //stagger: 1,
-    //     }
-    //     // `label_start${i}`
-    //   );
-    //   //phasesTL.value.addLabel(`label_start${i}`);
-    //   phasesTL.value.fromTo(
-    //     phasesChipsContainer[i], // Usa l'elemento corrispondente
-    //     { y: 10, autoAlpha: 0 },
-    //     {
-    //       y: 0,
-    //       autoAlpha: 1,
-    //       //duration: 0.5
-    //     },
-    //     //`label_end${i}`,
-    //     "<"
-    //   );
-    //   phasesTL.value.addLabel(`label_end${i}`);
-    // });
     //!SECTION
 
-    const containers = [
-      "#pre-chips-container",
-      "#production-chips-container",
-      "#post-chips-container",
-      "#market-chips-container",
-    ]; // creo un array con i container delle chips delle fasi
+    //SECTION - gestione animazione a steps
+    let currentStep = 0;
+    //const totalSteps = phasesTL.value.getChildren().length;
+    const totalSteps = phasesChipsTitle.length; // Numero totale di step
+    console.log("Step Totali delle fasi (durata della timeline)", totalSteps);
+    let isAnimating = false;
+    let animationActive = false;
+    let scrollTimeout = null; //timeout per debounce
 
-    //implemento l'intentObserver che gestirò dalla pagina parent in cui chiamerò il componente
-    // intentObserver.value = ScrollTrigger.observe({
-    //   type: "wheel,touch,pointer",
-    //   tolerance: 10,
-    //   preventDefault: true,
-    //   // metodo che tiene conto dello scroll naturale di MacOS cioè si basa sulla direzione indicata da deltaY
-    //   onChange: (self) => {
-    //     const delta = self.deltaY || self.touchDeltaY;
-    //     const threshold = 5;
-    //     if (Math.abs(delta) > threshold) {
-    //       if (delta > 0) {
-    //         //console.log("Scrolling down");
-    //         allowScroll && circleAnimation(currentIndex + 1, true);
-    //       } else if (delta < 0) {
-    //         //console.log("Scrolling up");
-    //         allowScroll && circleAnimation(currentIndex - 1, false);
-    //       }
-    //     }
-    //   },
-    //   onEnable(self) {
-    //     allowScroll = false; // blocca lo scroll
-    //     scrollTimeout.restart(true); //riattiva lo scroll dopo un secondo
-    //     //registro la posizione dello scroll
-    //     let savedScroll = self.scrollY();
-    //     // Per bloccare il div in posizione durante l'animazione
-    //     self._restoreScroll = () => self.scrollY(savedScroll);
-    //     //document.addEventListener("scroll", self._restoreScroll, { passive: false });
-    //     //ogni volta che l'utente scrolla ripristino la posizione dello scroll salvata
-    //     //passive:false serve per non interferire con il preventDefault
-    //   },
-    //   onDisable: (self) => {
-    //     document.removeEventListener("scroll", self._restoreScroll);
-    //     // Tolgo il listener e riattivo lo scroll
-    //   },
-    // });
-    // intentObserver.value.disable(); //disabilito l'observer inizialemnte
+    // function nextStep() {
+    //   if (isAnimating) return; // Evita che lo scroll eccessivo faccia saltare più step
+    //   isAnimating = true;
 
-    function circleAnimation(index, isScrollingDown) {
-      //gestiamo il ripristino dello scroll se siamo alla fine o ritornati all'inizio
-      if (
-        (index === phasesItems.length + 1 && isScrollingDown) ||
-        (index === -1 && !isScrollingDown)
-      ) {
-        intentObserver.value.disable();
-        return;
+    //   if (currentStep < totalSteps) {
+    //     currentStep++;
+    //     phasesTL.value.tweenTo(currentStep, {
+    //       onComplete: () => (isAnimating = false), // Sblocca l'animazione dopo la fine
+    //     });
+    //   }
+    // }
+
+    // function prevStep() {
+    //   if (isAnimating) return;
+    //   isAnimating = true;
+
+    //   if (currentStep > 0) {
+    //     currentStep--;
+    //     phasesTL.value.tweenTo(currentStep, {
+    //       onComplete: () => (isAnimating = false),
+    //     });
+    //   }
+    // }
+
+    // // Gestione dello scroll su mouse e touch
+    // function handleScroll(event) {
+    //   event.preventDefault(); // Evita lo scroll normale della pagina
+    //   if (event.deltaY > 0) {
+    //     nextStep(); // Scroll giù -> Avanza
+    //   } else if (event.deltaY < 0) {
+    //     prevStep(); // Scroll su -> Torna indietro
+    //   }
+    // }
+
+    // // Eventi per desktop e mobile
+    // window.addEventListener("wheel", handleScroll, { passive: false });
+    // window.addEventListener("touchmove", handleScroll, { passive: false });
+
+    //---------
+    function nextStep() {
+      if (!animationActive || isAnimating || currentStep >= totalSteps - 1) return;
+      isAnimating = true;
+      currentStep++;
+      console.log(`Avanzamento Step: ${currentStep}/${totalSteps - 1}`);
+      phasesTL.value.tweenTo(`label_end${currentStep}`, {
+        onComplete: () => (isAnimating = false),
+      });
+    }
+
+    function prevStep() {
+      if (!animationActive || isAnimating || currentStep <= 0) return;
+      isAnimating = true;
+      currentStep--;
+      console.log(`Tornando allo Step: ${currentStep}/${totalSteps - 1}`);
+      phasesTL.value.tweenTo(`label_end${currentStep}`, {
+        onComplete: () => (isAnimating = false),
+      });
+    }
+
+    function handleScroll(event) {
+      if (!animationActive) return;
+      event.preventDefault();
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        if (event.deltaY > 0) {
+          nextStep();
+        } else if (event.deltaY < 0) {
+          prevStep();
+        }
+      }, 60); // Attendi 100ms prima di accettare un altro scroll
+    }
+
+    // function handleScroll(event) {
+    //   if (!animationActive || isAnimating) return;
+    //   console.log("DELTA-Y: ", event.deltaY);
+    //   event.preventDefault();
+
+    //   // **Debounce per evitare doppie chiamate**
+    //   // clearTimeout(scrollTimeout);
+    //   // scrollTimeout = setTimeout(() => {
+    //   if (event.deltaY > 10) {
+    //     // Normalizza il delta per evitare più avanzamenti
+    //     nextStep();
+    //   } else if (event.deltaY < -10) {
+    //     prevStep();
+    //   }
+    //   // }, 50); // Attendi 50ms prima di accettare un altro scroll
+    // }
+
+    // **Osservatore per rilevare la visibilità della sezione**
+    const targetElement = document.querySelector("#phases-section");
+
+    const observer = new MutationObserver(() => {
+      const computedStyle = window.getComputedStyle(targetElement);
+      const isVisible =
+        computedStyle.display !== "none" &&
+        computedStyle.opacity !== "0" &&
+        computedStyle.visibility !== "hidden";
+
+      if (isVisible && !animationActive) {
+        animationActive = true;
+        console.log("Attivata animazione");
+        window.addEventListener("wheel", handleScroll, { passive: false });
+        window.addEventListener("touchmove", handleScroll, { passive: false });
+      } else if (!isVisible && animationActive) {
+        animationActive = false;
+        console.log("Disattivata animazione");
+        window.removeEventListener("wheel", handleScroll);
+        window.removeEventListener("touchmove", handleScroll);
       }
+    });
 
-      // console.log("currentIndex", currentIndex, "_", "index", index);
+    observer.observe(targetElement, {
+      attributes: true,
+      attributeFilter: ["style", "class"],
+    });
 
-      let target = isScrollingDown ? phasesItems[currentIndex] : phasesItems[index];
-      let txtTarget = isScrollingDown
-        ? phasesTxtItems[currentIndex]
-        : phasesTxtItems[index];
-      //console.log("Array dei testi delle fasi", `${txtTarget} path`);
-      let targetContainer = isScrollingDown
-        ? containers[currentIndex]
-        : containers[index];
+    //!SECTION
 
-      let Chips_Title = isScrollingDown
-        ? `${containers[currentIndex]} .title`
-        : `${containers[index]} .title`;
-
-      let Chips_Title_pre = isScrollingDown
-        ? `${containers[currentIndex - 1]} .title`
-        : `${containers[index - 1]} .title`;
-
-      //ricavo le chips per ogni container in base a currentIndex
-
-      let targetChips = isScrollingDown
-        ? `${containers[currentIndex]} .phase-chips`
-        : `${containers[index]} .phase-chips`;
-
-      let targetChips_pre = isScrollingDown
-        ? `${containers[currentIndex - 1]} .phase-chips`
-        : `${containers[index - 1]} .phase-chips`;
-
-      let phases_tl = $gsap.timeline();
-
-      phases_tl
-        .fromTo(
-          Chips_Title,
-          {
-            y: isScrollingDown ? -10 : 0,
-          },
-          {
-            y: isScrollingDown ? 0 : -10,
-            autoAlpha: isScrollingDown ? 1 : 0,
-            duration: 0.5,
-          }
-        )
-        .fromTo(
-          Chips_Title_pre,
-          {
-            y: isScrollingDown ? 0 : 10,
-          },
-          {
-            y: isScrollingDown ? 10 : 0,
-            autoAlpha: isScrollingDown ? 0 : 1,
-            duration: 0.3,
-          },
-          "<"
-        )
-        .fromTo(
-          targetChips,
-          {
-            y: isScrollingDown ? 10 : 0,
-          },
-          {
-            y: isScrollingDown ? 0 : 10,
-            autoAlpha: isScrollingDown ? 1 : 0,
-            duration: 0.5,
-          }
-        )
-        .fromTo(
-          targetChips_pre,
-          {
-            y: isScrollingDown ? 0 : -10,
-          },
-          {
-            y: isScrollingDown ? -10 : 0,
-            autoAlpha: isScrollingDown ? 0 : 1,
-            duration: 0.3,
-          },
-          "<"
-        );
-
-      currentIndex = index;
-    } //NOTE - chiusura CircleAnimation
+    // const containers = [
+    //   "#pre-chips-container",
+    //   "#production-chips-container",
+    //   "#post-chips-container",
+    //   "#market-chips-container",
+    // ]; // creo un array con i container delle chips delle fasi
   }); //NOTE - chiusura nextTick
 }); //NOTE - chiusura onMounted
 

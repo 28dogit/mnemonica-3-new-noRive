@@ -126,8 +126,8 @@ onMounted(() => {
 
     //phases
 
-    PhasesRef.value.phasesTL.scrollTrigger.disable();
-    console.log("phasesTL_SC", PhasesRef.value.phasesTL.scrollTrigger);
+    //PhasesRef.value.phasesTL.scrollTrigger.disable();
+    //console.log("phasesTL_SC", PhasesRef.value.phasesTL.scrollTrigger);
     // console.log(
     //   "Rotazione tl fase suo scrolltrigger - ",
     //   PhasesRef.value.rotationTL,
@@ -150,7 +150,7 @@ onMounted(() => {
         let end_S = 0;
         let sectionHeight0 = section.offsetHeight + 70;
         let sectionHeight1 = scrollTrigger.end + 70;
-        let sectionHeight2 = PhasesRef.value.phasesTL.scrollTrigger.end + 70;
+        let sectionHeight2 = section.offsetHeight + 70; //PhasesRef.value.phasesTL.scrollTrigger.end + 70;
 
         // console.log(
         //   "le altezze Reali :) - ",
@@ -230,9 +230,9 @@ onMounted(() => {
             }
             if (index === 2) {
               PhasesRef.value.rotationTL.play();
-              PhasesRef.value.phasesTL.scrollTrigger.enable();
+              //PhasesRef.value.phasesTL.scrollTrigger.enable();
               console.log("play", PhasesRef.value.rotationTL);
-              console.log("enable", PhasesRef.value.phasesTL.scrollTrigger.enabled);
+              //console.log("enable", PhasesRef.value.phasesTL.scrollTrigger.enabled);
             }
             // if (index === 2) {
             //   if (!PhasesRef.value.isPlaying) {
@@ -265,8 +265,8 @@ onMounted(() => {
             }
             if (index === 2) {
               PhasesRef.value.rotationTL.pause();
-              PhasesRef.value.phasesTL.scrollTrigger.disable();
-              console.log("enable", PhasesRef.value.phasesTL.scrollTrigger.enabled);
+              // PhasesRef.value.phasesTL.scrollTrigger.disable();
+              //console.log("enable", PhasesRef.value.phasesTL.scrollTrigger.enabled);
               //PhasesRef.value.intentObserver.disable();
             }
           },
@@ -285,13 +285,13 @@ onMounted(() => {
             }
             if (index === 2) {
               PhasesRef.value.rotationTL.play();
-              PhasesRef.value.phasesTL.scrollTrigger.enable();
-              ScrollTrigger.refresh();
+              // PhasesRef.value.phasesTL.scrollTrigger.enable();
+              //ScrollTrigger.refresh();
               console.log("play", PhasesRef.value.rotationTL);
-              console.log(
-                "enable + refresh",
-                PhasesRef.value.phasesTL.scrollTrigger.enabled
-              );
+              // console.log(
+              //   "enable + refresh",
+              //   PhasesRef.value.phasesTL.scrollTrigger.enabled
+              // );
             }
             // if (index === 2) {
             //   if (!PhasesRef.value.isPlaying) {
@@ -320,8 +320,8 @@ onMounted(() => {
             }
             if (index === 2) {
               PhasesRef.value.rotationTL.pause();
-              PhasesRef.value.phasesTL.scrollTrigger.disable();
-              console.log("enable", PhasesRef.value.phasesTL.scrollTrigger.enabled);
+              // PhasesRef.value.phasesTL.scrollTrigger.disable();
+              // console.log("enable", PhasesRef.value.phasesTL.scrollTrigger.enabled);
             }
           },
         });
