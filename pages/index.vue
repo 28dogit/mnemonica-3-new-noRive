@@ -131,17 +131,40 @@ onMounted(() => {
     //   });
     // });
 
+    let isCoolingDown = false;
+    const COOL_DOWN_TIME = 800; // ms
+
     function handleScroll(event) {
+      // Se siamo in fase di "cooldown", ignoriamo tutti gli eventi successivi
+      if (isCoolingDown) return;
+
       if (event.deltaY > 0) {
         //nextStep();
-        console.log("DELTA-Y >0: ", event.deltaY);
         sectionsTL.play();
       } else if (event.deltaY < 0) {
         //prevStep();
-        console.log("DELTA-Y <0: ", event.deltaY);
         sectionsTL.reverse();
       }
+
+      // Attiviamo la "finestra" di cooldown
+      isCoolingDown = true;
+      setTimeout(() => {
+        isCoolingDown = false;
+      }, COOL_DOWN_TIME);
     }
+
+    // function handleScroll(event) {
+    //   if (event.deltaY > 0) {
+    //     //nextStep();
+    //     console.log("DELTA-Y >0: ", event.deltaY);
+    //     //sectionsTL.tweenTo("modules_section", {});
+    //     sectionsTL.play();
+    //   } else if (event.deltaY < 0) {
+    //     //prevStep();
+    //     console.log("DELTA-Y <0: ", event.deltaY);
+    //     sectionsTL.reverse();
+    //   }
+    // }
     window.addEventListener("wheel", handleScroll, { passive: false });
     window.addEventListener("touchmove", handleScroll, { passive: false });
 
@@ -149,7 +172,7 @@ onMounted(() => {
 
     sectionsTL.to("#hero-section", {
       autoAlpha: 0,
-      duration: 0.5,
+      duration: 1,
       zIndex: "0",
     });
     sectionsTL.to(
@@ -168,9 +191,27 @@ onMounted(() => {
         duration: 0.5,
         zIndex: "999999999",
       },
+
       "<"
     );
     sectionsTL.addLabel("modules_section");
+    sectionsTL.addPause();
+    sectionsTL.to("#modules-section", {
+      autoAlpha: 0,
+      duration: 0.5,
+      zIndex: "0",
+    });
+    sectionsTL.to(
+      "#phases-section",
+      {
+        autoAlpha: 1,
+        duration: 0.5,
+        zIndex: "999999999",
+      },
+      "<"
+    );
+    sectionsTL.addLabel("phases_section");
+    sectionsTL.addPause();
 
     //!SECTION
 

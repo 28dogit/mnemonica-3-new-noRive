@@ -161,19 +161,19 @@ onMounted(() => {
       // });
     }
 
-    function handleScroll(event) {
-      if (!animationActive || isAnimating) return;
-      event.preventDefault();
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        console.log("DELTA-Y: ", event.deltaY);
-        if (event.deltaY > 0) {
-          nextStep();
-        } else if (event.deltaY < 0) {
-          prevStep();
-        }
-      }, 35); // Attendi 100ms prima di accettare un altro scroll
-    }
+    // function handleScroll(event) {
+    //   if (!animationActive || isAnimating) return;
+    //   event.preventDefault();
+    //   clearTimeout(scrollTimeout);
+    //   scrollTimeout = setTimeout(() => {
+    //     console.log("DELTA-Y: ", event.deltaY);
+    //     if (event.deltaY > 0) {
+    //       nextStep();
+    //     } else if (event.deltaY < 0) {
+    //       prevStep();
+    //     }
+    //   }, 35); // Attendi 100ms prima di accettare un altro scroll
+    // }
 
     // function handleScroll(event) {
     //   if (!animationActive || isAnimating) return;
@@ -195,30 +195,30 @@ onMounted(() => {
     // **Osservatore per rilevare la visibilità della sezione**
     const targetElement = document.querySelector("#phases-section");
 
-    const observer = new MutationObserver(() => {
-      const computedStyle = window.getComputedStyle(targetElement);
-      const isVisible =
-        computedStyle.display !== "none" &&
-        computedStyle.opacity !== "0" &&
-        computedStyle.visibility !== "hidden";
+    // const observer = new MutationObserver(() => {
+    //   const computedStyle = window.getComputedStyle(targetElement);
+    //   const isVisible =
+    //     computedStyle.display !== "none" &&
+    //     computedStyle.opacity !== "0" &&
+    //     computedStyle.visibility !== "hidden";
 
-      if (isVisible && !animationActive) {
-        animationActive = true;
-        console.log("Attivata animazione");
-        window.addEventListener("wheel", handleScroll, { passive: false });
-        window.addEventListener("touchmove", handleScroll, { passive: false });
-      } else if (!isVisible && animationActive) {
-        animationActive = false;
-        console.log("Disattivata animazione");
-        window.removeEventListener("wheel", handleScroll);
-        window.removeEventListener("touchmove", handleScroll);
-      }
-    });
+    //   if (isVisible && !animationActive) {
+    //     animationActive = true;
+    //     console.log("Attivata animazione");
+    //     window.addEventListener("wheel", handleScroll, { passive: false });
+    //     window.addEventListener("touchmove", handleScroll, { passive: false });
+    //   } else if (!isVisible && animationActive) {
+    //     animationActive = false;
+    //     console.log("Disattivata animazione");
+    //     window.removeEventListener("wheel", handleScroll);
+    //     window.removeEventListener("touchmove", handleScroll);
+    //   }
+    // });
 
-    observer.observe(targetElement, {
-      attributes: true,
-      attributeFilter: ["style", "class"],
-    });
+    // observer.observe(targetElement, {
+    //   attributes: true,
+    //   attributeFilter: ["style", "class"],
+    // });
 
     //!SECTION
   }); //NOTE - chiusura nextTick
