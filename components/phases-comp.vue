@@ -119,54 +119,27 @@ onMounted(() => {
     let isAnimating = false;
     let animationActive = false;
     let scrollTimeout = null; //timeout per debounce
+    let firstScrollEvent = true; // Flag per evitare la doppia chiamata iniziale
 
-    // function nextStep() {
-    //   if (isAnimating) return; // Evita che lo scroll eccessivo faccia saltare più step
-    //   isAnimating = true;
-
-    //   if (currentStep < totalSteps) {
-    //     currentStep++;
-    //     phasesTL.value.tweenTo(currentStep, {
-    //       onComplete: () => (isAnimating = false), // Sblocca l'animazione dopo la fine
-    //     });
-    //   }
-    // }
-
-    // function prevStep() {
-    //   if (isAnimating) return;
-    //   isAnimating = true;
-
-    //   if (currentStep > 0) {
-    //     currentStep--;
-    //     phasesTL.value.tweenTo(currentStep, {
-    //       onComplete: () => (isAnimating = false),
-    //     });
-    //   }
-    // }
-
-    // // Gestione dello scroll su mouse e touch
-    // function handleScroll(event) {
-    //   event.preventDefault(); // Evita lo scroll normale della pagina
-    //   if (event.deltaY > 0) {
-    //     nextStep(); // Scroll giù -> Avanza
-    //   } else if (event.deltaY < 0) {
-    //     prevStep(); // Scroll su -> Torna indietro
-    //   }
-    // }
-
-    // // Eventi per desktop e mobile
-    // window.addEventListener("wheel", handleScroll, { passive: false });
-    // window.addEventListener("touchmove", handleScroll, { passive: false });
-
-    //---------
     function nextStep() {
       if (!animationActive || isAnimating || currentStep >= totalSteps - 1) return;
       isAnimating = true;
       currentStep++;
       console.log(`Avanzamento Step: ${currentStep}/${totalSteps - 1}`);
       phasesTL.value.tweenTo(`label_end${currentStep}`, {
-        onComplete: () => (isAnimating = false),
+        duration: 0.6, // Ridotto per rendere il passaggio più reattivo
+        ease: "power2.out", // Aggiunto easing per un passaggio più fluido
+        onComplete: () => {
+          setTimeout(() => {
+            isAnimating = false;
+          }, 50); // Breve ritardo per evitare doppi eventi
+        },
       });
+      // phasesTL.value.tweenTo(`label_end${currentStep}`, {
+      //   onComplete: () => {
+      //     isAnimating = false;
+      //   },
+      // });
     }
 
     function prevStep() {
@@ -175,21 +148,31 @@ onMounted(() => {
       currentStep--;
       console.log(`Tornando allo Step: ${currentStep}/${totalSteps - 1}`);
       phasesTL.value.tweenTo(`label_end${currentStep}`, {
-        onComplete: () => (isAnimating = false),
+        duration: 0.6,
+        ease: "power2.out",
+        onComplete: () => {
+          setTimeout(() => {
+            isAnimating = false;
+          }, 50);
+        },
       });
+      // phasesTL.value.tweenTo(`label_end${currentStep}`, {
+      //   onComplete: () => (isAnimating = false),
+      // });
     }
 
     function handleScroll(event) {
-      if (!animationActive) return;
+      if (!animationActive || isAnimating) return;
       event.preventDefault();
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
+        console.log("DELTA-Y: ", event.deltaY);
         if (event.deltaY > 0) {
           nextStep();
         } else if (event.deltaY < 0) {
           prevStep();
         }
-      }, 60); // Attendi 100ms prima di accettare un altro scroll
+      }, 35); // Attendi 100ms prima di accettare un altro scroll
     }
 
     // function handleScroll(event) {
@@ -238,13 +221,6 @@ onMounted(() => {
     });
 
     //!SECTION
-
-    // const containers = [
-    //   "#pre-chips-container",
-    //   "#production-chips-container",
-    //   "#post-chips-container",
-    //   "#market-chips-container",
-    // ]; // creo un array con i container delle chips delle fasi
   }); //NOTE - chiusura nextTick
 }); //NOTE - chiusura onMounted
 
