@@ -48,15 +48,19 @@ const PhasesRef = ref(null);
 
 onMounted(() => {
   nextTick(() => {
-    //await nextTick();
     const { $gsap } = useNuxtApp();
+
+    $gsap.set("#hero-section", { opacity: 1 });
+    $gsap.set(".ghirlanda-updx, .ghirlanda-dwsx ", { opacity: 0 });
+
+    // Variabile che indica se l'animazione intro è completata
+    let introCompleted = false;
 
     //SECTION - animazioni interne
     // implemento la timeline intro che sbloccherà alla fine l'overflow hidden del body per ripristinare lo scroll
     const intro = $gsap.timeline({
       onComplete: () => {
-        //console.log("Ripristino scroll");
-        //$gsap.set("body", { overflow: "auto" });
+        introCompleted = true;
       },
     });
     // registro effetto per l'entrata delle scritte e del logo in Hero section
@@ -92,9 +96,6 @@ onMounted(() => {
     intro.EnterFrom("#H-preserve", { duration: 0.7 }, "> -=0.3");
     intro.EnterFrom("#heroSubTitle", { duration: 0.5, y: "-25px" }, "-=0.7");
 
-    $gsap.set("#hero-section", { opacity: 1 });
-    $gsap.set(".ghirlanda-updx, .ghirlanda-dwsx ", { opacity: 0 });
-
     //!SECTION
 
     //SECTION - Gestione animazione Timeline allo scroll
@@ -106,35 +107,15 @@ onMounted(() => {
       return;
     }
 
-    // sections.forEach((section, index) => {
-    //   const observer = new MutationObserver(() => {
-    //     const computedStyle = window.getComputedStyle(section);
-    //     const isVisible =
-    //       computedStyle.display !== "none" &&
-    //       computedStyle.opacity !== "0" &&
-    //       computedStyle.visibility !== "hidden";
-
-    //     if (isVisible) {
-    //       console.log("Attivata", section);
-    //       window.addEventListener("wheel", handleScroll, { passive: false });
-    //       window.addEventListener("touchmove", handleScroll, { passive: false });
-    //     } else if (!isVisible) {
-    //       console.log("Disattivata", section);
-    //       window.removeEventListener("wheel", handleScroll);
-    //       window.removeEventListener("touchmove", handleScroll);
-    //     }
-    //   });
-
-    //   observer.observe(section, {
-    //     attributes: true,
-    //     attributeFilter: ["style", "class"],
-    //   });
-    // });
-
     let isCoolingDown = false;
-    const COOL_DOWN_TIME = 800; // ms
+    const COOL_DOWN_TIME = 1600; // ms
 
     function handleScroll(event) {
+      // Se la timeline intro non è ancora terminata, ignoro completamente lo scroll
+      if (!introCompleted) {
+        event.preventDefault();
+        return;
+      }
       // Se siamo in fase di "cooldown", ignoriamo tutti gli eventi successivi
       if (isCoolingDown) return;
 
@@ -153,18 +134,6 @@ onMounted(() => {
       }, COOL_DOWN_TIME);
     }
 
-    // function handleScroll(event) {
-    //   if (event.deltaY > 0) {
-    //     //nextStep();
-    //     console.log("DELTA-Y >0: ", event.deltaY);
-    //     //sectionsTL.tweenTo("modules_section", {});
-    //     sectionsTL.play();
-    //   } else if (event.deltaY < 0) {
-    //     //prevStep();
-    //     console.log("DELTA-Y <0: ", event.deltaY);
-    //     sectionsTL.reverse();
-    //   }
-    // }
     window.addEventListener("wheel", handleScroll, { passive: false });
     window.addEventListener("touchmove", handleScroll, { passive: false });
 
