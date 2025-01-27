@@ -55,6 +55,7 @@ onMounted(() => {
 
     // Variabile che indica se l'animazione intro è completata
     let introCompleted = false;
+    let isfixedSection = true;
 
     //SECTION - animazioni interne
     // implemento la timeline intro che sbloccherà alla fine l'overflow hidden del body per ripristinare lo scroll
@@ -111,6 +112,7 @@ onMounted(() => {
     const COOL_DOWN_TIME = 1600; // ms
 
     function handleScroll(event) {
+      if (!isfixedSection) return;
       // Se la timeline intro non è ancora terminata, ignoro completamente lo scroll
       if (!introCompleted) {
         event.preventDefault();
@@ -137,7 +139,23 @@ onMounted(() => {
     window.addEventListener("wheel", handleScroll, { passive: false });
     window.addEventListener("touchmove", handleScroll, { passive: false });
 
-    const sectionsTL = $gsap.timeline({ paused: true });
+    //NOTE - recupero la rotationTL esposta dal componente phases_comp
+    const RotationTL = PhasesRef.value.rotationTL;
+
+    //NOTE - recupero la phasesTL esposta dal componente phases_comp
+    const PhasesTL = PhasesRef.value.phasesTL;
+
+    const sectionsTL = $gsap.timeline({
+      paused: true,
+      onComplete: () => {
+        setTimeout(() => {
+          $gsap.set("body", { overflow: "auto" });
+          // Simula un piccolo scroll per attivare ScrollTrigger
+          window.scrollBy({ top: 2, behavior: "instant" });
+        }, 100);
+      },
+      onReverseCompleted: () => {},
+    });
 
     sectionsTL.to("#hero-section", {
       autoAlpha: 0,
@@ -154,22 +172,65 @@ onMounted(() => {
       "<"
     );
     sectionsTL.to(
+      ".ghirlanda-updx, .ghirlanda-dwsx ",
+      {
+        autoAlpha: 1,
+        filter: "blur(0px)",
+      },
+      "<"
+    );
+    sectionsTL.to(
       "#modules-section",
       {
         autoAlpha: 1,
         duration: 0.5,
         zIndex: "999999999",
       },
+      "<0.3"
+    );
+    sectionsTL.to("#Modules_3a #Rooms path", { fill: "#CEF372" }, "<");
 
+    sectionsTL.addLabel("modules_section");
+    // pausa entrata modules
+    sectionsTL.addPause();
+    //-----
+
+    sectionsTL.to("#modules_svg", { rotate: "+=120" });
+    sectionsTL.to("#Modules_3a #Rooms path", { fill: "#B8EFFA" }, "<");
+    sectionsTL.to("#Modules_3a #Boxes path", { fill: "#CEF372" }, "<");
+    sectionsTL.set("#modules-content #module-txt_1", { zIndex: 0 }, "<");
+    sectionsTL.to("#modules-content #module-txt_1", { opacity: 0 }, "<");
+    sectionsTL.set("#modules-content #module-txt_2", { zIndex: 110 }, "<");
+    sectionsTL.to("#modules-content #module-txt_2", { opacity: 1 }, "<");
+
+    sectionsTL.addPause();
+
+    sectionsTL.to("#modules_svg", { rotate: "+=120" });
+    sectionsTL.to("#Modules_3a #Boxes path", { fill: "#B8EFFA" }, "<");
+    sectionsTL.to("#Modules_3a #Masters path", { fill: "#CEF372" }, "<");
+    sectionsTL.set("#modules-content #module-txt_2", { zIndex: 0 }, "<");
+    sectionsTL.to("#modules-content #module-txt_2", { opacity: 0 }, "<");
+    sectionsTL.set("#modules-content #module-txt_3", { zIndex: 110 }, "<");
+    sectionsTL.to("#modules-content #module-txt_3", { opacity: 1 }, "<");
+
+    sectionsTL.addPause();
+
+    //------
+    // sectionsTL.call(() => PhasesRef.value.rotationTL.pause());
+    sectionsTL.call(() => RotationTL.pause());
+
+    sectionsTL.to("#modules_svg", { rotate: "+=120" });
+    //sectionsTL.call(() => PhasesRef.value.rotationTL.play(), [], "<+=0.2");
+    sectionsTL.call(() => RotationTL.play(), [], "<+=0.2");
+    sectionsTL.to(
+      "#modules-section",
+      {
+        autoAlpha: 0,
+        duration: 0.5,
+        zIndex: "0",
+      },
       "<"
     );
-    sectionsTL.addLabel("modules_section");
-    sectionsTL.addPause();
-    sectionsTL.to("#modules-section", {
-      autoAlpha: 0,
-      duration: 0.5,
-      zIndex: "0",
-    });
     sectionsTL.to(
       "#phases-section",
       {
@@ -180,221 +241,27 @@ onMounted(() => {
       "<"
     );
     sectionsTL.addLabel("phases_section");
+    sectionsTL.call(() => PhasesTL.play());
+    // pausa entrata Phases
+    sectionsTL.addPause();
+    sectionsTL.call(() => PhasesTL.play());
     sectionsTL.addPause();
 
-    //!SECTION
+    //ANCHOR - Scrolltrigger per gestire la sezione "nofixed"
 
-    // const sections = document.querySelectorAll(".section_fixed");
-
-    // if (!sections.length) {
-    //   console.error("Nessuna sezione trovata.");
-    //   return;
-    // }
-
-    // //SECTION - Richiamo Composables e le varie esposte
-    // //richiamo del composable useGsapModules che contiene tutta la timeline di modules
-    // //qui richiamerò anche il composables di Phase (da implementare ancora)
-
-    // //composables di Modules
-    // const { modules_tl, getScrollTrigger, setOnEnter, setOnComplete } = useGsapModules();
-    // const scrollTrigger = getScrollTrigger();
-    // scrollTrigger.disable();
-
-    // //!SECTION
-
-    // //creo la funzione updateTriger per aggiornarla con un listner sul resize
-    // const updateTriggers = () => {
-    //   let allScrollHeight = 0;
-    //   let scrollTriggerHeights = [];
-    //   // Loop per creare transizioni tra sezioni
-    //   sections.forEach((section, index) => {
-    //     const viewportHeight = section.offsetHeight;
-    //     //calcolo l'altezza della section per gestire i markers di gsap
-    //     let scrollHeight = ref(null);
-    //     let start_S = 0;
-    //     let end_S = 0;
-    //     let sectionHeight0 = section.offsetHeight + 70;
-    //     let sectionHeight1 = scrollTrigger.end + 70;
-    //     let sectionHeight2 = section.offsetHeight + 70; //PhasesRef.value.phasesTL.scrollTrigger.end + 70;
-
-    //     if (index === 0) {
-    //       scrollHeight = sectionHeight0;
-    //       start_S = 0;
-    //       end_S = sectionHeight0;
-    //       console.log("test0", scrollHeight);
-    //     }
-    //     if (index === 1) {
-    //       scrollHeight = sectionHeight1;
-    //       start_S = sectionHeight0;
-    //       end_S = sectionHeight0 + sectionHeight1;
-    //       console.log("test1", scrollHeight);
-    //     }
-    //     if (index === 2) {
-    //       scrollHeight = sectionHeight2;
-    //       start_S = sectionHeight0 + sectionHeight1;
-    //       end_S = sectionHeight0 + sectionHeight1 + sectionHeight2;
-    //       console.log("test2", scrollHeight);
-    //     }
-
-    //     allScrollHeight += scrollHeight;
-    //     scrollTriggerHeights.push(scrollHeight);
-
-    //     // console.log("SecrollHeight", scrollHeight);
-    //     console.log("allScrollHeight", allScrollHeight);
-    //     // console.log("scrollTriggerHeights", scrollTriggerHeights);
-    //     console.log("test Calcolo Start", start_S);
-    //     console.log("test Calcolo End", end_S);
-
-    //     //rendo dinamica l'altezza di #sectionsWrapper usando js per creare la variabile css dell'altezza in base a quante sezioni ci sono, per evitare errori o dimenticanze scrivendolo a mano
-    //     // questa variabile la userò nel css
-    //     document.documentElement.style.setProperty(
-    //       "--total-height",
-    //       `${allScrollHeight}px`
-    //     );
-
-    //     let mainScrollTrigger = ScrollTrigger.create({
-    //       markers: true,
-    //       //pin: true,
-    //       trigger: "#sectionsWrapper", // Trigger sull'intero contenitore
-    //       //trigger: section, // Trigger sull'intero contenitore
-
-    //       start: `${start_S}px center`, // Inizio della sezione
-    //       end: `${end_S}px center`, // fine della sezione
-    //       //invalidateOnRefresh: true,
-
-    //       onEnter: () => {
-    //         $gsap.to(section, { opacity: 1, zIndex: "999999999", duration: 0.5 });
-    //         if (index === 1) {
-    //           scrollTrigger.enable();
-
-    //           // $gsap.to(window, {
-    //           //   scrollTo: scrollTrigger.labelToScroll("ghirlande"),
-    //           //   ease: "power2.inOut",
-    //           //   duration: 3,
-    //           //   onStart: () => {
-    //           //     console.log("scrollTo start", scrollTrigger.labelToScroll("ghirlande"));
-    //           //   },
-    //           //   onComplete: () => {
-    //           //     console.log(
-    //           //       "scrollTo complete",
-    //           //       scrollTrigger.labelToScroll("ghirlande")
-    //           //     );
-    //           //   },
-    //           // });
-    //         }
-    //         if (index === 2) {
-    //           PhasesRef.value.rotationTL.play();
-    //           //PhasesRef.value.phasesTL.scrollTrigger.enable();
-    //           console.log("play", PhasesRef.value.rotationTL);
-    //           //console.log("enable", PhasesRef.value.phasesTL.scrollTrigger.enabled);
-    //         }
-    //         // if (index === 2) {
-    //         //   if (!PhasesRef.value.isPlaying) {
-    //         //     // Controllo per evitare ripetizioni
-    //         //     PhasesRef.value.isPlaying = true; // Stato interno per evitare richiami multipli
-    //         //     PhasesRef.value.rotationTL.play();
-    //         //     PhasesRef.value.phasesTL.scrollTrigger.enable();
-    //         //     console.log("phasesTL_SC_enter", PhasesRef.value.phasesTL.scrollTrigger);
-
-    //         //     // Controlla lo stato dell'osservatore dopo averlo abilitato
-    //         //     console.log("play", PhasesRef.value.rotationTL);
-    //         //   }
-
-    //         //   // Esegui un debounce per sicurezza
-    //         //   setTimeout(() => {
-    //         //     PhasesRef.value.isPlaying = false; // Reimposta lo stato dopo un breve ritardo
-    //         //   }, 500); // Regola il tempo secondo necessità
-    //         // }
-    //       },
-    //       onLeave: () => {
-    //         $gsap.to(section, { opacity: 0, zIndex: "0", duration: 0.5 });
-    //         $gsap.to("#ghirlanda-element_start", {
-    //           opacity: 0,
-    //           zIndex: "0",
-    //           duration: 0.5,
-    //         });
-
-    //         if (index === 1) {
-    //           scrollTrigger.disable();
-    //         }
-    //         if (index === 2) {
-    //           PhasesRef.value.rotationTL.pause();
-    //           // PhasesRef.value.phasesTL.scrollTrigger.disable();
-    //           //console.log("enable", PhasesRef.value.phasesTL.scrollTrigger.enabled);
-    //           //PhasesRef.value.intentObserver.disable();
-    //         }
-    //       },
-    //       onEnterBack: () => {
-    //         $gsap.to(section, { opacity: 1, zIndex: "999999999", duration: 0.5 });
-    //         if (index === 0) {
-    //           $gsap.to("#ghirlanda-element_start", {
-    //             opacity: 0.6,
-    //             zIndex: "999999999",
-    //             duration: 0.5,
-    //           });
-    //         }
-    //         if (index === 1) {
-    //           scrollTrigger.enable();
-    //           ScrollTrigger.refresh();
-    //         }
-    //         if (index === 2) {
-    //           PhasesRef.value.rotationTL.play();
-    //           // PhasesRef.value.phasesTL.scrollTrigger.enable();
-    //           //ScrollTrigger.refresh();
-    //           console.log("play", PhasesRef.value.rotationTL);
-    //           // console.log(
-    //           //   "enable + refresh",
-    //           //   PhasesRef.value.phasesTL.scrollTrigger.enabled
-    //           // );
-    //         }
-    //         // if (index === 2) {
-    //         //   if (!PhasesRef.value.isPlaying) {
-    //         //     // Controllo per evitare ripetizioni
-    //         //     PhasesRef.value.isPlaying = true; // Stato interno per evitare richiami multipli
-    //         //     PhasesRef.value.rotationTL.play();
-    //         //     PhasesRef.value.phasesTL.scrollTrigger.enable();
-    //         //     ScrollTrigger.refresh();
-    //         //     //PhasesRef.value.intentObserver.enable();
-
-    //         //     // Controlla lo stato dell'osservatore dopo averlo abilitato
-    //         //     console.log("play", PhasesRef.value.rotationTL);
-    //         //     //console.log("observer enabled:", PhasesRef.value.intentObserver);
-    //         //   }
-
-    //         //   // Esegui un debounce per sicurezza
-    //         //   setTimeout(() => {
-    //         //     PhasesRef.value.isPlaying = false; // Reimposta lo stato dopo un breve ritardo
-    //         //   }, 500); // Regola il tempo secondo necessità
-    //         // }
-    //       },
-    //       onLeaveBack: () => {
-    //         $gsap.to(section, { opacity: 0, zIndex: "0", duration: 0.5 });
-    //         if (index === 1) {
-    //           scrollTrigger.disable();
-    //         }
-    //         if (index === 2) {
-    //           PhasesRef.value.rotationTL.pause();
-    //           // PhasesRef.value.phasesTL.scrollTrigger.disable();
-    //           // console.log("enable", PhasesRef.value.phasesTL.scrollTrigger.enabled);
-    //         }
-    //       },
-    //     });
-    //   });
-    //   ScrollTrigger.refresh();
-    // };
-
-    // // Inizializza i trigger
-    // updateTriggers();
-
-    // // Listener per il resize
-    // window.addEventListener("resize", updateTriggers);
-
-    // // Rimuovi il listener quando il componente viene smontato
-    // onBeforeUnmount(() => {
-    //   window.removeEventListener("resize", updateTriggers);
-    // });
-
-    // Imposta la prima sezione visibile all'inizio
+    const noFixedST = ScrollTrigger.create({
+      trigger: ".nofixed_section",
+      start: "top bottom",
+      end: "bottom bottom",
+      markers: true,
+      onEnter: () => {
+        isfixedSection = false;
+      },
+      onLeaveBack: () => {
+        $gsap.set("body", { overflow: "hidden" });
+        isfixedSection = true;
+      },
+    });
   }); //NOTE - chiusura Next Tick
 });
 </script>
