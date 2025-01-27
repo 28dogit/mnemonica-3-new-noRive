@@ -187,10 +187,10 @@ watch(
   () => props.isOpen,
   (newVal) => {
     if (newVal) {
-      disableBodyScroll();
+      // disableBodyScroll();
       openModal();
     } else {
-      enableBodyScroll();
+      // enableBodyScroll();
     }
   }
 );

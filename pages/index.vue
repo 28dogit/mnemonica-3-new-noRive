@@ -33,6 +33,7 @@
       </div>
     </div>
     <div class="nofixed_section w-[100vw] h-[1600px] z-30">
+      <div class="preMade"></div>
       <div id="made-for" class="max-w-[1200px]">
         <h2>Made For</h2>
       </div>
@@ -352,7 +353,7 @@ onMounted(() => {
       trigger: ".nofixed_section",
       start: "top bottom",
       end: "bottom bottom",
-      markers: true,
+      //markers: true,
       onEnter: () => {
         isfixedSection = false;
       },
@@ -380,10 +381,14 @@ onMounted(() => {
   background: $gradient_4;
   background: linear-gradient(0deg, $gradient_4 80%, $gradient_4_0 100%);
   z-index: 30;
-  padding-top: 5rem;
+  //padding-top: 5rem;
   display: flex;
   align-items: center;
   flex-direction: column;
   position: relative;
+  .preMade {
+    width: 100%;
+    height: 100px;
+  }
 }
 </style>
