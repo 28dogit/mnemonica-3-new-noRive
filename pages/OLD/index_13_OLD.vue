@@ -6,7 +6,6 @@
         <div id="hero-content-wrapper" class="wrapper">
           <div id="hero-content" class="content">
             <div id="heroTitle" class="flex items-center justify-center flex-wrap">
-              <!-- <ChevronScroll></ChevronScroll> -->
               <div class="overflowMask overflow-hidden">
                 <h1 id="H-screen" class="uppercase">Screen</h1>
               </div>
@@ -150,17 +149,17 @@ onMounted(() => {
     $gsap.set("#modules-section", { zIndex: 0 });
     $gsap.set("#phases-section", { zIndex: 0 });
     //$gsap.set("#pre-chips-container .title", { autoAlpha: 0 });
-    $gsap.set("#post-chips-container .title", { opacity: 0, y: -10 });
-    $gsap.set("#production-chips-container .title", { opacity: 0, y: -10 });
-    $gsap.set("#market-chips-container .title", { opacity: 0, y: -10 });
-    $gsap.set("#post-chips-container .chipsContainer", { opacity: 0, y: 10 });
-    $gsap.set("#production-chips-container .chipsContainer", { opacity: 0, y: 10 });
-    $gsap.set("#market-chips-container .chipsContainer", { opacity: 0, y: 10 });
+    $gsap.set("#post-chips-container .title", { opacity: 0 });
+    $gsap.set("#production-chips-container .title", { opacity: 0 });
+    $gsap.set("#market-chips-container .title", { opacity: 0 });
+    $gsap.set("#post-chips-container .chipsContainer", { opacity: 0 });
+    $gsap.set("#production-chips-container .chipsContainer", { opacity: 0 });
+    $gsap.set("#market-chips-container .chipsContainer", { opacity: 0 });
 
     const sectionsTL = $gsap.timeline({
       paused: true,
       defaults: {
-        ease: "power2.out",
+        ease: "power4.out",
       },
       onComplete: () => {
         setTimeout(() => {
@@ -204,7 +203,6 @@ onMounted(() => {
       "<0.3"
     );
     sectionsTL.to("#Modules_3a #Rooms path", { fill: "#CEF372" }, "<");
-    sectionsTL.from("#modules_svg", { rotate: "-=60", ease: "power1.out" }, "<");
     sectionsTL.to("#modules-content #module-txt_1", { opacity: 1, zIndex: 1 }, "<");
     // sectionsTL.set("#modules-content #module-txt_2", { zIndex: 0 });
 
@@ -237,7 +235,7 @@ onMounted(() => {
     // sectionsTL.call(() => PhasesRef.value.rotationTL.pause());
     sectionsTL.call(() => RotationTL.pause());
 
-    sectionsTL.to("#modules_svg", { rotate: "+=60", ease: "power1.in" });
+    sectionsTL.to("#modules_svg", { rotate: "+=120" });
     //sectionsTL.call(() => PhasesRef.value.rotationTL.play(), [], "<+=0.2");
     sectionsTL.call(() => RotationTL.play(), [], "<+=0.2");
     sectionsTL.to(
@@ -253,10 +251,10 @@ onMounted(() => {
       "#phases-section",
       {
         autoAlpha: 1,
-        duration: 0.8,
+        duration: 0.5,
         zIndex: 1,
       },
-      "<+=0.2"
+      "<"
     );
 
     sectionsTL.addLabel("phases_section");
@@ -290,6 +288,31 @@ onMounted(() => {
       },
       "<"
     );
+
+    // sectionsTL.fromTo(
+    //   "#pre-chips-container .title",
+    //   { y: 0, autoAlpha: 1 },
+    //   { y: -10, autoAlpha: 0, duration: 0.3 }
+    // );
+    // sectionsTL.fromTo(
+    //   "#pre-chips-container .chipsContainer",
+    //   { y: 0, autoAlpha: 1 },
+    //   { y: 10, autoAlpha: 0, duration: 0.3 },
+    //   "<"
+    // );
+    // sectionsTL.fromTo(
+    //   "#production-chips-container .title",
+    //   { y: -10, autoAlpha: 0 },
+    //   { y: 0, autoAlpha: 1, duration: 0.3 },
+    //   "<"
+    // );
+    // sectionsTL.fromTo(
+    //   "#production-chips-container .chipsContainer",
+    //   { y: 10, autoAlpha: 0 },
+    //   { y: 0, autoAlpha: 1, duration: 0.3 },
+    //   "<"
+    // );
+
     sectionsTL.addLabel("phases_section2");
     sectionsTL.addPause();
 
@@ -326,55 +349,65 @@ onMounted(() => {
       "<"
     );
 
+    // sectionsTL.fromTo(
+    //   "#production-chips-container .title",
+    //   { y: 0, autoAlpha: 1 },
+    //   { y: -10, autoAlpha: 0, duration: 0.3 }
+    // );
+    // sectionsTL.fromTo(
+    //   "#production-chips-container .chipsContainer",
+    //   { y: 0, autoAlpha: 1 },
+    //   { y: 10, autoAlpha: 0, duration: 0.3 },
+    //   "<"
+    // );
+    // sectionsTL.fromTo(
+    //   "#post-chips-container .title",
+    //   { y: -10, autoAlpha: 0 },
+    //   { y: 0, autoAlpha: 1, duration: 0.3 },
+    //   "<"
+    // );
+    // sectionsTL.fromTo(
+    //   "#post-chips-container .chipsContainer",
+    //   { y: 10, autoAlpha: 0 },
+    //   { y: 0, autoAlpha: 1, duration: 0.3 },
+    //   "<"
+    // );
     sectionsTL.addLabel("phases_section3");
+    // sectionsTL.to(
+    //   "#phases-section",
+    //   {
+    //     autoAlpha: 0,
+    //     duration: 0.5,
+    //     zIndex: 0,
+    //   },
+    //   "<"
+    // );
     sectionsTL.addPause();
 
-    sectionsTL.to("#post-chips-container .title", {
-      y: -10,
-      autoAlpha: 0,
-      duration: 0.3,
-    });
-    sectionsTL.to(
-      "#post-chips-container .chipsContainer",
-      {
-        y: 10,
-        autoAlpha: 0,
-        duration: 0.3,
-      },
-      "<"
-    );
-    sectionsTL.to(
-      "#market-chips-container .title",
-      {
-        y: 0,
-        autoAlpha: 1,
-        duration: 0.3,
-      },
-      "<"
-    );
-    sectionsTL.to(
-      "#market-chips-container .chipsContainer",
-      {
-        y: 0,
-        autoAlpha: 1,
-        duration: 0.3,
-      },
-      "<"
-    );
-
-    sectionsTL.addPause();
-
-    sectionsTL.to(
-      "#phases-section",
-      {
-        autoAlpha: 0,
-        duration: 1,
-        zIndex: 0,
-        delay: 0.5,
-      },
-      "<"
-    );
-    sectionsTL.addPause();
+    // sectionsTL.fromTo(
+    //   "#post-chips-container .title",
+    //   { y: 0, autoAlpha: 1 },
+    //   { y: -10, autoAlpha: 0, duration: 0.3 }
+    // );
+    // sectionsTL.fromTo(
+    //   "#post-chips-container .chipsContainer",
+    //   { y: 0, autoAlpha: 1 },
+    //   { y: 10, autoAlpha: 0, duration: 0.3 },
+    //   "<"
+    // );
+    // sectionsTL.fromTo(
+    //   "#market-chips-container .title",
+    //   { y: -10, autoAlpha: 0 },
+    //   { y: 0, autoAlpha: 1, duration: 0.3 },
+    //   "<"
+    // );
+    // sectionsTL.fromTo(
+    //   "#market-chips-container .chipsContainer",
+    //   { y: 10, autoAlpha: 0 },
+    //   { y: 0, autoAlpha: 1, duration: 0.3 },
+    //   "<"
+    // );
+    // sectionsTL.addPause();
 
     //ANCHOR - Scrolltrigger per gestire la sezione "nofixed"
 
