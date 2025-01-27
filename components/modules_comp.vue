@@ -78,6 +78,7 @@ onMounted(() => {
   #modules-content {
     display: flex;
     align-items: flex-start;
+    position: relative;
     justify-content: center;
     @include bp.for-tablet-up {
       align-items: center;
@@ -94,7 +95,7 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 100;
+    z-index: 0;
     position: absolute;
     padding: 10px;
     width: 90%;
@@ -112,7 +113,6 @@ onMounted(() => {
   #module-txt_1 {
     // display: none;
     opacity: 1;
-    z-index: 110;
   }
   #module-txt_2 {
     // display: none;

@@ -47,10 +47,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const PhasesRef = ref(null);
 
 onMounted(() => {
+  const { $gsap } = useNuxtApp();
   nextTick(() => {
-    const { $gsap } = useNuxtApp();
-
-    $gsap.set("#hero-section", { opacity: 1 });
+    $gsap.set("#hero-section", { opacity: 1, zIndex: 1 });
     $gsap.set(".ghirlanda-updx, .ghirlanda-dwsx ", { opacity: 0 });
 
     // Variabile che indica se l'animazione intro è completata
@@ -145,8 +144,22 @@ onMounted(() => {
     //NOTE - recupero la phasesTL esposta dal componente phases_comp
     const PhasesTL = PhasesRef.value.phasesTL;
 
+    $gsap.set("#hero-section", { zIndex: 1 });
+    $gsap.set("#modules-section", { zIndex: 0 });
+    $gsap.set("#phases-section", { zIndex: 0 });
+    //$gsap.set("#pre-chips-container .title", { autoAlpha: 0 });
+    $gsap.set("#post-chips-container .title", { opacity: 0 });
+    $gsap.set("#production-chips-container .title", { opacity: 0 });
+    $gsap.set("#market-chips-container .title", { opacity: 0 });
+    $gsap.set("#post-chips-container .chipsContainer", { opacity: 0 });
+    $gsap.set("#production-chips-container .chipsContainer", { opacity: 0 });
+    $gsap.set("#market-chips-container .chipsContainer", { opacity: 0 });
+
     const sectionsTL = $gsap.timeline({
       paused: true,
+      defaults: {
+        ease: "power4.out",
+      },
       onComplete: () => {
         setTimeout(() => {
           $gsap.set("body", { overflow: "auto" });
@@ -160,7 +173,7 @@ onMounted(() => {
     sectionsTL.to("#hero-section", {
       autoAlpha: 0,
       duration: 1,
-      zIndex: "0",
+      zIndex: 0,
     });
     sectionsTL.to(
       "#ghirlanda-element_start",
@@ -184,34 +197,36 @@ onMounted(() => {
       {
         autoAlpha: 1,
         duration: 0.5,
-        zIndex: "999999999",
+        zIndex: 1,
       },
       "<0.3"
     );
     sectionsTL.to("#Modules_3a #Rooms path", { fill: "#CEF372" }, "<");
+    sectionsTL.to("#modules-content #module-txt_1", { opacity: 1, zIndex: 1 }, "<");
+    // sectionsTL.set("#modules-content #module-txt_2", { zIndex: 0 });
 
     sectionsTL.addLabel("modules_section");
     // pausa entrata modules
     sectionsTL.addPause();
     //-----
 
-    sectionsTL.to("#modules_svg", { rotate: "+=120" });
+    sectionsTL.to("#modules_svg", { rotate: "+=120", ease: "back.out" });
     sectionsTL.to("#Modules_3a #Rooms path", { fill: "#B8EFFA" }, "<");
     sectionsTL.to("#Modules_3a #Boxes path", { fill: "#CEF372" }, "<");
-    sectionsTL.set("#modules-content #module-txt_1", { zIndex: 0 }, "<");
-    sectionsTL.to("#modules-content #module-txt_1", { opacity: 0 }, "<");
-    sectionsTL.set("#modules-content #module-txt_2", { zIndex: 110 }, "<");
-    sectionsTL.to("#modules-content #module-txt_2", { opacity: 1 }, "<");
+    sectionsTL.to("#modules-content #module-txt_1", { opacity: 0, zIndex: 0 }, "<");
+    // sectionsTL.set("#modules-content #module-txt_1", { zIndex: 0 }, "<");
+    sectionsTL.to("#modules-content #module-txt_2", { opacity: 1, zIndex: 1 }, "<");
+    // sectionsTL.set("#modules-content #module-txt_2", { zIndex: 110 }, "<");
 
     sectionsTL.addPause();
 
-    sectionsTL.to("#modules_svg", { rotate: "+=120" });
+    sectionsTL.to("#modules_svg", { rotate: "+=120", ease: "back.out" });
     sectionsTL.to("#Modules_3a #Boxes path", { fill: "#B8EFFA" }, "<");
     sectionsTL.to("#Modules_3a #Masters path", { fill: "#CEF372" }, "<");
-    sectionsTL.set("#modules-content #module-txt_2", { zIndex: 0 }, "<");
-    sectionsTL.to("#modules-content #module-txt_2", { opacity: 0 }, "<");
-    sectionsTL.set("#modules-content #module-txt_3", { zIndex: 110 }, "<");
-    sectionsTL.to("#modules-content #module-txt_3", { opacity: 1 }, "<");
+    sectionsTL.to("#modules-content #module-txt_2", { opacity: 0, zIndex: 0 }, "<");
+    // sectionsTL.to("#modules-content #module-txt_2", { opacity: 0 }, "<");
+    sectionsTL.to("#modules-content #module-txt_3", { opacity: 1, zIndex: 1 }, "<");
+    // sectionsTL.to("#modules-content #module-txt_3", { opacity: 1 }, "<");
 
     sectionsTL.addPause();
 
@@ -227,7 +242,7 @@ onMounted(() => {
       {
         autoAlpha: 0,
         duration: 0.5,
-        zIndex: "0",
+        zIndex: 0,
       },
       "<"
     );
@@ -236,16 +251,100 @@ onMounted(() => {
       {
         autoAlpha: 1,
         duration: 0.5,
-        zIndex: "999999999",
+        zIndex: 1,
       },
       "<"
     );
+
     sectionsTL.addLabel("phases_section");
-    sectionsTL.call(() => PhasesTL.play());
-    // pausa entrata Phases
     sectionsTL.addPause();
-    sectionsTL.call(() => PhasesTL.play());
+
+    sectionsTL.fromTo(
+      "#pre-chips-container .title",
+      { y: 0, autoAlpha: 1 },
+      { y: -10, autoAlpha: 0, duration: 0.3 }
+    );
+    sectionsTL.fromTo(
+      "#pre-chips-container .chipsContainer",
+      { y: 0, autoAlpha: 1 },
+      { y: 10, autoAlpha: 0, duration: 0.3 },
+      "<"
+    );
+    sectionsTL.fromTo(
+      "#production-chips-container .title",
+      { y: -10, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: 0.3 },
+      "<"
+    );
+    sectionsTL.fromTo(
+      "#production-chips-container .chipsContainer",
+      { y: 10, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: 0.3 },
+      "<"
+    );
+
+    sectionsTL.addLabel("phases_section2");
     sectionsTL.addPause();
+
+    sectionsTL.fromTo(
+      "#production-chips-container .title",
+      { y: 0, autoAlpha: 1 },
+      { y: -10, autoAlpha: 0, duration: 0.3 }
+    );
+    sectionsTL.fromTo(
+      "#production-chips-container .chipsContainer",
+      { y: 0, autoAlpha: 1 },
+      { y: 10, autoAlpha: 0, duration: 0.3 },
+      "<"
+    );
+    sectionsTL.fromTo(
+      "#post-chips-container .title",
+      { y: -10, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: 0.3 },
+      "<"
+    );
+    sectionsTL.fromTo(
+      "#post-chips-container .chipsContainer",
+      { y: 10, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: 0.3 },
+      "<"
+    );
+    sectionsTL.addLabel("phases_section3");
+    // sectionsTL.to(
+    //   "#phases-section",
+    //   {
+    //     autoAlpha: 0,
+    //     duration: 0.5,
+    //     zIndex: 0,
+    //   },
+    //   "<"
+    // );
+    sectionsTL.addPause();
+
+    // sectionsTL.fromTo(
+    //   "#post-chips-container .title",
+    //   { y: 0, autoAlpha: 1 },
+    //   { y: -10, autoAlpha: 0, duration: 0.3 }
+    // );
+    // sectionsTL.fromTo(
+    //   "#post-chips-container .chipsContainer",
+    //   { y: 0, autoAlpha: 1 },
+    //   { y: 10, autoAlpha: 0, duration: 0.3 },
+    //   "<"
+    // );
+    // sectionsTL.fromTo(
+    //   "#market-chips-container .title",
+    //   { y: -10, autoAlpha: 0 },
+    //   { y: 0, autoAlpha: 1, duration: 0.3 },
+    //   "<"
+    // );
+    // sectionsTL.fromTo(
+    //   "#market-chips-container .chipsContainer",
+    //   { y: 10, autoAlpha: 0 },
+    //   { y: 0, autoAlpha: 1, duration: 0.3 },
+    //   "<"
+    // );
+    // sectionsTL.addPause();
 
     //ANCHOR - Scrolltrigger per gestire la sezione "nofixed"
 
@@ -285,5 +384,6 @@ onMounted(() => {
   display: flex;
   align-items: center;
   flex-direction: column;
+  position: relative;
 }
 </style>

@@ -110,6 +110,7 @@ const disableBodyScroll = () => {
 
 // Function to enable body scroll
 const enableBodyScroll = () => {
+  console.log(isfixedSection);
   document.body.style.overflow = "auto";
 };
 

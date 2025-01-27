@@ -60,33 +60,52 @@ let marketChips = ["Archive", "Library", "Festivals", "Screenings"];
     display: block;
     width: 100%;
     text-align: center;
-    opacity: 0;
-    visibility: inherit;
+    // opacity: 0;
+    //visibility: inherit;
     padding: 1rem;
     color: $mne_text-on-dark;
   }
-}
-.chipsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-.phase-chips {
-  opacity: 1;
-  font-size: 0.85rem;
-  font-weight: 300;
-  background-color: $gradient_3;
-  min-width: 105px;
-  height: 35px;
-  border-radius: 35px;
-  padding: 0.5rem 1rem;
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
-  color: $mne_secondary;
+
+  .chipsContainer {
+    display: flex;
+    // opacity: 0;
+    //visibility: inherit;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    .phase-chips {
+      opacity: 1;
+      font-size: 0.85rem;
+      font-weight: 300;
+      background-color: $gradient_3;
+      min-width: 105px;
+      height: 35px;
+      border-radius: 35px;
+      padding: 0.5rem 1rem;
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
+      color: $mne_secondary;
+    }
+  }
+  #pre-chips-container .title {
+    opacity: 1;
+  }
+  #pre-chips-container .chipsContainer {
+    opacity: 1;
+  }
+  #production-chips-container .title,
+  #post-chips-container .title,
+  #market-chips-container .title {
+    opacity: 0;
+  }
+  #production-chips-container .chipsContainer,
+  #post-chips-container .chipsContainer,
+  #market-chips-container .chipsContainer {
+    opacity: 0;
+  }
 }
 </style>
