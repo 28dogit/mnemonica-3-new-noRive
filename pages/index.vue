@@ -166,7 +166,7 @@ onMounted(() => {
         setTimeout(() => {
           $gsap.set("body", { overflow: "auto" });
           // Simula un piccolo scroll per attivare ScrollTrigger
-          window.scrollBy({ top: 2, behavior: "instant" });
+          window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
         }, 100);
       },
       onReverseCompleted: () => {},
@@ -189,7 +189,7 @@ onMounted(() => {
     sectionsTL.to(
       ".ghirlanda-updx, .ghirlanda-dwsx ",
       {
-        autoAlpha: 1,
+        autoAlpha: 0.6,
         filter: "blur(0px)",
       },
       "<"
@@ -374,7 +374,7 @@ onMounted(() => {
       },
       "<"
     );
-    sectionsTL.addPause();
+    //sectionsTL.addPause();
 
     //ANCHOR - Scrolltrigger per gestire la sezione "nofixed"
 
