@@ -57,45 +57,6 @@ onMounted(() => {
 
     //SECTION - sezione animazione delle chips delle fasi
 
-    // phasesTL.value = $gsap.timeline({ paused: true });
-
-    // phasesChipsTitle.forEach((ChipTitle, i) => {
-    //   // Nasconde il chip precedente prima di mostrare il nuovo
-    //   if (i > 0) {
-    //     phasesTL.value.to(phasesChipsTitle[i - 1], {
-    //       autoAlpha: 0,
-    //       duration: 0.3,
-    //     });
-
-    //     phasesTL.value.to(
-    //       phasesChipsContainer[i - 1],
-    //       {
-    //         autoAlpha: 0,
-    //         duration: 0.3,
-    //       },
-    //       "<"
-    //     );
-    //   }
-
-    //   // Mostra il nuovo titolo
-    //   phasesTL.value.fromTo(
-    //     ChipTitle,
-    //     { y: -10, autoAlpha: 0 },
-    //     { y: 0, autoAlpha: 1, duration: 0.3 }
-    //   );
-
-    //   // Mostra il nuovo contenitore di chips
-    //   phasesTL.value.fromTo(
-    //     phasesChipsContainer[i],
-    //     { y: 10, autoAlpha: 0 },
-    //     { y: 0, autoAlpha: 1, duration: 0.3 },
-    //     "<"
-    //   );
-
-    //   phasesTL.value.addLabel(`label_end${i}`);
-    //   phasesTL.value.addPause();
-    // });
-
     //!SECTION
 
     //SECTION - gestione animazione a steps
