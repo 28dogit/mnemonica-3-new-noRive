@@ -7,6 +7,7 @@
           <div id="hero-content" class="content">
             <div id="heroTitle" class="flex items-center justify-center flex-wrap">
               <!-- <ChevronScroll></ChevronScroll> -->
+              <canvas ref="canvasRef" id="canvas" width="500" height="500"></canvas>
               <div class="overflowMask overflow-hidden">
                 <h1 id="H-screen" class="uppercase">Screen</h1>
               </div>
@@ -45,12 +46,31 @@
 <script setup>
 import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Rive } from "@rive-app/canvas";
 
 const PhasesRef = ref(null);
+const canvasRef = ref(null);
 
 onMounted(() => {
   const { $gsap } = useNuxtApp();
+
   nextTick(() => {
+    const r = new Rive({
+      src: "/assets/riv/provariv.riv",
+      //src: "https://cdn.rive.app/animations/vehicles.riv",
+      //canvas: document.querySelectorAll("#canvas"),
+      canvas: canvasRef.value,
+      autoplay: true,
+      stateMachines: "State Machine 1",
+      onLoad: () => {
+        r.resizeDrawingSurfaceToCanvas();
+      },
+    });
+
+    window.addEventListener("resize", () => {
+      r.resizeDrawingSurfaceToCanvas();
+    });
+
     $gsap.set("#hero-section", { opacity: 1, zIndex: 1 });
     $gsap.set(".ghirlanda-updx, .ghirlanda-dwsx ", { opacity: 0 });
 
