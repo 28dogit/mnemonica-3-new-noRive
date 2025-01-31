@@ -56,12 +56,13 @@ onMounted(() => {
 
   nextTick(() => {
     const r = new Rive({
-      src: "/assets/riv/provariv.riv",
-      //src: "https://cdn.rive.app/animations/vehicles.riv",
+      //src: "/assets/riv/provariv.riv",
+      src: "https://cdn.rive.app/animations/vehicles.riv",
       //canvas: document.querySelectorAll("#canvas"),
       canvas: canvasRef.value,
       autoplay: true,
-      stateMachines: "State Machine 1",
+      // stateMachines: "State Machine 1",
+      stateMachines: "bumpy",
       onLoad: () => {
         r.resizeDrawingSurfaceToCanvas();
       },
