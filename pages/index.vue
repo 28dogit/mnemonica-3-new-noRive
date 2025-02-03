@@ -2,13 +2,23 @@
   <main>
     <div id="sectionsWrapper" class="z-20">
       <div id="hero-section" class="section_fixed hero">
-        <div id="ghirlanda-element" class="element"></div>
-        <div id="hero-content-wrapper" class="wrapper">
+        <!-- <div id="ghirlanda-element" class="element"></div> -->
+        <canvas
+          ref="canvasRef"
+          id="canvas"
+          style="
+            position: relative;
+            width: 100%;
+            max-width: 960px;
+            height: 100%;
+            z-index: 5;
+          "
+        ></canvas>
+        <!-- <div id="hero-content-wrapper" class="wrapper">
           <div id="hero-content" class="content">
-            <div id="heroTitle" class="flex items-center justify-center flex-wrap">
-              <!-- <ChevronScroll></ChevronScroll> -->
-              <canvas ref="canvasRef" id="canvas" width="500" height="500"></canvas>
-              <div class="overflowMask overflow-hidden">
+            <div id="heroTitle" class="flex items-center justify-center flex-wrap"> -->
+        <!-- <ChevronScroll></ChevronScroll> -->
+        <!-- <div class="overflowMask overflow-hidden">
                 <h1 id="H-screen" class="uppercase">Screen</h1>
               </div>
               <div class="overflowMask overflow-hidden">
@@ -25,7 +35,7 @@
               Connecting the dots of the digital <br />cinema living ecosystem
             </h2>
           </div>
-        </div>
+        </div> -->
       </div>
       <div id="modules-section" class="section_fixed modules">
         <ModulesComp></ModulesComp>
@@ -46,7 +56,8 @@
 <script setup>
 import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Rive } from "@rive-app/canvas";
+import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
+//import { Rive } from "@rive-app/canvas";
 
 const PhasesRef = ref(null);
 const canvasRef = ref(null);
@@ -55,22 +66,39 @@ onMounted(() => {
   const { $gsap } = useNuxtApp();
 
   nextTick(() => {
+    //SECTION - RIVE
     const r = new Rive({
-      //src: "/assets/riv/provariv.riv",
-      src: "https://cdn.rive.app/animations/vehicles.riv",
+      src: "/assets/rive/hero_mnemonica_4.riv",
+      artboard: "Master 2",
+      //src: "https://cdn.rive.app/animations/vehicles.riv",
       //canvas: document.querySelectorAll("#canvas"),
       canvas: canvasRef.value,
       autoplay: true,
-      // stateMachines: "State Machine 1",
-      stateMachines: "bumpy",
+      stateMachines: "State Hero",
+      //stateMachines: "bumpy",
+      layout: new Layout({
+        fit: Fit.Contain, // Adatta senza distorsione
+        alignment: Alignment.Center, // Centra l'animazione
+        resizeMode: "auto",
+      }),
       onLoad: () => {
         r.resizeDrawingSurfaceToCanvas();
       },
     });
 
     window.addEventListener("resize", () => {
+      r.layout = new Layout({
+        fit: Fit.Contain, // Cambia il fit per coprire l'area
+        alignment: Alignment.Center, // Allinea in basso
+      });
       r.resizeDrawingSurfaceToCanvas();
     });
+
+    // window.addEventListener("resize", () => {
+    //   r.resizeDrawingSurfaceToCanvas();
+    // });
+
+    //!SECTION
 
     $gsap.set("#hero-section", { opacity: 1, zIndex: 1 });
     $gsap.set(".ghirlanda-updx, .ghirlanda-dwsx ", { opacity: 0 });
