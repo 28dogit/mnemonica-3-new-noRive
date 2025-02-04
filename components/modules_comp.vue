@@ -7,21 +7,24 @@
   <div id="modules-content-wrapper" class="wrapper">
     <div id="modules-content" class="content">
       <div id="module-txt_1" class="module_card">
-        <h2 class="mTitle">Screening Rooms</h2>
+        <!-- <h2 class="mTitle">Screening Rooms</h2> -->
+        <h2 class="mTitle">Screen</h2>
         <h3 class="mSubTitle">streaming and discussion</h3>
         <button @click="isModalOpen1 = true">
           <FocusBTN></FocusBTN>
         </button>
       </div>
       <div id="module-txt_2" class="module_card">
-        <h2 class="mTitle">Sharing Boxes</h2>
+        <!-- <h2 class="mTitle">Sharing Boxes</h2> -->
+        <h2 class="mTitle">Deliver</h2>
         <h3 class="mSubTitle">data transfer</h3>
         <button @click="isModalOpen2 = true">
           <FocusBTN></FocusBTN>
         </button>
       </div>
       <div id="module-txt_3" class="module_card">
-        <h2 class="mTitle">HQ Masters</h2>
+        <!-- <h2 class="mTitle">HQ Masters</h2> -->
+        <h2 class="mTitle">Preserve</h2>
         <h3 class="mSubTitle">perennial availability</h3>
         <button @click="isModalOpen3 = true">
           <FocusBTN></FocusBTN>

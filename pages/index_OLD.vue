@@ -16,7 +16,7 @@
         ></canvas>
         <div class="headline">
           <h2 id="heroSubTitle" class="hidden min-[680px]:block text-center">
-            Let you media assets flourish and last in the digital cinema ecosystem
+            Let your media assets flourish and last in the digital cinema ecosystem
           </h2>
           <h2 id="heroSubTitle" class="text-center min-[680px]:hidden">
             Let your media assets flourish<br />
@@ -247,6 +247,55 @@ onMounted(() => {
     );
     //ANCHOR - Hero end
 
+    //ANCHOR - Modules Section Start
+    sectionsTL.to(
+      ".ghirlanda-updx, .ghirlanda-dwsx ",
+      {
+        autoAlpha: 0.6,
+        filter: "blur(0px)",
+      },
+      "<"
+    );
+    sectionsTL.to(
+      "#modules-section",
+      {
+        autoAlpha: 1,
+        duration: 0.5,
+        zIndex: 1,
+      },
+      "<0.3"
+    );
+    sectionsTL.to("#Modules_3a #Rooms path", { fill: "#CEF372" }, "<");
+    sectionsTL.from("#modules_svg", { rotate: "-=60", ease: "power1.out" }, "<");
+    sectionsTL.to("#modules-content #module-txt_1", { opacity: 1, zIndex: 1 }, "<");
+    // sectionsTL.set("#modules-content #module-txt_2", { zIndex: 0 });
+
+    sectionsTL.addLabel("modules_section");
+    // pausa entrata modules
+    sectionsTL.addPause();
+    //-----
+
+    sectionsTL.to("#modules_svg", { rotate: "+=120", ease: "back.out" });
+    sectionsTL.to("#Modules_3a #Rooms path", { fill: "#B8EFFA" }, "<");
+    sectionsTL.to("#Modules_3a #Boxes path", { fill: "#CEF372" }, "<");
+    sectionsTL.to("#modules-content #module-txt_1", { opacity: 0, zIndex: 0 }, "<");
+    // sectionsTL.set("#modules-content #module-txt_1", { zIndex: 0 }, "<");
+    sectionsTL.to("#modules-content #module-txt_2", { opacity: 1, zIndex: 1 }, "<");
+    // sectionsTL.set("#modules-content #module-txt_2", { zIndex: 110 }, "<");
+
+    sectionsTL.addPause();
+
+    sectionsTL.to("#modules_svg", { rotate: "+=120", ease: "back.out" });
+    sectionsTL.to("#Modules_3a #Boxes path", { fill: "#B8EFFA" }, "<");
+    sectionsTL.to("#Modules_3a #Masters path", { fill: "#CEF372" }, "<");
+    sectionsTL.to("#modules-content #module-txt_2", { opacity: 0, zIndex: 0 }, "<");
+    // sectionsTL.to("#modules-content #module-txt_2", { opacity: 0 }, "<");
+    sectionsTL.to("#modules-content #module-txt_3", { opacity: 1, zIndex: 1 }, "<");
+    // sectionsTL.to("#modules-content #module-txt_3", { opacity: 1 }, "<");
+
+    sectionsTL.addPause();
+    //ANCHOR - Modules Section End
+
     //ANCHOR - Phases Section Start
     // sectionsTL.call(() => PhasesRef.value.rotationTL.pause());
     sectionsTL.call(() => RotationTL.pause());
@@ -255,7 +304,7 @@ onMounted(() => {
     //sectionsTL.call(() => PhasesRef.value.rotationTL.play(), [], "<+=0.2");
     sectionsTL.call(() => RotationTL.play(), [], "<+=0.2");
     sectionsTL.to(
-      "#hero-section",
+      "#modules-section",
       {
         autoAlpha: 0,
         duration: 0.5,
@@ -276,174 +325,112 @@ onMounted(() => {
     sectionsTL.addLabel("phases_section");
     sectionsTL.addPause();
 
-    // sectionsTL.to("#pre-chips-container .title", { y: -10, autoAlpha: 0, duration: 0.3 });
-    // sectionsTL.to(
-    //   "#pre-chips-container .chipsContainer",
-    //   {
-    //     y: 10,
-    //     autoAlpha: 0,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-    // sectionsTL.to(
-    //   "#production-chips-container .title",
-    //   {
-    //     y: 0,
-    //     autoAlpha: 1,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-    // sectionsTL.to(
-    //   "#production-chips-container .chipsContainer",
-    //   {
-    //     y: 0,
-    //     autoAlpha: 1,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-    // sectionsTL.addLabel("phases_section2");
-    // sectionsTL.addPause();
-
-    // sectionsTL.to("#production-chips-container .title", {
-    //   y: -10,
-    //   autoAlpha: 0,
-    //   duration: 0.3,
-    // });
-    // sectionsTL.to(
-    //   "#production-chips-container .chipsContainer",
-    //   {
-    //     y: 10,
-    //     autoAlpha: 0,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-    // sectionsTL.to(
-    //   "#post-chips-container .title",
-    //   {
-    //     y: 0,
-    //     autoAlpha: 1,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-    // sectionsTL.to(
-    //   "#post-chips-container .chipsContainer",
-    //   {
-    //     y: 0,
-    //     autoAlpha: 1,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-
-    // sectionsTL.addLabel("phases_section3");
-    // sectionsTL.addPause();
-
-    // sectionsTL.to("#post-chips-container .title", {
-    //   y: -10,
-    //   autoAlpha: 0,
-    //   duration: 0.3,
-    // });
-    // sectionsTL.to(
-    //   "#post-chips-container .chipsContainer",
-    //   {
-    //     y: 10,
-    //     autoAlpha: 0,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-    // sectionsTL.to(
-    //   "#market-chips-container .title",
-    //   {
-    //     y: 0,
-    //     autoAlpha: 1,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-    // sectionsTL.to(
-    //   "#market-chips-container .chipsContainer",
-    //   {
-    //     y: 0,
-    //     autoAlpha: 1,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-
-    // sectionsTL.addPause();
-    //ANCHOR - Phases Section End
-
-    //ANCHOR - Modules Section Start
-    sectionsTL.to("#phases-section", {
-      autoAlpha: 0,
-      duration: 0.5,
-      zIndex: 0,
-    });
+    sectionsTL.to("#pre-chips-container .title", { y: -10, autoAlpha: 0, duration: 0.3 });
     sectionsTL.to(
-      "#modules-section",
+      "#pre-chips-container .chipsContainer",
       {
-        autoAlpha: 1,
-        duration: 0.8,
-        zIndex: 1,
+        y: 10,
+        autoAlpha: 0,
+        duration: 0.3,
       },
       "<"
     );
-    sectionsTL.call(() => RotationTL.play());
-    sectionsTL.call(() => RotationTL.pause());
+    sectionsTL.to(
+      "#production-chips-container .title",
+      {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.3,
+      },
+      "<"
+    );
+    sectionsTL.to(
+      "#production-chips-container .chipsContainer",
+      {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.3,
+      },
+      "<"
+    );
+    sectionsTL.addLabel("phases_section2");
+    sectionsTL.addPause();
 
-    sectionsTL.to(".ghirlanda-updx, .ghirlanda-dwsx ", {
-      autoAlpha: 0.6,
-      filter: "blur(0px)",
+    sectionsTL.to("#production-chips-container .title", {
+      y: -10,
+      autoAlpha: 0,
+      duration: 0.3,
     });
     sectionsTL.to(
-      "#modules-section",
+      "#production-chips-container .chipsContainer",
       {
-        autoAlpha: 1,
-        duration: 0.5,
-        zIndex: 1,
+        y: 10,
+        autoAlpha: 0,
+        duration: 0.3,
       },
-      "<0.3"
+      "<"
     );
-    sectionsTL.to("#Modules_4 #Screen path", { fill: "#CEF372" }, "<");
-    sectionsTL.from("#modules_svg", { rotate: "-=60", ease: "power1.out" }, "<");
-    sectionsTL.to("#modules-content #module-txt_1", { opacity: 1, zIndex: 1 }, "<");
-    // sectionsTL.set("#modules-content #module-txt_2", { zIndex: 0 });
+    sectionsTL.to(
+      "#post-chips-container .title",
+      {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.3,
+      },
+      "<"
+    );
+    sectionsTL.to(
+      "#post-chips-container .chipsContainer",
+      {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.3,
+      },
+      "<"
+    );
 
-    sectionsTL.addLabel("modules_section");
-    // pausa entrata modules
+    sectionsTL.addLabel("phases_section3");
     sectionsTL.addPause();
-    //-----
 
-    sectionsTL.to("#modules_svg", { rotate: "+=120", ease: "back.out" });
-    sectionsTL.to("#Modules_4 #Screen path", { fill: "#B8EFFA" }, "<");
-    sectionsTL.to("#Modules_4 #Deliver path", { fill: "#CEF372" }, "<");
-    sectionsTL.to("#modules-content #module-txt_1", { opacity: 0, zIndex: 0 }, "<");
-    // sectionsTL.set("#modules-content #module-txt_1", { zIndex: 0 }, "<");
-    sectionsTL.to("#modules-content #module-txt_2", { opacity: 1, zIndex: 1 }, "<");
-    // sectionsTL.set("#modules-content #module-txt_2", { zIndex: 110 }, "<");
+    sectionsTL.to("#post-chips-container .title", {
+      y: -10,
+      autoAlpha: 0,
+      duration: 0.3,
+    });
+    sectionsTL.to(
+      "#post-chips-container .chipsContainer",
+      {
+        y: 10,
+        autoAlpha: 0,
+        duration: 0.3,
+      },
+      "<"
+    );
+    sectionsTL.to(
+      "#market-chips-container .title",
+      {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.3,
+      },
+      "<"
+    );
+    sectionsTL.to(
+      "#market-chips-container .chipsContainer",
+      {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.3,
+      },
+      "<"
+    );
 
     sectionsTL.addPause();
-
-    sectionsTL.to("#modules_svg", { rotate: "+=120", ease: "back.out" });
-    sectionsTL.to("#Modules_4 #Deliver path", { fill: "#B8EFFA" }, "<");
-    sectionsTL.to("#Modules_4 #Preserve path", { fill: "#CEF372" }, "<");
-    sectionsTL.to("#modules-content #module-txt_2", { opacity: 0, zIndex: 0 }, "<");
-    // sectionsTL.to("#modules-content #module-txt_2", { opacity: 0 }, "<");
-    sectionsTL.to("#modules-content #module-txt_3", { opacity: 1, zIndex: 1 }, "<");
-    // sectionsTL.to("#modules-content #module-txt_3", { opacity: 1 }, "<");
-
-    sectionsTL.addPause();
-    //ANCHOR - Modules Section End
+    //ANCHOR - Phases Section End
 
     //ANCHOR - nofixed Section Start (modificare in base a quale sarà l'ultima sezione prima del nofixed)
     sectionsTL.to(
-      "#modules-section",
+      "#phases-section",
       {
         autoAlpha: 0,
         duration: 1,

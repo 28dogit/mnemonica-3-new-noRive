@@ -4,19 +4,13 @@
     <ProductionSvg id="Production_svg" class="phaseCircle"></ProductionSvg>
     <PostSvg id="Post_svg" class="phaseCircle"></PostSvg>
     <MarketSvg id="Market_svg" class="phaseCircle"></MarketSvg>
+    <!-- <div id="phasesTitle" class="title">
+      <h2>All Phases</h2>
+    </div> -->
   </div>
   <div id="phases-content-wrapper" class="wrapper">
     <div id="phases-content" class="content">
-      <div class="headline">
-        <h2 id="PhasesSubTitle" class="text-center">From Prep to Eternity</h2>
-        <h3 class="text-center">
-          Empowering media companies to protect and grow their digital capital
-        </h3>
-        <div class="choice">
-          <MasterBTN>Production</MasterBTN>
-          <MasterBTN>Archive</MasterBTN>
-        </div>
-      </div>
+      <PhasesChips2></PhasesChips2>
     </div>
   </div>
 </template>
@@ -26,10 +20,13 @@
 import { nextTick } from "vue";
 import { _opacity } from "#tailwind-config/theme";
 import { _bottom } from "#tailwind-config/theme/backgroundPosition";
+import { PhasesChips2 } from "#components";
 
 //definisco le costanti da esporre con defineExpose, che userò all'interno di onMounted utilizzando .value
 // utilizzo shallowRef per non covertire le proprietà interne di Gsap in oggetti reattivi di vue
 const rotationTL = shallowRef(null);
+//const phasesTL = shallowRef(null);
+//const intentObserver = shallowRef(null);
 
 onMounted(() => {
   const { $gsap } = useNuxtApp();
@@ -57,6 +54,14 @@ onMounted(() => {
     });
 
     //!SECTION
+
+    //SECTION - sezione animazione delle chips delle fasi
+
+    //!SECTION
+
+    //SECTION - gestione animazione a steps
+
+    //!SECTION
   }); //NOTE - chiusura nextTick
 }); //NOTE - chiusura onMounted
 
@@ -64,11 +69,4 @@ onMounted(() => {
 defineExpose({ rotationTL });
 </script>
 
-<style scoped>
-.choice {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 1rem;
-}
-</style>
+<style scoped></style>
