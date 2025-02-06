@@ -4,6 +4,17 @@
       <div id="hero-section" class="section_fixed hero">
         <!-- <div id="ghirlanda-element" class="element"></div> -->
         <canvas
+          ref="canvasRefLogo"
+          id="canvasLogo"
+          style="
+            position: relative;
+            width: 100%;
+            max-width: 960px;
+            height: 100%;
+            z-index: 5;
+          "
+        ></canvas>
+        <canvas
           ref="canvasRef"
           id="canvas"
           style="
@@ -70,20 +81,40 @@ import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
 
 const PhasesRef = ref(null);
 const canvasRef = ref(null);
+const canvasRefLogo = ref(null);
 
 onMounted(() => {
   const { $gsap } = useNuxtApp();
 
   nextTick(() => {
     //SECTION - RIVE
+    const rLogo = new Rive({
+      src: "/assets/rive/hero_mne_divided.riv",
+      artboard: "Logo",
+      canvas: canvasRefLogo.value,
+      autoplay: true,
+      stateMachines: "State logo",
+      layout: new Layout({
+        fit: Fit.Contain, // Adatta senza distorsione
+        alignment: Alignment.Center, // Centra l'animazione
+        resizeMode: "auto",
+      }),
+      onLoad: () => {
+        rLogo.resizeDrawingSurfaceToCanvas();
+      },
+    });
+
     const r = new Rive({
-      src: "/assets/rive/hero_mnemonica_4.riv",
-      artboard: "Master 2",
+      //src: "/assets/rive/hero_mnemonica_4.riv",
+      src: "/assets/rive/hero_mne_divided.riv",
+      // artboard: "Master 2",
+      artboard: "Title_2",
       //src: "https://cdn.rive.app/animations/vehicles.riv",
       //canvas: document.querySelectorAll("#canvas"),
       canvas: canvasRef.value,
       autoplay: true,
-      stateMachines: "State Hero",
+      stateMachines: "State Title",
+      // stateMachines: "State Hero",
       //stateMachines: "bumpy",
       layout: new Layout({
         fit: Fit.Contain, // Adatta senza distorsione
@@ -101,6 +132,11 @@ onMounted(() => {
         alignment: Alignment.Center, // Allinea in basso
       });
       r.resizeDrawingSurfaceToCanvas();
+      rLogo.layout = new Layout({
+        fit: Fit.Contain, // Cambia il fit per coprire l'area
+        alignment: Alignment.Center, // Allinea in basso
+      });
+      rLogo.resizeDrawingSurfaceToCanvas();
     });
 
     // window.addEventListener("resize", () => {
