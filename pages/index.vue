@@ -3,7 +3,7 @@
     <div id="sectionsWrapper" class="z-20">
       <div id="hero-section" class="section_fixed hero">
         <!-- <div id="ghirlanda-element" class="element"></div> -->
-        <canvas
+        <!-- <canvas
           ref="canvasRefLogo"
           id="canvasLogo"
           style="
@@ -13,7 +13,7 @@
             height: 100%;
             z-index: 5;
           "
-        ></canvas>
+        ></canvas> -->
         <canvas
           ref="canvasRef"
           id="canvas"
@@ -81,32 +81,47 @@ import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
 
 const PhasesRef = ref(null);
 const canvasRef = ref(null);
-const canvasRefLogo = ref(null);
+// const canvasRefLogo = ref(null);
+
+// Variabile per memorizzare il buffer del file .riv
+let rivBuffer = null;
+
+// Funzione per caricare il file .riv una sola volta
+async function loadRivFile(url) {
+  const response = await fetch(url);
+  return await response.arrayBuffer();
+}
 
 onMounted(() => {
   const { $gsap } = useNuxtApp();
 
-  nextTick(() => {
+  nextTick(async () => {
     //SECTION - RIVE
-    const rLogo = new Rive({
-      src: "/assets/rive/hero_mne_divided.riv",
-      artboard: "Logo",
-      canvas: canvasRefLogo.value,
-      autoplay: true,
-      stateMachines: "State logo",
-      layout: new Layout({
-        fit: Fit.Contain, // Adatta senza distorsione
-        alignment: Alignment.Center, // Centra l'animazione
-        resizeMode: "auto",
-      }),
-      onLoad: () => {
-        rLogo.resizeDrawingSurfaceToCanvas();
-      },
-    });
+
+    // Carica il file .riv (assicurati che il percorso sia corretto)
+    rivBuffer = await loadRivFile("/assets/rive/hero_mne_divided.riv");
+
+    // const rLogo = new Rive({
+    //   //src: "/assets/rive/hero_mne_divided.riv",
+    //   buffer: rivBuffer, // Utilizza il buffer già caricato
+    //   artboard: "Logo",
+    //   canvas: canvasRefLogo.value,
+    //   autoplay: true,
+    //   stateMachines: "State logo",
+    //   layout: new Layout({
+    //     fit: Fit.Contain, // Adatta senza distorsione
+    //     alignment: Alignment.Center, // Centra l'animazione
+    //     resizeMode: "auto",
+    //   }),
+    //   onLoad: () => {
+    //     rLogo.resizeDrawingSurfaceToCanvas();
+    //   },
+    // });
 
     const r = new Rive({
+      buffer: rivBuffer, // Utilizza il buffer già caricato
       //src: "/assets/rive/hero_mnemonica_4.riv",
-      src: "/assets/rive/hero_mne_divided.riv",
+      // src: "/assets/rive/hero_mne_divided.riv",
       // artboard: "Master 2",
       artboard: "Title_2",
       //src: "https://cdn.rive.app/animations/vehicles.riv",
@@ -132,11 +147,11 @@ onMounted(() => {
         alignment: Alignment.Center, // Allinea in basso
       });
       r.resizeDrawingSurfaceToCanvas();
-      rLogo.layout = new Layout({
-        fit: Fit.Contain, // Cambia il fit per coprire l'area
-        alignment: Alignment.Center, // Allinea in basso
-      });
-      rLogo.resizeDrawingSurfaceToCanvas();
+      // rLogo.layout = new Layout({
+      //   fit: Fit.Contain, // Cambia il fit per coprire l'area
+      //   alignment: Alignment.Center, // Allinea in basso
+      // });
+      // rLogo.resizeDrawingSurfaceToCanvas();
     });
 
     // window.addEventListener("resize", () => {
