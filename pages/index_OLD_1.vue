@@ -115,10 +115,17 @@ onMounted(() => {
 
     const r = new Rive({
       buffer: rivBuffer, // Utilizza il buffer già caricato
+      //src: "/assets/rive/hero_mnemonica_4.riv",
+      // src: "/assets/rive/hero_mne_divided.riv",
+      // artboard: "Master 2",
       artboard: "Title_2",
+      //src: "https://cdn.rive.app/animations/vehicles.riv",
+      //canvas: document.querySelectorAll("#canvas"),
       canvas: canvasRef.value,
       autoplay: true,
       stateMachines: "State Title",
+      // stateMachines: "State Hero",
+      //stateMachines: "bumpy",
       layout: new Layout({
         fit: Fit.Contain, // Adatta senza distorsione
         alignment: Alignment.Center, // Centra l'animazione
@@ -129,17 +136,22 @@ onMounted(() => {
       },
     });
 
-    function aggiornaResize(elemento) {
-      elemento.layout = new Layout({
+    window.addEventListener("resize", () => {
+      r.layout = new Layout({
         fit: Fit.Contain, // Cambia il fit per coprire l'area
         alignment: Alignment.Center, // Allinea in basso
       });
-      elemento.resizeDrawingSurfaceToCanvas();
-    }
-
-    window.addEventListener("resize", () => {
-      [r, rLogo].forEach(aggiornaResize);
+      r.resizeDrawingSurfaceToCanvas();
+      rLogo.layout = new Layout({
+        fit: Fit.Contain, // Cambia il fit per coprire l'area
+        alignment: Alignment.Center, // Allinea in basso
+      });
+      rLogo.resizeDrawingSurfaceToCanvas();
     });
+
+    // window.addEventListener("resize", () => {
+    //   r.resizeDrawingSurfaceToCanvas();
+    // });
 
     //!SECTION
 
@@ -315,10 +327,6 @@ onMounted(() => {
       },
       "<+=0.2"
     );
-    sectionsTL.to(".ghirlanda-updx, .ghirlanda-dwsx ", {
-      autoAlpha: 0.6,
-      filter: "blur(0px)",
-    });
 
     sectionsTL.addLabel("phases_section");
     sectionsTL.addPause();
@@ -444,10 +452,10 @@ onMounted(() => {
     sectionsTL.call(() => RotationTL.play());
     sectionsTL.call(() => RotationTL.pause());
 
-    // sectionsTL.to(".ghirlanda-updx, .ghirlanda-dwsx ", {
-    //   autoAlpha: 0.6,
-    //   filter: "blur(0px)",
-    // });
+    sectionsTL.to(".ghirlanda-updx, .ghirlanda-dwsx ", {
+      autoAlpha: 0.6,
+      filter: "blur(0px)",
+    });
     sectionsTL.to(
       "#modules-section",
       {
