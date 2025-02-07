@@ -21,7 +21,7 @@
             position: relative;
             width: 100%;
             max-width: 960px;
-            height: 100%;
+
             z-index: 5;
           "
         ></canvas>

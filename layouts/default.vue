@@ -19,14 +19,14 @@
     </div>
 
     <Header />
-    <!-- <div id="ghirlanda-element_start" class="element_start">
+    <div id="ghirlanda-element_start" class="element_start">
       <NuxtImg
         id="ghirlanda_img"
         src="/assets/img/Ghirlanda_full_web_800_opt.png"
         alt="mnemonica ghirlanda ecosystem"
         densities="x1"
       />
-    </div> -->
+    </div>
     <slot class="min-h-screen" />
     <Footer />
   </div>
