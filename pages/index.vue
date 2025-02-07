@@ -2,26 +2,20 @@
   <main>
     <div id="sectionsWrapper" class="z-20">
       <div id="hero-section" class="section_fixed hero">
-        <!-- <div id="ghirlanda-element" class="element"></div> -->
-        <!-- <canvas
+        <div id="ghirlanda-element" class="element"></div>
+        <canvas
           ref="canvasRefLogo"
           id="canvasLogo"
-          style="
-            position: relative;
-            width: 100%;
-            max-width: 960px;
-            height: 100%;
-            z-index: 5;
-          "
-        ></canvas> -->
+          style="position: absolute; height: 100px; z-index: 5"
+        ></canvas>
         <canvas
           ref="canvasRef"
           id="canvas"
           style="
-            position: relative;
+            position: absolute;
             width: 100%;
             max-width: 960px;
-
+            height: 50vh;
             z-index: 5;
           "
         ></canvas>
@@ -81,7 +75,7 @@ import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
 
 const PhasesRef = ref(null);
 const canvasRef = ref(null);
-// const canvasRefLogo = ref(null);
+const canvasRefLogo = ref(null);
 
 // Variabile per memorizzare il buffer del file .riv
 let rivBuffer = null;
@@ -101,22 +95,23 @@ onMounted(() => {
     // Carica il file .riv (assicurati che il percorso sia corretto)
     rivBuffer = await loadRivFile("/assets/rive/hero_mne_divided.riv");
 
-    // const rLogo = new Rive({
-    //   //src: "/assets/rive/hero_mne_divided.riv",
-    //   buffer: rivBuffer, // Utilizza il buffer già caricato
-    //   artboard: "Logo",
-    //   canvas: canvasRefLogo.value,
-    //   autoplay: true,
-    //   stateMachines: "State logo",
-    //   layout: new Layout({
-    //     fit: Fit.Contain, // Adatta senza distorsione
-    //     alignment: Alignment.Center, // Centra l'animazione
-    //     resizeMode: "auto",
-    //   }),
-    //   onLoad: () => {
-    //     rLogo.resizeDrawingSurfaceToCanvas();
-    //   },
-    // });
+    const rLogo = new Rive({
+      buffer: rivBuffer, // Utilizza il buffer già caricato
+      artboard: "Logo",
+      canvas: canvasRefLogo.value,
+      autoplay: true, //per inizializzare l'animazione
+      //stateMachines: "State logo",
+      animations: "Logo intro",
+      layout: new Layout({
+        fit: Fit.Contain, // Adatta senza distorsione
+        alignment: Alignment.Center, // Centra l'animazione
+        resizeMode: "auto",
+      }),
+      onLoad: () => {
+        rLogo.resizeDrawingSurfaceToCanvas();
+        rLogo.pause(); // metto in pausa l'istanza rLogo dopo averla inizializzata in modo da poterla riprendere in seguito e fare rLogo.play("timelineName")
+      },
+    });
 
     const r = new Rive({
       buffer: rivBuffer, // Utilizza il buffer già caricato
@@ -147,11 +142,11 @@ onMounted(() => {
         alignment: Alignment.Center, // Allinea in basso
       });
       r.resizeDrawingSurfaceToCanvas();
-      // rLogo.layout = new Layout({
-      //   fit: Fit.Contain, // Cambia il fit per coprire l'area
-      //   alignment: Alignment.Center, // Allinea in basso
-      // });
-      // rLogo.resizeDrawingSurfaceToCanvas();
+      rLogo.layout = new Layout({
+        fit: Fit.Contain, // Cambia il fit per coprire l'area
+        alignment: Alignment.Center, // Allinea in basso
+      });
+      rLogo.resizeDrawingSurfaceToCanvas();
     });
 
     // window.addEventListener("resize", () => {
@@ -172,6 +167,8 @@ onMounted(() => {
     const intro = $gsap.timeline({
       onComplete: () => {
         introCompleted = true;
+        console.log("Intro completata");
+        rLogo.play("Logo intro"); //Logo intro è il nome della timeline impostata in Rive
       },
     });
     // registro effetto per l'entrata delle scritte e del logo in Hero section
@@ -282,6 +279,13 @@ onMounted(() => {
     });
 
     //ANCHOR - Hero Section Start
+    sectionsTL.call(
+      () => {
+        rLogo.play("Logo intro");
+      },
+      null,
+      "-=1"
+    );
     sectionsTL.to("#hero-section", {
       autoAlpha: 0,
       duration: 1,
