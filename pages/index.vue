@@ -115,7 +115,7 @@ onMounted(() => {
 
     const rTitle = new Rive({
       buffer: rivBuffer, // Utilizza il buffer già caricato
-      artboard: "Title_2",
+      artboard: "Title",
       canvas: canvasRef.value,
       autoplay: true,
       stateMachines: "State Title",
@@ -131,8 +131,8 @@ onMounted(() => {
 
     function aggiornaResize(elemento) {
       // Aggiorna gli attributi width e height del canvas in base alle dimensioni attuali
-      canvasRef.value.width = canvasRef.value.offsetWidth;
-      canvasRef.value.height = canvasRef.value.offsetHeight;
+      // canvasRef.value.width = canvasRef.value.offsetWidth;
+      // canvasRef.value.height = canvasRef.value.offsetHeight;
 
       elemento.layout = new Layout({
         fit: Fit.Layout, // Cambia il fit per coprire l'area
@@ -143,8 +143,6 @@ onMounted(() => {
     }
 
     window.addEventListener("resize", () => {
-      console.log("Resize + ", canvasRef.value);
-
       [rTitle, rLogo].forEach(aggiornaResize);
     });
 
