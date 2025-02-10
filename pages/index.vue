@@ -15,7 +15,7 @@
             position: absolute;
             width: 100%;
             max-width: 960px;
-            height: 50vh;
+            height: 100%;
             z-index: 5;
           "
         ></canvas>
@@ -115,12 +115,12 @@ onMounted(() => {
 
     const rTitle = new Rive({
       buffer: rivBuffer, // Utilizza il buffer già caricato
-      artboard: "Title",
+      artboard: "Title_2b",
       canvas: canvasRef.value,
       autoplay: true,
-      stateMachines: "State Title",
+      //stateMachines: "State Title",
       layout: new Layout({
-        fit: Fit.Contain, // Adatta senza distorsione
+        fit: Fit.Layout, // Adatta senza distorsione
         alignment: Alignment.Center, // Centra l'animazione
         resizeMode: "auto",
       }),
