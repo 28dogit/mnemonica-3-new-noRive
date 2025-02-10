@@ -113,9 +113,9 @@ onMounted(() => {
       },
     });
 
-    const r = new Rive({
+    const rTitle = new Rive({
       buffer: rivBuffer, // Utilizza il buffer già caricato
-      artboard: "Title_2",
+      artboard: "Title",
       canvas: canvasRef.value,
       autoplay: true,
       stateMachines: "State Title",
@@ -125,7 +125,7 @@ onMounted(() => {
         resizeMode: "auto",
       }),
       onLoad: () => {
-        r.resizeDrawingSurfaceToCanvas();
+        rTitle.resizeDrawingSurfaceToCanvas();
       },
     });
 
@@ -138,7 +138,7 @@ onMounted(() => {
     }
 
     window.addEventListener("resize", () => {
-      [r, rLogo].forEach(aggiornaResize);
+      [rTitle, rLogo].forEach(aggiornaResize);
     });
 
     //!SECTION
