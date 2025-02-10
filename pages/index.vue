@@ -103,7 +103,7 @@ onMounted(() => {
       //stateMachines: "State logo",
       animations: "Logo intro",
       layout: new Layout({
-        fit: Fit.Contain, // Adatta senza distorsione
+        fit: Fit.Layout, // Adatta senza distorsione
         alignment: Alignment.Center, // Centra l'animazione
         resizeMode: "auto",
       }),
@@ -115,7 +115,7 @@ onMounted(() => {
 
     const rTitle = new Rive({
       buffer: rivBuffer, // Utilizza il buffer già caricato
-      artboard: "Title_2b",
+      artboard: "Title_2",
       canvas: canvasRef.value,
       autoplay: true,
       stateMachines: "State Title",
@@ -130,14 +130,21 @@ onMounted(() => {
     });
 
     function aggiornaResize(elemento) {
+      // Aggiorna gli attributi width e height del canvas in base alle dimensioni attuali
+      canvasRef.value.width = canvasRef.value.offsetWidth;
+      canvasRef.value.height = canvasRef.value.offsetHeight;
+
       elemento.layout = new Layout({
-        fit: Fit.Contain, // Cambia il fit per coprire l'area
+        fit: Fit.Layout, // Cambia il fit per coprire l'area
         alignment: Alignment.Center, // Allinea in basso
+        resizeMode: "auto",
       });
       elemento.resizeDrawingSurfaceToCanvas();
     }
 
     window.addEventListener("resize", () => {
+      console.log("Resize + ", canvasRef.value);
+
       [rTitle, rLogo].forEach(aggiornaResize);
     });
 
