@@ -15,7 +15,7 @@
             position: absolute;
             width: 100%;
             max-width: 960px;
-            height: 100%;
+            height: 50vh;
             z-index: 5;
           "
         ></canvas>
@@ -118,7 +118,7 @@ onMounted(() => {
       artboard: "Title_2b",
       canvas: canvasRef.value,
       autoplay: true,
-      //stateMachines: "State Title",
+      stateMachines: "State Title",
       layout: new Layout({
         fit: Fit.Layout, // Adatta senza distorsione
         alignment: Alignment.Center, // Centra l'animazione
