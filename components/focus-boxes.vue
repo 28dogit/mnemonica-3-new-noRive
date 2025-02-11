@@ -29,7 +29,13 @@
           </svg>
           <div ref="modalInner" class="modal-inner">
             <div class="modal-block">
-              <h1>BOXES</h1>
+              <h1>DELIVER</h1>
+              <p>
+                Get rid of third-party shuttles. With the built-in data exchange facility,
+                you can send & receive files and folders of any size and complexity
+                directly from/to Rooms, as well as local drives. Only between registered
+                users, without leaving Mnemonica safe walls.
+              </p>
             </div>
             <NuxtImg
               class="img-modal-block"
@@ -37,15 +43,6 @@
               sizes="600px"
               placeholder="https://placehold.co/600x400"
             ></NuxtImg>
-            <div class="modal-block">
-              <h1>Titolo blocco 1</h1>
-              <p>
-                Blocco 1 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Eligendi, earum facilis labore voluptatum nemo optio iste
-                voluptates, ducimus quas autem atque! Aspernatur temporibus fuga
-                assumenda! Impedit neque amet perspiciatis deleniti.
-              </p>
-            </div>
             <div class="modal-block">
               <h1>Titolo blocco 2</h1>
               <p>

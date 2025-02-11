@@ -19,37 +19,21 @@
             z-index: 5;
           "
         ></canvas>
-        <div class="headline">
-          <h2 id="heroSubTitle" class="hidden min-[680px]:block text-center">
-            Let you media assets flourish and last in the digital cinema ecosystem
-          </h2>
-          <h2 id="heroSubTitle" class="text-center min-[680px]:hidden">
-            Let your media assets flourish<br />
-            and last in the digital cinema ecosystem
-          </h2>
-        </div>
-        <!-- <div id="hero-content-wrapper" class="wrapper">
+        <div id="hero-content-wrapper" class="wrapper">
           <div id="hero-content" class="content">
-            <div id="heroTitle" class="flex items-center justify-center flex-wrap"> -->
-        <!-- <ChevronScroll></ChevronScroll> -->
-        <!-- <div class="overflowMask overflow-hidden">
-                <h1 id="H-screen" class="uppercase">Screen</h1>
-              </div>
-              <div class="overflowMask overflow-hidden">
-                <h1 id="H-deliver" class="uppercase">Deliver</h1>
-              </div>
-              <div class="overflowMask overflow-hidden">
-                <h1 id="H-preserve" class="uppercase">Preserve</h1>
-              </div>
+            <!-- <div id="heroTitle" class="flex items-center justify-center flex-wrap">
+            </div> -->
+            <div class="headline">
+              <h2 id="heroSubTitle" class="hidden min-[680px]:block text-center">
+                Let you media assets flourish and last in the digital cinema ecosystem
+              </h2>
+              <h2 id="heroSubTitle" class="text-center min-[680px]:hidden">
+                Let your media assets flourish<br />
+                and last in the digital cinema ecosystem
+              </h2>
             </div>
-            <h2 id="heroSubTitle" class="hidden min-[680px]:block text-center">
-              Connecting the dots of the digital cinema living ecosystem
-            </h2>
-            <h2 id="heroSubTitle" class="text-center min-[680px]:hidden">
-              Connecting the dots of the digital <br />cinema living ecosystem
-            </h2>
           </div>
-        </div> -->
+        </div>
       </div>
       <div id="phases-section" class="section_fixed phases">
         <PhasesComp ref="PhasesRef"></PhasesComp>
@@ -71,7 +55,6 @@
 import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
-//import { Rive } from "@rive-app/canvas";
 
 const PhasesRef = ref(null);
 const canvasRef = ref(null);
@@ -92,14 +75,14 @@ onMounted(() => {
   nextTick(async () => {
     //SECTION - RIVE
 
-    // Carica il file .riv (assicurati che il percorso sia corretto)
+    // Carica il file .riv una sola volta
     rivBuffer = await loadRivFile("/assets/rive/hero_mne_divided.riv");
 
     const rLogo = new Rive({
       buffer: rivBuffer, // Utilizza il buffer già caricato
       artboard: "Logo",
       canvas: canvasRefLogo.value,
-      autoplay: true, //per inizializzare l'animazione
+      autoplay: true,
       //stateMachines: "State logo",
       animations: "Logo intro",
       layout: new Layout({
@@ -114,7 +97,7 @@ onMounted(() => {
     });
 
     const rTitle = new Rive({
-      buffer: rivBuffer, // Utilizza il buffer già caricato
+      buffer: rivBuffer,
       artboard: "Title",
       canvas: canvasRef.value,
       autoplay: true,
@@ -158,6 +141,10 @@ onMounted(() => {
     //SECTION - animazioni interne
     // implemento la timeline intro che sbloccherà alla fine l'overflow hidden del body per ripristinare lo scroll
     const intro = $gsap.timeline({
+      onStart: () => {
+        console.log("Intro Partita");
+        //rLogo.play("Logo intro"); //Logo intro è il nome della timeline impostata in Rive
+      },
       onComplete: () => {
         introCompleted = true;
         console.log("Intro completata");
@@ -328,107 +315,6 @@ onMounted(() => {
     sectionsTL.addLabel("phases_section");
     sectionsTL.addPause();
 
-    // sectionsTL.to("#pre-chips-container .title", { y: -10, autoAlpha: 0, duration: 0.3 });
-    // sectionsTL.to(
-    //   "#pre-chips-container .chipsContainer",
-    //   {
-    //     y: 10,
-    //     autoAlpha: 0,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-    // sectionsTL.to(
-    //   "#production-chips-container .title",
-    //   {
-    //     y: 0,
-    //     autoAlpha: 1,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-    // sectionsTL.to(
-    //   "#production-chips-container .chipsContainer",
-    //   {
-    //     y: 0,
-    //     autoAlpha: 1,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-    // sectionsTL.addLabel("phases_section2");
-    // sectionsTL.addPause();
-
-    // sectionsTL.to("#production-chips-container .title", {
-    //   y: -10,
-    //   autoAlpha: 0,
-    //   duration: 0.3,
-    // });
-    // sectionsTL.to(
-    //   "#production-chips-container .chipsContainer",
-    //   {
-    //     y: 10,
-    //     autoAlpha: 0,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-    // sectionsTL.to(
-    //   "#post-chips-container .title",
-    //   {
-    //     y: 0,
-    //     autoAlpha: 1,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-    // sectionsTL.to(
-    //   "#post-chips-container .chipsContainer",
-    //   {
-    //     y: 0,
-    //     autoAlpha: 1,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-
-    // sectionsTL.addLabel("phases_section3");
-    // sectionsTL.addPause();
-
-    // sectionsTL.to("#post-chips-container .title", {
-    //   y: -10,
-    //   autoAlpha: 0,
-    //   duration: 0.3,
-    // });
-    // sectionsTL.to(
-    //   "#post-chips-container .chipsContainer",
-    //   {
-    //     y: 10,
-    //     autoAlpha: 0,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-    // sectionsTL.to(
-    //   "#market-chips-container .title",
-    //   {
-    //     y: 0,
-    //     autoAlpha: 1,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-    // sectionsTL.to(
-    //   "#market-chips-container .chipsContainer",
-    //   {
-    //     y: 0,
-    //     autoAlpha: 1,
-    //     duration: 0.3,
-    //   },
-    //   "<"
-    // );
-
-    // sectionsTL.addPause();
     //ANCHOR - Phases Section End
 
     //ANCHOR - Modules Section Start
@@ -449,10 +335,6 @@ onMounted(() => {
     sectionsTL.call(() => RotationTL.play());
     sectionsTL.call(() => RotationTL.pause());
 
-    // sectionsTL.to(".ghirlanda-updx, .ghirlanda-dwsx ", {
-    //   autoAlpha: 0.6,
-    //   filter: "blur(0px)",
-    // });
     sectionsTL.to(
       "#modules-section",
       {

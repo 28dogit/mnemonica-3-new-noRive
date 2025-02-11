@@ -13,8 +13,10 @@
         />
       </div>
       <div id="navWrapper" class="flex w-9/12 justify-end pr-10">
-        <Nav class="hidden md:visible md:flex" />
-        <NavMobile class="md:hidden" />
+        <!-- <Nav class="hidden md:visible md:flex" /> -->
+        <StructureNav class="hidden md:visible md:flex" />
+        <StructureNavMobile class="md:hidden" />
+        <!-- <NavMobile class="md:hidden" /> -->
 
         <!-- <div class="darktoggle ml-12"><DarkModeToggle /></div> -->
       </div>

@@ -29,7 +29,14 @@
           </svg>
           <div ref="modalInner" class="modal-inner">
             <div class="modal-block">
-              <h1>MASTERS</h1>
+              <h1>PRESERVE</h1>
+              <p>
+                Forget hard drives and LTOs. Welcome to the most advanced and reliable
+                solution for long-term preservation of digital film works that also keeps
+                them always available for business opportunities and cultural outreach.
+                Arrange immediate screenings with integrated Rooms, easily retrieve
+                relevant assets, securely deliver to stakeholders.
+              </p>
             </div>
             <NuxtImg
               class="img-modal-block"
@@ -37,15 +44,6 @@
               sizes="600px"
               placeholder="https://placehold.co/600x400"
             ></NuxtImg>
-            <div class="modal-block">
-              <h1>Titolo blocco 1</h1>
-              <p>
-                Blocco 1 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Eligendi, earum facilis labore voluptatum nemo optio iste
-                voluptates, ducimus quas autem atque! Aspernatur temporibus fuga
-                assumenda! Impedit neque amet perspiciatis deleniti.
-              </p>
-            </div>
             <div class="modal-block">
               <h1>Titolo blocco 2</h1>
               <p>
