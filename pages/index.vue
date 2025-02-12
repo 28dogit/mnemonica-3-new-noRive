@@ -112,24 +112,6 @@ onMounted(() => {
       },
     });
 
-    const rFocusBtn = new Rive({
-      buffer: rivBuffer,
-      artboard: "Focus",
-      canvas: canvasRefBtn.value,
-      autoplay: true,
-      //stateMachines: "State logo",
-      animations: "FocusBtn_animation",
-      layout: new Layout({
-        fit: Fit.Layout, // Adatta senza distorsione
-        alignment: Alignment.Center, // Centra l'animazione
-        resizeMode: "auto",
-      }),
-      onLoad: () => {
-        rFocusBtn.resizeDrawingSurfaceToCanvas();
-        //rFocusBtn.pause(); // metto in pausa l'istanza rLogo dopo averla inizializzata in modo da poterla riprendere in seguito e fare rLogo.play("timelineName")
-      },
-    });
-
     function aggiornaResize(elemento) {
       // Aggiorna gli attributi width e height del canvas in base alle dimensioni attuali
       // canvasRef.value.width = canvasRef.value.offsetWidth;
@@ -144,7 +126,7 @@ onMounted(() => {
     }
 
     window.addEventListener("resize", () => {
-      [rTitle, rLogo, rFocusBtn].forEach(aggiornaResize);
+      [rTitle, rLogo].forEach(aggiornaResize);
     });
 
     //!SECTION

@@ -9,7 +9,43 @@
     style="position: absolute; height: 105px; width: 100px; z-index: 5"
   ></canvas>
 </template>
-<script setup></script>
+<script setup>
+import { onMounted, ref } from "vue";
+import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
+const canvasRefBtn = ref(null);
+
+onMounted(() => {
+  const rFocusBtn = new Rive({
+    src: "/assets/rive/focusbtn.riv",
+    artboard: "Focus",
+    canvas: canvasRefBtn.value,
+    autoplay: true,
+    stateMachines: "FocusBtn_animation",
+    layout: new Layout({
+      fit: Fit.Layout, // Adatta senza distorsione
+      alignment: Alignment.Center, // Centra l'animazione
+      resizeMode: "auto",
+    }),
+    onLoad: () => {
+      rFocusBtn.resizeDrawingSurfaceToCanvas();
+      //rFocusBtn.pause(); // metto in pausa l'istanza rLogo dopo averla inizializzata in modo da poterla riprendere in seguito e fare rLogo.play("timelineName")
+    },
+  });
+
+  function aggiornaResize(elemento) {
+    elemento.layout = new Layout({
+      fit: Fit.Layout, // Cambia il fit per coprire l'area
+      alignment: Alignment.Center, // Allinea in basso
+      resizeMode: "auto",
+    });
+    elemento.resizeDrawingSurfaceToCanvas();
+  }
+
+  window.addEventListener("resize", () => {
+    aggiornaResize(rFocusBtn);
+  });
+});
+</script>
 <style lang="scss" scoped>
 @use "@/assets/css/_globals.scss" as *;
 @use "@/assets/css/_breakpoints.scss" as bp;
