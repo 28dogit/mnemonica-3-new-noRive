@@ -3,6 +3,11 @@
     <span class="focusTxt">Focus</span>
     <span class="focusBtn">+</span>
   </div>
+  <canvas
+    ref="canvasRefBtn"
+    id="canvasFocusBtn"
+    style="position: absolute; height: 105px; width: 100px; z-index: 5"
+  ></canvas>
 </template>
 <script setup></script>
 <style lang="scss" scoped>
