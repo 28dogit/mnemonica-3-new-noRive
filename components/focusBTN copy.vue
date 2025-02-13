@@ -1,23 +1,31 @@
 <template>
   <div class="focusWrapper">
+    <!-- <span class="focusTxt">Focus</span>
+    <span class="focusBtn">+</span> -->
     <canvas
       ref="canvasRefBtn"
       id="canvasFocusBtn"
       style="height: 70px; width: 70px"
     ></canvas>
+    <!-- <div
+      class="clickOverlay"
+      @click.stop="$emit('click')"
+      @touchstart.stop="$emit('click')"
+      @pointerdown.stop="$emit('click')"
+    ></div> -->
   </div>
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
 import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
 
+// Definisci gli eventi che il componente può emettere
 const emit = defineEmits(["click"]);
 
 const canvasRefBtn = ref(null);
-let rFocusBtn = null; // Istanza di Rive
 
 onMounted(() => {
-  rFocusBtn = new Rive({
+  const rFocusBtn = new Rive({
     src: "/assets/rive/focusbtn.riv",
     artboard: "Focus 2",
     canvas: canvasRefBtn.value,
@@ -31,35 +39,13 @@ onMounted(() => {
     onLoad: () => {
       rFocusBtn.resizeDrawingSurfaceToCanvas();
       //rFocusBtn.pause(); // metto in pausa l'istanza rLogo dopo averla inizializzata in modo da poterla riprendere in seguito e fare rLogo.play("timelineName")
-      console.log("✅ Rive caricato correttamente!");
-
-      // 📌 Stampiamo gli input della State Machine
-      const stateMachineInputs = rFocusBtn.stateMachineInputs("FocusBtn_animation");
-      console.log("🔍 Stato della state machine:", stateMachineInputs);
-
-      // 🎯 Controlliamo se esiste "Event28"
-      const eventTrigger = stateMachineInputs.find((input) => input.name === "Event28");
-
-      if (eventTrigger) {
-        console.log("✅ Event28 trovato!");
-
-        // ✅ Intercettiamo il click direttamente in Vue
-        canvasRefBtn.value.addEventListener("pointerdown", () => {
-          console.log("📢 Click sul canvas intercettato! Attiviamo Event28...");
-          eventTrigger.fire(); // 🔥 Attiva manualmente Event28
-          emit("click"); // Emettiamo l'evento per Vue
-        });
-      } else {
-        console.warn("⚠️ L'evento Event28 NON è stato trovato nella state machine!");
-      }
-
-      // ✅ Rendi `rFocusBtn` accessibile globalmente per il test in console
-      window.rFocusBtn = rFocusBtn;
-      console.log("🛠 `rFocusBtn` è ora accessibile dalla console!");
+      // Aggiungi un listener per gli eventi di click sul canvas
+      canvasRefBtn.value.addEventListener("click", () => {
+        // Emetti l'evento di click per il pulsante Vue
+        emit("click");
+      });
     },
   });
-
-  console.log("🎯 Configurazione di Rive completata.");
 
   function aggiornaResize(elemento) {
     elemento.layout = new Layout({
@@ -79,6 +65,21 @@ onMounted(() => {
 @use "@/assets/css/_globals.scss" as *;
 @use "@/assets/css/_breakpoints.scss" as bp;
 
+// canvas#canvasFocusBtn {
+//   pointer-events: none;
+// }
+
+// .clickOverlay {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background: transparent;
+//   z-index: 3; // Deve essere sopra il canvas
+//   pointer-events: auto; // Permette al canvas di Rive di ricevere input
+// }
+
 .focusWrapper {
   position: relative;
   width: 100px;
@@ -86,5 +87,34 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  // display: flex;
+  // align-items: center;
+  // justify-content: flex-end;
+  // gap: 1rem;
+  // height: 30px;
+  // border-radius: 30px;
+  // width: fit-content;
+  // min-width: 120px;
+  // padding-left: 1rem;
+  // margin-top: 1rem;
+  // background-color: $gradient_2;
+  // .focusTxt {
+  //   opacity: 1;
+  //   //display: none;
+  // }
+  // .focusBtn {
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   font-size: 1.5rem;
+  //   // color: $mne_secondary;
+  //   color: $mne_text-on-dark;
+  //   margin: 0;
+  //   background-color: $gradient_4;
+  //   width: 30px;
+  //   height: 30px;
+  //   border-radius: 15px;
+  // }
 }
 </style>
