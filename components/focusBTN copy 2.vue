@@ -9,7 +9,7 @@
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
-import { Rive, Fit, Alignment, Layout, EventType, RiveEventType } from "@rive-app/canvas";
+import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
 
 const emit = defineEmits(["click"]);
 
@@ -30,25 +30,33 @@ onMounted(() => {
     }),
     onLoad: () => {
       rFocusBtn.resizeDrawingSurfaceToCanvas();
+      //rFocusBtn.pause(); // metto in pausa l'istanza rLogo dopo averla inizializzata in modo da poterla riprendere in seguito e fare rLogo.play("timelineName")
+
+      // 📌 Stampiamo gli input della State Machine
+      const stateMachineInputs = rFocusBtn.stateMachineInputs("FocusBtn_animation");
+      console.log("🔍 Stato della state machine:", stateMachineInputs);
+
+      // 🎯 Controlliamo se esiste "Event28"
+      const eventTrigger = stateMachineInputs.find((input) => input.name === "Event28");
+
+      if (eventTrigger) {
+        console.log("✅ Event28 trovato!");
+
+        // ✅ Intercettiamo il click direttamente in Vue
+        canvasRefBtn.value.addEventListener("pointerdown", () => {
+          console.log("📢 Click sul canvas intercettato! Attiviamo Event28...");
+          eventTrigger.fire(); // 🔥 Attiva manualmente Event28
+          emit("click"); // Emettiamo l'evento per Vue
+        });
+      } else {
+        console.warn("⚠️ L'evento Event28 NON è stato trovato nella state machine!");
+      }
+
+      // ✅ Rendi `rFocusBtn` accessibile globalmente per il test in console
+      window.rFocusBtn = rFocusBtn;
+      console.log("🛠 `rFocusBtn` è ora accessibile dalla console!");
     },
   });
-
-  function onRiveEventReceived(riveEvent) {
-    const eventData = riveEvent.data;
-    //const eventProperties = eventData.properties;
-    if (eventData.type === RiveEventType.General) {
-      emit("click"); // Per il desktop
-      emit("touch"); // Per dispositivi mobili
-      emit("pointerdown");
-      console.log("Event name", eventData.name);
-    } else if (eventData.type === RiveEventType.OpenUrl) {
-      window.open(eventData.url);
-    }
-  }
-  // Add event listener and provide callback to handle Rive Event
-  rFocusBtn.on(EventType.RiveEvent, onRiveEventReceived);
-  // Can unsubscribe to Rive Events at any time via the off() API like below
-  // rFocusBtn.off(EventType.RiveEvent, onRiveEventReceived);
 
   function aggiornaResize(elemento) {
     elemento.layout = new Layout({
