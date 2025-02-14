@@ -10,23 +10,37 @@
         <!-- <h2 class="mTitle">Screening Rooms</h2> -->
         <h2 class="mTitle">Screen</h2>
         <h3 class="mSubTitle">streaming and discussion</h3>
-        <button @click="isModalOpen1 = true">
+        <button
+          @click.passive="openModal1"
+          @touchstart.passive="openModal1"
+          @pointerdown.passive="openModal1"
+          @mousedown.passive="openModal1"
+        >
+          <!-- pointerdown potrebbe sostituire touchstart e mousedown, perchè li contempla, per ora li tengo per sicurezza -->
           <FocusBTN></FocusBTN>
         </button>
       </div>
       <div id="module-txt_2" class="module_card">
-        <!-- <h2 class="mTitle">Sharing Boxes</h2> -->
         <h2 class="mTitle">Deliver</h2>
         <h3 class="mSubTitle">data transfer</h3>
-        <button @click="isModalOpen2 = true">
+        <button
+          @click.passive="openModal2"
+          @touchstart.passive="openModal2"
+          @pointerdown.passive="openModal2"
+          @mousedown.passive="openModal2"
+        >
           <FocusBTN></FocusBTN>
         </button>
       </div>
       <div id="module-txt_3" class="module_card">
-        <!-- <h2 class="mTitle">HQ Masters</h2> -->
         <h2 class="mTitle">Preserve</h2>
         <h3 class="mSubTitle">perennial availability</h3>
-        <button @click="isModalOpen3 = true">
+        <button
+          @click.passive="openModal3"
+          @touchstart.passive="openModal3"
+          @pointerdown.passive="openModal3"
+          @mousedown.passive="openModal3"
+        >
           <FocusBTN></FocusBTN>
         </button>
       </div>
@@ -45,9 +59,27 @@ import { _zIndex } from "#tailwind-config/theme";
 import { nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// mipreparo le istanze dei modali
 const isModalOpen1 = ref(false);
 const isModalOpen2 = ref(false);
 const isModalOpen3 = ref(false);
+
+// Controlla se il dispositivo supporta eventi touch
+const isTouchDevice = () => {
+  return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+};
+
+// Apertura dei modali con registrazione evento
+const openModal1 = (event) => {
+  //apro il modale
+  isModalOpen1.value = true;
+};
+const openModal2 = (event) => {
+  isModalOpen2.value = true;
+};
+const openModal3 = (event) => {
+  isModalOpen3.value = true;
+};
 
 const closeModal = () => {
   isModalOpen1.value = false;
@@ -56,11 +88,7 @@ const closeModal = () => {
 };
 
 onMounted(() => {
-  nextTick(() => {
-    // console.log(
-    //   "la logica di Gsap per questo componente eè affidata al composable useGsapModules.ts"
-    // );
-  }); //NOTE - end nextTick
+  nextTick(() => {}); //NOTE - end nextTick
 }); //NOTE - end onMounted
 //!SECTION
 </script>

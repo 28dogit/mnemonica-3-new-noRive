@@ -20,7 +20,7 @@ let rFocusBtn = null; // Istanza di Rive
 onMounted(() => {
   rFocusBtn = new Rive({
     src: "/assets/rive/focusbtn.riv",
-    artboard: "FocusArtboard",
+    artboard: "Focus 3",
     canvas: canvasRefBtn.value,
     autoplay: true,
     stateMachines: "FocusBtn_animation",
@@ -37,7 +37,7 @@ onMounted(() => {
   function onRiveEventReceived(riveEvent) {
     const eventData = riveEvent.data;
     switch (eventData.name) {
-      case "onClickEvent":
+      case "Event28":
         console.log("Event da switch case", eventData.name);
         emit("click");
         emit("touch");
@@ -47,6 +47,15 @@ onMounted(() => {
       default:
         break;
     }
+    //const eventProperties = eventData.properties;
+    // if (eventData.type === RiveEventType.General) {
+    //   emit("click"); // Per il desktop
+    //   emit("touch"); // Per dispositivi mobili
+    //   emit("pointerdown");
+    //   console.log("Event name", eventData.name);
+    // } else if (eventData.type === RiveEventType.OpenUrl) {
+    //   window.open(eventData.url);
+    // }
   }
   // Add event listener and provide callback to handle Rive Event
   rFocusBtn.on(EventType.RiveEvent, onRiveEventReceived);
