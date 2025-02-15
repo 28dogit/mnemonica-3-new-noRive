@@ -198,6 +198,10 @@ onMounted(() => {
     let isCoolingDown = false;
     const COOL_DOWN_TIME = 1600; // ms
 
+    // Variabili per tracciare il tocco
+    let touchStartY = 0;
+    let touchEndY = 0;
+
     function handleScroll(event) {
       if (!isfixedSection) return;
       // Se la timeline intro non è ancora terminata, ignoro completamente lo scroll
@@ -208,13 +212,36 @@ onMounted(() => {
       // Se siamo in fase di "cooldown", ignoriamo tutti gli eventi successivi
       if (isCoolingDown) return;
 
-      if (event.deltaY > 0) {
-        //nextStep();
-        sectionsTL.play();
-      } else if (event.deltaY < 0) {
-        //prevStep();
-        sectionsTL.reverse();
+      let deltaY = 0;
+      //SECTION - ottimizazione touch mobile
+      // Determina il tipo di evento
+      if (event.type === "wheel") {
+        deltaY = event.deltaY;
+      } else if (event.type === "pointerdown") {
+        touchStartY = event.clientY;
+      } else if (event.type === "pointermove") {
+        touchEndY = event.clientY;
+      } else if (event.type === "pointerup") {
+        deltaY = touchStartY - touchEndY;
       }
+
+      // Soglia minima per evitare input accidentali su mobile
+      if (Math.abs(deltaY) > 30) {
+        if (deltaY > 0) {
+          sectionsTL.play(); // Scroll down
+        } else {
+          sectionsTL.reverse(); // Scroll up
+        }
+      }
+      //!SECTION
+
+      // if (event.deltaY > 0) {
+      //   //nextStep();
+      //   sectionsTL.play();
+      // } else if (event.deltaY < 0) {
+      //   //prevStep();
+      //   sectionsTL.reverse();
+      // }
 
       // Attiviamo la "finestra" di cooldown
       isCoolingDown = true;
@@ -224,7 +251,10 @@ onMounted(() => {
     }
 
     window.addEventListener("wheel", handleScroll, { passive: false });
-    window.addEventListener("touchmove", handleScroll, { passive: false });
+    //window.addEventListener("touchmove", handleScroll, { passive: false });
+    window.addEventListener("pointerdown", handleScroll, { passive: false });
+    window.addEventListener("pointermove", handleScroll, { passive: false });
+    window.addEventListener("pointerup", handleScroll, { passive: false });
 
     //NOTE - recupero la rotationTL esposta dal componente phases_comp
     const RotationTL = PhasesRef.value.rotationTL;
