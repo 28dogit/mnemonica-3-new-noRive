@@ -226,22 +226,22 @@ onMounted(() => {
       }
 
       // Soglia minima per evitare input accidentali su mobile
-      if (Math.abs(deltaY) > 30) {
-        if (deltaY > 0) {
-          sectionsTL.play(); // Scroll down
-        } else {
-          sectionsTL.reverse(); // Scroll up
-        }
-      }
+      // if (Math.abs(deltaY) > 30) {
+      //   if (deltaY > 0) {
+      //     sectionsTL.play(); // Scroll down
+      //   } else {
+      //     sectionsTL.reverse(); // Scroll up
+      //   }
+      // }
       //!SECTION
 
-      // if (event.deltaY > 0) {
-      //   //nextStep();
-      //   sectionsTL.play();
-      // } else if (event.deltaY < 0) {
-      //   //prevStep();
-      //   sectionsTL.reverse();
-      // }
+      if (event.deltaY > 0) {
+        //nextStep();
+        sectionsTL.play();
+      } else if (event.deltaY < 0) {
+        //prevStep();
+        sectionsTL.reverse();
+      }
 
       // Attiviamo la "finestra" di cooldown
       isCoolingDown = true;
