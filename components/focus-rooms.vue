@@ -12,21 +12,14 @@
 
         <div ref="modalContent" class="modal-content" id="m-content">
           <button
-            @click="closeModal"
-            class="modal-x-btn bg-orange-500 rounded-full absolute top-[20px] left-[20px] w-9 h-9 flex items-center justify-center"
+            class="modal-x-btn"
+            @click.passive="closeModal"
+            @touchstart.passive="closeModal"
+            @pointerdown.passive="closeModal"
+            @mousedown.passive="closeModal"
           >
-            <UIcon name="i-heroicons-x-mark" class="text-woodsmoke-950 w-5 h-5"></UIcon>
+            <BtnCloseBTN></BtnCloseBTN>
           </button>
-          <svg width="100" height="100">
-            <circle
-              id="x-circle"
-              cx="38"
-              cy="38"
-              r="17"
-              stroke-width="0"
-              fill="#ffffff"
-            />
-          </svg>
           <div ref="modalInner" class="modal-inner">
             <div class="modal-block">
               <h1>SCREEN</h1>
@@ -74,6 +67,7 @@ import {
   nextTick,
 } from "vue";
 import { useWindowSize } from "@vueuse/core";
+import { BtnCloseBTN } from "#components";
 const { $gsap } = useNuxtApp();
 
 const props = defineProps({

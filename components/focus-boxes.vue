@@ -12,21 +12,14 @@
 
         <div ref="modalContent" class="modal-content" id="m-content">
           <button
-            @click="closeModal"
-            class="modal-x-btn bg-orange-500 rounded-full absolute top-[20px] left-[20px] w-9 h-9 flex items-center justify-center"
+            class="modal-x-btn"
+            @click.passive="closeModal"
+            @touchstart.passive="closeModal"
+            @pointerdown.passive="closeModal"
+            @mousedown.passive="closeModal"
           >
-            <UIcon name="i-heroicons-x-mark" class="text-woodsmoke-950 w-5 h-5"></UIcon>
+            <BtnCloseBTN></BtnCloseBTN>
           </button>
-          <svg width="100" height="100">
-            <circle
-              id="x-circle"
-              cx="38"
-              cy="38"
-              r="17"
-              stroke-width="0"
-              fill="#ffffff"
-            />
-          </svg>
           <div ref="modalInner" class="modal-inner">
             <div class="modal-block">
               <h1>DELIVER</h1>
@@ -44,21 +37,15 @@
               placeholder="https://placehold.co/600x400"
             ></NuxtImg>
             <div class="modal-block">
-              <h1>Titolo blocco 2</h1>
               <p>
-                Blocco 2 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Eligendi, earum facilis labore voluptatum nemo optio iste
-                voluptates, ducimus quas autem atque! Aspernatur temporibus fuga
-                assumenda! Impedit neque amet perspiciatis deleniti.
-              </p>
-            </div>
-            <div class="modal-block">
-              <h1>Titolo blocco 3</h1>
-              <p>
-                Blocco 3 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Eligendi, earum facilis labore voluptatum nemo optio iste
-                voluptates, ducimus quas autem atque! Aspernatur temporibus fuga
-                assumenda! Impedit neque amet perspiciatis deleniti.
+                Donec rutrum pulvinar mauris, eget pretium leo pharetra non. Phasellus
+                ultricies sollicitudin nibh, in ultrices odio sodales a. Donec nec
+                consequat orci. Vivamus in laoreet elit, in imperdiet turpis. Sed sagittis
+                erat erat, at posuere odio maximus ac. Proin lacinia est sed sollicitudin
+                feugiat. Curabitur commodo lorem quam, non efficitur felis bibendum in.
+                Sed dolor neque, eleifend nec porttitor vitae, tempor in sapien. Nunc eget
+                mauris id enim auctor suscipit et nec dui. Sed ac sollicitudin augue.
+                Etiam consectetur quam a lobortis ornare.
               </p>
             </div>
           </div>

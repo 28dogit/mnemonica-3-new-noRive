@@ -8,6 +8,9 @@ h1 {
     letter-spacing: 1px;
     padding: 20px 0;
     font-optical-sizing: auto;
+    @include bp.for-phone{
+        font-size: 2rem;
+    }
     // .light & {
     //     color: #151515;
     // }

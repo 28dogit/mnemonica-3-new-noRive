@@ -18,11 +18,9 @@ dialog {
   .modal-content {
     height: 100%;
   }
-  .modal-x-btn{
-    background-color: $mne_secondary;
-  }
+
   .modal-inner {
-    padding: 80px 3% 20px 3%;
+    padding: 0px 3% 20px 3%;
     display: flex;
     align-items: center;
     flex-direction: column;
