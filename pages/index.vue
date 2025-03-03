@@ -26,7 +26,7 @@
             </div> -->
             <div class="headline">
               <h2 id="heroSubTitle" class="hidden min-[680px]:block text-center">
-                Let you media assets flourish and last in the digital cinema ecosystem
+                Let your media assets flourish and last in the digital cinema ecosystem
               </h2>
               <h2 id="heroSubTitle" class="text-center min-[680px]:hidden">
                 Let your media assets flourish<br />

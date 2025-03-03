@@ -139,6 +139,7 @@ onMounted(() => {
     .mSubTitle {
       color: $mne_secondary;
       font-weight: 300;
+      text-align: center;
     }
   }
   #module-txt_1 {
