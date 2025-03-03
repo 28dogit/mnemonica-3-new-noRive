@@ -107,8 +107,8 @@ onMounted(() => {
     position: absolute;
   }
   #modules-content {
-    display: flex;
-    align-items: flex-start;
+    // display: flex;
+    // align-items: flex-start;
     position: relative;
     justify-content: center;
     @include bp.for-tablet-up {
