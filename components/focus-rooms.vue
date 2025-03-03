@@ -44,21 +44,15 @@
               placeholder="https://placehold.co/600x400"
             ></NuxtImg>
             <div class="modal-block">
-              <h1>Titolo blocco 2</h1>
               <p>
-                Blocco 2 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Eligendi, earum facilis labore voluptatum nemo optio iste
-                voluptates, ducimus quas autem atque! Aspernatur temporibus fuga
-                assumenda! Impedit neque amet perspiciatis deleniti.
-              </p>
-            </div>
-            <div class="modal-block">
-              <h1>Titolo blocco 3</h1>
-              <p>
-                Blocco 3 del modale, Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Eligendi, earum facilis labore voluptatum nemo optio iste
-                voluptates, ducimus quas autem atque! Aspernatur temporibus fuga
-                assumenda! Impedit neque amet perspiciatis deleniti.
+                Donec rutrum pulvinar mauris, eget pretium leo pharetra non. Phasellus
+                ultricies sollicitudin nibh, in ultrices odio sodales a. Donec nec
+                consequat orci. Vivamus in laoreet elit, in imperdiet turpis. Sed sagittis
+                erat erat, at posuere odio maximus ac. Proin lacinia est sed sollicitudin
+                feugiat. Curabitur commodo lorem quam, non efficitur felis bibendum in.
+                Sed dolor neque, eleifend nec porttitor vitae, tempor in sapien. Nunc eget
+                mauris id enim auctor suscipit et nec dui. Sed ac sollicitudin augue.
+                Etiam consectetur quam a lobortis ornare.
               </p>
             </div>
           </div>
