@@ -32,6 +32,8 @@
                 Let your media assets flourish<br />
                 and last in the digital cinema ecosystem
               </h2>
+              <h2>{{ post.title }}</h2>
+              <nuxt-content :document="post" />
             </div>
           </div>
         </div>
@@ -53,6 +55,12 @@
 </template>
 
 <script setup>
+// const { data: post } = await useAsyncData("post", async () => {
+//   queryContent("test-contenuti").findOne();
+// });
+const { data: post } = await useAsyncData(() =>
+  queryCollection("content").path("/").first()
+);
 import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";

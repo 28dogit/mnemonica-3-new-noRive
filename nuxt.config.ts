@@ -37,8 +37,9 @@ export default defineNuxtConfig({
     '@/plugins/gsap.js',
   ],
 
-  modules: ["@nuxt/ui", '@nuxtjs/apollo', '@nuxt/fonts', '@nuxt/image', '@vueuse/nuxt'],
+  modules: ["@nuxt/ui", '@nuxtjs/apollo', '@nuxt/fonts', '@nuxt/image', '@vueuse/nuxt', '@nuxt/content'],
 
+  //content: {},
 
   apollo: {
     clients: {
