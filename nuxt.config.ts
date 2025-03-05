@@ -39,7 +39,10 @@ export default defineNuxtConfig({
 
   modules: ["@nuxt/ui", '@nuxtjs/apollo', '@nuxt/fonts', '@nuxt/image', '@vueuse/nuxt', '@nuxt/content'],
 
-  //content: {},
+  content: {
+    // Add your content module options here if needed
+  },
+  
 
   apollo: {
     clients: {

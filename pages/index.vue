@@ -32,8 +32,9 @@
                 Let your media assets flourish<br />
                 and last in the digital cinema ecosystem
               </h2>
-              <h2>{{ post.title }}</h2>
-              <nuxt-content :document="post" />
+              <h2>{{ doc.title }}</h2>
+              <h3>{{ doc.description }}</h3>
+              <ContentRenderer :value="doc" />
             </div>
           </div>
         </div>
@@ -58,8 +59,8 @@
 // const { data: post } = await useAsyncData("post", async () => {
 //   queryContent("test-contenuti").findOne();
 // });
-const { data: post } = await useAsyncData(() =>
-  queryCollection("content").path("/").first()
+const { data: doc } = await useAsyncData(() =>
+  queryCollection("content").path("/test-contenuti").first()
 );
 import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
