@@ -12,6 +12,7 @@
           ref="canvasRef"
           id="canvas"
           style="
+            margin-top: 80px;
             position: absolute;
             width: 100%;
             max-width: 960px;
@@ -25,7 +26,7 @@
             </div> -->
             <div class="headline">
               <h2 id="heroSubTitle" class="hidden min-[680px]:block text-center">
-                Let you media assets flourish and last in the digital cinema ecosystem
+                Let your media assets flourish and last in the digital cinema ecosystem
               </h2>
               <h2 id="heroSubTitle" class="text-center min-[680px]:hidden">
                 Let your media assets flourish<br />
@@ -148,7 +149,7 @@ onMounted(() => {
       onComplete: () => {
         introCompleted = true;
         console.log("Intro completata");
-        rLogo.play("Logo intro"); //Logo intro è il nome della timeline impostata in Rive
+        //rLogo.play("Logo intro"); //Logo intro è il nome della timeline impostata in Rive
       },
     });
     // registro effetto per l'entrata delle scritte e del logo in Hero section
@@ -168,6 +169,14 @@ onMounted(() => {
       },
       extendTimeline: true,
     });
+
+    intro.call(
+      () => {
+        rLogo.play("Logo intro");
+      },
+      null,
+      1
+    );
 
     intro.from("#ghirlanda-element_start", {
       autoAlpha: 0,
