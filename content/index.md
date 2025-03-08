@@ -2,9 +2,10 @@
 
 Here is some content.
 
-::ModulesComp
+::modules-comp
 #titolo1
 modulo 1
+
 #titolo2
 modulo 2
 ::
