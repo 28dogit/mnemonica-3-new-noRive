@@ -10,7 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/content": "^3.2.2",
+    "@nuxt/content": "^3.3.0",
     "@vue/apollo-composable": "^4.2.1",
     "autoprefixer": "^10.4.20",
     "striptags": "^3.2.0"
@@ -25,9 +25,9 @@
     "@nuxtjs/apollo": "^5.0.0-alpha.14",
     "@rive-app/canvas": "^2.26.4",
     "@tailwindcss/typography": "^0.5.16",
-    "@vueuse/nuxt": "^12.8.1",
+    "@vueuse/nuxt": "^12.8.2",
     "gsap": "^3.12.7",
-    "nuxt": "^3.15.4",
+    "nuxt": "^3.16.0",
     "postcss": "^8.5.3",
     "sass": "^1.85.1",
     "tailwindcss": "^3.4.17",
