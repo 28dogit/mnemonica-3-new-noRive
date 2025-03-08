@@ -56,9 +56,6 @@
 </template>
 
 <script setup>
-// const { data: post } = await useAsyncData("post", async () => {
-//   queryContent("test-contenuti").findOne();
-// });
 const { data: doc } = await useAsyncData(() =>
   queryCollection("content").path("/test-contenuti").first()
 );
