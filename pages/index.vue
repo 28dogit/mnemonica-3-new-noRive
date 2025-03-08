@@ -2,6 +2,7 @@
   <main>
     <div id="sectionsWrapper" class="z-20">
       <div id="hero-section" class="section_fixed hero">
+        <ContentContenuti></ContentContenuti>
         <div id="ghirlanda-element" class="element"></div>
         <canvas
           ref="canvasRefLogo"
@@ -32,8 +33,6 @@
                 Let your media assets flourish<br />
                 and last in the digital cinema ecosystem
               </h2>
-              <h2>{{ doc.title }}</h2>
-              <h3>{{ doc.description }}</h3>
               <ContentRenderer :value="doc" />
             </div>
           </div>
