@@ -2,7 +2,6 @@
   <main>
     <div id="sectionsWrapper" class="z-20">
       <div id="hero-section" class="section_fixed hero">
-        <ContentContenuti></ContentContenuti>
         <div id="ghirlanda-element" class="element"></div>
         <canvas
           ref="canvasRefLogo"
@@ -33,7 +32,19 @@
                 Let your media assets flourish<br />
                 and last in the digital cinema ecosystem
               </h2>
-              <ContentRenderer :value="doc" />
+              <ContentRenderer :value="doc">
+                <template #default>
+                  <div
+                    class="tinello"
+                    v-for="block in doc.body.children"
+                    :key="block._id"
+                  >
+                    <p v-if="block.tag === 'bloccoprova'">
+                      {{ block.children[0].value }}
+                    </p>
+                  </div>
+                </template>
+              </ContentRenderer>
             </div>
           </div>
         </div>
