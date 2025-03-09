@@ -32,19 +32,8 @@
                 Let your media assets flourish<br />
                 and last in the digital cinema ecosystem
               </h2>
-              <ContentRenderer :value="doc">
-                <template #default>
-                  <div
-                    class="tinello"
-                    v-for="block in doc.body.children"
-                    :key="block._id"
-                  >
-                    <p v-if="block.tag === 'bloccoprova'">
-                      {{ block.children[0].value }}
-                    </p>
-                  </div>
-                </template>
-              </ContentRenderer>
+              <ContentRenderer :value="doc"> </ContentRenderer>
+              <!-- <ContentRenderer :value="docdata"> </ContentRenderer> -->
             </div>
           </div>
         </div>
@@ -69,6 +58,7 @@
 const { data: doc } = await useAsyncData(() =>
   queryCollection("content").path("/test-contenuti").first()
 );
+//const { data: docdata } = await useAsyncData(() => queryCollection("contentData"));
 import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
