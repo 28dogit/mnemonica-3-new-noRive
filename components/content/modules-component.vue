@@ -2,17 +2,14 @@
   <!-- //SECTION - TEMPLATE -->
   <div id="modules-element" class="element">
     <Modules id="modules_svg"></Modules>
-    <p id="allinOne"><slot name="allinone" mdc-unwrap="p" /></p>
+    <p id="allinOne"><slot name="all-in-one" mdc-unwrap="p" /></p>
   </div>
   <div id="modules-content-wrapper" class="wrapper">
     <div id="modules-content" class="content">
       <div id="module-txt_1" class="module_card">
-        <slot></slot>
-        <slot />
-        <!-- <h2 class="mTitle">Screening Rooms</h2> -->
-        <h2 class="mTitle"><slot name="screentitle" mdc-unwrap="p"></slot></h2>
+        <h2 class="mTitle"><slot name="screen-title" mdc-unwrap="p"></slot></h2>
 
-        <h3 class="mSubTitle"><slot name="screensub" mdc-unwrap="p"></slot></h3>
+        <h3 class="mSubTitle"><slot name="screen-sub" mdc-unwrap="p"></slot></h3>
         <button
           @click.passive="openModal1"
           @touchstart.passive="openModal1"
@@ -24,8 +21,8 @@
         </button>
       </div>
       <div id="module-txt_2" class="module_card">
-        <h2 class="mTitle"><slot name="delivertitle" mdc-unwrap="p"></slot></h2>
-        <h3 class="mSubTitle"><slot name="deliversub" mdc-unwrap="p"></slot></h3>
+        <h2 class="mTitle"><slot name="deliver-title" mdc-unwrap="p"></slot></h2>
+        <h3 class="mSubTitle"><slot name="deliver-sub" mdc-unwrap="p"></slot></h3>
         <button
           @click.passive="openModal2"
           @touchstart.passive="openModal2"
@@ -36,8 +33,8 @@
         </button>
       </div>
       <div id="module-txt_3" class="module_card">
-        <h2 class="mTitle"><slot name="preservetitle"></slot></h2>
-        <h3 class="mSubTitle"><slot name="preservesub"></slot></h3>
+        <h2 class="mTitle"><slot name="preserve-title" mdc-unwrap="p"></slot></h2>
+        <h3 class="mSubTitle"><slot name="preserve-sub" mdc-unwrap="p"></slot></h3>
         <button
           @click.passive="openModal3"
           @touchstart.passive="openModal3"
