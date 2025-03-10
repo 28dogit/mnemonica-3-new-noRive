@@ -33,7 +33,6 @@
                 Let your media assets flourish<br />
                 and last in the digital cinema ecosystem
               </h2>
-              <!-- <ContentRenderer :value="docdata"> </ContentRenderer> -->
             </div>
           </div>
         </div>
@@ -42,11 +41,7 @@
         <PhasesComp ref="PhasesRef"></PhasesComp>
       </div>
       <div id="modules-section" class="section_fixed modules">
-        <!-- <ModulesComp></ModulesComp> -->
-        <div class="test28">
-          <ContentRenderer :value="doc"> </ContentRenderer>
-          <!-- <ModulesComponent></ModulesComponent> -->
-        </div>
+        <ContentRenderer :value="contentModulesComponent"></ContentRenderer>
       </div>
     </div>
     <div class="nofixed_section w-[100vw] h-[1600px] z-30">
@@ -59,8 +54,8 @@
 </template>
 
 <script setup>
-const { data: doc } = await useAsyncData(() =>
-  queryCollection("content").path("/").first()
+const { data: contentModulesComponent } = await useAsyncData(() =>
+  queryCollection("content").path("/modules-content").first()
 );
 //const { data: docdata } = await useAsyncData(() => queryCollection("contentData"));
 import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";

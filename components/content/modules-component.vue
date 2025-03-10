@@ -2,7 +2,7 @@
   <!-- //SECTION - TEMPLATE -->
   <div id="modules-element" class="element">
     <Modules id="modules_svg"></Modules>
-    <p id="allinOne">All in One</p>
+    <p id="allinOne"><slot name="allinone" mdc-unwrap="p" /></p>
   </div>
   <div id="modules-content-wrapper" class="wrapper">
     <div id="modules-content" class="content">
@@ -24,8 +24,8 @@
         </button>
       </div>
       <div id="module-txt_2" class="module_card">
-        <h2 class="mTitle"><slot name="delivertitle"></slot></h2>
-        <h3 class="mSubTitle"><slot name="deliversub"></slot></h3>
+        <h2 class="mTitle"><slot name="delivertitle" mdc-unwrap="p"></slot></h2>
+        <h3 class="mSubTitle"><slot name="deliversub" mdc-unwrap="p"></slot></h3>
         <button
           @click.passive="openModal2"
           @touchstart.passive="openModal2"

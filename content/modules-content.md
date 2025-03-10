@@ -1,11 +1,11 @@
 ---
 title: Modules-Content
-description: Modules Componente Content
+description: content for Modules Component
 ---
 
-::modules-component-nononononononnnonno
-#default
-Using MDC & Vue components is addictive.
+::modules-component
+#allinone
+All in One
 
 #screentitle
 Screen
