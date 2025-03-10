@@ -1,11 +1,13 @@
+---
+title: My First Content Page 28
+description: This is my first content page 28
+---
+
 # my First Content page
 
 Here is some content.
 
-::modules-comp
-#titolo1
-modulo 1
+# {{ Titolo28 }}
 
-#titolo2
-modulo 2
-::
+#sezione
+Testo della sezione
