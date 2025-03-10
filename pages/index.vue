@@ -20,6 +20,7 @@
             z-index: 5;
           "
         ></canvas>
+        <slot name="screentitle"></slot>
         <div id="hero-content-wrapper" class="wrapper">
           <div id="hero-content" class="content">
             <!-- <div id="heroTitle" class="flex items-center justify-center flex-wrap">
@@ -32,7 +33,6 @@
                 Let your media assets flourish<br />
                 and last in the digital cinema ecosystem
               </h2>
-              <ContentRenderer :value="doc"> </ContentRenderer>
               <!-- <ContentRenderer :value="docdata"> </ContentRenderer> -->
             </div>
           </div>
@@ -42,7 +42,11 @@
         <PhasesComp ref="PhasesRef"></PhasesComp>
       </div>
       <div id="modules-section" class="section_fixed modules">
-        <ModulesComp></ModulesComp>
+        <!-- <ModulesComp></ModulesComp> -->
+        <div class="test28">
+          <ContentRenderer :value="doc"> </ContentRenderer>
+          <!-- <ModulesComponent></ModulesComponent> -->
+        </div>
       </div>
     </div>
     <div class="nofixed_section w-[100vw] h-[1600px] z-30">
@@ -56,7 +60,7 @@
 
 <script setup>
 const { data: doc } = await useAsyncData(() =>
-  queryCollection("content").path("/test-contenuti").first()
+  queryCollection("content").path("/").first()
 );
 //const { data: docdata } = await useAsyncData(() => queryCollection("contentData"));
 import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";

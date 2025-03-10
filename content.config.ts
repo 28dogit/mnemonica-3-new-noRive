@@ -7,7 +7,7 @@ export default defineContentConfig({
       source: '**/*.md',
     }),
     contentData: defineCollection({
-      type: 'page',
+      type: 'data',
       source: '**/*.md',
       schema: z.object({
         title: z.string(),

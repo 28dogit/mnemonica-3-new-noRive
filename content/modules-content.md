@@ -3,7 +3,10 @@ title: Modules-Content
 description: Modules Componente Content
 ---
 
-::modules-component
+::modules-component-nononononononnnonno
+#default
+Using MDC & Vue components is addictive.
+
 #screentitle
 Screen
 

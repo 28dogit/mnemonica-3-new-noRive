@@ -41,6 +41,15 @@ export default defineNuxtConfig({
 
   content: {
     // Add your content module options here if needed
+    preview:{
+      api: 'https://api.nuxt.studio',
+      dev:true,
+    },
+    watch: {
+      enabled: true,
+      port: 4000,
+      showURL: false
+    }
   },
   
 
