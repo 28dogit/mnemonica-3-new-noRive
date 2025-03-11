@@ -18,7 +18,7 @@
             @pointerdown.passive="closeModal"
             @mousedown.passive="closeModal"
           >
-            <BtnCloseBTN></BtnCloseBTN>
+            <BtnClose></BtnClose>
           </button>
           <div ref="modalInner" class="modal-inner">
             <div class="modal-block">
@@ -67,7 +67,6 @@ import {
   nextTick,
 } from "vue";
 import { useWindowSize } from "@vueuse/core";
-import { BtnCloseBTN } from "#components";
 const { $gsap } = useNuxtApp();
 
 const props = defineProps({

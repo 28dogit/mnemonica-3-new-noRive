@@ -1,9 +1,9 @@
 <template>
   <div id="phases-element" class="element">
-    <PreSvg id="Pre_svg" class="phaseCircle"></PreSvg>
-    <ProductionSvg id="Production_svg" class="phaseCircle"></ProductionSvg>
-    <PostSvg id="Post_svg" class="phaseCircle"></PostSvg>
-    <MarketSvg id="Market_svg" class="phaseCircle"></MarketSvg>
+    <SvgPre id="Pre_svg" class="phaseCircle"></SvgPre>
+    <SvgProduction id="Production_svg" class="phaseCircle"></SvgProduction>
+    <SvgPost id="Post_svg" class="phaseCircle"></SvgPost>
+    <SvgMarket id="Market_svg" class="phaseCircle"></SvgMarket>
   </div>
   <div id="phases-content-wrapper" class="wrapper">
     <div id="phases-content" class="content">
@@ -15,8 +15,8 @@
           <slot name="subtitle" mdc-unwrap="p" />
         </h3>
         <div class="choice">
-          <BtnMasterBTN>Production</BtnMasterBTN>
-          <BtnMasterBTN>Archive</BtnMasterBTN>
+          <BtnMaster>Production</BtnMaster>
+          <BtnMaster>Archive</BtnMaster>
         </div>
       </div>
     </div>

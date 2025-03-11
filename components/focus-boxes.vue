@@ -18,7 +18,7 @@
             @pointerdown.passive="closeModal"
             @mousedown.passive="closeModal"
           >
-            <BtnCloseBTN></BtnCloseBTN>
+            <BtnClose></BtnClose>
           </button>
           <div ref="modalInner" class="modal-inner">
             <div class="modal-block">
