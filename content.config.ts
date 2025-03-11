@@ -8,10 +8,25 @@ export default defineContentConfig({
     }),
     contentData: defineCollection({
       type: 'data',
-      source: '**/*.md',
+      source: 'data/**/*.md',
       schema: z.object({
         title: z.string(),
         description: z.string(),
+        subtitle: z.string(),
+        body: z.object({
+          type: z.string(),
+          children: z.any(),
+          toc: z.any(),
+        }),
+      }),
+    }),
+    contenJData: defineCollection({
+      type: 'data',
+      source: 'data/**/*.json',
+      schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        subtitle: z.string(),
       }),
     })
   }
