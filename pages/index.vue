@@ -37,8 +37,12 @@
           </div>
         </div>
       </div>
-      <div id="phases-section" class="section_fixed phases">
-        <PhasesComp ref="PhasesRef"></PhasesComp>
+      <div id="phases-section" class="28 section_fixed phases">
+        <ContentRenderer
+          :value="contentPhasesComponent"
+          ref="PhasesRef"
+        ></ContentRenderer>
+        <!-- <PhasesComp ref="PhasesRef"></PhasesComp> -->
       </div>
       <div id="modules-section" class="section_fixed modules">
         <ContentRenderer :value="contentModulesComponent"></ContentRenderer>
@@ -56,6 +60,9 @@
 <script setup>
 const { data: contentModulesComponent } = await useAsyncData(() =>
   queryCollection("content").path("/modules-content").first()
+);
+const { data: contentPhasesComponent } = await useAsyncData(() =>
+  queryCollection("content").path("/phases-content").first()
 );
 //const { data: docdata } = await useAsyncData(() => queryCollection("contentData"));
 import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";
