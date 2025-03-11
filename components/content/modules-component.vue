@@ -17,7 +17,7 @@
           @mousedown.passive="openModal1"
         >
           <!-- pointerdown potrebbe sostituire touchstart e mousedown, perchè li contempla, per ora li tengo per sicurezza -->
-          <FocusBTN></FocusBTN>
+          <BtnFocusBTN></BtnFocusBTN>
         </button>
       </div>
       <div id="module-txt_2" class="module_card">
@@ -29,7 +29,7 @@
           @pointerdown.passive="openModal2"
           @mousedown.passive="openModal2"
         >
-          <FocusBTN></FocusBTN>
+          <BtnFocusBTN></BtnFocusBTN>
         </button>
       </div>
       <div id="module-txt_3" class="module_card">
@@ -41,7 +41,7 @@
           @pointerdown.passive="openModal3"
           @mousedown.passive="openModal3"
         >
-          <FocusBTN></FocusBTN>
+          <BtnFocusBTN></BtnFocusBTN>
         </button>
       </div>
     </div>
