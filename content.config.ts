@@ -10,6 +10,7 @@ export default defineContentConfig({
       type: 'data',
       source: 'data/**/*.md',
       schema: z.object({
+        id: z.string(),
         title: z.string(),
         description: z.string(),
         subtitle: z.string(),

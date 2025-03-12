@@ -1,10 +1,13 @@
 ---
+id: "123"
 title: meta-titolo
 subtitle: meta-subtitle
 ---
 ::elemento-iniziale-tre-pallocchi
 #titolo
-test secondo
+Primo blocco Titolo
+#sottotitolo
+primo blocco sottostitolo
 ::
 
 ::elemento-iniziale
@@ -19,4 +22,7 @@ paragrafo
 
 1. numberde
 2. numberde2
+::
+::elemento3
+Ciao
 ::

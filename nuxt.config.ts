@@ -49,7 +49,7 @@ export default defineNuxtConfig({
       enabled: true,
       port: 4000,
       showURL: false
-    }
+    },
   },
   
 
