@@ -12,27 +12,24 @@ Primo blocco Titolo studio
 primo blocco sottostitolo
 ::
 
-::elemento-iniziale
-#titolo
-# titolo
-
-paragrafo?
-
-## sottotitolo
-
-paragrafo
-
-- lista
-  - lista
-    - lista
-
-1. numberde
-2. numberde2
-::
-
 ::elemento3
 Default slot
 
 #slot3
 Ciao
+::
+
+::elemento-iniziale
+testo di Default
+
+altro default?
+
+  :::Elemento
+  Slot 1
+  
+  Slot2
+  :::
+
+#slot4
+Ciao slot 4
 ::
