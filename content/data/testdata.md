@@ -31,5 +31,6 @@ paragrafo
 ::
 
 ::elemento3
+#slot
 Ciao
 ::

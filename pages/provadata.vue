@@ -1,16 +1,11 @@
 <template>
-  <div>
+  <div class="h-max">
     <h2>Contenuto Slot 1</h2>
     <div v-html="slot1Content"></div>
     <h2>Contenuto Slot 2</h2>
     <div v-html="slot2Content"></div>
     <h2>Titolo pagina dataProva</h2>
-    <pre class="gino">{{ data }}</pre>
-    <!-- <div class="title">{{ testdata.meta.body.value[1][2][2][1].id }}</div>
-    <div class="testo">{{ testdata.meta.body.value[0][0] }}</div> -->
-    <!-- <pre>{{ testdata.meta.body.value[0][0] }}</pre> -->
-    <!-- <pre class="test">{{ testdata.meta.body.value[1][0] }}</pre> -->
-    <!-- <pre>{{ testdata }}</pre> -->
+    <pre class="gino">{{ body[2] }}</pre>
   </div>
 </template>
 
