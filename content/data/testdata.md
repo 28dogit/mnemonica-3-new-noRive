@@ -6,7 +6,7 @@ subtitle: meta-subtitle
 
 ::elemento-iniziale-tre-pallocchi
 #titolo
-Primo blocco Titolo studio
+Primo blocco **Titolo** ~~studio~~
 
 #sottotitolo
 primo blocco sottostitolo
@@ -24,7 +24,7 @@ testo di Default
 
 altro default?
 
-  :::Elemento
+  :::elemento
   Slot 1
   
   Slot2
