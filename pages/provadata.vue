@@ -5,7 +5,7 @@
     <h2>Contenuto Slot 2</h2>
     <div v-html="slot2Content"></div>
     <h2>Titolo pagina dataProva</h2>
-    <pre class="gino">{{ body[2] }}</pre>
+    <pre class="gino">{{ body[0] }}</pre>
   </div>
 </template>
 
@@ -22,6 +22,8 @@ const body = data.value?.body?.value;
 console.log("BODY", body[1][2][2][2]);
 console.log("BODYlenght", body.length);
 //console.log(JSON.stringify(data.value.body.value, null, 2));
+const bodyL = JSON.stringify(data.value.body.value, null, 2);
+console.log("BodyL", bodyL);
 
 // Funzione per estrarre il contenuto degli slot
 const extractSlotContent = (body, slotName) => {
@@ -36,10 +38,13 @@ const extractSlotContent = (body, slotName) => {
         // Se il contenuto è un array, estrai il testo
         return contentNode
           .map((item) => {
-            if (Array.isArray(item) && item[0] === "p") {
+            if (
+              Array.isArray(item) &&
+              item[0] === ("p" || "h1" || "h2" || "h3" || "h4" || "h5" || "h6")
+            ) {
               return item[2]?.trim() || "";
             }
-            return "";
+            return "titoz";
           })
           .join(" ");
       }
