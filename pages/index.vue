@@ -40,6 +40,7 @@
       <div id="phases-section" class="28 section_fixed phases">
         <!-- <ContentRenderer :value="contentPhasesComponent"></ContentRenderer> -->
         <PhasesComp ref="PhasesRef"></PhasesComp>
+        <!-- <PhasesComponent></PhasesComponent> -->
       </div>
       <div id="modules-section" class="section_fixed modules">
         <ContentRenderer :value="contentModulesComponent"></ContentRenderer>

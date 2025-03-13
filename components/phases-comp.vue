@@ -9,9 +9,13 @@
     <div id="phases-content" class="content">
       <div class="headline">
         <h2 id="PhasesSubTitle" class="text-center nuovo-test">
-          <!-- {{ PhasesContent }} -->
-          <ContentRenderer :value="testpage"></ContentRenderer>
+          {{ data.title }}
+          {{ PhasesContent }}
         </h2>
+        <div class="cino">
+          <ContentRenderer :value="data" v-slot="title"></ContentRenderer>
+        </div>
+        <ContentRenderer :value="testpage"></ContentRenderer>
         <h3 class="text-center">
           Empowering media companies to protect and grow their digital capital
         </h3>
@@ -37,48 +41,48 @@ const { data: testpage } = await useAsyncData(() =>
   queryCollection("content").path("/").first()
 );
 // Accesso al corpo del Markdown
-// const body = data.value?.body?.value;
+const body = data.value?.body?.value;
 
-// const extractBlockContent = (body, blockName) => {
-//   if (!body || !Array.isArray(body)) return `Slot ${blockName} non trovato`;
+const extractBlockContent = (body, blockName) => {
+  if (!body || !Array.isArray(body)) return `Slot ${blockName} non trovato`;
 
-//   // Cerca ricorsivamente i nodi con il nome dello slot
-//   const findSlot = (node) => {
-//     if (Array.isArray(node) && node[0] === blockName) {
-//       // Estrai il contenuto dal terzo elemento del nodo
-//       const contentNode = node[2];
-//       if (Array.isArray(contentNode)) {
-//         // Se il contenuto è un array, estrai il testo
-//         return contentNode
-//           .map((item) => {
-//             if (
-//               Array.isArray(item) &&
-//               item[0] === ("p" || "h1" || "h2" || "h3" || "h4" || "h5" || "h6")
-//             ) {
-//               return item[2]?.trim() || "";
-//             }
-//             return "";
-//           })
-//           .join(" ");
-//       }
-//     }
-//     if (Array.isArray(node)) {
-//       for (const child of node) {
-//         const result = findSlot(child);
-//         if (result) return result;
-//       }
-//     }
-//     return null;
-//   };
+  // Cerca ricorsivamente i nodi con il nome dello slot
+  const findSlot = (node) => {
+    if (Array.isArray(node) && node[0] === blockName) {
+      // Estrai il contenuto dal terzo elemento del nodo
+      const contentNode = node[2];
+      if (Array.isArray(contentNode)) {
+        // Se il contenuto è un array, estrai il testo
+        return contentNode
+          .map((item) => {
+            if (
+              Array.isArray(item) &&
+              item[0] === ("p" || "h1" || "h2" || "h3" || "h4" || "h5" || "h6")
+            ) {
+              return item[2]?.trim() || "";
+            }
+            return "";
+          })
+          .join(" ");
+      }
+    }
+    if (Array.isArray(node)) {
+      for (const child of node) {
+        const result = findSlot(child);
+        if (result) return result;
+      }
+    }
+    return null;
+  };
 
-//   const result = findSlot(body);
-//   return result || `Slot ${blockName} non trovato`;
-// };
+  const result = findSlot(body);
+  return result || `Slot ${blockName} non trovato`;
+};
 
-// // Estrai il contenuto degli slot
-// const PhasesContent = body
-//   ? extractBlockContent(body, "phases")
-//   : "Slot 1 phases non trovato";
+// Estrai il contenuto degli slot
+const PhasesContent = body
+  ? extractBlockContent(body, "phases")
+  : "Slot 1 phases non trovato";
 
 //definisco le costanti da esporre con defineExpose, che userò all'interno di onMounted utilizzando .value
 // utilizzo shallowRef per non covertire le proprietà interne di Gsap in oggetti reattivi di vue
