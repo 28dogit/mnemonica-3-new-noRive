@@ -12,7 +12,7 @@ Empowering media companies to *protect* and grow their digital capital
 
 # end {#phases}
 
-::elemento-test
+::elemento-test {#elemento-test}
 #titolo
 Primo blocco **Titolo**
 
