@@ -12,10 +12,15 @@ Empowering media companies to *protect* and grow their digital capital
 
 # end {#phases}
 
-::elemento-test {#elemento-test}
+::elemento-test
+---
+id: elemento-test
+---
+
 #titolo
 Primo blocco **Titolo**
 
 #sottotitolo
 primo blocco sottostitolo
+
 ::
