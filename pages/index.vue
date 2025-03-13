@@ -275,11 +275,11 @@ onMounted(() => {
     window.addEventListener("pointerup", handleScroll, { passive: false });
 
     //NOTE - recupero la rotationTL esposta dal componente phases_comp
-    const RotationTL = PhasesRef.value.rotationTL;
+    const RotationTL = PhasesRef.value?.rotationTL;
     console.log("RotetionTL: ", RotationTL);
 
     //NOTE - recupero la phasesTL esposta dal componente phases_comp
-    const PhasesTL = PhasesRef.value.phasesTL;
+    const PhasesTL = PhasesRef.value?.phasesTL;
 
     $gsap.set("#hero-section", { zIndex: 1 });
     $gsap.set("#modules-section", { zIndex: 0 });
