@@ -6,5 +6,6 @@
     "laravel"
   ],
   "license": "MIT",
-  "type": "project"
+  "type": "project",
+  "testo": "<h1>ciao</h1>"
 }
