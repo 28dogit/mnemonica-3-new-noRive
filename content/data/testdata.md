@@ -4,16 +4,26 @@ title: meta-titolo
 subtitle: meta-subtitle
 ---
 
+::phases
+
+#title
+From Prep to Eternity
+
+#subtitle
+Empowering media companies to protect and grow their digital capital
+
+::
+
 ::elemento-iniziale-tre-pallocchi
 #titolo
-Primo blocco **Titolo** ~~studio~~
+Primo blocco **Titolo**
 
 #sottotitolo
 primo blocco sottostitolo
 ::
 
 ::elemento3
-Default slot
+Default Slot
 
 #slot3
 Ciao
@@ -24,7 +34,7 @@ testo di Default
 
 altro default?
 
-  :::elemento
+  :::elementz
   Slot 1
   
   Slot2

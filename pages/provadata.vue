@@ -2,6 +2,7 @@
   <div class="h-max">
     <h2>Contenuto Slot 1</h2>
     <div v-html="slot1Content"></div>
+    <div class="test28"><slot name="elemento-iniziale"></slot></div>
     <h2>Contenuto Slot 2</h2>
     <div v-html="slot2Content"></div>
     <h2>Titolo pagina dataProva</h2>

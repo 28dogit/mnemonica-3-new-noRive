@@ -38,11 +38,8 @@
         </div>
       </div>
       <div id="phases-section" class="28 section_fixed phases">
-        <ContentRenderer
-          :value="contentPhasesComponent"
-          ref="PhasesRef"
-        ></ContentRenderer>
-        <!-- <PhasesComp ref="PhasesRef"></PhasesComp> -->
+        <!-- <ContentRenderer :value="contentPhasesComponent"></ContentRenderer> -->
+        <PhasesComp ref="PhasesRef"></PhasesComp>
       </div>
       <div id="modules-section" class="section_fixed modules">
         <ContentRenderer :value="contentModulesComponent"></ContentRenderer>
@@ -61,9 +58,9 @@
 const { data: contentModulesComponent } = await useAsyncData(() =>
   queryCollection("content").path("/modules-content").first()
 );
-const { data: contentPhasesComponent } = await useAsyncData(() =>
-  queryCollection("content").path("/phases-content").first()
-);
+// const { data: contentPhasesComponent } = await useAsyncData(() =>
+//   queryCollection("content").path("/phases-content").first()
+// );
 //const { data: docdata } = await useAsyncData(() => queryCollection("contentData"));
 import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -279,6 +276,7 @@ onMounted(() => {
 
     //NOTE - recupero la rotationTL esposta dal componente phases_comp
     const RotationTL = PhasesRef.value.rotationTL;
+    console.log("RotetionTL: ", RotationTL);
 
     //NOTE - recupero la phasesTL esposta dal componente phases_comp
     const PhasesTL = PhasesRef.value.phasesTL;
