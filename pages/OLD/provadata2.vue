@@ -2,13 +2,13 @@
   <div class="h-max">
     <h2>{{ sectionTitle }}</h2>
     <div v-html="sectionContent"></div>
-    <div v-if="slots.titolo" v-html="slots.titolo"></div>
-    <div v-if="slots.sottotitolo" v-html="slots.sottotitolo"></div>
+    <div v-if="slots.titolo" v-html="slots.title"></div>
+    <div v-if="slots.sottotitolo" v-html="slots.subtitle"></div>
   </div>
 </template>
 
 <script setup>
-const { data } = await useAsyncData("testdata", () => {
+const { data } = await useAsyncData("sections-index", () => {
   return queryCollection("contentData").first();
 });
 // Verifica che i dati siano presenti

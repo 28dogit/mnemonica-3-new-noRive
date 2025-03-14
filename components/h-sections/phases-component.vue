@@ -8,12 +8,19 @@
   <div id="phases-content-wrapper" class="wrapper">
     <div id="phases-content" class="content">
       <div class="headline">
-        <h2 id="PhasesSubTitle" class="text-center">
-          <slot name="title" mdc-unwrap="p" />
-        </h2>
-        <h3 class="text-center">
-          <slot name="subtitle" mdc-unwrap="p" />
-        </h3>
+        <!-- <div class="" v-html="defaultContent"></div> -->
+        <div
+          id="PhasesTitle"
+          class="text-center"
+          v-if="slots.title"
+          v-html="slots.title"
+        ></div>
+        <div
+          id="PhasesSubtitle"
+          class="text-center"
+          v-if="slots.subtitle"
+          v-html="slots.subtitle"
+        ></div>
         <div class="choice">
           <BtnMaster>Production</BtnMaster>
           <BtnMaster>Archive</BtnMaster>
@@ -24,6 +31,16 @@
 </template>
 
 <script setup>
+//SECTION - Nuxt Content CMS
+
+//Uso il composable useExtractSlots per estrarre i dati dal file di markup (slot da estrarre, file .md da leggere)
+const { fetchSection } = useExtractSlots("phases", "sections-index");
+
+// Estraggo i dati per ottenere i testi degli slot che mi servono più il file di default nell'html fare riferimento al nome dello slot da richiamare nel file di markup
+const { slots, defaultContent } = await fetchSection();
+
+//!SECTION
+
 //le altre importazioni derivano dalla pagina principale
 import { nextTick } from "vue";
 import { _opacity } from "#tailwind-config/theme";

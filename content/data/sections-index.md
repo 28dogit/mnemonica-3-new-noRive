@@ -1,46 +1,63 @@
 ---
-title: Modules-Content
-description: content for Modules Component
+title: sections titles
+subtitle: meta-subtitle
 ---
 
-::modules-component
-#all-in-one
-All in One
+::phases
+---
+title:  Phases titels
+---
+Testo di default del modulo Phases
 
-#screen-title
-Screen
+#title
+## From *Prep* to **Eternity**
 
-#screen-sub
-streaming and discussion
+#subtitle
+### **Empowering media companies** to *protect* and grow their digital capital
 
-#screen-Middle-Modal
+::
+
+::modules
+---
+title: modules titles
+---
+Testo di default del modulo Modules
+
+#title1
+## Screen
+
+#subtitle1
+### Streaming & Discussion
+
+#middle-modal-1
 Leave folders behind. Experience active workspaces that free you from
 repetitive tasks—encoding, watermarking, keeping everyone updated. Enjoy
 private places where people meet around media, playlists are a given,
 content is easy to find and move.
 
-#deliver-title
-Deliver
+#title2
+## Move
 
-#deliver-sub
-data transfer
+#subtitle2
+### File Exchange & Delivery
 
-#deliver-Middle-Modal
+#middle-modal-2
 Get rid of third-party shuttles. With the built-in data exchange facility,
 you can send & receive files and folders of any size and complexity
 directly from/to Rooms, as well as local drives. Only between registered
 users, without leaving Mnemonica safe walls.
 
-#preserve-title
-Preserve
+#title3
+## Preserve
 
-#preserve-sub
-perennial availability
+#subtitle3
+### Perennial Availability
 
-#preserve-Middle-Modal
+#middle-modal-3
 Forget hard drives and LTOs. Welcome to the most advanced and reliable
 solution for long-term preservation of digital film works that also keeps
 them always available for business opportunities and cultural outreach.
 Arrange immediate screenings with integrated Rooms, easily retrieve
 relevant assets, securely deliver to stakeholders.
+
 ::

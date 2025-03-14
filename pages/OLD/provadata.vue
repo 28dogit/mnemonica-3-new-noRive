@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-const { data } = await useAsyncData("testdata", () => {
+const { data } = await useAsyncData("sections-index", () => {
   return queryCollection("contentData").first();
 });
 // Verifica che i dati siano presenti

@@ -34,7 +34,7 @@
 
 <script setup>
 import { ref } from "vue";
-import Modals from "~/components/modals.vue";
+import Modals from "~/components/OLD/modals.vue";
 
 const isModalOpen = ref(false);
 const isModalOpen2 = ref(false);

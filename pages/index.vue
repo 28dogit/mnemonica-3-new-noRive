@@ -37,13 +37,11 @@
           </div>
         </div>
       </div>
-      <div id="phases-section" class="28 section_fixed phases">
-        <!-- <ContentRenderer :value="contentPhasesComponent"></ContentRenderer> -->
-        <PhasesComp ref="PhasesRef"></PhasesComp>
-        <!-- <PhasesComponent></PhasesComponent> -->
+      <div id="phases-section" class="section_fixed phases">
+        <HSectionsPhasesComponent ref="PhasesRef"></HSectionsPhasesComponent>
       </div>
       <div id="modules-section" class="section_fixed modules">
-        <ContentRenderer :value="contentModulesComponent"></ContentRenderer>
+        <HSectionsModulesComponent></HSectionsModulesComponent>
       </div>
     </div>
     <div class="nofixed_section w-[100vw] h-[1600px] z-30">
@@ -56,13 +54,12 @@
 </template>
 
 <script setup>
-const { data: contentModulesComponent } = await useAsyncData(() =>
-  queryCollection("content").path("/modules-content").first()
-);
+// const { data: contentModulesComponent } = await useAsyncData(() =>
+//   queryCollection("content").path("/modules-content").first()
+// );
 // const { data: contentPhasesComponent } = await useAsyncData(() =>
 //   queryCollection("content").path("/phases-content").first()
 // );
-//const { data: docdata } = await useAsyncData(() => queryCollection("contentData"));
 import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";

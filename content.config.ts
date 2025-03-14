@@ -21,14 +21,5 @@ export default defineContentConfig({
         }),
       }),
     }),
-    contenJData: defineCollection({
-      type: 'data',
-      source: 'data/**/*.json',
-      schema: z.object({
-        title: z.string(),
-        description: z.string(),
-        subtitle: z.string(),
-      }),
-    })
   }
 })

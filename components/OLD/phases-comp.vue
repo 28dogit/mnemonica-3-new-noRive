@@ -36,7 +36,7 @@
 <script setup>
 //SECTION - Nuxt Content CMS
 //ANCHOR - da parametrizzare con un composable
-const { data } = await useAsyncData("testdata", () => {
+const { data } = await useAsyncData("sections-index", () => {
   return queryCollection("contentData").first();
 });
 // Verifica che i dati siano presenti
