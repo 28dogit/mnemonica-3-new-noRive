@@ -2,25 +2,15 @@
 title: meta-titolo <b>grassetto</b>
 subtitle: meta-subtitle
 ---
-testo di Default
 
-# start {#phases}
- 
-# From Prep to **Eternity**
-
-Empowering media companies to *protect* and grow their digital capital
-
-# end {#phases}
-
-::elemento-test
----
-id: elemento-test
----
+::phases
 
 #titolo
-Primo blocco **Titolo**
+## From Prep to **Eternity**
 
 #sottotitolo
-primo blocco sottostitolo
+### **Empowering media companies** to *protect* and grow their digital capital
+
+testo di default del modulo phases
 
 ::

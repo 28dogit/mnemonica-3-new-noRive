@@ -8,17 +8,22 @@
   <div id="phases-content-wrapper" class="wrapper">
     <div id="phases-content" class="content">
       <div class="headline">
-        <h2 id="PhasesSubTitle" class="text-center nuovo-test">
-          {{ data.title }}
-          {{ PhasesContent }}
-        </h2>
-        <div class="cino">
-          <ContentRenderer :value="data" v-slot="title"></ContentRenderer>
-        </div>
-        <ContentRenderer :value="testpage"></ContentRenderer>
-        <h3 class="text-center">
+        <!-- <h2 id="PhasesSubTitle" class="text-center nuovo-test"> -->
+        <div
+          id="PhasesSubTitle"
+          class="text-center nuovo-test"
+          v-if="slots.titolo"
+          v-html="slots.titolo"
+        ></div>
+        <!-- </h2> -->
+        <div
+          class="text-center"
+          v-if="slots.sottotitolo"
+          v-html="slots.sottotitolo"
+        ></div>
+        <!-- <h3 class="text-center">
           Empowering media companies to protect and grow their digital capital
-        </h3>
+        </h3> -->
         <div class="choice">
           <BtnMaster>Production</BtnMaster>
           <BtnMaster>Archive</BtnMaster>
@@ -29,60 +34,76 @@
 </template>
 
 <script setup>
+//SECTION - Nuxt Content CMS
+//ANCHOR - da parametrizzare con un composable
+const { data } = await useAsyncData("testdata", () => {
+  return queryCollection("contentData").first();
+});
+// Verifica che i dati siano presenti
+if (!data.value || !data.value.body) {
+  console.error("Dati non trovati:", data.value);
+}
+// Accedi al corpo del Markdown
+const body = data.value?.body?.value;
+
+// Funzione per estrarre gli slot da un componente
+const extractSlots = (content, componentTag) => {
+  const slots = {};
+
+  // Trova il componente
+  const componentNode = content.find((node) => node[0] === componentTag);
+  if (!componentNode) return slots;
+
+  // Itera sui figli del componente
+  const [, , ...children] = componentNode;
+  for (const child of children) {
+    if (Array.isArray(child) && child[0] === "template") {
+      const slotName = Object.keys(child[1])[0]?.replace("v-slot:", "") || "default";
+      //const slotName = child[1][0]?.["v-slot"] || "default"; // Estrai il nome dello slot
+      slots[slotName] = renderNode(child[2]); // Renderizza il contenuto dello slot
+      console.log("SLOTSName", slots[slotName]);
+    }
+  }
+  return slots;
+};
+
+// Estraiamo gli slot dal componente "elemento-iniziale-tre-pallocchi"
+const slots = extractSlots(body, "phases");
+// Convertiamo il contenuto principale in HTML
+const sectionTitle = "Fasi"; // Puoi estrarre il titolo dinamicamente se necessario
+const sectionContent = body.map((node) => renderNode(node)).join("");
+
+// Funzione per renderizzare un nodo in HTML
+function renderNode(node) {
+  // Se il nodo è un testo, restituiscilo direttamente
+  if (typeof node === "string") {
+    return node;
+  }
+  const [tag, props, ...children] = node;
+
+  // Ignora i template (li gestiamo separatamente)
+  if (tag === "template") {
+    return "";
+  }
+
+  // Se è un componente personalizzato, renderizza i suoi figli
+  if (tag.startsWith("phases")) {
+    const renderedChildren = children.map((child) => renderNode(child)).join("");
+    return `<${tag} id="${props?.id || ""}">${renderedChildren}</${tag}>`;
+  }
+
+  // Renderizza i figli
+  const renderedChildren = children.map((child) => renderNode(child)).join("");
+
+  // Restituisce l'elemento HTML
+  return `<${tag} id="${props?.id || ""}">${renderedChildren}</${tag}>`;
+}
+//!SECTION
+
 //le altre importazioni derivano dalla pagina principale
 import { nextTick } from "vue";
 import { _opacity } from "#tailwind-config/theme";
 import { _bottom } from "#tailwind-config/theme/backgroundPosition";
-
-const { data } = await useAsyncData("testdata", () => {
-  return queryCollection("contentData").first();
-});
-const { data: testpage } = await useAsyncData(() =>
-  queryCollection("content").path("/").first()
-);
-// Accesso al corpo del Markdown
-const body = data.value?.body?.value;
-
-const extractBlockContent = (body, blockName) => {
-  if (!body || !Array.isArray(body)) return `Slot ${blockName} non trovato`;
-
-  // Cerca ricorsivamente i nodi con il nome dello slot
-  const findSlot = (node) => {
-    if (Array.isArray(node) && node[0] === blockName) {
-      // Estrai il contenuto dal terzo elemento del nodo
-      const contentNode = node[2];
-      if (Array.isArray(contentNode)) {
-        // Se il contenuto è un array, estrai il testo
-        return contentNode
-          .map((item) => {
-            if (
-              Array.isArray(item) &&
-              item[0] === ("p" || "h1" || "h2" || "h3" || "h4" || "h5" || "h6")
-            ) {
-              return item[2]?.trim() || "";
-            }
-            return "";
-          })
-          .join(" ");
-      }
-    }
-    if (Array.isArray(node)) {
-      for (const child of node) {
-        const result = findSlot(child);
-        if (result) return result;
-      }
-    }
-    return null;
-  };
-
-  const result = findSlot(body);
-  return result || `Slot ${blockName} non trovato`;
-};
-
-// Estrai il contenuto degli slot
-const PhasesContent = body
-  ? extractBlockContent(body, "phases")
-  : "Slot 1 phases non trovato";
 
 //definisco le costanti da esporre con defineExpose, che userò all'interno di onMounted utilizzando .value
 // utilizzo shallowRef per non covertire le proprietà interne di Gsap in oggetti reattivi di vue
