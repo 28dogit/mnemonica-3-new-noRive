@@ -17,6 +17,22 @@ export const useExtractSlots = (sectionName, asyncDataKey = "sections-index") =>
       return `<${tag} id="${props?.id || ""}">${renderedChildren}</${tag}>`;
     }
 
+      // Gestione speciale per i link (<a>)
+    if (tag === "a") {
+      const href = props?.href || "#"; // Estrae l'attributo href
+      const renderedChildren = children.map((child) => renderNode(child)).join("");
+      return `<${tag} href="${href}">${renderedChildren}</${tag}>`;
+    }
+
+    // Gestione speciale per i paragrafi (<p>) che contengono solo un link (<a>)
+    if (tag === "p") {
+      // Controlla se il paragrafo contiene solo un link
+      if (children.length === 1 && Array.isArray(children[0]) && children[0][0] === "a") {
+        // Se sì, restituisci solo il link
+        return renderNode(children[0]);
+      }
+    }
+
     // Renderizza i figli
     const renderedChildren = children.map((child) => renderNode(child)).join("");
 

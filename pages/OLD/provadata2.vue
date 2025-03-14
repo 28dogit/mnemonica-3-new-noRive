@@ -18,6 +18,8 @@ if (!data.value || !data.value.body) {
 // Accedi al corpo del Markdown
 const body = data.value?.body?.value;
 
+console.log("BODY", body);
+
 // Funzione per estrarre gli slot da un componente
 const extractSlots = (content, componentTag) => {
   const slots = {};
