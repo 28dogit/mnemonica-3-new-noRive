@@ -24,7 +24,8 @@
         <h3 class="mSubTitle">data transfer</h3> -->
         <div class="mTitle" v-if="slots.title2" v-html="slots.title2"></div>
         <div class="mSubTitle" v-if="slots.subtitle2" v-html="slots.subtitle2"></div>
-        <div class="mLinks" v-if="slots.links2" v-html="slots.links2"></div>
+        <div class="mLinks" v-if="slots.link21" v-html="slots.link21"></div>
+        <div class="mLinks" v-if="slots.link22" v-html="slots.link22"></div>
         <button
           @click.passive="openModal2"
           @touchstart.passive="openModal2"

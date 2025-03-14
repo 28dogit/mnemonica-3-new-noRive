@@ -38,14 +38,14 @@ Experience active workspaces that free you from repetitive tasks—encoding, wat
 #subtitle2
 ### File Exchange & Delivery
 
-#middle-modal-2
+#middleModal2
 **Get rid of third-party shuttles.**
 With the built-in data transfer facility, you can send & receive files and folders of any size and complexity directly from/to Rooms, as well as local drives, or deliver materials agreed in sales and distribution contracts. All without leaving Mnemonica safe walls.
 
-#links2
+#link21
 [Link](/OLD/provadata2/)
-
-[Link da rivedere!](/OLD/provadata2)
+#link22
+<a href="OLD/provadata2" target="_blank">prova link</a>
 
 #title3
 ## Preserve
