@@ -273,6 +273,7 @@ onMounted(() => {
     window.addEventListener("pointerup", handleScroll, { passive: false });
 
     //NOTE - recupero la rotationTL esposta dal componente phases_comp
+    console.log("PhasesRef:", PhasesRef.value);
     const RotationTL = PhasesRef.value?.rotationTL;
     console.log("RotetionTL: ", RotationTL);
 
