@@ -18,7 +18,7 @@
       />
     </div>
 
-    <StructureHeader />
+    <MneHeader />
     <div id="ghirlanda-element_start" class="element_start">
       <NuxtImg
         id="ghirlanda_img"
@@ -28,13 +28,11 @@
       />
     </div>
     <slot class="min-h-screen" />
-    <StructureFooter />
+    <MneFooter />
   </div>
 </template>
 
 <script setup>
-import Header from "~/components/structure/header.vue";
-
 onMounted(() => {});
 //Gsap-fine
 </script>
