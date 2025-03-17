@@ -74,6 +74,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  // isFixedSection: {
+  //   type: Boolean,
+  //   default: true,
+  // },
 });
 
 const emit = defineEmits(["close"]);
@@ -90,12 +94,15 @@ const { width, height } = useWindowSize({
 // Function to disable body scroll
 const disableBodyScroll = () => {
   document.body.style.overflow = "hidden";
+  document.body.style.position = "fixed";
+  document.body.style.width = "100%";
 };
 
 // Function to enable body scroll
 const enableBodyScroll = () => {
-  console.log(isfixedSection);
   document.body.style.overflow = "auto";
+  document.body.style.position = "";
+  document.body.style.width = "";
 };
 
 //controllo il rapporto tra altezza e larghezza della viewport
@@ -158,6 +165,8 @@ const handleScroll = (event) => {
   if (!isPortrait.value) {
     console.log("Focus", modalInner.value.scrollLeft);
     event.preventDefault();
+    event.stopPropagation();
+
     $gsap.to(modalInner.value, {
       scrollTo: {
         x: modalInner.value.scrollLeft + event.deltaY * 6,
@@ -173,7 +182,7 @@ watch(
   () => props.isOpen,
   (newVal) => {
     if (newVal) {
-      //disableBodyScroll();
+      disableBodyScroll();
       openModal();
     } else {
       //enableBodyScroll();
@@ -181,11 +190,19 @@ watch(
   }
 );
 
+// Add these new functions
+const preventBodyScroll = (event) => {
+  if (props.isOpen) {
+    event.preventDefault();
+  }
+};
+
 onMounted(() => {
   nextTick(() => {
     isMounted.value = true;
     isPortrait.value = height.value > width.value;
   });
+
   //metto in pausa l'animazione di apertura del modale
   $gsap
     .fromTo(

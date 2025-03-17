@@ -22,6 +22,15 @@
         <li class="dark:hover:text-chenin-300 hover:text-seagull-400" @click="close_mNav">
           <nuxt-link to="/">Home</nuxt-link>
         </li>
+        <li class="dark:hover:text-chenin-300 hover:text-seagull-400" @click="close_mNav">
+          <nuxt-link to="/security">Security</nuxt-link>
+        </li>
+        <li class="dark:hover:text-chenin-300 hover:text-seagull-400" @click="close_mNav">
+          <nuxt-link to="/specialty-features">Features</nuxt-link>
+        </li>
+        <li class="dark:hover:text-chenin-300 hover:text-seagull-400" @click="close_mNav">
+          <nuxt-link to="/mobile-app">App</nuxt-link>
+        </li>
       </ul>
     </nav>
   </div>

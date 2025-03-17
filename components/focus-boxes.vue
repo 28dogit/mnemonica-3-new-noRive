@@ -74,6 +74,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isFixedSection: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const emit = defineEmits(["close"]);

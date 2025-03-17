@@ -1,4 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+// Auto-import all SCSS files in assets/css
+import { resolve } from 'node:path'
+import { readdirSync } from 'node:fs'
+const cssDir = resolve(__dirname, 'assets/css')
+const scssFiles = readdirSync(cssDir)
+  .filter(file => file.endsWith('.scss') && !file.startsWith('_')) // Exclude partials
+  .map(file => `~/assets/css/${file}`);
+// fine importazione css
 export default defineNuxtConfig({
   app: {
     baseURL: '/mne/', // Assicurati che il percorso sia seguito da una barra finale
@@ -12,8 +21,11 @@ export default defineNuxtConfig({
       enabled: true
     }
   },
-
-  css: ['~/assets/css/main.scss'],
+  css: scssFiles, // Include all SCSS files in the assets/css directory invecec di dichiararli uno per volta
+  // css: [
+  //   '~/assets/css/main.scss',
+  //   '~/assets/css/nav.scss'
+  // ],
 
   postcss: {
     plugins: {
