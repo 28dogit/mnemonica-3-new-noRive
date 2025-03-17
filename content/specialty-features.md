@@ -13,7 +13,3 @@ Questa pagina è dedicata alle funzionalità speciali.
 
 ::icon
 ::
-
-::modules-component
-#deliver-sub
-::
