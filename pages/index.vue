@@ -39,6 +39,7 @@
       </div>
       <div id="phases-section" class="section_fixed phases">
         <HSectionsPhasesComponent ref="PhasesRef"></HSectionsPhasesComponent>
+        <HSectionsTest ref="TestRef"></HSectionsTest>
       </div>
       <div id="modules-section" class="section_fixed modules">
         <HSectionsModulesComponent></HSectionsModulesComponent>
@@ -68,6 +69,7 @@ const PhasesRef = ref(null);
 const canvasRef = ref(null);
 const canvasRefLogo = ref(null);
 const canvasRefBtn = ref(null);
+const TestRef = ref(null);
 
 // Variabile per memorizzare il buffer del file .riv
 let rivBuffer = null;
@@ -273,9 +275,10 @@ onMounted(() => {
     window.addEventListener("pointerup", handleScroll, { passive: false });
 
     //NOTE - recupero la rotationTL esposta dal componente phases_comp
+    console.log("TestRef: ", TestRef.value.exposeTest);
     console.log("PhasesRef:", PhasesRef.value);
-    const RotationTL = PhasesRef.value?.rotationTL;
-    console.log("RotetionTL: ", RotationTL);
+    const RotationTL = TestRef.value?.rotationTL;
+    console.log("RotationTL: ", RotationTL);
 
     //NOTE - recupero la phasesTL esposta dal componente phases_comp
     const PhasesTL = PhasesRef.value?.phasesTL;
