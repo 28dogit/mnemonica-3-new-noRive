@@ -4,12 +4,6 @@
 @use "breakpoints.scss" as bp;
 @use "animations.scss" as anim;
 
-//impedisco lo scroll fino alla fine dell'animazione iniziale
-body{
-    overflow: hidden;
-    //da ripristinare su hidden per la produzione
-  }
-
   #mainContainer{
     display: flex;
     flex-direction: column;

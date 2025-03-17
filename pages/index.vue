@@ -85,6 +85,9 @@ async function loadRivFile(url) {
 onMounted(() => {
   const { $gsap } = useNuxtApp();
 
+  // blocca lo scroll on mount (solo per index)
+  document.body.style.overflow = "hidden";
+
   nextTick(async () => {
     //SECTION - RIVE
     // Carica il file .riv una sola volta
@@ -454,6 +457,10 @@ onMounted(() => {
       },
     });
   }); //NOTE - chiusura Next Tick
+  onBeforeUnmount(() => {
+    // Ripristino lo scroll nel caso lasciassi la pagina prima di aver sbloccato lo scroll via gsap
+    document.body.style.overflow = "auto";
+  });
 });
 </script>
 
