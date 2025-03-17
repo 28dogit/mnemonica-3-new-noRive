@@ -10,6 +10,3 @@ Questa pagina è dedicata alle funzionalità speciali.
 ## prova di H2
 
 ---
-
-::icon
-::
