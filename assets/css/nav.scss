@@ -1,0 +1,7 @@
+@use "globals.scss" as *;
+
+.nav-hover{
+    &:hover{
+        color: $nav-hover;
+    }
+}
