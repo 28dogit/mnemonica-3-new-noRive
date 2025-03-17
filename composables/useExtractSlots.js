@@ -1,7 +1,13 @@
 // composables/useExtractSlots.js
-import { useAsyncData } from '#imports'; // Importa useAsyncData da Nuxt 3
+import { useAsyncData, ref } from '#imports'; // Importa useAsyncData e ref da Nuxt 3
 
 export const useExtractSlots = (sectionName, asyncDataKey = "sections-index") => {
+  // Crea ref reattivi per i risultati
+  const slots = ref({});
+  const defaultContent = ref('');
+  const isLoading = ref(true);
+  const error = ref(null);
+
   // Funzione per renderizzare un nodo in HTML
   const renderNode = (node) => {
     if (typeof node === 'string') return node;
@@ -17,7 +23,7 @@ export const useExtractSlots = (sectionName, asyncDataKey = "sections-index") =>
       return `<${tag} id="${props?.id || ""}">${renderedChildren}</${tag}>`;
     }
 
-      // Gestione speciale per i link (<a>)
+    // Gestione speciale per i link (<a>)
     if (tag === "a") {
       const href = props?.href || "#"; // Estrae l'attributo href
       const renderedChildren = children.map((child) => renderNode(child)).join("");
@@ -42,50 +48,67 @@ export const useExtractSlots = (sectionName, asyncDataKey = "sections-index") =>
 
   // Funzione per estrarre gli slot da un componente
   const extractSlots = (content, componentTag) => {
-    const slots = {};
+    const extractedSlots = {};
 
     // Trova il componente
     const componentNode = content.find((node) => node[0] === componentTag);
-    if (!componentNode) return slots;
+    if (!componentNode) return extractedSlots;
 
     // Itera sui figli del componente
     const [, , ...children] = componentNode;
     for (const child of children) {
       if (Array.isArray(child) && child[0] === "template") {
         const slotName = Object.keys(child[1])[0]?.replace("v-slot:", "") || "default";
-        slots[slotName] = renderNode(child[2]); // Renderizza il contenuto dello slot
+        extractedSlots[slotName] = renderNode(child[2]); // Renderizza il contenuto dello slot
       }
     }
 
-    return slots;
+    return extractedSlots;
   };
 
-  // Funzione principale del composable
-  const fetchSection = async () => {
-    const { data } = await useAsyncData(asyncDataKey, () => {
+  // Funzione principale del composable - ora non restituisce una Promise
+  const fetchSection = () => {
+    // Imposta lo stato di caricamento
+    isLoading.value = true;
+    error.value = null;
+
+    // Esegue la query in modo non bloccante
+    useAsyncData(asyncDataKey, () => {
       return queryCollection("contentData").first();
+    }).then(({ data }) => {
+      // Verifica che i dati siano presenti
+      if (!data.value || !data.value.body) {
+        console.error("Dati non trovati:", data.value);
+        error.value = "Dati non trovati";
+        isLoading.value = false;
+        return;
+      }
+
+      // Accedi al corpo del Markdown
+      const body = data.value?.body?.value;
+
+      // Estrai gli slot
+      slots.value = extractSlots(body, sectionName);
+
+      // Estrai il contenuto di default
+      const componentDefaultNode = body.find((node) => node[0] === sectionName);
+      if (componentDefaultNode) {
+        const defaultNodes = componentDefaultNode
+          .slice(2)
+          .filter((child) => child[0] !== "template");
+        defaultContent.value = defaultNodes.map((node) => renderNode(node)).join("");
+      }
+
+      // Aggiorna lo stato di caricamento
+      isLoading.value = false;
+    }).catch((err) => {
+      console.error("Errore durante il caricamento dei dati:", err);
+      error.value = err.message || "Errore durante il caricamento";
+      isLoading.value = false;
     });
 
-    // Verifica che i dati siano presenti
-    if (!data.value || !data.value.body) {
-      console.error("Dati non trovati:", data.value);
-      return { slots: {}, defaultContent: "" };
-    }
-
-    // Accedi al corpo del Markdown
-    const body = data.value?.body?.value;
-
-    // Estrai gli slot
-    const slots = extractSlots(body, sectionName);
-
-    // Estrai il contenuto di default
-    const componentDefaultNode = body.find((node) => node[0] === sectionName);
-    const defaultNodes = componentDefaultNode
-      .slice(2)
-      .filter((child) => child[0] !== "template");
-    const defaultContent = defaultNodes.map((node) => renderNode(node)).join("");
-
-    return { slots, defaultContent };
+    // Restituisce i ref reattivi invece di una Promise
+    return { slots, defaultContent, isLoading, error };
   };
 
   return { fetchSection };

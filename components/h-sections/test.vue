@@ -8,8 +8,8 @@
   <div id="phases-content-wrapper" class="wrapper">
     <div id="phases-content" class="content">
       <div class="headline">
-        <!-- <div class="" v-html="defaultContent"></div> -->
-        <!-- <div
+        <div class="" v-html="defaultContent"></div>
+        <div
           id="PhasesTitle"
           class="text-center"
           v-if="slots.title"
@@ -20,7 +20,7 @@
           class="text-center"
           v-if="slots.subtitle"
           v-html="slots.subtitle"
-        ></div> -->
+        ></div>
         <div class="choice">
           <BtnMaster>Production</BtnMaster>
           <BtnMaster>Archive</BtnMaster>
@@ -37,14 +37,19 @@
 // // Estraggo i dati per ottenere i testi degli slot che mi servono più il file di default nell'html fare riferimento al nome dello slot da richiamare nel file di markup
 // const { slots, defaultContent } = await fetchSection();
 
-const exposeTest = "ciao ciao ions";
+const exposeTest = "ciao ciao async-ions";
 const mariolino = "mariolino";
 const rotationTL = shallowRef(null);
 
 onMounted(() => {
   const { $gsap } = useNuxtApp();
 
-  nextTick(() => {
+  nextTick(async () => {
+    //Uso il composable useExtractSlots per estrarre i dati dal file di markup (slot da estrarre, file .md da leggere)
+    const { fetchSection } = useExtractSlots("phases", "sections-index");
+
+    // Estraggo i dati per ottenere i testi degli slot che mi servono più il file di default nell'html fare riferimento al nome dello slot da richiamare nel file di markup
+    const { slots, defaultContent } = await fetchSection();
     rotationTL.value = $gsap.timeline({
       paused: true,
     });

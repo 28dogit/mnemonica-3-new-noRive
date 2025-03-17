@@ -62,7 +62,7 @@
 const { fetchSection } = useExtractSlots("modules", "sections-index");
 
 // Estraggo i dati per ottenere i testi degli slot che mi servono più il file di default nell'html fare riferimento al nome dello slot da richiamare nel file di markup
-const { slots, defaultContent } = await fetchSection();
+const { slots, defaultContent } = fetchSection();
 
 //!SECTION
 // SECTION - SCRIPT

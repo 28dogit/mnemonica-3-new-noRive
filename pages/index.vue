@@ -39,7 +39,7 @@
       </div>
       <div id="phases-section" class="section_fixed phases">
         <HSectionsPhasesComponent ref="PhasesRef"></HSectionsPhasesComponent>
-        <HSectionsTest ref="TestRef"></HSectionsTest>
+        <!-- <HSectionsTest ref="TestRef"></HSectionsTest> -->
       </div>
       <div id="modules-section" class="section_fixed modules">
         <HSectionsModulesComponent></HSectionsModulesComponent>
@@ -69,7 +69,9 @@ const PhasesRef = ref(null);
 const canvasRef = ref(null);
 const canvasRefLogo = ref(null);
 const canvasRefBtn = ref(null);
-const TestRef = ref(null);
+
+// Usiamo il composable per lo stato Fixed Section
+const { isfixedSection, setFixedSection } = useFixedSection();
 
 // Variabile per memorizzare il buffer del file .riv
 let rivBuffer = null;
@@ -146,7 +148,7 @@ onMounted(() => {
 
     // Variabile che indica se l'animazione intro è completata
     let introCompleted = false;
-    let isfixedSection = true;
+    //let isfixedSection = true; non serve più perchè sostituita dal composable
 
     //SECTION - animazioni interne
     // implemento la timeline intro che sbloccherà alla fine l'overflow hidden del body per ripristinare lo scroll
@@ -221,7 +223,7 @@ onMounted(() => {
     let touchEndY = 0;
 
     function handleScroll(event) {
-      if (!isfixedSection) return;
+      if (!isfixedSection.value) return; //.value perchè uso il composable
       // Se la timeline intro non è ancora terminata, ignoro completamente lo scroll
       if (!introCompleted) {
         event.preventDefault();
@@ -275,10 +277,7 @@ onMounted(() => {
     window.addEventListener("pointerup", handleScroll, { passive: false });
 
     //NOTE - recupero la rotationTL esposta dal componente phases_comp
-    console.log("TestRef: ", TestRef.value.exposeTest);
-    console.log("PhasesRef:", PhasesRef.value);
-    const RotationTL = TestRef.value?.rotationTL;
-    console.log("RotationTL: ", RotationTL);
+    const RotationTL = PhasesRef.value?.rotationTL;
 
     //NOTE - recupero la phasesTL esposta dal componente phases_comp
     const PhasesTL = PhasesRef.value?.phasesTL;
@@ -447,11 +446,11 @@ onMounted(() => {
       end: "bottom bottom",
       //markers: true,
       onEnter: () => {
-        isfixedSection = false;
+        setFixedSection(false); //composable
       },
       onLeaveBack: () => {
         $gsap.set("body", { overflow: "hidden" });
-        isfixedSection = true;
+        setFixedSection(true);
       },
     });
   }); //NOTE - chiusura Next Tick
