@@ -15,6 +15,5 @@ Questa pagina è dedicata alle funzionalità speciali.
 ::
 
 ::modules-component
-#all-in-one
-Prova componente
+#deliver-sub
 ::
