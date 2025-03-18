@@ -1,7 +1,7 @@
 ---
 title: Specialty Features
 description: Specialty Features page
-links: []
+links: [/mobile-app,/security]
 ---
 
 ::features-content
@@ -28,11 +28,7 @@ Questo è il testo di base
 ::gallery
 :nuxt-img{alt="Logo MNE wide" src="/assets/img/mnemonica-logo-2024-site.png"}
 
- 
-
 :nuxt-img{alt="Mia" src="/assets/img/mia2023-mnemonica.jpg"}
-
- 
 
 :nuxt-img{alt="Logo MNE wide" src="/assets/img/mnemonica-logo-2024-site.png"}
 ::
