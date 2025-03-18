@@ -11,10 +11,6 @@ Questa pagina è dedicata alle funzionalità speciali.
 
 ---
 
-![Logo-mne-Vector.svg](/assets/img/svg/Logo-mne-Vector.svg)
+![Cerchio](/assets/img/svg/Cerchio-labels.svg)![Logo Mnemonica](NuxtImg%20src=%22/mne/assets/img/svg/Logo-mne-Vector.svg%22%20alt=%22Logo%22%20/)![Mappa-Globale-divisa\_Europa.png](/assets/img/svg/Mappa-Globale-divisa_Europa.png)
 
-![Logo Mnemonica](<NuxtImg src="/mne/assets/img/svg/Logo-mne-Vector.svg" alt="Logo" />)
-
-::image
-<NuxtImg src="/mne/assets/img/svg/Logo-mne-Vector.svg" alt="Logo" />
-::
+:nuxt-img{alt="Logo" src="/assets/img/mia2023-mnemonica.jpg"}
