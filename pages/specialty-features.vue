@@ -1,7 +1,6 @@
 <template>
   <div class="page-wrapper">
     <ContentRenderer v-if="page" :value="page" />
-    <FeaturesContent />
   </div>
 </template>
 

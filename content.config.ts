@@ -7,6 +7,7 @@ export default defineContentConfig({
       type: 'page',
       source: '**/*.md',
       schema: z.object({
+        links: z.array(z.string()),
         id: z.string(),
         title: z.string(),
         description: z.string(),
