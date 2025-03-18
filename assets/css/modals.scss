@@ -1,14 +1,14 @@
 @use "globals.scss" as *;
 dialog {
-    background-color: $gradient_4;
+    background-color: rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     z-index: 9999999999;
     opacity: 0;
     max-width: none;
     max-height: none;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
@@ -16,6 +16,7 @@ dialog {
     overflow-y: auto;
   }
   .modal-content {
+    background-color: $gradient_4;
     height: 100%;
   }
 

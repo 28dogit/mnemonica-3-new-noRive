@@ -1,58 +1,28 @@
 <template>
   <teleport to="body">
-    <div>
+    <!-- <div class="modal-wrapper"> --
       <!-- <ClientOnly> -->
-      <dialog
-        id="mioModale"
-        class="bg-slate-500"
-        ref="myModal"
-        :class="{ horizontal: isMounted && !isPortrait }"
-      >
-        <!-- aggiungo una classe dinamica horizontal che viene aggiunta quando la viewport non è portrait -->
-
-        <div ref="modalContent" class="modal-content" id="m-content">
-          <button
-            class="modal-x-btn"
-            @click.passive="closeModal"
-            @touchstart.passive="closeModal"
-            @pointerdown.passive="closeModal"
-            @mousedown.passive="closeModal"
-          >
-            <BtnClose></BtnClose>
-          </button>
-          <div ref="modalInner" class="modal-inner">
-            <div class="modal-block">
-              <h1>SCREEN</h1>
-              <p>
-                Leave folders behind. Experience active workspaces that free you from
-                repetitive tasks—encoding, watermarking, keeping everyone updated. Enjoy
-                private places where people meet around media, playlists are a given,
-                content is easy to find and move.
-              </p>
-            </div>
-            <NuxtImg
-              class="img-modal-block"
-              src="assets/img/mia2023-mnemonica.jpg"
-              sizes="600px"
-              placeholder="https://placehold.co/600x400"
-            ></NuxtImg>
-            <div class="modal-block">
-              <p>
-                Donec rutrum pulvinar mauris, eget pretium leo pharetra non. Phasellus
-                ultricies sollicitudin nibh, in ultrices odio sodales a. Donec nec
-                consequat orci. Vivamus in laoreet elit, in imperdiet turpis. Sed sagittis
-                erat erat, at posuere odio maximus ac. Proin lacinia est sed sollicitudin
-                feugiat. Curabitur commodo lorem quam, non efficitur felis bibendum in.
-                Sed dolor neque, eleifend nec porttitor vitae, tempor in sapien. Nunc eget
-                mauris id enim auctor suscipit et nec dui. Sed ac sollicitudin augue.
-                Etiam consectetur quam a lobortis ornare.
-              </p>
-            </div>
-          </div>
-        </div>
-      </dialog>
-      <!-- </ClientOnly> -->
-    </div>
+    <div calss="fondale"></div>
+    <dialog
+      id="mioModale"
+      ref="myModal"
+      :class="{ horizontal: isMounted && !isPortrait }"
+    >
+      <!-- aggiungo una classe dinamica horizontal che viene aggiunta quando la viewport non è portrait -->
+      <div ref="modalContent" class="modal-content" id="m-content">
+        <button
+          class="modal-x-btn"
+          @click.passive="closeModal"
+          @touchstart.passive="closeModal"
+          @pointerdown.passive="closeModal"
+          @mousedown.passive="closeModal"
+        >
+          <BtnClose></BtnClose>
+        </button>
+        <div ref="modalInner" class="modal-inner">contenuto modale</div>
+      </div>
+    </dialog>
+    <!-- </ClientOnly> -->
   </teleport>
 </template>
 
@@ -74,16 +44,11 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  // isFixedSection: {
-  //   type: Boolean,
-  //   default: true,
-  // },
 });
 
 const emit = defineEmits(["close"]);
 
 const isClient = ref(false);
-
 const isMounted = ref(false);
 const myModal = ref(null);
 const modalContent = ref(null);
@@ -144,13 +109,30 @@ const openModal = () => {
   $gsap.fromTo(
     myModal.value,
     { opacity, x, y },
-    { opacity: 1, x: "0%", y: "0%", duration: 0.5, ease: "power2.out" }
+    {
+      opacity: 1,
+      x: isPortrait.value ? "0%" : "0%",
+      y: isPortrait.value ? "0%" : "0%",
+      duration: 0.3,
+      ease: "power2.out",
+    }
+  );
+  $gsap.fromTo(
+    modalContent.value,
+    { opacity, x, y },
+    {
+      opacity: 1,
+      x: isPortrait.value ? "0%" : "50%",
+      y: isPortrait.value ? "50%" : "0%",
+      duration: 1,
+      ease: "power2.out",
+    }
   );
 };
 //chiudo il modale
 const closeModal = () => {
   const { x, y, opacity } = AnimationProps(false); //passiamo isOpening = false
-  $gsap.to(myModal.value, {
+  $gsap.to([modalContent.value, myModal.value], {
     opacity,
     x,
     y,
@@ -165,7 +147,6 @@ const closeModal = () => {
 
 const handleScroll = (event) => {
   if (!isPortrait.value) {
-    console.log("Focus", modalInner.value.scrollLeft);
     event.preventDefault();
     event.stopPropagation();
 
@@ -193,12 +174,12 @@ watch(
   { immediate: true }
 );
 
-// Add these new functions
-const preventBodyScroll = (event) => {
-  if (props.isOpen) {
-    event.preventDefault();
-  }
-};
+// // Add these new functions
+// const preventBodyScroll = (event) => {
+//   if (props.isOpen) {
+//     event.preventDefault();
+//   }
+// };
 
 onMounted(() => {
   isClient.value = true;
@@ -218,27 +199,27 @@ onMounted(() => {
 
   modalInner.value.addEventListener("wheel", handleScroll, { passive: false });
 
-  const cClose = document.querySelector(".modal-x-btn");
+  // const cClose = document.querySelector(".modal-x-btn");
 
-  const animation = $gsap.fromTo(
-    "#x-circle",
-    { opacity: 0, scale: 1, transformOrigin: "58% 50%", rotate: 0 },
-    {
-      scale: 1.3,
-      opacity: 0.3,
-      rotate: 360,
-      duration: 0.3,
-      ease: "power2",
-      transformOrigin: "58% 50%",
-      // repeat: -1,
-      // yoyo: true,
-    }
-  );
+  // const animation = $gsap.fromTo(
+  //   "#x-circle",
+  //   { opacity: 0, scale: 1, transformOrigin: "58% 50%", rotate: 0 },
+  //   {
+  //     scale: 1.3,
+  //     opacity: 0.3,
+  //     rotate: 360,
+  //     duration: 0.3,
+  //     ease: "power2",
+  //     transformOrigin: "58% 50%",
+  //     // repeat: -1,
+  //     // yoyo: true,
+  //   }
+  // );
 
-  animation.pause();
+  // animation.pause();
 
-  cClose.addEventListener("mouseenter", () => animation.play());
-  cClose.addEventListener("mouseleave", () => animation.reverse());
+  // cClose.addEventListener("mouseenter", () => animation.play());
+  // cClose.addEventListener("mouseleave", () => animation.reverse());
 });
 
 onBeforeUnmount(() => {
@@ -251,6 +232,4 @@ onUnmounted(() => {
 });
 </script>
 
-<style lang="scss" scoped>
-@use "~/assets/css/modals.scss";
-</style>
+<style lang="scss" scoped></style>
