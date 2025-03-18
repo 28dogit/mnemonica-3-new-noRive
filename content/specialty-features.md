@@ -2,6 +2,13 @@
 title: Specialty Features
 description: Specialty Features page
 ---
+:home-hero
+#title
+Titolo
+
+#description
+Descrizione della Home-hero
+:
 
 # Specialty Features
 
