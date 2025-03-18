@@ -6,6 +6,17 @@ export default defineContentConfig({
     content: defineCollection({
       type: 'page',
       source: '**/*.md',
+      schema: z.object({
+        id: z.string(),
+        title: z.string(),
+        description: z.string(),
+        subtitle: z.string(),
+        body: z.object({
+          type: z.string(),
+          children: z.any(),
+          toc: z.any(),
+        }),
+      }),
     }),
     contentData: defineCollection({
       type: 'data',

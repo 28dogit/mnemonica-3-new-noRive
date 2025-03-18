@@ -11,15 +11,20 @@
       <slot name="immagine1" mdc-unwrap="p" />
       <slot name="immagine2" mdc-unwrap="p" />
     </div>
-    <div class="flex items-center justify-center">
-      <slot name="img3" mdc-unwrap="p" />
+    <div class="gallery-content">
+      <slot name="gallery" mdc-unwrap="p" />
     </div>
-    <slot name="img4" mdc-unwrap="p" />
-    <slot name="Img5" mdc-unwrap="p" />
-    <slot name="img6" mdc-unwrap="p" />
   </div>
 </template>
 
 <script lang="ts" setup></script>
 
-<style></style>
+<style>
+.gallery-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+</style>
