@@ -53,6 +53,10 @@ export default defineNuxtConfig({
 
   content: {
     // Add your content module options here if needed
+    // build:{
+    //   markdown: {
+    //   },
+    // },
     preview:{
       api: 'https://api.nuxt.studio',
       dev:true,

@@ -3,24 +3,24 @@ title: Specialty Features
 description: Specialty Features page
 ---
 
-::home-hero
+::features-content
+
 #title
-Titolo
-
-#description
-Descrizione della Home-hero
-::
-
 # Specialty Features
 
-Questa pagina è dedicata alle funzionalità speciali.
+#description
+## Questa pagina è dedicata alle funzionalità speciali.
 
-## prova di H2
-
----
-
+#immagine1
 :nuxt-img{alt="Mia" src="/assets/img/mia2023-mnemonica.jpg"}
 
+#immagine2
 :nuxt-img{alt="Logo" src="/assets/img/svg/Cerchio-labels.svg"}
 
-:nuxt-img{alt="Mappa" src="/assets/img/svg/Mappa-Globale-divisa_Europa.png"}
+#img3
+[Logo](/assets/img/svg/Logo-mne-Vector.svg)
+
+#default
+Questo è il testo di base
+
+::
