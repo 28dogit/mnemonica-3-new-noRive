@@ -12,6 +12,8 @@ Questo è il testo di base
 #description
 ## Questa pagina è dedicata alle funzionalità speciali.
 
+![tet](/assets/img/mnemonica-logo-2024-site.png)
+
 #immagine1
 :nuxt-img{alt="Mia" src="/assets/img/mia2023-mnemonica.jpg"}
 
