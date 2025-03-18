@@ -6,7 +6,7 @@ links:
   - /security
 ---
 
-::features-content
+::page-content
 Questo è il testo di base
 
 #title
