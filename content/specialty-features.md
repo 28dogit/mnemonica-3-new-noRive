@@ -14,6 +14,8 @@ Questo è il testo di base
 
 :nuxt-img{alt="Logo MNE wide" src="/assets/img/mnemonica-logo-2024-site.png"}
 
+:nuxt-img{alt="Mia" src="/assets/img/mia2023-mnemonica.jpg"}
+
 #immagine1
 :nuxt-img{alt="Mia" src="/assets/img/mia2023-mnemonica.jpg"}
 
