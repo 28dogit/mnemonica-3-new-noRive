@@ -132,7 +132,7 @@ const openModal = () => {
 //chiudo il modale
 const closeModal = () => {
   const { x, y, opacity } = AnimationProps(false); //passiamo isOpening = false
-  $gsap.to([modalContent.value, myModal.value], {
+  $gsap.to(myModal.value, {
     opacity,
     x,
     y,
@@ -141,6 +141,17 @@ const closeModal = () => {
     onComplete: () => {
       // myModal.value.close();
       emit("close");
+    },
+  });
+  $gsap.to(modalContent.value, {
+    opacity,
+    x,
+    y,
+    duration: 0.3,
+    ease: "power2.in",
+    onComplete: () => {
+      // myModal.value.close();
+      //emit("close");
     },
   });
 };

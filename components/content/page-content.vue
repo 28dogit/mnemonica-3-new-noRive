@@ -1,9 +1,9 @@
 <template>
   <div class="page-content">
-    <!-- <slot></slot> -->
-    <div v-if="$slots.description">
+    <slot></slot>
+    <!-- <div v-if="$slots.description">
       <slot name="description" />
-    </div>
+    </div> -->
   </div>
 </template>
 
