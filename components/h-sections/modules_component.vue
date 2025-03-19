@@ -10,10 +10,22 @@
         <div class="mTitle" v-if="slots.title1" v-html="slots.title1"></div>
         <div class="mSubTitle" v-if="slots.subtitle1" v-html="slots.subtitle1"></div>
         <button
-          @click.passive="openModal1"
-          @touchstart.passive="openModal1"
-          @pointerdown.passive="openModal1"
-          @mousedown.passive="openModal1"
+          @click.passive="
+            isModalOpen = true;
+            modalId = 'screen';
+          "
+          @touchstart.passive="
+            isModalOpen = true;
+            modalId = 'screen';
+          "
+          @pointerdown.passive="
+            isModalOpen = true;
+            modalId = 'screen';
+          "
+          @mousedown.passive="
+            isModalOpen = true;
+            modalId = 'screen';
+          "
         >
           <!-- pointerdown potrebbe sostituire touchstart e mousedown, perchè li contempla, per ora li tengo per sicurezza -->
           <BtnFocus></BtnFocus>
@@ -49,6 +61,7 @@
       </div>
     </div>
   </div>
+  <ModalsModale50 :isOpen="isModalOpen" :isModal="modalId" @close="closeModal" />
   <FocusRooms :isOpen="isModalOpen1" @close="closeModal" />
   <FocusBoxes :isOpen="isModalOpen2" @close="closeModal" />
   <FocusMasters :isOpen="isModalOpen3" @close="closeModal" />
@@ -72,6 +85,9 @@ import { nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // mipreparo le istanze dei modali
+const isModalOpen = ref(false);
+const modalId = ref("");
+// const modalId = "screen";
 const isModalOpen1 = ref(false);
 const isModalOpen2 = ref(false);
 const isModalOpen3 = ref(false);

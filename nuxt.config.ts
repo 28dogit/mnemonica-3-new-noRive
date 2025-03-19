@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     baseURL: '/mne/', // Assicurati che il percorso sia seguito da una barra finale
     // layoutTransition: { name: 'layout', mode: 'out-in' }
   },
+  robots: { robotsTxt: false } ,
 
   devtools: {
     enabled: true,
@@ -49,7 +50,7 @@ export default defineNuxtConfig({
     '@/plugins/gsap.js',
   ],
 
-  modules: ["@nuxt/ui", '@nuxtjs/apollo', '@nuxt/fonts', '@nuxt/image', '@vueuse/nuxt', '@nuxt/content', '@nuxtjs/seo'],
+  modules: ["@nuxt/ui", '@nuxtjs/apollo', '@nuxt/fonts', '@nuxt/image', '@vueuse/nuxt', '@nuxtjs/seo', '@nuxt/content'],
 
   content: {
     // Add your content module options here if needed

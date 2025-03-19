@@ -19,7 +19,9 @@
         >
           <BtnClose></BtnClose>
         </button>
-        <div ref="modalInner" class="modal-inner">contenuto modale</div>
+        <div ref="modalInner" class="modal-inner">
+          <ContentRenderer v-if="modalContentData" :value="modalContentData" />
+        </div>
       </div>
     </dialog>
     <!-- </ClientOnly> -->
@@ -44,7 +46,18 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isModal: {
+    type: String,
+  },
 });
+
+//carico i dati .md
+const { data: modalContentData } = await useAsyncData(
+  `/modali50/${props.isModal}`,
+  () => {
+    return queryCollection("content").path(`/modali50/${props.isModal}`).first();
+  }
+);
 
 const emit = defineEmits(["close"]);
 
