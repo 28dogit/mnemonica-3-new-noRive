@@ -10,6 +10,7 @@
     >
       <!-- aggiungo una classe dinamica horizontal che viene aggiunta quando la viewport non è portrait -->
       <div ref="modalContent" class="modal-content" id="m-content">
+        <p>Modal ID: {{ isModal }}</p>
         <button
           class="modal-x-btn"
           @click.passive="closeModal"
@@ -48,9 +49,10 @@ const props = defineProps({
   },
   isModal: {
     type: String,
+    //default: "",
   },
 });
-
+console.log("isModal?: ", props.isOpen);
 //carico i dati .md
 const { data: modalContentData } = await useAsyncData(
   `/modali50/${props.isModal}`,
@@ -187,8 +189,10 @@ watch(
 );
 
 onMounted(() => {
+  console.log("isModal Mounted: ", props.isOpen);
   isClient.value = true;
   nextTick(() => {
+    console.log("isModal next tick: ", props.isOpen);
     isMounted.value = true;
     isPortrait.value = height.value > width.value;
   });

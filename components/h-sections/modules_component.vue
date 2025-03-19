@@ -12,19 +12,19 @@
         <button
           @click.passive="
             isModalOpen = true;
-            modalId = 'screen';
+            modalId = 'app-modal';
           "
           @touchstart.passive="
             isModalOpen = true;
-            modalId = 'screen';
+            modalId = 'app-modal';
           "
           @pointerdown.passive="
             isModalOpen = true;
-            modalId = 'screen';
+            modalId = 'app-modal';
           "
           @mousedown.passive="
             isModalOpen = true;
-            modalId = 'screen';
+            modalId = 'app-modal';
           "
         >
           <!-- pointerdown potrebbe sostituire touchstart e mousedown, perchè li contempla, per ora li tengo per sicurezza -->
@@ -32,8 +32,6 @@
         </button>
       </div>
       <div id="module-txt_2" class="module_card">
-        <!-- <h2 class="mTitle">Deliver</h2>
-        <h3 class="mSubTitle">data transfer</h3> -->
         <div class="mTitle" v-if="slots.title2" v-html="slots.title2"></div>
         <div class="mSubTitle" v-if="slots.subtitle2" v-html="slots.subtitle2"></div>
         <div class="mLinks" v-if="slots.link21" v-html="slots.link21"></div>
@@ -86,8 +84,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // mipreparo le istanze dei modali
 const isModalOpen = ref(false);
-const modalId = ref("");
-// const modalId = "screen";
+//const modalId = ref("");
+let modalId = "";
+//const modalId = "screen";
 const isModalOpen1 = ref(false);
 const isModalOpen2 = ref(false);
 const isModalOpen3 = ref(false);

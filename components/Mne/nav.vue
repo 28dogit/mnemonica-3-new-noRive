@@ -5,7 +5,7 @@
         <li class="hover:text-seagull-400">
           <nuxt-link to="/">Home</nuxt-link>
         </li>
-        <li class="nav-hover"><nuxt-link to="/security">Secuirty</nuxt-link></li>
+        <li class="nav-hover"><nuxt-link to="/security">Security</nuxt-link></li>
         <li class="nav-hover">
           <nuxt-link to="/specialty-features">Features</nuxt-link>
         </li>
