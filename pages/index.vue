@@ -2,27 +2,29 @@
   <main>
     <div id="sectionsWrapper" class="z-20">
       <div id="hero-section" class="section_fixed hero">
-        <div id="ghirlanda-element" class="element"></div>
-        <canvas
-          ref="canvasRefLogo"
-          id="canvasLogo"
-          style="position: absolute; height: 100px; z-index: 5"
-        ></canvas>
-        <canvas
-          ref="canvasRef"
-          id="canvas"
-          style="
-            margin-top: 80px;
-            position: absolute;
-            width: 100%;
-            max-width: 960px;
-            height: 50vh;
-            z-index: 5;
-          "
-        ></canvas>
+        <div class="element">
+          <div id="ghirlanda-element" class="element"></div>
+          <canvas
+            ref="canvasRefLogo"
+            id="canvasLogo"
+            style="position: absolute; height: 100px; z-index: 5"
+          ></canvas>
+          <canvas
+            ref="canvasRef"
+            id="canvas"
+            style="
+              margin-top: 80px;
+              position: absolute;
+              width: 100%;
+              max-width: 960px;
+              height: 50vh;
+              z-index: 5;
+            "
+          ></canvas>
+        </div>
         <slot name="screentitle"></slot>
         <div id="hero-content-wrapper" class="wrapper">
-          <div id="hero-content" class="content">
+          <div id="hero-content" class="content hero">
             <!-- <div id="heroTitle" class="flex items-center justify-center flex-wrap">
             </div> -->
             <div class="headline">
@@ -89,6 +91,7 @@ onMounted(() => {
 
   // blocca lo scroll on mount (solo per index)
   document.body.style.overflow = "hidden";
+  console.log("onMounted-index");
 
   nextTick(async () => {
     //SECTION - RIVE

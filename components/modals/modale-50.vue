@@ -10,7 +10,7 @@
     >
       <!-- aggiungo una classe dinamica horizontal che viene aggiunta quando la viewport non è portrait -->
       <div ref="modalContent" class="modal-content" id="m-content">
-        <p>Modal ID: {{ isModal }}</p>
+        <!-- <p>Modal ID: {{ isModal }}</p> -->
         <button
           class="modal-x-btn"
           @click.passive="closeModal"
@@ -214,9 +214,7 @@ onBeforeUnmount(() => {
   enableBodyScroll();
 });
 
-onUnmounted(() => {
-  enableBodyScroll();
-});
+onUnmounted(() => {});
 </script>
 
 <style lang="scss" scoped></style>

@@ -1,7 +1,9 @@
 <template>
   <div class="page-wrapper">
     <ContentRenderer v-if="page" :value="page" />
+    <BtnMaster @click="isModalOpen = true">open Modale app</BtnMaster>
   </div>
+  <ModalsModale50 :isOpen="isModalOpen" :isModal="modalId" @close="closeModal" />
 </template>
 
 <script setup>
@@ -13,6 +15,12 @@ const route = useRoute();
 const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection("content").path(route.path).first();
 });
+
+const isModalOpen = ref(false);
+const modalId = "mobile-app"; // qui indico il nome del modale che devo aprire in content/modali50
+const closeModal = () => {
+  isModalOpen.value = false;
+};
 </script>
 
 <style lang="scss" scoped></style>

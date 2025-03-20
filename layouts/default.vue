@@ -80,7 +80,7 @@ onMounted(() => {});
 }
 #ghirlanda-element_start {
   //solo per test con logo da sistemare definitivamente
-  margin-top: 80px;
+  // margin-top: 80px;
   //
   opacity: 0.6;
   height: 300px;

@@ -1,9 +1,11 @@
 <template>
   <div id="phases-element" class="element">
-    <SvgPre id="Pre_svg" class="phaseCircle"></SvgPre>
-    <SvgProduction id="Production_svg" class="phaseCircle"></SvgProduction>
-    <SvgPost id="Post_svg" class="phaseCircle"></SvgPost>
-    <SvgMarket id="Market_svg" class="phaseCircle"></SvgMarket>
+    <div class="elementSvg">
+      <SvgPre id="Pre_svg" class="phaseCircle"></SvgPre>
+      <SvgProduction id="Production_svg" class="phaseCircle"></SvgProduction>
+      <SvgPost id="Post_svg" class="phaseCircle"></SvgPost>
+      <SvgMarket id="Market_svg" class="phaseCircle"></SvgMarket>
+    </div>
   </div>
   <div id="phases-content-wrapper" class="wrapper">
     <div id="phases-content" class="content">
@@ -84,6 +86,12 @@ defineExpose({ rotationTL });
 </script>
 
 <style scoped>
+.elementSvg {
+  position: relative;
+  display: block;
+  width: 350px;
+  height: 350px;
+}
 .choice {
   display: flex;
   flex-direction: row;

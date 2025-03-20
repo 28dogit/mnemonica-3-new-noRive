@@ -3,7 +3,7 @@
     <ContentRenderer v-if="page" :value="page" />
   </div>
   <!-- <button @click="isModalOpen = true">Open Modal rooms</button> -->
-  <BtnMaster @click="isModalOpen = true">open Modale screen</BtnMaster>
+  <BtnMaster @click="isModalOpen = true">open Modale security</BtnMaster>
   <div style="height: 1000px; width: 100%; background: #e0e0e000">
     <!-- Spazio per controllo scroll con modal aperto -->
   </div>
@@ -12,6 +12,7 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 definePageMeta({
   layout: "page-layout",
 });
@@ -22,7 +23,7 @@ const { data: page } = await useAsyncData(route.path, () => {
 });
 
 const isModalOpen = ref(false);
-const modalId = "screen"; // qui indico il nome del modale che devo aprire in content/modali50
+const modalId = "security"; // qui indico il nome del modale che devo aprire in content/modali50
 const closeModal = () => {
   isModalOpen.value = false;
 };

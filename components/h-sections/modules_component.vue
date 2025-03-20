@@ -1,8 +1,10 @@
 <template>
   <!-- //SECTION - TEMPLATE -->
   <div id="modules-element" class="element">
+    <!-- <div class="elementSvg"> -->
     <SvgModules id="modules_svg"></SvgModules>
     <p id="allinOne">All in One</p>
+    <!-- </div> -->
   </div>
   <div id="modules-content-wrapper" class="wrapper">
     <div id="modules-content" class="content">
@@ -123,15 +125,15 @@ onMounted(() => {
   #modules_svg {
     width: 95%;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
   }
   #allinOne {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
     color: #fff;
     font-size: 1.3rem;
     margin-bottom: 0;
