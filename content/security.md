@@ -14,5 +14,5 @@ Duis at sollicitudin eros. Fusce posuere magna non nisi venenatis, vitae vulputa
 ::
 
 ::gallery
-:nuxt-img{alt="Logo MNE wide" src="/assets/img/mnemonica-logo-2024-site.png"}
+:nuxt-img{alt="placeholder wide" src="https://placehold.co/600x400"}
 ::

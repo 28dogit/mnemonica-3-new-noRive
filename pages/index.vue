@@ -69,6 +69,8 @@ const PhasesRef = ref(null);
 const canvasRef = ref(null);
 const canvasRefLogo = ref(null);
 const canvasRefBtn = ref(null);
+const noFixedSTRef = ref(null);
+const handleScrollRef = ref(null);
 
 // Usiamo il composable per lo stato Fixed Section
 const { isfixedSection, setFixedSection } = useFixedSection();
@@ -273,6 +275,9 @@ onMounted(() => {
       }, COOL_DOWN_TIME);
     }
 
+    //registro handleScrol nella ref handleScrollRef dichiarata all'inizio fuori dal nextTick per l'onBeforeUnmount
+    handleScrollRef.value = handleScroll;
+
     window.addEventListener("wheel", handleScroll, { passive: false });
     //window.addEventListener("touchmove", handleScroll, { passive: false });
     window.addEventListener("pointerdown", handleScroll, { passive: false });
@@ -453,13 +458,33 @@ onMounted(() => {
       },
       onLeaveBack: () => {
         $gsap.set("body", { overflow: "hidden" });
+        console.log("intervento sullo scroll!!!!");
         setFixedSection(true);
       },
     });
+    // Registriamo  l'istanza dello scrolltrigger nella ref noFixedSTRef dichiarata all'inizio fuori dal nextTick
+    noFixedSTRef.value = noFixedST;
   }); //NOTE - chiusura Next Tick
   onBeforeUnmount(() => {
     // Ripristino lo scroll nel caso lasciassi la pagina prima di aver sbloccato lo scroll via gsap
     document.body.style.overflow = "auto";
+    // Clean up dello ScrollTrigger
+    if (noFixedSTRef.value) {
+      noFixedSTRef.value.kill();
+      noFixedSTRef.value = null;
+    }
+
+    // Remove event listeners
+    if (handleScrollRef.value) {
+      window.removeEventListener("wheel", handleScrollRef.value, { passive: false });
+      window.removeEventListener("pointerdown", handleScrollRef.value, {
+        passive: false,
+      });
+      window.removeEventListener("pointermove", handleScrollRef.value, {
+        passive: false,
+      });
+      window.removeEventListener("pointerup", handleScrollRef.value, { passive: false });
+    }
   });
 });
 </script>

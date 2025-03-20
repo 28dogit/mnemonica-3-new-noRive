@@ -3,6 +3,16 @@
     max-width: 960px;
     padding:2em;
 }
-.page-content{
+//blocco contenuto pagina
+.page-content-block{
     margin-top: 20px;
 }
+
+// blocco gallery
+.gallery-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 20px;
+  }

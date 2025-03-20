@@ -8,6 +8,7 @@
 @use "@/assets/css/_globals.scss" as *;
 @use "@/assets/css/_breakpoints.scss" as bp;
 .btnWrapper {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;

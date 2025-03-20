@@ -52,7 +52,7 @@ const props = defineProps({
     //default: "",
   },
 });
-console.log("isModal?: ", props.isOpen);
+console.log("isModal?: ", props.isModal);
 //carico i dati .md
 const { data: modalContentData } = await useAsyncData(
   `/modali50/${props.isModal}`,
@@ -189,10 +189,10 @@ watch(
 );
 
 onMounted(() => {
-  console.log("isModal Mounted: ", props.isOpen);
+  console.log("isModal Mounted: ", props.isModal);
   isClient.value = true;
   nextTick(() => {
-    console.log("isModal next tick: ", props.isOpen);
+    console.log("isModal next tick: ", props.isModal);
     isMounted.value = true;
     isPortrait.value = height.value > width.value;
   });

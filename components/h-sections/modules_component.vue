@@ -10,22 +10,10 @@
         <div class="mTitle" v-if="slots.title1" v-html="slots.title1"></div>
         <div class="mSubTitle" v-if="slots.subtitle1" v-html="slots.subtitle1"></div>
         <button
-          @click.passive="
-            isModalOpen = true;
-            modalId = 'app-modal';
-          "
-          @touchstart.passive="
-            isModalOpen = true;
-            modalId = 'app-modal';
-          "
-          @pointerdown.passive="
-            isModalOpen = true;
-            modalId = 'app-modal';
-          "
-          @mousedown.passive="
-            isModalOpen = true;
-            modalId = 'app-modal';
-          "
+          @click.passive="openModal1"
+          @touchstart.passive="openModal1"
+          @pointerdown.passive="openModal1"
+          @mousedown.passive="openModal1"
         >
           <!-- pointerdown potrebbe sostituire touchstart e mousedown, perchè li contempla, per ora li tengo per sicurezza -->
           <BtnFocus></BtnFocus>
@@ -60,9 +48,9 @@
     </div>
   </div>
   <ModalsModale50 :isOpen="isModalOpen" :isModal="modalId" @close="closeModal" />
-  <FocusRooms :isOpen="isModalOpen1" @close="closeModal" />
+  <!-- <FocusRooms :isOpen="isModalOpen1" @close="closeModal" />
   <FocusBoxes :isOpen="isModalOpen2" @close="closeModal" />
-  <FocusMasters :isOpen="isModalOpen3" @close="closeModal" />
+  <FocusMasters :isOpen="isModalOpen3" @close="closeModal" /> -->
   <!-- //!SECTION -->
 </template>
 
@@ -84,8 +72,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // mipreparo le istanze dei modali
 const isModalOpen = ref(false);
-//const modalId = ref("");
-let modalId = "";
+const modalId = ref("");
+// let modalId = "";
 //const modalId = "screen";
 const isModalOpen1 = ref(false);
 const isModalOpen2 = ref(false);
@@ -97,12 +85,15 @@ const isTouchDevice = () => {
 };
 
 // Apertura dei modali con registrazione evento
+
 const openModal1 = (event) => {
   //apro il modale
-  isModalOpen1.value = true;
+  isModalOpen.value = true;
+  modalId.value = "screen";
 };
 const openModal2 = (event) => {
-  isModalOpen2.value = true;
+  isModalOpen.value = true;
+  modalId.value = "mobile-app";
 };
 const openModal3 = (event) => {
   isModalOpen3.value = true;
@@ -132,6 +123,20 @@ onMounted(() => {
   #modules_svg {
     width: 95%;
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #allinOne {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 0;
+    text-shadow: 0 0 7px rgba(184, 239, 250, 1), 0 0 10px rgba(184, 239, 250, 1),
+      0 0 22px rgba(184, 239, 250, 1);
   }
   #modules-content {
     // display: flex;
@@ -141,13 +146,6 @@ onMounted(() => {
     @include bp.for-tablet-up {
       align-items: center;
     }
-  }
-  #allinOne {
-    color: #fff;
-    font-size: 1.3rem;
-    margin-bottom: 0;
-    text-shadow: 0 0 7px rgba(184, 239, 250, 1), 0 0 10px rgba(184, 239, 250, 1),
-      0 0 22px rgba(184, 239, 250, 1);
   }
   .module_card {
     display: flex;

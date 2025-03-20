@@ -12,14 +12,14 @@ navigation:
 ---
 
 ::title-subtitle
-#title
-# Specialty Features
+#title 
+Specialty Features
 
 #subtitle
-## Sottotitolo
+Sottotitolo Specialty Features
 ::
 
-::page-content
+::page-content-block
 ### Titoletto h3
 
 Questa pagina è dedicata alle funzionalità speciali.
@@ -28,19 +28,18 @@ Questa pagina è dedicata alle funzionalità speciali.
 
 :nuxt-img{alt="Immagine Mia" src="/assets/img/mia2023-mnemonica.jpg"}
 
- 
+::
 
-#links
+::page-content-block
+###  Gallery
 ::
 
 ::gallery
-:nuxt-img{alt="Logo MNE wide" src="/assets/img/mnemonica-logo-2024-site.png"}
+:nuxt-img{alt="placeholder200" src="https://placehold.co/200"}
+:nuxt-img{alt="placeholder200" src="https://placehold.co/200"}
+:nuxt-img{alt="placeholder200" src="https://placehold.co/200"}
+::
 
- 
-
-:nuxt-img{alt="Mia" src="/assets/img/mia2023-mnemonica.jpg"}
-
- 
-
-:nuxt-img{alt="Logo MNE wide" src="/assets/img/mnemonica-logo-2024-site.png"}
+::page-content-block
+altro blocco contentuo pagina
 ::

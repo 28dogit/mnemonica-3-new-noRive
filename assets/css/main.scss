@@ -59,11 +59,11 @@
   opacity: 0;
   overflow:hidden;
   margin-bottom: 6rem;
-  &:not(#hero-section){
-    @include bp.for-tablet-up{ // 576px up
-      flex-direction: row;
-    }
-  }
+  // &:not(#hero-section){
+  //   @include bp.for-tablet-up{ // 576px up
+  //     flex-direction: row;
+  //   }
+  // }
   &.hero{
     justify-content: flex-start;
   }
