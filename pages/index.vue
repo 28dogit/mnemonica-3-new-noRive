@@ -9,6 +9,7 @@
             id="canvasLogo"
             style="position: absolute; height: 100px; z-index: 5"
           ></canvas>
+          <!-- <a href="#" class="z-10" @click="playFast">tl_test</a> -->
           <canvas
             ref="canvasRef"
             id="canvas"
@@ -84,6 +85,19 @@ let rivBuffer = null;
 async function loadRivFile(url) {
   const response = await fetch(url);
   return await response.arrayBuffer();
+}
+
+function handleClick(event) {
+  event.preventDefault();
+  alert("Pulsante cliccato!");
+}
+const introRef = ref(null);
+function playFast() {
+  // Imposta la velocità a 2x
+  introRef.value.timeScale(2);
+
+  // Rimuovi tutte le pause e riproduci la timeline fino alla fine
+  introRef.value.play();
 }
 
 onMounted(() => {
@@ -171,6 +185,7 @@ onMounted(() => {
         //rLogo.play("Logo intro"); //Logo intro è il nome della timeline impostata in Rive
       },
     });
+
     // registro effetto per l'entrata delle scritte e del logo in Hero section
     $gsap.registerEffect({
       name: "EnterFrom",
@@ -448,6 +463,8 @@ onMounted(() => {
       "<"
     );
     //sectionsTL.addPause();
+
+    introRef.value = sectionsTL;
 
     //ANCHOR - Scrolltrigger per gestire la sezione "nofixed"
 

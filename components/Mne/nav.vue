@@ -10,6 +10,7 @@
           <nuxt-link to="/specialty-features">Features</nuxt-link>
         </li>
         <li class="nav-hover"><nuxt-link to="/mobile-app">App</nuxt-link></li>
+        <!-- <li class="nav-hover"><a href="#" @click="playFast">Blog</a></li> -->
       </ul>
     </nav>
   </div>
