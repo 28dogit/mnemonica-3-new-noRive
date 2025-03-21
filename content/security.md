@@ -11,7 +11,7 @@ Security
 security subtitle
 ::
 
-::page-content
+::page-content-block
 Duis at sollicitudin eros. Fusce posuere magna non nisi venenatis, vitae vulputate est pellentesque. In a tortor tempor, scelerisque risus sit amet, mattis diam.
 ::
 
