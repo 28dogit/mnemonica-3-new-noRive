@@ -55,6 +55,49 @@
       "isOrdered": true,
       "folders": {},
       "files": {}
+    },
+    "content": {
+      "name": "content",
+      "isOrdered": true,
+      "folders": {
+        "data": {
+          "name": "data",
+          "isOrdered": true,
+          "folders": {},
+          "files": {}
+        },
+        "modali50": {
+          "name": "modali50",
+          "isOrdered": true,
+          "folders": {},
+          "files": {
+            "mobile-app": 0,
+            "deliver": 1,
+            "preserve": 2,
+            "screen": 3,
+            "security": 4
+          }
+        }
+      },
+      "files": {
+        "mobile-app": 0,
+        "index": 1,
+        "security": 2,
+        "specialty-features": 3,
+        "test-studio": 4
+      }
+    },
+    "types": {
+      "name": "types",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "utils": {
+      "name": "utils",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
     }
   },
   "files": {

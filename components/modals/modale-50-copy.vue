@@ -143,6 +143,18 @@ const openModal = () => {
 };
 //chiudo il modale
 const closeModal = () => {
+  console.log("currentModalType-Apertura", currentModalType.value);
+  if (
+    currentModalType.value != "screen" ||
+    currentModalType.value != "deliver" ||
+    currentModalType.value != "preserve"
+  ) {
+    enableBodyScroll();
+    console.log("gatto");
+  } else {
+    disableBodyScroll();
+    console.log("ciccio");
+  }
   const { x, y, opacity } = AnimationProps(false); //passiamo isOpening = false
   $gsap.to(myModal.value, {
     opacity: 0,
@@ -177,24 +189,15 @@ const handleScroll = (event) => {
   }
 };
 
-const lastOpenedModalType = ref("");
-
 //tengo d'occhio la props isOpen
 watch(
   () => props.isOpen,
   (newVal) => {
     if (newVal) {
-      lastOpenedModalType.value = currentModalType.value;
       disableBodyScroll();
       openModal();
     } else {
-      if (
-        lastOpenedModalType.value !== "screen" &&
-        lastOpenedModalType.value !== "deliver" &&
-        lastOpenedModalType.value !== "preserve"
-      ) {
-        enableBodyScroll();
-      }
+      // enableBodyScroll();
     }
   },
   { immediate: true }
@@ -234,6 +237,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   modalInner.value.removeEventListener("wheel", handleScroll);
+  //enableBodyScroll();
 });
 
 onUnmounted(() => {});

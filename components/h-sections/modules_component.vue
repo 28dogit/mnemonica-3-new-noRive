@@ -50,9 +50,6 @@
     </div>
   </div>
   <ModalsModale50 :isOpen="isModalOpen" :isModal="modalId" @close="closeModal" />
-  <!-- <FocusRooms :isOpen="isModalOpen1" @close="closeModal" />
-  <FocusBoxes :isOpen="isModalOpen2" @close="closeModal" />
-  <FocusMasters :isOpen="isModalOpen3" @close="closeModal" /> -->
   <!-- //!SECTION -->
 </template>
 
@@ -75,11 +72,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 // mipreparo le istanze dei modali
 const isModalOpen = ref(false);
 const modalId = ref("");
-// let modalId = "";
-//const modalId = "screen";
-const isModalOpen1 = ref(false);
-const isModalOpen2 = ref(false);
-const isModalOpen3 = ref(false);
 
 // Controlla se il dispositivo supporta eventi touch
 const isTouchDevice = () => {
@@ -87,24 +79,29 @@ const isTouchDevice = () => {
 };
 
 // Apertura dei modali con registrazione evento
+const { lockScroll, unlockScroll } = useScrollLock();
 
-const openModal1 = (event) => {
+const openModal1 = () => {
   //apro il modale
   isModalOpen.value = true;
   modalId.value = "screen";
+  lockScroll(); // Blocca lo scroll quando il modale è aperto
 };
-const openModal2 = (event) => {
+const openModal2 = () => {
   isModalOpen.value = true;
-  modalId.value = "mobile-app";
+  modalId.value = "deliver";
+  lockScroll();
 };
 const openModal3 = (event) => {
-  isModalOpen3.value = true;
+  isModalOpen.value = true;
+  modalId.value = "preserve";
+  lockScroll();
 };
 
 const closeModal = () => {
-  isModalOpen1.value = false;
-  isModalOpen2.value = false;
-  isModalOpen3.value = false;
+  isModalOpen.value = false;
+  modalId.value = "";
+  unlockScroll(); // Sblocca lo scroll quando il modale è chiuso
 };
 
 onMounted(() => {

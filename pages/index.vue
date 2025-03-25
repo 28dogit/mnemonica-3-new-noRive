@@ -105,7 +105,6 @@ onMounted(() => {
 
   // blocca lo scroll on mount (solo per index)
   document.body.style.overflow = "hidden";
-  console.log("onMounted-index");
 
   nextTick(async () => {
     //SECTION - RIVE
@@ -246,6 +245,10 @@ onMounted(() => {
     let touchEndY = 0;
 
     function handleScroll(event) {
+      const { isScrollLocked } = useScrollLock();
+      // Se lo scroll è bloccato (modale aperto), ignora l'evento
+      if (isScrollLocked.value) return;
+
       if (!isfixedSection.value) return; //.value perchè uso il composable
       // Se la timeline intro non è ancora terminata, ignoro completamente lo scroll
       if (!introCompleted) {
@@ -327,6 +330,7 @@ onMounted(() => {
       onComplete: () => {
         setTimeout(() => {
           $gsap.set("body", { overflow: "auto" });
+          console.log("completata sectionsTL");
           // Simula un piccolo scroll per attivare ScrollTrigger
           window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
         }, 100);
@@ -478,7 +482,7 @@ onMounted(() => {
       },
       onLeaveBack: () => {
         $gsap.set("body", { overflow: "hidden" });
-        console.log("intervento sullo scroll!!!!");
+        // console.log("intervento sullo scroll!!!!");
         setFixedSection(true);
       },
     });
