@@ -1,7 +1,7 @@
 ---
 title: Mnemonica gate
 description: Mnemonica gate page
-links:
+links: null
 seo:
   title: Mnemonica gate
   description: Mnemonica gate page
@@ -10,7 +10,7 @@ navigation:
 ---
 
 ::title-subtitle
-#title 
+#title
 Mnemonica gate
 
 #subtitle
@@ -21,7 +21,6 @@ Sottotitolo Mnemonica gate
 ### Mnemonica gate
 
 Questa pagina è dedicata a Mnemonica gate.
-
 ::
 
 ::page-content-block
