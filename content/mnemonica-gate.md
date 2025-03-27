@@ -30,3 +30,13 @@ Blocco testo 1
 ::page-content-block
 altro blocco testo pagina
 ::
+
+::flex-wrap
+    :::page-content-block
+    flexwrap cont 1
+    :::
+  
+    :::page-content-block
+    flexwrap cont 2
+    :::
+::
