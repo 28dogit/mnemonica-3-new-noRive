@@ -43,3 +43,7 @@ altro blocco testo pagina
 
 test
 ::
+
+::flex-wrap
+interno a flex-wrap
+::
