@@ -28,7 +28,7 @@ Blocco testo 1
 ::
 
 ::page-content-block{.custom-class}
-altro blocco testo pagina prendo la description {{ $doc.description }} dal frontmatter
+altro blocco testo pagina prendo la *description* {{ $doc.description }} dal frontmatter
 ::
 
 ::flex-wrap{.flex1}
