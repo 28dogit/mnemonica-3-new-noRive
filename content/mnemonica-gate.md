@@ -32,13 +32,13 @@ altro blocco testo pagina
 ::
 
 ::flex-wrap
-  ::page-content-block
+  :::page-content-block
   flexwrap cont 1
-  ::
+  :::
 
-  ::page-content-block
+  :::page-content-block
   flexwrap cont 2
-  ::
+  :::
 
 test
 ::
