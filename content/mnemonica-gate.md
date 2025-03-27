@@ -32,6 +32,7 @@ altro blocco testo pagina
 ::
 
 ::flex-wrap
+
   :::page-content-block
   flexwrap cont 1
   :::
