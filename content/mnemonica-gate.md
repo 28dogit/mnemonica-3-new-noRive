@@ -27,11 +27,11 @@ Questa pagina è dedicata a Mnemonica gate.
 Blocco testo 1
 ::
 
-::page-content-block
-altro blocco testo pagina
+::page-content-block{.custom-class}
+altro blocco testo pagina prendo la description **"{{ $doc.description }}"** dal frontmatter
 ::
 
-::flex-wrap
+::flex-wrap{.flex1}
 
   :::page-content-block
   flexwrap cont 1
@@ -41,9 +41,4 @@ altro blocco testo pagina
   flexwrap cont 2
   :::
 
-test
-::
-
-::flex-wrap
-interno a flex-wrap
 ::
