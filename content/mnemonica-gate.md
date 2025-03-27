@@ -38,6 +38,10 @@ altro blocco testo pagina prendo la *description* {{ $doc.description }} dal fro
 
   :::page-content-block
   flexwrap cont 2
+  
+    ::::page-content-block
+    flexwrap cont 2b
+    ::::
   :::
 
   :::page-content-block
