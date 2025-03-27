@@ -104,7 +104,7 @@ onMounted(() => {
     });
 
     rotationTL_Titles.value.TitlesRotation(".phaseCircle #Pre_txt", {
-      duration: 15,
+      duration: 12,
       rotate: -360,
     });
     rotationTL_Titles.value.TitlesRotation(
@@ -117,12 +117,12 @@ onMounted(() => {
     );
     rotationTL_Titles.value.TitlesRotation(
       ".phaseCircle #Post_txt",
-      { duration: 14 },
+      { duration: 15 },
       "<"
     );
     rotationTL_Titles.value.TitlesRotation(
       ".phaseCircle #Market_txt",
-      { duration: 12 },
+      { duration: 16 },
       "<"
     );
 
