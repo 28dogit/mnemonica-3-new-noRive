@@ -36,7 +36,7 @@ altro blocco testo pagina prendo la *description* {{ $doc.description }} dal fro
   flexwrap cont 1
   :::
 
-  :::page-content-block
+  :::page-content-block{#prova-annidamento .test-child style="color:red"}
   flexwrap cont 2
   
     ::::page-content-block
