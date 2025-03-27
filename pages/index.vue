@@ -51,7 +51,25 @@
     <div class="nofixed_section w-[100vw] h-[1600px] z-30">
       <div class="preMade"></div>
       <div id="made-for" class="max-w-[1200px]">
-        <h2>Made For</h2>
+        <HSectionsMadeFor></HSectionsMadeFor>
+      </div>
+      <div id="production" class="max-w-[1200px]">
+        <HSectionsProduction></HSectionsProduction>
+      </div>
+      <div id="production-ui" class="max-w-[1200px]">
+        <HSectionsProductionUi></HSectionsProductionUi>
+      </div>
+      <div id="archive" class="max-w-[1200px]">
+        <HSectionsArchive></HSectionsArchive>
+      </div>
+      <div id="archive-ui" class="max-w-[1200px]">
+        <HSectionsArchiveUi></HSectionsArchiveUi>
+      </div>
+      <div id="about-us" class="max-w-[1200px]">
+        <HSectionsAboutUs></HSectionsAboutUs>
+      </div>
+      <div id="contacts" class="max-w-[1200px]">
+        <HSectionsContacts></HSectionsContacts>
       </div>
     </div>
   </main>
@@ -67,6 +85,7 @@
 import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
+import { HSectionsArchive } from "#components";
 
 const PhasesRef = ref(null);
 const canvasRef = ref(null);
@@ -307,6 +326,7 @@ onMounted(() => {
 
     //NOTE - recupero la rotationTL esposta dal componente phases_comp
     const RotationTL = PhasesRef.value?.rotationTL;
+    const RotationTL_Titles = PhasesRef.value?.rotationTL_Titles;
 
     //NOTE - recupero la phasesTL esposta dal componente phases_comp
     const PhasesTL = PhasesRef.value?.phasesTL;
@@ -365,10 +385,12 @@ onMounted(() => {
     //ANCHOR - Phases Section Start
     // sectionsTL.call(() => PhasesRef.value.rotationTL.pause());
     sectionsTL.call(() => RotationTL.pause());
+    sectionsTL.call(() => RotationTL_Titles.pause());
 
     sectionsTL.to("#modules_svg", { rotate: "+=60", ease: "power1.in" });
     //sectionsTL.call(() => PhasesRef.value.rotationTL.play(), [], "<+=0.2");
     sectionsTL.call(() => RotationTL.play(), [], "<+=0.2");
+    sectionsTL.call(() => RotationTL_Titles.play(), [], "<+=0.2");
     sectionsTL.to(
       "#hero-section",
       {
@@ -413,7 +435,9 @@ onMounted(() => {
       "<"
     );
     sectionsTL.call(() => RotationTL.play());
+    sectionsTL.call(() => RotationTL_Titles.play());
     sectionsTL.call(() => RotationTL.pause());
+    sectionsTL.call(() => RotationTL_Titles.pause());
 
     sectionsTL.to(
       "#modules-section",

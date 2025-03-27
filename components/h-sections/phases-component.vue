@@ -51,12 +51,14 @@ import { _bottom } from "#tailwind-config/theme/backgroundPosition";
 //definisco le costanti da esporre con defineExpose, che userò all'interno di onMounted utilizzando .value
 // utilizzo shallowRef per non covertire le proprietà interne di Gsap in oggetti reattivi di vue
 const rotationTL = shallowRef(null);
+const rotationTL_Titles = shallowRef(null);
 
 onMounted(() => {
   const { $gsap } = useNuxtApp();
 
   nextTick(() => {
     let phasesItems = $gsap.utils.toArray(".phaseCircle .innerCircle"); //creo l'array dei cerchi delle Fasi
+    let phasesTitles = $gsap.utils.toArray(".phaseCircle .innerTxt"); //creo l'array dei titoli delle fasi
     let phasesChipsTitle = $gsap.utils.toArray("#chips-wrapper .container .title");
     //let phasesChips = $gsap.utils.toArray("#chips-wrapper .phase-chips");
     let phasesChipsContainer = $gsap.utils.toArray(
@@ -72,17 +74,71 @@ onMounted(() => {
     rotationTL.value.to(phasesItems, {
       rotate: 360,
       transformOrigin: "50% 50%",
-      duration: 7,
+      duration: 9,
       ease: "linear",
       repeat: -1,
     });
+
+    $gsap.registerEffect({
+      name: "TitlesRotation",
+      effect: (targets, config) => {
+        return $gsap.from(targets, {
+          duration: config.duration,
+          rotate: config.rotate,
+          transformOrigin: config.transformOrigin,
+          repeat: config.repeat,
+          ease: config.ease,
+        });
+      },
+      defaults: {
+        rotate: 360,
+        transformOrigin: "50% 50%",
+        repeat: -1,
+        ease: "linear",
+      },
+      extendTimeline: true,
+    });
+
+    rotationTL_Titles.value = $gsap.timeline({
+      paused: true,
+    });
+
+    rotationTL_Titles.value.TitlesRotation(".phaseCircle #Pre_txt", {
+      duration: 15,
+      rotate: -360,
+    });
+    rotationTL_Titles.value.TitlesRotation(
+      ".phaseCircle #Production_txt",
+      {
+        duration: 13,
+        rotate: -360,
+      },
+      "<"
+    );
+    rotationTL_Titles.value.TitlesRotation(
+      ".phaseCircle #Post_txt",
+      { duration: 14 },
+      "<"
+    );
+    rotationTL_Titles.value.TitlesRotation(
+      ".phaseCircle #Market_txt",
+      { duration: 12 },
+      "<"
+    );
+
+    // rotationTL_Titles.value.to(phasesTitles, {
+    //   rotate: 360,
+    //   transformOrigin: "50% 50%",
+    //   duration: 7,
+    //   ease: "linear",
+    //   repeat: -1,
+    // });
 
     //!SECTION
   }); //NOTE - chiusura nextTick
 }); //NOTE - chiusura onMounted
 
-//defineExpose({ rotationTL, phasesTL });
-defineExpose({ rotationTL });
+defineExpose({ rotationTL, rotationTL_Titles });
 </script>
 
 <style scoped>
