@@ -142,7 +142,7 @@ onMounted(() => {
     // align-items: flex-start;
     position: relative;
     justify-content: center;
-    @include bp.for-tablet-up {
+    @include bp.for-tablet {
       align-items: center;
     }
   }
@@ -154,7 +154,7 @@ onMounted(() => {
     position: absolute;
     padding: 10px;
     width: 90%;
-    @include bp.for-tablet-up {
+    @include bp.for-tablet {
       width: 50%;
     }
     .mTitle {

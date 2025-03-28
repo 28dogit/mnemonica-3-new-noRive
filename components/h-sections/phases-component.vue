@@ -1,11 +1,6 @@
 <template>
   <div id="phases-element" class="element">
-    <div class="elementSvg">
-      <SvgPre id="Pre_svg" class="phaseCircle"></SvgPre>
-      <SvgProduction id="Production_svg" class="phaseCircle"></SvgProduction>
-      <SvgPost id="Post_svg" class="phaseCircle"></SvgPost>
-      <SvgMarket id="Market_svg" class="phaseCircle"></SvgMarket>
-    </div>
+    <SvgAllPhases id="Phases_svg" class="phaseCircle"></SvgAllPhases>
   </div>
   <div id="phases-content-wrapper" class="wrapper">
     <div id="phases-content" class="content">
@@ -125,15 +120,6 @@ onMounted(() => {
       { duration: 16 },
       "<"
     );
-
-    // rotationTL_Titles.value.to(phasesTitles, {
-    //   rotate: 360,
-    //   transformOrigin: "50% 50%",
-    //   duration: 7,
-    //   ease: "linear",
-    //   repeat: -1,
-    // });
-
     //!SECTION
   }); //NOTE - chiusura nextTick
 }); //NOTE - chiusura onMounted
@@ -142,11 +128,8 @@ defineExpose({ rotationTL, rotationTL_Titles });
 </script>
 
 <style scoped>
-.elementSvg {
-  position: relative;
-  display: block;
-  width: 350px;
-  height: 350px;
+.Phases_svg {
+  width: 100%;
 }
 .choice {
   display: flex;

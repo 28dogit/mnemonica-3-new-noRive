@@ -1,37 +1,46 @@
 @mixin for-phone {
-    @media all and (max-device-width: 575.98px) {
+    // Stili per schermi piccoli
+    @media (max-width: 480px) {
         @content;
     }
 }
 
-@mixin for-tablet-up {
-    @media all and (min-width: 576px) {
+@mixin for-tablet {
+    @media (min-width: 481px) and (max-width: 767px) {
+        // Stili per smartphone in landscape o tablet piccoli
         @content;
     }
 }
 
 @mixin for-tablet-portrait {
-    @media all and (min-width: 576px) and (max-width:767.98px) {
+    @media (min-width: 768px) and (max-width: 1024px) {
+        // Stili per tablet
         @content;
     }
 }
-@mixin for-tablet-landscape {
-    @media all and (min-width: 768px) and (max-width: 991.98px) {
+@mixin for-tablet-portrait-up {
+    @media (min-width: 768px) {
+        // Stili per tablet
         @content;
     }
 }
+
 @mixin for-desktop-small {
-    @media all and (min-width: 992px) and (max-width: 1199.98px) {
+    @media (min-width: 1025px) and (max-width: 1280px) {
+        // Stili per laptop o schermi fino a Full HD
         @content;
-    }
+    }    
 }
+
 @mixin for-desktop-big-up {
-    @media all and (min-width: 1200px) {
+    @media (min-width: 1281px) {
+        // Stili per monitor grandi
         @content;
     }
+    
 }
 @mixin for-desktop-big-up-h-reduced {
-    @media all and (min-width: 1200px) and (max-height:750px) {
+    @media all and (min-width: 1281px) and (max-height:750px) {
         @content;
     }
 }
