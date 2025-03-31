@@ -64,6 +64,10 @@ onMounted(() => {
 
     //SECTION - sezione animazione continua dei cerchi delle Fasi
 
+    $gsap.set(phasesItems, {
+      opacity: 0.4,
+    });
+
     rotationTL.value = $gsap.timeline({
       paused: true,
     });
@@ -133,16 +137,6 @@ defineExpose({ rotationTL, rotationTL_Titles });
 // .Phases_svg {
 //   width: 100%;
 // }
-#phases-element {
-  #All-Phases {
-    #m_100_circle_ecosys_0,
-    #m_100_circle_ecosys_1,
-    #m_100_circle_ecosys_2,
-    #m_100_circle_ecosys_3 {
-      opacity: 0.3;
-    }
-  }
-}
 .choice {
   display: flex;
   flex-direction: row;

@@ -2,7 +2,7 @@
   <main>
     <div id="sectionsWrapper" class="z-20">
       <div id="hero-section" class="section_fixed hero">
-        <div class="element">
+        <div id="hero-element" class="element">
           <div id="ghirlanda-element" class="circular"></div>
           <canvas
             ref="canvasRefLogo"

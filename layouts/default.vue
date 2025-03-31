@@ -20,19 +20,20 @@
 
     <MneHeader />
     <div id="sectionsWrapper">
-      <div id="section1">
-        <div class="element-p">
+      <!-- <div id="section1"> -->
+      <div id="hero-section" class="hero">
+        <div class="element">
           <div id="ghirlanda-element_start" class="circular">
             <NuxtImg
-              id="ghirlanda_img-2"
+              id="ghirlanda_img"
               src="/assets/img/Ghirlanda_full_web_800_opt.png"
               alt="mnemonica ghirlanda ecosystem"
               densities="x1"
             />
           </div>
         </div>
-        <div class="wrapper-p">
-          <div class="content-p"></div>
+        <div class="wrapper">
+          <div class="content"></div>
         </div>
       </div>
     </div>
@@ -83,57 +84,5 @@
       height: 200px; /* Set a fixed size */
     }
   }
-}
-//----------------
-#sections-w {
-  width: 100vw;
-  max-width: 1200px;
-  height: calc(100vh - 70px);
-}
-.element-p {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  padding: 1em;
-  width: 100%;
-  height: 50vh;
-  @include bp.for-tablet {
-    height: 60vh;
-  }
-  @include bp.for-tablet-portrait-up {
-    height: 70vh;
-  }
-
-  .circular {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: calc(50vh - 2em);
-    height: 100%;
-    border-radius: 50%;
-    mix-blend-mode: plus-lighter;
-    mix-blend-mode: luminosity;
-    @include bp.for-tablet {
-      width: calc(60vh - 2em);
-    }
-    @include bp.for-tablet-portrait-up {
-      width: calc(70vh - 2em);
-    }
-  }
-}
-.wrapper-p {
-  position: relative;
-  width: 100%;
-  height: calc(50vh - 70px);
-}
-.content-p {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2em;
-  width: 100%;
-  height: 100%;
-  color: white;
 }
 </style>

@@ -38,76 +38,62 @@
     //@include grad-var-desktop(50%,10%,80%,80%,20%,70%,25%,5%);
   }
 
+.element {
+  // background-color: rosybrown;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 1em;
+  width: 100%;
+  height: 50vh;
+  @include bp.for-tablet {
+    height: 60vh;
+  }
+  @include bp.for-tablet-portrait-up {
+    height: 70vh;
+  }
 
-  //---------
-  // #sections-w {
-  //   //da eliminare cambiando 
-  //   width: 100vw;
-  //   max-width: 1200px;
-  //   height: calc(100vh - 70px);
-  // }
-  .element {
-    background-color: rosybrown;
+  .circular {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    padding: 1em;
-    width: 100%;
-    height: 50vh;
+    width: calc(50vh - 2em);
+    height: 100%;
+    border-radius: 50%;
+    // background-color: blue;
+    // border-radius: 50%;
     @include bp.for-tablet {
-      height: 60vh;
+      width: calc(60vh - 2em);
     }
     @include bp.for-tablet-portrait-up {
-      height: 70vh;
-    }
-  
-    .circular {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: calc(50vh - 2em);
-      height: 100%;
-      border-radius: 50%;
-      mix-blend-mode: plus-lighter;
-      mix-blend-mode: luminosity;
-      background-color: blue;
-      border-radius: 50%;
-      @include bp.for-tablet {
-        width: calc(60vh - 2em);
-      }
-      @include bp.for-tablet-portrait-up {
-        width: calc(70vh - 2em);
-      }
+      width: calc(70vh - 2em);
     }
   }
-  .wrapper {
-    background-color: aquamarine;
-    position: relative;
-    width: 100%;
-    height: calc(50vh - 70px);
-  }
-  .content {
-    background-color: red;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2em;
-    width: 100%;
-    height: 100%;
-    color: white;
-  }
+}
+.wrapper {
+  // background-color: aquamarine;
+  position: relative;
+  width: 100%;
+  height: calc(50vh - 70px);
+}
+.content {
+  // background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
+  width: 100%;
+  height: 100%;
+  color: white;
+}
 
-
-
-  //_--------
-
-  #sectionsWrapper {
-    width: 100vw;
-    max-width: 1200px;
-    height: calc(100vh - 70px);
-    //position: relative; /* Contenitore relativo per le sezioni sovrapposte */
-  }
+#sectionsWrapper {
+  width: 100vw;
+  max-width: 1200px;
+  height: calc(100vh - 70px);
+  //position: relative; /* Contenitore relativo per le sezioni sovrapposte */
+}
 
 .section_fixed{
   display: flex;
@@ -122,58 +108,10 @@
   opacity: 0;
   overflow:hidden;
   margin-bottom: 6rem;
-  // &:not(#hero-section){
-  //   @include bp.for-tablet{ // 576px up
-  //     flex-direction: row;
-  //   }
-  // }
   &.hero{
     justify-content: flex-start;
   }
 }
-
-// .element{
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     position: relative;
-//     width: 100%;
-//     min-height: 50vh;
-//     height: 50vh;
-//     // @include bp.for-tablet{// 576px up
-//     //   width:40%;
-//     // }
-//     // @include bp.for-desktop-big-up{ // 1200px up
-//     //   width: 30%;
-//     // }
-//   }
-// .wrapper{
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     height: 50vh;
-//     // @include bp.for-tablet{
-//     //   width: 60vw
-//     // }
-//     // @include bp.for-desktop-big-up{
-//     //   width: 70%;
-//     // }
-// }
-// .content{
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   width: 80vw;
-//   height: 40vh;
-//   //background-color: red;
-//   color:white;
-//   @include bp.for-tablet{
-//     height: auto;
-//   };
-//   &.hero{
-//     align-items: flex-start;
-//   }
-// }
 
 .nofixed_section {
   background: $gradient_4;
@@ -192,17 +130,10 @@
 
 //*SECTION - Hero
 
-#ghirlanda-element{
+#ghirlanda-element_start{
     opacity:0.6;
-    //max-height: 50vh;
+    mix-blend-mode: plus-lighter;
     mix-blend-mode: luminosity;
-    @include bp.for-desktop-big-up{
-      width: 550px;
-    }
-}
-
-#ghirlanda_img{
-  width: 90%;
 }
 
   #heroTitle {
@@ -229,25 +160,4 @@
       margin-bottom: 100px;
     }
   }
-//*!SECTION
-
-// SECTION - Phases
-// #phases-element{
-//     #All-Phases{
-//       #m_100_circle_ecosys_0,
-//       #m_100_circle_ecosys_1,
-//       #m_100_circle_ecosys_2,
-//       #m_100_circle_ecosys_3 {
-//         opacity: 0.3;
-//       }
-//     }
-//   }
-  // #phases-content{
-  //   width: 95vw; 
-  // }
-  // .phaseCircle .innerTxt{
-  //   opacity: 1;
-  //  // display: none;
-  // }
-  
 //*!SECTION
