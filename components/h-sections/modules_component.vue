@@ -118,16 +118,16 @@ onMounted(() => {
 @use "@/assets/css/_breakpoints.scss" as bp;
 
 #modules-section {
-  #modules-element {
-    overflow: hidden;
-  }
-  #modules_svg {
-    //width: 95%;
-    //position: absolute;
-    // top: 50%;
-    // left: 50%;
-    // transform: translate(-50%, -50%);
-  }
+  // #modules-element {
+  //   overflow: hidden;
+  // }
+  // #modules_svg {
+  //   //width: 95%;
+  //   //position: absolute;
+  //   // top: 50%;
+  //   // left: 50%;
+  //   // transform: translate(-50%, -50%);
+  // }
   #allinOne {
     position: absolute;
     // top: 50%;

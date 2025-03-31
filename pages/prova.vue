@@ -2,7 +2,7 @@
   <main>
     <div id="sectionsWrapper">
       <div id="section1" class="">
-        <div class="element-p">
+        <div class="element">
           <div class="circular">
             <NuxtImg
               id="ghirlanda_img-2"
@@ -15,8 +15,8 @@
             <SvgAllPhases id="Phases_svg" class="phaseCircle-2"></SvgAllPhases>
           </div>
         </div>
-        <div class="wrapper-p">
-          <div class="content-p"></div>
+        <div class="wrapper">
+          <div class="content"></div>
         </div>
       </div>
     </div>

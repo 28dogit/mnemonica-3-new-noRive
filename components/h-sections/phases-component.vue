@@ -129,9 +129,19 @@ onMounted(() => {
 defineExpose({ rotationTL, rotationTL_Titles });
 </script>
 
-<style scoped>
-.Phases_svg {
-  width: 100%;
+<style lang="scss" scoped>
+// .Phases_svg {
+//   width: 100%;
+// }
+#phases-element {
+  #All-Phases {
+    #m_100_circle_ecosys_0,
+    #m_100_circle_ecosys_1,
+    #m_100_circle_ecosys_2,
+    #m_100_circle_ecosys_3 {
+      opacity: 0.3;
+    }
+  }
 }
 .choice {
   display: flex;

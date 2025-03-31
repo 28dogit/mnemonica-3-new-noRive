@@ -47,6 +47,7 @@
   //   height: calc(100vh - 70px);
   // }
   .element {
+    background-color: rosybrown;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -70,6 +71,8 @@
       border-radius: 50%;
       mix-blend-mode: plus-lighter;
       mix-blend-mode: luminosity;
+      background-color: blue;
+      border-radius: 50%;
       @include bp.for-tablet {
         width: calc(60vh - 2em);
       }
@@ -79,11 +82,13 @@
     }
   }
   .wrapper {
+    background-color: aquamarine;
     position: relative;
     width: 100%;
     height: calc(50vh - 70px);
   }
   .content {
+    background-color: red;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -227,19 +232,19 @@
 //*!SECTION
 
 // SECTION - Phases
-#phases-element{
-    #All-Phases{
-      #m_100_circle_ecosys_0,
-      #m_100_circle_ecosys_1,
-      #m_100_circle_ecosys_2,
-      #m_100_circle_ecosys_3 {
-        opacity: 0.3;
-      }
-    }
-  }
-  #phases-content{
-    width: 95vw; 
-  }
+// #phases-element{
+//     #All-Phases{
+//       #m_100_circle_ecosys_0,
+//       #m_100_circle_ecosys_1,
+//       #m_100_circle_ecosys_2,
+//       #m_100_circle_ecosys_3 {
+//         opacity: 0.3;
+//       }
+//     }
+//   }
+  // #phases-content{
+  //   width: 95vw; 
+  // }
   // .phaseCircle .innerTxt{
   //   opacity: 1;
   //  // display: none;
