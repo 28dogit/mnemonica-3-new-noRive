@@ -2,8 +2,10 @@
   <!-- //SECTION - TEMPLATE -->
   <div id="modules-element" class="element">
     <!-- <div class="elementSvg"> -->
-    <SvgModules id="modules_svg"></SvgModules>
-    <p id="allinOne">All in One</p>
+    <div class="circular">
+      <SvgModules id="modules_svg"></SvgModules>
+      <p id="allinOne">All in One</p>
+    </div>
     <!-- </div> -->
   </div>
   <div id="modules-content-wrapper" class="wrapper">
@@ -120,14 +122,14 @@ onMounted(() => {
     overflow: hidden;
   }
   #modules_svg {
-    width: 95%;
-    position: absolute;
+    //width: 95%;
+    //position: absolute;
     // top: 50%;
     // left: 50%;
     // transform: translate(-50%, -50%);
   }
   #allinOne {
-    // position: absolute;
+    position: absolute;
     // top: 50%;
     // left: 50%;
     // transform: translate(-50%, -50%);

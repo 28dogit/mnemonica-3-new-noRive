@@ -6,11 +6,14 @@
     > -->
     <div id="menuWrapper" class="flex items-center max-w-[1440px] text-slate-300 m-auto">
       <div id="logoWrapper" class="flex w-3/12 justify-start pl-10">
-        <img
-          class="logo max-w-44"
-          alt="Vue logo"
-          src="@/assets/img/svg/MN-Wide-Light.svg"
-        />
+        <nuxt-link to="/">
+          <NuxtImg
+            class="logo max-w-44"
+            alt="Vue logo"
+            src="/assets/img/svg/MN-Wide-Light.svg"
+            densities="x1"
+          />
+        </nuxt-link>
       </div>
       <div id="navWrapper" class="flex w-9/12 justify-end pr-10">
         <!-- <Nav class="hidden md:visible md:flex" /> -->

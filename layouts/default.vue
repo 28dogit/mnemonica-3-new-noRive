@@ -19,7 +19,7 @@
     </div>
 
     <MneHeader />
-    <div id="sections-w">
+    <div id="sectionsWrapper">
       <div id="section1">
         <div class="element-p">
           <div id="ghirlanda-element_start" class="circular">
