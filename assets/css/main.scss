@@ -38,12 +38,69 @@
     //@include grad-var-desktop(50%,10%,80%,80%,20%,70%,25%,5%);
   }
 
+
+  //---------
+  #sections-w {
+    width: 100vw;
+    max-width: 1200px;
+    height: calc(100vh - 70px);
+  }
+  .element {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 1em;
+    width: 100%;
+    height: 50vh;
+    @include bp.for-tablet {
+      height: 60vh;
+    }
+    @include bp.for-tablet-portrait-up {
+      height: 70vh;
+    }
+  
+    .circular {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: calc(50vh - 2em);
+      height: 100%;
+      border-radius: 50%;
+      mix-blend-mode: plus-lighter;
+      mix-blend-mode: luminosity;
+      @include bp.for-tablet {
+        width: calc(60vh - 2em);
+      }
+      @include bp.for-tablet-portrait-up {
+        width: calc(70vh - 2em);
+      }
+    }
+  }
+  .wrapper {
+    position: relative;
+    width: 100%;
+    height: calc(50vh - 70px);
+  }
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+    width: 100%;
+    height: 100%;
+    color: white;
+  }
+
+
+
+  //_--------
+
   #sectionsWrapper {
     width: 100vw;
     max-width: 1200px;
     height: calc(100vh - 70px);
-    //height: var(--total-height);
-    position: relative; /* Contenitore relativo per le sezioni sovrapposte */
+    //position: relative; /* Contenitore relativo per le sezioni sovrapposte */
   }
 
 .section_fixed{
@@ -69,48 +126,48 @@
   }
 }
 
-.element{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    width: 100%;
-    min-height: 50vh;
-    height: 50vh;
-    // @include bp.for-tablet{// 576px up
-    //   width:40%;
-    // }
-    // @include bp.for-desktop-big-up{ // 1200px up
-    //   width: 30%;
-    // }
-  }
-.wrapper{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50vh;
-    // @include bp.for-tablet{
-    //   width: 60vw
-    // }
-    // @include bp.for-desktop-big-up{
-    //   width: 70%;
-    // }
-}
-.content{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 80vw;
-  height: 40vh;
-  //background-color: red;
-  color:white;
-  @include bp.for-tablet{
-    height: auto;
-  };
-  &.hero{
-    align-items: flex-start;
-  }
-}
+// .element{
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     position: relative;
+//     width: 100%;
+//     min-height: 50vh;
+//     height: 50vh;
+//     // @include bp.for-tablet{// 576px up
+//     //   width:40%;
+//     // }
+//     // @include bp.for-desktop-big-up{ // 1200px up
+//     //   width: 30%;
+//     // }
+//   }
+// .wrapper{
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     height: 50vh;
+//     // @include bp.for-tablet{
+//     //   width: 60vw
+//     // }
+//     // @include bp.for-desktop-big-up{
+//     //   width: 70%;
+//     // }
+// }
+// .content{
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   width: 80vw;
+//   height: 40vh;
+//   //background-color: red;
+//   color:white;
+//   @include bp.for-tablet{
+//     height: auto;
+//   };
+//   &.hero{
+//     align-items: flex-start;
+//   }
+// }
 
 .nofixed_section {
   background: $gradient_4;

@@ -22,16 +22,13 @@
     <div id="sections-w">
       <div id="section1">
         <div class="element-p">
-          <div class="tondo">
+          <div id="ghirlanda-element_start" class="circular">
             <NuxtImg
               id="ghirlanda_img-2"
               src="/assets/img/Ghirlanda_full_web_800_opt.png"
               alt="mnemonica ghirlanda ecosystem"
               densities="x1"
             />
-            <!-- <SvgModulesProva id="modules_svg-2"></SvgModulesProva>
-            <p id="allinOne-2">All in One</p> -->
-            <!-- <SvgAllPhases id="Phases_svg" class="phaseCircle-2"></SvgAllPhases> -->
           </div>
         </div>
         <div class="wrapper-p">
@@ -39,23 +36,12 @@
         </div>
       </div>
     </div>
-    <!-- <div id="ghirlanda-element_start" class="element_start">
-      <NuxtImg
-        id="ghirlanda_img"
-        src="/assets/img/Ghirlanda_full_web_800_opt.png"
-        alt="mnemonica ghirlanda ecosystem"
-        densities="x1"
-      />
-    </div> -->
     <slot class="min-h-screen" />
     <MneFooter />
   </div>
 </template>
 
-<script setup>
-onMounted(() => {});
-//Gsap-fine
-</script>
+<script setup></script>
 
 <style lang="scss" scoped>
 @use "@/assets/css/_breakpoints.scss" as bp;
@@ -98,58 +84,19 @@ onMounted(() => {});
     }
   }
 }
-#ghirlanda-element_start {
-  //solo per test con logo da sistemare definitivamente
-  // margin-top: 80px;
-  //
-  opacity: 0.6;
-  height: 300px;
-  @include bp.for-desktop-big-up {
-    width: 550px;
-  }
-  #ghirlanda_img {
-    width: 90%;
-  }
-}
-
-.element_start {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 70px;
-  width: 100%;
-  min-height: 50vh;
-  mix-blend-mode: plus-lighter;
-  mix-blend-mode: luminosity;
-  @include bp.for-tablet {
-    // 576px up
-    width: 40%;
-    //min-height: 95vh;
-  }
-  @include bp.for-desktop-big-up {
-    // 1200px up
-    width: 30%;
-    //min-height: 100vh;
-  }
-}
 //----------------
 #sections-w {
   width: 100vw;
   max-width: 1200px;
   height: calc(100vh - 70px);
-  //height: var(--total-height);
-  position: relative; /* Contenitore relativo per le sezioni sovrapposte */
 }
 .element-p {
-  // background-color: rosybrown;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   padding: 1em;
   width: 100%;
-  //min-height: 50vh;
   height: 50vh;
   @include bp.for-tablet {
     height: 60vh;
@@ -158,41 +105,29 @@ onMounted(() => {});
     height: 70vh;
   }
 
-  .tondo {
+  .circular {
     display: flex;
     align-items: center;
     justify-content: center;
     width: calc(50vh - 2em);
     height: 100%;
-    // background-color: blue;
     border-radius: 50%;
+    mix-blend-mode: plus-lighter;
+    mix-blend-mode: luminosity;
     @include bp.for-tablet {
       width: calc(60vh - 2em);
     }
     @include bp.for-tablet-portrait-up {
       width: calc(70vh - 2em);
     }
-    //#ghirlanda_img-2,
-    #allinOne-2 {
-      position: absolute;
-    }
-    #ghirlanda_img-2 {
-      mix-blend-mode: plus-lighter;
-      mix-blend-mode: luminosity;
-    }
-    .Phases_svg {
-      width: 100%;
-    }
   }
 }
 .wrapper-p {
-  // background-color: aquamarine;
   position: relative;
   width: 100%;
   height: calc(50vh - 70px);
 }
 .content-p {
-  // background-color: red;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -200,8 +135,5 @@ onMounted(() => {});
   width: 100%;
   height: 100%;
   color: white;
-  &.hero {
-    align-items: flex-start;
-  }
 }
 </style>

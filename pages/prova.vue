@@ -1,7 +1,7 @@
 <template>
   <main>
     <div id="sections-w">
-      <div id="section1">
+      <div id="section1" class="section_fixed">
         <div class="element-p">
           <div class="tondo">
             <!-- <NuxtImg

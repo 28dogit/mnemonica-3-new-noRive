@@ -1,6 +1,8 @@
 <template>
   <div id="phases-element" class="element">
-    <SvgAllPhases id="Phases_svg" class="phaseCircle"></SvgAllPhases>
+    <div class="circular">
+      <SvgAllPhases id="Phases_svg" class="phaseCircle"></SvgAllPhases>
+    </div>
   </div>
   <div id="phases-content-wrapper" class="wrapper">
     <div id="phases-content" class="content">
