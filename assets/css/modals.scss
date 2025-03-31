@@ -15,9 +15,11 @@ dialog {
     margin: 0;
     overflow-y: auto;
   }
+
   .modal-content {
     background-color: $gradient_4;
     height: 100%;
+    // width: 50%;
   }
 
   .modal-inner {

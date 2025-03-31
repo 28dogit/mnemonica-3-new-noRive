@@ -5,7 +5,7 @@
     <dialog
       id="mioModale"
       ref="myModal"
-      :class="{ horizontal: isMounted && !isPortrait }"
+      :class="{ horizontal50: isMounted && !isPortrait }"
       @click="(e) => e.target === myModal && closeModal()"
     >
       <!-- aggiungo una classe dinamica horizontal che viene aggiunta quando la viewport non è portrait -->
@@ -136,6 +136,7 @@ const openModal = () => {
       opacity: 1,
       x: isPortrait.value ? "0%" : "50%",
       y: isPortrait.value ? "50%" : "0%",
+      transformOrigin: "100%  100%",
       duration: 1,
       ease: "power2.out",
     }
@@ -162,20 +163,20 @@ const closeModal = () => {
   });
 };
 
-const handleScroll = (event) => {
-  if (!isPortrait.value) {
-    event.preventDefault();
-    event.stopPropagation();
+// const handleScroll = (event) => {
+//   if (!isPortrait.value) {
+//     event.preventDefault();
+//     event.stopPropagation();
 
-    $gsap.to(modalInner.value, {
-      scrollTo: {
-        x: modalInner.value.scrollLeft + event.deltaY * 6,
-      },
-      ease: "power2",
-      duration: 0.5,
-    });
-  }
-};
+//     $gsap.to(modalInner.value, {
+//       scrollTo: {
+//         x: modalInner.value.scrollLeft + event.deltaY * 6,
+//       },
+//       ease: "power2",
+//       duration: 0.5,
+//     });
+//   }
+// };
 
 const lastOpenedModalType = ref("");
 
@@ -229,14 +230,18 @@ onMounted(() => {
     )
     .pause();
 
-  modalInner.value.addEventListener("wheel", handleScroll, { passive: false });
+  //modalInner.value.addEventListener("wheel", handleScroll, { passive: false });
 });
 
 onBeforeUnmount(() => {
-  modalInner.value.removeEventListener("wheel", handleScroll);
+  //modalInner.value.removeEventListener("wheel", handleScroll);
 });
 
 onUnmounted(() => {});
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.horizontal50 .modal-content {
+  max-width: 50vw;
+}
+</style>
