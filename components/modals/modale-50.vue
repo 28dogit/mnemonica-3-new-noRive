@@ -110,7 +110,7 @@ const AnimationProps = (isOpening) => {
   } else {
     // Entrata da destra per orientamento orizzontale, in questo caso usiamo la x
     return {
-      x: isOpening ? "100%" : "100%",
+      x: isOpening ? "100vw" : "100vw",
       y: "0%",
       opacity: 0,
     };
@@ -134,9 +134,8 @@ const openModal = () => {
     { opacity, x, y },
     {
       opacity: 1,
-      x: isPortrait.value ? "0%" : "50%",
-      y: isPortrait.value ? "50%" : "0%",
-      transformOrigin: "100%  100%",
+      x: isPortrait.value ? "0vw" : "50vw",
+      y: isPortrait.value ? "50vw" : "0vw",
       duration: 1,
       ease: "power2.out",
     }

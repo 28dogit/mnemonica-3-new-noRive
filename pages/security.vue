@@ -1,9 +1,33 @@
 <template>
   <div class="page-wrapper">
+    <div class="mausecoordinates">mouse: x: {{ x }} y: {{ y }}</div>
     <ContentRenderer v-if="page" :value="page" />
+      <video
+      class="video-sfumato"
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="auto"
+    >
+      <source src="/assets/video/room-cards_4.webm" type="video/webm" />
+      <source src="/assets/video/room-cards.mp4" type="video/mp4" />
+    </video>
+
+    <video
+      class="video-webm"
+      autoplay
+      loop
+      muted
+      playsinline
+      src="/assets/video/room-cards_5.webm"
+    ></video>
   </div>
   <!-- <button @click="isModalOpen = true">Open Modal rooms</button> -->
-  <BtnMaster @click="isModalOpen = true">open Modale security</BtnMaster>
+  <MneParallaxWrapper :speed="100">
+    <BtnMaster @click="isModalOpen = true">open Modale security</BtnMaster>
+  </MneParallaxWrapper>
+
   <div style="height: 1000px; width: 100%; background: #e0e0e000">
     <!-- Spazio per controllo scroll con modal aperto -->
   </div>
@@ -16,6 +40,8 @@ import { ref } from "vue";
 definePageMeta({
   layout: "page-layout",
 });
+
+const { x, y } = useMouse();
 const route = useRoute();
 
 const { data: page } = await useAsyncData(route.path, () => {
@@ -29,4 +55,19 @@ const closeModal = () => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.video-sfumato {
+    display: block;
+    width: 100%;
+    height: auto;
+    /* Applica una maschera con gradiente da trasparente a opaco */
+    mask-image: linear-gradient(to right, 
+        transparent 0%, 
+        rgba(0, 0, 0, 0.3) 10%, 
+        black 20%);
+    -webkit-mask-image: linear-gradient(to right, 
+        transparent 0%, 
+        rgba(0, 0, 0, 0.3) 10%, 
+        black 20%);
+}
+</style>
