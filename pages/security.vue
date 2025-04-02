@@ -10,8 +10,9 @@
       playsinline
       preload="auto"
     >
-      <source src="/assets/video/room-cards_4.webm" type="video/webm" />
-      <source src="/assets/video/room-cards.mp4" type="video/mp4" />
+      <!-- <source calss="deskMq" src="/assets/video/room-cards_4.webm" type="video/webm" /> -->
+      <source calss="mobileMq" src="/assets/video/box-2x-vertical.mp4" type="video/webm" />
+      <source calss="deskMq" src="/assets/video/room-cards.mp4" type="video/mp4" />
     </video>
 
     <video
@@ -56,6 +57,25 @@ const closeModal = () => {
 </script>
 
 <style lang="scss" scoped>
+@use "@/assets/css/_breakpoints.scss" as bp;
+
+.mobileMq {
+  @include bp.for-tablet {
+    display: none;
+  }
+  @include bp.for-phone {
+    display: block;
+  }
+}
+.deskMq {
+  @include bp.for-tablet {
+    display: block;
+  }
+  @include bp.for-phone {
+    display: none;
+  }
+}
+
 .video-sfumato {
     display: block;
     width: 100%;

@@ -103,7 +103,7 @@ const AnimationProps = (isOpening) => {
   if (isPortrait.value) {
     // Entrata dal basso per orientamento verticale
     return {
-      y: isOpening ? "100%" : "100%", //isOpening true = si sta aprendo e y sarà 100, se è false si sta chiudendo quindi y sarà 0
+      y: isOpening ? "100vw" : "100vw", //isOpening true = si sta aprendo e y sarà 100, se è false si sta chiudendo quindi y sarà 0
       x: "0%",
       opacity: 0,
     };
@@ -123,7 +123,7 @@ const openModal = () => {
   //prendo i valori delle props dalla funzione AnimationProps passando isOpening=true
   const { x, y, opacity } = AnimationProps(true);
   //le passo a gsap
-  $gsap.set(myModal.value, { opacity: 0, x: "0%", y: "0%" });
+  $gsap.set(myModal.value, { opacity: 1, x: "0%", y: "0%" });
   $gsap.to(myModal.value, {
     opacity: 1,
     duration: 0.3,
@@ -149,7 +149,7 @@ const closeModal = () => {
     duration: 0.5,
     ease: "power2.in",
     onComplete: () => {
-      $gsap.set(myModal.value, { opacity: 0, x: "100%", y: "100%" });
+      $gsap.set(myModal.value, { opacity: 1, x: "100%", y: "100%" });
       emit("close");
     },
   });
