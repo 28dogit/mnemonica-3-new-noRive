@@ -12,7 +12,7 @@
           <!-- <a href="#" class="z-10" @click="playFast">tl_test</a> -->
           <canvas
             ref="canvasRef"
-            id="canvas"
+            id="canvasPayoff"
             style="
               margin-top: 80px;
               position: absolute;
@@ -154,6 +154,7 @@ onMounted(() => {
       canvas: canvasRef.value,
       autoplay: true,
       stateMachines: "State Title",
+      //animations:"Hero-title-intro",
       layout: new Layout({
         fit: Fit.Layout, // Adatta senza distorsione
         alignment: Alignment.Center, // Centra l'animazione
@@ -161,6 +162,7 @@ onMounted(() => {
       }),
       onLoad: () => {
         rTitle.resizeDrawingSurfaceToCanvas();
+        //rTitle.pause();
       },
     });
 
@@ -180,6 +182,8 @@ onMounted(() => {
     window.addEventListener("resize", () => {
       [rTitle, rLogo].forEach(aggiornaResize);
     });
+
+    const stateMachineInputs = rTitle.stateMachineInputs("State Title");
 
     //!SECTION
 
@@ -227,22 +231,34 @@ onMounted(() => {
         rLogo.play("Logo intro");
       },
       null,
-      1
+      0.3
     );
-
     intro.from("#ghirlanda-element_start", {
       autoAlpha: 0,
       rotate: 5,
       filter: "blur(5px)",
-      duration: 1.5,
+      duration: 3,
       scale: 0.9,
       force3D: true,
       ease: "power2.inOut",
-    });
-    intro.EnterFrom("#logo_mne", { duration: 2, y: "0" });
-    intro.EnterFrom("#H-screen", { duration: 0.7 }, "<");
-    intro.EnterFrom("#H-deliver", { duration: 0.7 }, "> -=0.3");
-    intro.EnterFrom("#H-preserve", { duration: 0.7 }, "> -=0.3");
+    }, ">=0.5");
+    intro.to("#canvasLogo", {
+      autoAlpha: 0,
+      duration: 2,
+    },"<+=1");
+  intro.call(
+    () => {
+      rTitle.play("Hero-title-intro");
+    },
+    null,
+    2
+  );
+
+
+    // intro.EnterFrom("#logo_mne", { duration: 2, y: "0" });
+    // intro.EnterFrom("#H-screen", { duration: 0.7 }, "<");
+    // intro.EnterFrom("#H-deliver", { duration: 0.7 }, "> -=0.3");
+    // intro.EnterFrom("#H-preserve", { duration: 0.7 }, "> -=0.3");
     intro.EnterFrom("#heroSubTitle", { duration: 0.5, y: "-25px" }, "-=0.7");
 
     //!SECTION
