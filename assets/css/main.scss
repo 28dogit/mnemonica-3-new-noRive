@@ -80,7 +80,7 @@
 .content {
   // background-color: red;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   padding: 2em;
   width: 100%;
@@ -160,4 +160,21 @@
       margin-bottom: 100px;
     }
   }
+  #canvasLogo{
+    margin-top: 100px;
+    position: absolute;
+    z-index: 5;
+    @include bp.for-phone{ // W-1200px H-750px up
+      margin-top: 30px;
+    }
+  }
+  #canvasPayoff{
+    margin-top: 70px;
+    position: absolute;
+    // max-width: 960px;
+    z-index: 5;
+    @include bp.for-phone{ // W-1200px H-750px up
+      margin-top: 0px;
+    }
+    }
 //*!SECTION

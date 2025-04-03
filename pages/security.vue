@@ -15,14 +15,14 @@
       <source calss="deskMq" src="/assets/video/room-cards.mp4" type="video/mp4" />
     </video>
 
-    <video
+    <!-- <video
       class="video-webm"
       autoplay
       loop
       muted
       playsinline
       src="/assets/video/room-cards_5.webm"
-    ></video>
+    ></video> -->
   </div>
   <!-- <button @click="isModalOpen = true">Open Modal rooms</button> -->
   <MneParallaxWrapper :speed="100">
@@ -76,18 +76,46 @@ const closeModal = () => {
   }
 }
 
+// .video-sfumato {
+//     display: block;
+//     width: 100%;
+//     height: auto;
+//     /* Applica una maschera con gradiente da trasparente a opaco */
+//     mask-image: linear-gradient(to right, 
+//         transparent 0%, 
+//         rgba(0, 0, 0, 0.3) 10%, 
+//         black 20%);
+//     -webkit-mask-image: linear-gradient(to right, 
+//         transparent 0%, 
+//         rgba(0, 0, 0, 0.3) 10%, 
+//         black 20%);
+// }
 .video-sfumato {
+  position: absolute;
+  right: -20px;
     display: block;
-    width: 100%;
+    width: 50%;
     height: auto;
-    /* Applica una maschera con gradiente da trasparente a opaco */
-    mask-image: linear-gradient(to right, 
-        transparent 0%, 
-        rgba(0, 0, 0, 0.3) 10%, 
-        black 20%);
-    -webkit-mask-image: linear-gradient(to right, 
-        transparent 0%, 
-        rgba(0, 0, 0, 0.3) 10%, 
-        black 20%);
+    /* Applica una maschera con gradiente da trasparente a opaco su lato destro e in alto */
+    mask-image: 
+        linear-gradient(to right, 
+            transparent 0%, 
+            rgba(0, 0, 0, 0.3) 10%, 
+            black 20%),
+        linear-gradient(to bottom, 
+            transparent 0%, 
+            rgba(0, 0, 0, 0.3) 10%, 
+            black 20%);
+    -webkit-mask-image: 
+        linear-gradient(to right, 
+            transparent 0%, 
+            rgba(0, 0, 0, 0.3) 10%, 
+            black 20%),
+        linear-gradient(to bottom, 
+            transparent 0%, 
+            rgba(0, 0, 0, 0.3) 10%, 
+            black 20%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
 }
 </style>
