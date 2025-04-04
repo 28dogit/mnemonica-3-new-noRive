@@ -2,18 +2,20 @@
   <div class="page-wrapper">
     <div class="mausecoordinates">mouse: x: {{ x }} y: {{ y }}</div>
     <ContentRenderer v-if="page" :value="page" />
-      <video
-      class="video-sfumato"
-      autoplay
-      loop
-      muted
-      playsinline
-      preload="auto"
-    >
-      <!-- <source calss="deskMq" src="/assets/video/room-cards_4.webm" type="video/webm" /> -->
-      <source calss="mobileMq" src="/assets/video/box-2x-vertical.mp4" type="video/webm" />
-      <source calss="deskMq" src="/assets/video/room-cards.mp4" type="video/mp4" />
-    </video>
+      <div class="video-box">
+        <video
+        class="video-sfumato"
+        autoplay
+        loop
+        muted
+        playsinline
+        preload="auto"
+            >
+        <!-- <source calss="deskMq" src="/assets/video/room-cards_4.webm" type="video/webm" /> -->
+        <source calss="mobileMq" src="/assets/video/box-2x-vertical.mp4" type="video/webm" />
+        <source calss="deskMq" src="/assets/video/room-cards.mp4" type="video/mp4" />
+            </video>
+      </div>
 
     <!-- <video
       class="video-webm"
@@ -41,6 +43,10 @@ import { ref } from "vue";
 definePageMeta({
   layout: "page-layout",
 });
+
+
+// const videoV = document.querySelector(".video-sfumato");
+// videoV.playbackRate=2;
 
 const { x, y } = useMouse();
 const route = useRoute();
@@ -75,7 +81,12 @@ const closeModal = () => {
     display: none;
   }
 }
-
+.video-box{
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  width: 100%;
+}
 // .video-sfumato {
 //     display: block;
 //     width: 100%;
@@ -91,10 +102,10 @@ const closeModal = () => {
 //         black 20%);
 // }
 .video-sfumato {
-  position: absolute;
-  right: -20px;
+  position: relative;
+  right: -40px;
     display: block;
-    width: 50%;
+    width: 67%;
     height: auto;
     /* Applica una maschera con gradiente da trasparente a opaco su lato destro e in alto */
     mask-image: 
