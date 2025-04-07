@@ -86,10 +86,12 @@ import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
 import { HSectionsArchive } from "#components";
+import { toRaw } from 'vue'; //serve per gestire gli imput delle statemachine di RIVE
 
 const PhasesRef = ref(null);
-const canvasRef = ref(null);
 const canvasRefLogo = ref(null);
+const canvasRef = ref(null);
+const titleTrigger = ref(null);
 const canvasRefBtn = ref(null);
 const noFixedSTRef = ref(null);
 const handleScrollRef = ref(null);
@@ -128,7 +130,7 @@ onMounted(() => {
   nextTick(async () => {
     //SECTION - RIVE
     // Carica il file .riv una sola volta
-    rivBuffer = await loadRivFile("/assets/rive/hero_mne_divided.riv");
+    rivBuffer = await loadRivFile("/assets/rive/hero_mne_divided-test.riv");
 
     const rLogo = new Rive({
       buffer: rivBuffer, // Utilizza il buffer già caricato
@@ -163,9 +165,14 @@ onMounted(() => {
       onLoad: () => {
         rTitle.resizeDrawingSurfaceToCanvas();
         //rTitle.pause();
+        const inputs = rTitle.stateMachineInputs('State Title');
+        //console.log(inputs);
+        // Find the input you want to set a value for, or trigger e lo salvo in una ref titleTrigger
+        titleTrigger.value = inputs.find(i => i.name === 'start');
       },
     });
 
+  
     function aggiornaResize(elemento) {
       // Aggiorna gli attributi width e height del canvas in base alle dimensioni attuali
       // canvasRef.value.width = canvasRef.value.offsetWidth;
@@ -182,8 +189,6 @@ onMounted(() => {
     window.addEventListener("resize", () => {
       [rTitle, rLogo].forEach(aggiornaResize);
     });
-
-    const stateMachineInputs = rTitle.stateMachineInputs("State Title");
 
     //!SECTION
 
@@ -248,7 +253,12 @@ onMounted(() => {
     },"<+=1");
   intro.call(
     () => {
-      rTitle.play("Hero-title-intro");
+      if (titleTrigger.value) {
+        //gestisco l'input trigger della Statemachine di RIVE con toRaw per leggerla
+          const rawTrigger = toRaw(titleTrigger.value);
+          console.log(rawTrigger);
+          rawTrigger.fire();
+        }
     },
     null,
     2
