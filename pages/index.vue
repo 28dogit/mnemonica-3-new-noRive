@@ -130,7 +130,7 @@ onMounted(() => {
   nextTick(async () => {
     //SECTION - RIVE
     // Carica il file .riv una sola volta
-    rivBuffer = await loadRivFile("/assets/rive/hero_mne_divided-test.riv");
+    rivBuffer = await loadRivFile("/assets/rive/hero_mne_divided.riv");
 
     const rLogo = new Rive({
       buffer: rivBuffer, // Utilizza il buffer già caricato

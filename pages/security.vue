@@ -1,8 +1,13 @@
 <template>
   <div class="page-wrapper">
-    <div class="mausecoordinates">mouse: x: {{ x }} y: {{ y }}</div>
+    <!-- <div class="mausecoordinates">mouse: x: {{ x }} y: {{ y }}</div> -->
     <ContentRenderer v-if="page" :value="page" />
+    <!-- <div class="testgrad"></div> -->
       <div class="video-box">
+        <div class="video-box-content">
+        <h1>Title video UI</h1>
+        <h3>Spiegazione: dove si producono gli asset, momento fabbrica complementare al successivo archive</h3>
+      </div>
         <video
         class="video-sfumato"
         autoplay
@@ -17,16 +22,28 @@
             </video>
       </div>
 
-    <!-- <video
-      class="video-webm"
-      autoplay
-      loop
-      muted
-      playsinline
-      src="/assets/video/room-cards_5.webm"
-    ></video> -->
+      <div class="divider"></div>
+
+      <div class="video-box2">
+      <div class="video-box-content">
+        <h1>Title video UI</h1>
+        <h3>Spiegazione: dove si producono gli asset, momento fabbrica complementare al successivo archive</h3>
+      </div>
+        <video
+        class="video-sfumato2"
+        autoplay
+        loop
+        muted
+        playsinline
+        preload="auto"
+            >
+        <!-- <source calss="deskMq" src="/assets/video/room-cards_4.webm" type="video/webm" /> -->
+        <source calss="mobileMq" src="/assets/video/box-2x-vertical.mp4" type="video/webm" />
+        <source calss="deskMq" src="/assets/video/room-cards.mp4" type="video/mp4" />
+            </video>
+      </div>
   </div>
-  <!-- <button @click="isModalOpen = true">Open Modal rooms</button> -->
+
   <MneParallaxWrapper :speed="100">
     <BtnMaster @click="isModalOpen = true">open Modale security</BtnMaster>
   </MneParallaxWrapper>
@@ -44,6 +61,8 @@ definePageMeta({
   layout: "page-layout",
 });
 
+const { $gsap } = useNuxtApp();
+
 
 // const videoV = document.querySelector(".video-sfumato");
 // videoV.playbackRate=2;
@@ -60,6 +79,22 @@ const modalId = "security"; // qui indico il nome del modale che devo aprire in 
 const closeModal = () => {
   isModalOpen.value = false;
 };
+
+const animationscroll = () =>{
+  $gsap.fromTo(
+    ".video-box",
+    {
+      opacity: 0,
+    },
+    {
+      opacity: 1,
+      duration: 1.5,
+    }
+  );
+}
+
+animationscroll();
+
 </script>
 
 <style lang="scss" scoped>
@@ -81,51 +116,106 @@ const closeModal = () => {
     display: none;
   }
 }
+.divider{
+  height: 200px;
+}
 .video-box{
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  width: 100%;
+  // box-shadow: 0px 2px 18px 0px #E6EDF5;
+  box-shadow: 27px 0px 39px -14px rgba(0, 0, 0, 0.43);
+  border-radius: 0px 100px 100px 0px;
+  overflow: hidden;
+}
+.video-box2{
+  position: relative;
   display: flex;
   align-items: flex-end;
   flex-direction: column;
   width: 100%;
 }
-// .video-sfumato {
-//     display: block;
-//     width: 100%;
-//     height: auto;
-//     /* Applica una maschera con gradiente da trasparente a opaco */
-//     mask-image: linear-gradient(to right, 
-//         transparent 0%, 
-//         rgba(0, 0, 0, 0.3) 10%, 
-//         black 20%);
-//     -webkit-mask-image: linear-gradient(to right, 
-//         transparent 0%, 
-//         rgba(0, 0, 0, 0.3) 10%, 
-//         black 20%);
-// }
-.video-sfumato {
-  position: relative;
-  right: -40px;
-    display: block;
-    width: 67%;
-    height: auto;
-    /* Applica una maschera con gradiente da trasparente a opaco su lato destro e in alto */
+.video-box-content{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 10;
+    padding: 2em;
+  }
+.testgrad {
+  height: 100px;
+  width: 500px;
+  // background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+  background: linear-gradient(to right, transparent 0%, rgb(233 174 0 / 30%) 10%, rgb(68 85 209 / 60%) 20%, rgb(121 182 42 / 90%) 30%, #b62323 40%);
+}
+
+.video-sfumato {  
+  max-width: 40%;
+    /* Applico una maschera con gradiente da trasparente a opaco su lato destro e in alto */
     mask-image: 
-        linear-gradient(to right, 
+        linear-gradient(to right,  
             transparent 0%, 
             rgba(0, 0, 0, 0.3) 10%, 
-            black 20%),
-        linear-gradient(to bottom, 
-            transparent 0%, 
-            rgba(0, 0, 0, 0.3) 10%, 
-            black 20%);
+            rgba(0, 0, 0, 0.6) 25%, 
+            rgba(0, 0, 0, 0.9) 40%, 
+            black 60%);
     -webkit-mask-image: 
         linear-gradient(to right, 
             transparent 0%, 
             rgba(0, 0, 0, 0.3) 10%, 
-            black 20%),
-        linear-gradient(to bottom, 
+            rgba(0, 0, 0, 0.6) 25%, 
+            rgba(0, 0, 0, 0.9) 40%, 
+            black 60%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+}
+
+.video-sfumato2 {  
+  max-width: 40%;
+    /* Applico una maschera con gradiente da trasparente a opaco su lato destro e in alto */
+    mask-image: 
+        linear-gradient(to right, 
+        transparent 0%, 
+            rgba(0, 0, 0, 0.3) 10%, 
+            rgba(0, 0, 0, 0.6) 25%, 
+            rgba(0, 0, 0, 0.9) 40%, 
+            black 60%),
+            linear-gradient(to top, 
             transparent 0%, 
             rgba(0, 0, 0, 0.3) 10%, 
-            black 20%);
+            rgba(0, 0, 0, 0.6) 25%, 
+            rgba(0, 0, 0, 0.9) 40%, 
+            black 60%),
+       linear-gradient(to bottom, 
+            transparent 0%, 
+            rgba(0, 0, 0, 0.3) 10%, 
+            rgba(0, 0, 0, 0.6) 25%, 
+            rgba(0, 0, 0, 0.9) 40%, 
+            black 60%);
+    -webkit-mask-image: 
+        linear-gradient(to right, 
+            transparent 0%, 
+            rgba(0, 0, 0, 0.3) 10%, 
+            rgba(0, 0, 0, 0.6) 25%, 
+            rgba(0, 0, 0, 0.9) 40%, 
+            black 60%),
+            linear-gradient(to top, 
+            transparent 0%, 
+            rgba(0, 0, 0, 0.3) 10%, 
+            rgba(0, 0, 0, 0.6) 25%, 
+            rgba(0, 0, 0, 0.9) 40%, 
+            black 60%),
+        linear-gradient(to bottom, 
+        transparent 0%, 
+            rgba(0, 0, 0, 0.3) 10%, 
+            rgba(0, 0, 0, 0.6) 25%, 
+            rgba(0, 0, 0, 0.9) 40%, 
+            black 60%);
     -webkit-mask-composite: source-in;
     mask-composite: intersect;
 }
