@@ -14,12 +14,8 @@
             ref="canvasRef"
             id="canvasPayoff"
             style="
-              margin-top: 80px;
-              position: absolute;
               width: 100%;
-              max-width: 960px;
               height: 50vh;
-              z-index: 5;
             "
           ></canvas>
         </div>
@@ -169,6 +165,10 @@ onMounted(() => {
         //console.log(inputs);
         // Find the input you want to set a value for, or trigger e lo salvo in una ref titleTrigger
         titleTrigger.value = inputs.find(i => i.name === 'start');
+        //nomino i run text in rive e poi gli assegno un nuovo nome qui
+        rTitle.setTextRunValue("primo", "MEDIA");
+        rTitle.setTextRunValue("secondo", "ASSET");
+        rTitle.setTextRunValue("terzo", "MAGIC");
       },
     });
 

@@ -171,7 +171,7 @@
   #canvasPayoff{
     margin-top: 70px;
     position: absolute;
-    // max-width: 960px;
+    max-width: 960px;
     z-index: 5;
     @include bp.for-phone{ // W-1200px H-750px up
       margin-top: 0px;
