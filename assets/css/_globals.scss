@@ -62,3 +62,9 @@ $gradient_5: hsl(303, 90%, 32%);
     radial-gradient(circle at $x3 $y3, $gradient_2 0.25%, $gradient_4 40%);
     }
 }
+
+a.txt-link {
+    text-decoration: none;
+    border-bottom: 1px dashed $mne_secondary;
+    color: $mne_secondary;
+}

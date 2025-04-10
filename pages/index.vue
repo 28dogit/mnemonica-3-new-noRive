@@ -13,10 +13,7 @@
           <canvas
             ref="canvasRef"
             id="canvasPayoff"
-            style="
-              width: 100%;
-              height: 50vh;
-            "
+            style="width: 100%; height: 50vh"
           ></canvas>
         </div>
         <slot name="screentitle"></slot>
@@ -44,27 +41,33 @@
         <HSectionsModulesComponent></HSectionsModulesComponent>
       </div>
     </div>
-    <div class="nofixed_section w-[100vw] h-[1600px] z-30">
+    <div class="nofixed_section w-[100vw] z-30">
       <div class="preMade"></div>
-      <div id="made-for" class="max-w-[1200px]">
+      <div id="made-for" class="nofixed-inner-wrapper">
         <HSectionsMadeFor></HSectionsMadeFor>
       </div>
-      <div id="production" class="max-w-[1200px]">
+      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <div id="production" class="nofixed-inner-wrapper">
         <HSectionsProduction></HSectionsProduction>
       </div>
-      <div id="production-ui" class="max-w-[1200px]">
+      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <div id="production-ui" class="nofixed-inner-wrapper">
         <HSectionsProductionUi></HSectionsProductionUi>
       </div>
-      <div id="archive" class="max-w-[1200px]">
+      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <div id="archive" class="nofixed-inner-wrapper">
         <HSectionsArchive></HSectionsArchive>
       </div>
-      <div id="archive-ui" class="max-w-[1200px]">
+      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <div id="archive-ui" class="nofixed-inner-wrapper">
         <HSectionsArchiveUi></HSectionsArchiveUi>
       </div>
-      <div id="about-us" class="max-w-[1200px]">
+      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <div id="about-us" class="nofixed-inner-wrapper">
         <HSectionsAboutUs></HSectionsAboutUs>
       </div>
-      <div id="contacts" class="max-w-[1200px]">
+      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <div id="contacts" class="nofixed-inner-wrapper">
         <HSectionsContacts></HSectionsContacts>
       </div>
     </div>
@@ -82,7 +85,7 @@ import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
 import { HSectionsArchive } from "#components";
-import { toRaw } from 'vue'; //serve per gestire gli imput delle statemachine di RIVE
+import { toRaw } from "vue"; //serve per gestire gli imput delle statemachine di RIVE
 
 const PhasesRef = ref(null);
 const canvasRefLogo = ref(null);
@@ -161,10 +164,10 @@ onMounted(() => {
       onLoad: () => {
         rTitle.resizeDrawingSurfaceToCanvas();
         //rTitle.pause();
-        const inputs = rTitle.stateMachineInputs('State Title');
+        const inputs = rTitle.stateMachineInputs("State Title");
         //console.log(inputs);
         // Find the input you want to set a value for, or trigger e lo salvo in una ref titleTrigger
-        titleTrigger.value = inputs.find(i => i.name === 'start');
+        titleTrigger.value = inputs.find((i) => i.name === "start");
         //nomino i run text in rive e poi gli assegno un nuovo nome qui
         rTitle.setTextRunValue("primo", "MEDIA");
         rTitle.setTextRunValue("secondo", "ASSET");
@@ -172,7 +175,6 @@ onMounted(() => {
       },
     });
 
-  
     function aggiornaResize(elemento) {
       // Aggiorna gli attributi width e height del canvas in base alle dimensioni attuali
       // canvasRef.value.width = canvasRef.value.offsetWidth;
@@ -238,32 +240,39 @@ onMounted(() => {
       null,
       0.3
     );
-    intro.from("#ghirlanda-element_start", {
-      autoAlpha: 0,
-      rotate: 5,
-      filter: "blur(5px)",
-      duration: 3,
-      scale: 0.9,
-      force3D: true,
-      ease: "power2.inOut",
-    }, ">=0.5");
-    intro.to("#canvasLogo", {
-      autoAlpha: 0,
-      duration: 2,
-    },"<+=1");
-  intro.call(
-    () => {
-      if (titleTrigger.value) {
-        //gestisco l'input trigger della Statemachine di RIVE con toRaw per leggerla
+    intro.from(
+      "#ghirlanda-element_start",
+      {
+        autoAlpha: 0,
+        rotate: 5,
+        filter: "blur(5px)",
+        duration: 3,
+        scale: 0.9,
+        force3D: true,
+        ease: "power2.inOut",
+      },
+      ">=0.5"
+    );
+    intro.to(
+      "#canvasLogo",
+      {
+        autoAlpha: 0,
+        duration: 2,
+      },
+      "<+=1"
+    );
+    intro.call(
+      () => {
+        if (titleTrigger.value) {
+          //gestisco l'input trigger della Statemachine di RIVE con toRaw per leggerla
           const rawTrigger = toRaw(titleTrigger.value);
           console.log(rawTrigger);
           rawTrigger.fire();
         }
-    },
-    null,
-    2
-  );
-
+      },
+      null,
+      2
+    );
 
     // intro.EnterFrom("#logo_mne", { duration: 2, y: "0" });
     // intro.EnterFrom("#H-screen", { duration: 0.7 }, "<");
