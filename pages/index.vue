@@ -120,11 +120,22 @@ function playFast() {
   introRef.value.play();
 }
 
+function checkNofixedSection() {
+  const nofixedSection = document.querySelector(".nofixed_section");
+  return nofixedSection && window.scrollY > nofixedSection.offsetTop;
+}
+
 onMounted(() => {
   const { $gsap } = useNuxtApp();
 
+  if (!checkNofixedSection()) {
+    document.body.style.overflow = "hidden";
+    setFixedSection(true);
+  } else {
+    setFixedSection(false);
+  }
   // blocca lo scroll on mount (solo per index)
-  document.body.style.overflow = "hidden";
+  // document.body.style.overflow = "hidden";
 
   nextTick(async () => {
     //SECTION - RIVE

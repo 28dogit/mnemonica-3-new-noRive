@@ -34,7 +34,9 @@
 
         <UButton type="submit"> Submit </UButton>
 
-        <UButton variant="outline" class="ml-2" @click="form.clear()"> Clear </UButton>
+        <UButton variant="outline" class="ml-2" @click="form.value?.clear()">
+          Clear
+        </UButton>
       </UForm>
     </div>
   </div>
