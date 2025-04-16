@@ -27,7 +27,7 @@
           <ContentRenderer v-if="modalContentData" :value="modalContentData" />
         </div>
         <div class="modal-inner-2">
-          <ContentRenderer v-if="modalContentData" :value="modalContentData" />
+          <MneFormContact>Get in touch</MneFormContact>
         </div>
       </div>
     </dialog>
@@ -36,15 +36,7 @@
 </template>
 
 <script setup>
-import {
-  ref,
-  onMounted,
-  onBeforeUnmount,
-  onUnmounted,
-  computed,
-  watch,
-  nextTick,
-} from "vue";
+import { ref, onMounted, onBeforeUnmount, onUnmounted, computed, watch, nextTick } from "vue";
 import { useWindowSize } from "@vueuse/core";
 const { $gsap } = useNuxtApp();
 
@@ -250,14 +242,17 @@ onUnmounted(() => {});
   max-width: 50vw;
 }
 .modal-inner {
+  box-sizing: border-box;
   min-height: 50vh;
   height: 50vh;
 }
 .modal-inner-2 {
+  box-sizing: border-box;
   min-height: 100vh;
   height: 100vh;
+  padding: 2em;
 }
 .modal-content {
-  height: 150vh;
+  height: auto;
 }
 </style>

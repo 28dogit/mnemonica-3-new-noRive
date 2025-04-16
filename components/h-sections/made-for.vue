@@ -8,10 +8,7 @@
       <div class="boxMF cursor-pointer" @click="openModal('madefor/post-supervisors')">
         <p class="font-semibold">Post Supervisors</p>
       </div>
-      <div
-        class="boxMF cursor-pointer"
-        @click="openModal('madefor/post-production-labs')"
-      >
+      <div class="boxMF cursor-pointer" @click="openModal('madefor/post-production-labs')">
         <p class="font-semibold">Post-production Labs</p>
       </div>
       <div class="boxMF cursor-pointer" @click="openModal('madefor/distributors')">
