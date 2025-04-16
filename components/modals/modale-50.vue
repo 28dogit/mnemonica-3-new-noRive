@@ -20,7 +20,13 @@
         >
           <BtnClose></BtnClose>
         </button>
-        <div ref="modalInner" class="modal-inner">
+        <!-- <div ref="modalInner" class="modal-inner">
+          <ContentRenderer v-if="modalContentData" :value="modalContentData" />
+        </div> -->
+        <div class="modal-inner">
+          <ContentRenderer v-if="modalContentData" :value="modalContentData" />
+        </div>
+        <div class="modal-inner-2">
           <ContentRenderer v-if="modalContentData" :value="modalContentData" />
         </div>
       </div>
@@ -70,7 +76,7 @@ const isClient = ref(false);
 const isMounted = ref(false);
 const myModal = ref(null);
 const modalContent = ref(null);
-const modalInner = ref(null);
+//const modalInner = ref(null);
 const { width, height } = useWindowSize({
   initialWidth: 0,
   initialHeight: 0,
@@ -103,7 +109,7 @@ const AnimationProps = (isOpening) => {
   if (isPortrait.value) {
     // Entrata dal basso per orientamento verticale
     return {
-      y: isOpening ? "100vw" : "100vw", //isOpening true = si sta aprendo e y sarà 100, se è false si sta chiudendo quindi y sarà 0
+      y: isOpening ? "100vh" : "100vh", //isOpening true = si sta aprendo e y sarà 100, se è false si sta chiudendo quindi y sarà 0
       x: "0%",
       opacity: 0,
     };
@@ -135,7 +141,7 @@ const openModal = () => {
     {
       opacity: 1,
       x: isPortrait.value ? "0vw" : "50vw",
-      y: isPortrait.value ? "50vw" : "0vw",
+      y: isPortrait.value ? "50vh" : "0vh",
       duration: 1,
       ease: "power2.out",
     }
@@ -242,5 +248,16 @@ onUnmounted(() => {});
 <style lang="scss" scoped>
 .horizontal50 .modal-content {
   max-width: 50vw;
+}
+.modal-inner {
+  min-height: 50vh;
+  height: 50vh;
+}
+.modal-inner-2 {
+  min-height: 100vh;
+  height: 100vh;
+}
+.modal-content {
+  height: 150vh;
 }
 </style>

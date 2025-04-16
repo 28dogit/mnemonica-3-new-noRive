@@ -1,11 +1,7 @@
 <template>
   <div class="rive">
     <div class="content">
-        <canvas
-            ref="canvasRiveRef"
-            id="canvasrive"
-            style="width: 460px;"
-          ></canvas>
+      <canvas ref="canvasRiveRef" id="canvasrive" style="width: 460px"></canvas>
     </div>
   </div>
 </template>
@@ -29,8 +25,8 @@ async function loadRivFile(url) {
   return await response.arrayBuffer();
 }
 onMounted(() => {
-    //const { $gsap } = useNuxtApp();
-    nextTick(async () => {
+  //const { $gsap } = useNuxtApp();
+  nextTick(async () => {
     //SECTION - RIVE
     // Carica il file .riv una sola volta
     rivBuffer = await loadRivFile("/assets/rive/hero_mne_divided-test.riv");
@@ -69,11 +65,7 @@ onMounted(() => {
       [rLogo].forEach(aggiornaResize);
     });
   });
-
 });
-
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
