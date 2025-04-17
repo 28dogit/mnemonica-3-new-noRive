@@ -1,16 +1,17 @@
 <template>
   <div class="page-wrapper">
-    <h1>Mnemonica Gate</h1>
-    <p>
-      Duis at sollicitudin eros. Fusce posuere magna non nisi venenatis, vitae vulputate est pellentesque. In a tortor
-      tempor, scelerisque risus sit amet, mattis diam.
-    </p>
+    <ContentRenderer v-if="page" :value="page" />
   </div>
 </template>
 
 <script setup>
 definePageMeta({
   layout: "page-layout",
+});
+const route = useRoute();
+
+const { data: page } = await useAsyncData(route.path, () => {
+  return queryCollection("content").path(route.path).first();
 });
 </script>
 
