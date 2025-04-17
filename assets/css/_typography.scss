@@ -2,34 +2,33 @@
 @use "breakpoints.scss" as bp;
 
 h1 {
-    font-size: 2.5rem;
-    color: $mne_lighter;
-    font-weight: 300;
-    letter-spacing: 1px;
-    padding: 20px 0;
-    font-optical-sizing: auto;
-    @include bp.for-phone{
-        font-size: 2rem;
-    }
-    // .light & {
-    //     color: #151515;
-    // }
+  font-size: 2.5rem;
+  color: $mne_lighter;
+  font-weight: 300;
+  letter-spacing: 1px;
+  //padding: 20px 0;
+  font-optical-sizing: auto;
+  @include bp.for-phone {
+    font-size: 2rem;
+  }
+  // .light & {
+  //     color: #151515;
+  // }
 }
 h2 {
-    font-size: 1.3rem;
-    line-height: 2rem;
-    color: $mne_text-on-dark;
-    font-weight: 400;
-    font-optical-sizing: auto;
-    @include bp.for-phone{
-        
-    }
+  font-size: 1.3rem;
+  line-height: 2rem;
+  color: $mne_text-on-dark;
+  font-weight: 400;
+  font-optical-sizing: auto;
+  @include bp.for-phone {
+  }
 }
-h2#heroSubTitle{
-    @include bp.for-phone{
-        font-size: 1rem;
+h2#heroSubTitle {
+  @include bp.for-phone {
+    font-size: 1rem;
     line-height: 1.5rem;
-    }
+  }
 }
 // h3 {
 //     padding: 10px 0;
@@ -41,15 +40,15 @@ h2#heroSubTitle{
 //   font-style: normal;
 // }
 p {
-    font-size: 1rem;
-    line-height: 1.5rem;
-    color: #dadada;
-    margin-bottom: 10px;
-    font-optical-sizing: auto;
-    font-weight: 300;
-    font-style: normal;
-    @include bp.for-phone{
-        font-size: 0.85rem;
-        line-height: 1.3rem;
-    }
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #dadada;
+  margin-bottom: 10px;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  @include bp.for-phone {
+    font-size: 0.85rem;
+    line-height: 1.3rem;
+  }
 }

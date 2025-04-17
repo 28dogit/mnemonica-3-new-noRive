@@ -1,25 +1,23 @@
 ---
-title: Specialty Features
+title: Magic Features
 description: Specialty Features page
-links:
-  - /mobile-app
-  - /security
 seo:
-  title: Mnemonica Specialty Features
-  description: Specialty Features page
+  title: Mnemonica Magic Features
+  description: Magic Features page
 navigation:
   title: Features
 ---
 
 ::title-subtitle
-#title 
-Specialty Features
+#title
+Magic Features
 
 #subtitle
-Sottotitolo Specialty Features
+Sottotitolo Features
 ::
 
 ::page-content-block
+
 ### Titoletto h3
 
 Questa pagina è dedicata alle funzionalità speciali.
@@ -31,7 +29,9 @@ Questa pagina è dedicata alle funzionalità speciali.
 ::
 
 ::page-content-block
-###  Gallery
+
+### Gallery
+
 ::
 
 ::gallery
@@ -43,4 +43,3 @@ Questa pagina è dedicata alle funzionalità speciali.
 ::page-content-block
 altro blocco contentuo pagina
 ::
-

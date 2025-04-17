@@ -1,6 +1,7 @@
 <template>
   <div class="page-wrapper">
-    <h1>Screenning Rooms</h1>
+    <h1>Archive</h1>
+    <h2>Use Cases</h2>
   </div>
 </template>
 

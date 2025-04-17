@@ -2,15 +2,12 @@
   <div class="section-production home">
     <h3>Plans and Pricing</h3>
     <h1>Production</h1>
-    <p>
-      Spiegazione: dove si producono gli asset, momento fabbrica complementare al
-      successivo archive.
-    </p>
+    <p>Spiegazione: dove si producono gli asset, momento fabbrica complementare al successivo archive.</p>
 
     <div class="content">
-      <a href="" class="txt-link">Main components</a>
-      <a href="" class="txt-link">Use Cases </a>
-      <a href="" class="txt-link">Hall of Fame</a>
+      <nuxt-link to="/screening-rooms" class="txt-link">Main components</nuxt-link>
+      <nuxt-link to="/production-use-cases" class="txt-link">Use Cases</nuxt-link>
+      <nuxt-link to="/production-hall-fame" class="txt-link">Hall of Fame</nuxt-link>
       <UTabs :items="items"></UTabs>
     </div>
   </div>

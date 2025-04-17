@@ -1,6 +1,6 @@
 <template>
   <div class="page-wrapper">
-    <h1>Screenning Rooms</h1>
+    <h1>Masters</h1>
   </div>
 </template>
 

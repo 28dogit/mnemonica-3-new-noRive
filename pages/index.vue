@@ -4,17 +4,8 @@
       <div id="hero-section" class="section_fixed hero">
         <div id="hero-element" class="element">
           <div id="ghirlanda-element" class="circular"></div>
-          <canvas
-            ref="canvasRefLogo"
-            id="canvasLogo"
-            style="position: absolute; height: 100px; z-index: 5"
-          ></canvas>
-          <!-- <a href="#" class="z-10" @click="playFast">tl_test</a> -->
-          <canvas
-            ref="canvasRef"
-            id="canvasPayoff"
-            style="width: 100%; height: 50vh"
-          ></canvas>
+          <canvas ref="canvasRefLogo" id="canvasLogo" style="position: absolute; height: 100px; z-index: 5"></canvas>
+          <canvas ref="canvasRef" id="canvasPayoff" style="width: 100%; height: 50vh"></canvas>
         </div>
         <slot name="screentitle"></slot>
         <div id="hero-content-wrapper" class="wrapper">

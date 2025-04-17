@@ -3,14 +3,14 @@
     <h3>Plans and Pricing</h3>
     <h1>Archive</h1>
     <p>
-      Spiegazione: dove si proteggono si presentano e si vendono gli asset, momento
-      successivo e complementare alla production.
+      Spiegazione: dove si proteggono si presentano e si vendono gli asset, momento successivo e complementare alla
+      production.
     </p>
 
     <div class="content">
-      <a href="" class="txt-link">Main components</a>
-      <a href="" class="txt-link">Use Cases </a>
-      <a href="" class="txt-link">Trusted by</a>
+      <nuxt-link to="/masters" class="txt-link">Main components</nuxt-link>
+      <nuxt-link to="/archive-use-cases" class="txt-link">Use Cases</nuxt-link>
+      <nuxt-link to="/archive-trusted-by" class="txt-link">Trusted by</nuxt-link>
       <img src="https://placehold.co/600x400" alt="Placeholder" />
     </div>
   </div>

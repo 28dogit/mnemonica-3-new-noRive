@@ -10,10 +10,7 @@
         @click="close_mNav"
         class="menu-x-btn bg-black rounded-full absolute top-[20px] right-[20px] w-9 h-9 flex items-center justify-center"
       >
-        <UIcon
-          name="i-heroicons-x-mark"
-          class="text-woodsmoke-400 hover:text-woodsmoke-100 w-5 h-5"
-        ></UIcon>
+        <UIcon name="i-heroicons-x-mark" class="text-woodsmoke-400 hover:text-woodsmoke-100 w-5 h-5"></UIcon>
       </button>
       <svg width="50" height="50" class="absolute top-[13px] right-[13px] -z-10">
         <circle id="x-circle" cx="25" cy="25" r="17" stroke-width="0" fill="#ffffff" />
@@ -26,7 +23,7 @@
           <nuxt-link to="/security">Security</nuxt-link>
         </li>
         <li class="dark:hover:text-chenin-300 hover:text-seagull-400" @click="close_mNav">
-          <nuxt-link to="/specialty-features">Features</nuxt-link>
+          <nuxt-link to="/features">Features</nuxt-link>
         </li>
         <li class="dark:hover:text-chenin-300 hover:text-seagull-400" @click="close_mNav">
           <nuxt-link to="/mobile-app">App</nuxt-link>

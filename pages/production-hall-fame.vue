@@ -1,6 +1,7 @@
 <template>
   <div class="page-wrapper">
-    <h1>Screenning Rooms</h1>
+    <h1>Production</h1>
+    <h2>Hall of Fame</h2>
   </div>
 </template>
 
