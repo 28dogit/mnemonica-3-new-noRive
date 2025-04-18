@@ -21,13 +21,15 @@
       </UFormField>
 
       <UFormField name=" checkbox" label="Privacy Policy" required>
-        <UCheckbox v-model="state.checkbox"
-          label="I have read, understood, and accepted Mnemonica data treatment rules." />
+        <UCheckbox
+          v-model="state.checkbox"
+          label="I have read, understood, and accepted Mnemonica data treatment rules."
+        />
       </UFormField>
 
-      <UButton type="submit"> Submit </UButton>
+      <UButton color="neutral" type="submit"> Submit </UButton>
 
-      <UButton variant="outline" class="ml-2" @click="clearForm()"> Clear </UButton>
+      <UButton color="neutral" variant="outline" class="ml-2" @click="clearForm()"> Clear </UButton>
     </UForm>
     <div v-if="successMessage" class="text-green-600 mt-4">{{ successMessage }}</div>
   </div>

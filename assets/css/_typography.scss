@@ -45,7 +45,7 @@ p {
   color: #dadada;
   margin-bottom: 10px;
   font-optical-sizing: auto;
-  font-weight: 300;
+  //font-weight: 400;
   font-style: normal;
   @include bp.for-phone {
     font-size: 0.85rem;
