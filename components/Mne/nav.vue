@@ -11,7 +11,7 @@
         </li>
         <li class="nav-hover"><nuxt-link to="/mobile-app">App</nuxt-link></li>
         <li class="nav-hover">
-          <a href="#made-for" class="z-10">anchor</a>
+          <a href="#" @click.prevent="navigateToSection">Made For</a>
         </li>
         <!-- <li class="nav-hover"><a href="#" @click="playFast">Blog</a></li> -->
       </ul>
@@ -19,6 +19,19 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script setup>
+import { useNavStore } from "@/stores/navigationStore";
+import { navigateTo } from "#app";
+
+const navigationStore = useNavStore();
+
+const navigateToSection = () => {
+  // Imposta la sezione di destinazione e indica che deve essere eseguita la logica personalizzata
+  console.log("Navigazione avviata...");
+  navigationStore.setTargetSection("made-for", true);
+  console.log("Stato impostato:", navigationStore);
+  navigateTo("/");
+};
+</script>
 
 <style scoped></style>

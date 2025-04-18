@@ -18,6 +18,8 @@
         <slot name="screentitle"></slot>
         <div id="hero-content-wrapper" class="wrapper">
           <div id="hero-content" class="content hero">
+            <!-- <div id="heroTitle" class="flex items-center justify-center flex-wrap">
+            </div> -->
             <div class="headline">
               <h2 id="heroSubTitle" class="hidden min-[680px]:block text-center">
                 Let your media assets flourish and last in the digital cinema ecosystem
@@ -32,6 +34,7 @@
       </div>
       <div id="phases-section" class="section_fixed phases">
         <HSectionsPhasesComponent ref="PhasesRef"></HSectionsPhasesComponent>
+        <!-- <HSectionsTest ref="TestRef"></HSectionsTest> -->
       </div>
       <div id="modules-section" class="section_fixed modules">
         <HSectionsModulesComponent></HSectionsModulesComponent>
@@ -71,6 +74,12 @@
 </template>
 
 <script setup>
+// const { data: contentModulesComponent } = await useAsyncData(() =>
+//   queryCollection("content").path("/modules-content").first()
+// );
+// const { data: contentPhasesComponent } = await useAsyncData(() =>
+//   queryCollection("content").path("/phases-content").first()
+// );
 import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
@@ -81,25 +90,39 @@ const PhasesRef = ref(null);
 const canvasRefLogo = ref(null);
 const canvasRef = ref(null);
 const titleTrigger = ref(null);
+const canvasRefBtn = ref(null);
 const noFixedSTRef = ref(null);
 const handleScrollRef = ref(null);
-//costante in cui salvo sectionsTL per renderla disponibile in tutti i componenti
-const introRef = ref(null);
+
 // Usiamo il composable per lo stato Fixed Section
 const { isfixedSection, setFixedSection } = useFixedSection();
+
 // Variabile per memorizzare il buffer del file .riv
 let rivBuffer = null;
+
 // Funzione per caricare il file .riv una sola volta
 async function loadRivFile(url) {
   const response = await fetch(url);
   return await response.arrayBuffer();
 }
 
+function handleClick(event) {
+  event.preventDefault();
+  alert("Pulsante cliccato!");
+}
+const introRef = ref(null);
+function playFast() {
+  // Imposta la velocità a 2x
+  introRef.value.timeScale(2);
+
+  // Rimuovi tutte le pause e riproduci la timeline fino alla fine
+  introRef.value.play();
+}
+
 function checkNofixedSection() {
   const nofixedSection = document.querySelector(".nofixed_section");
   return nofixedSection && window.scrollY > nofixedSection.offsetTop;
 }
-
 //SECTION - scrolltest
 import { useNavStore } from "@/stores/navigationStore";
 
@@ -117,16 +140,8 @@ const scrollToSection = (sectionId) => {
 
 // Funzione personalizzata da eseguire
 const customLogic = () => {
-  // Aggiungi qui altre operazioni necessarie
-  if (introRef.value) {
-    introRef.value.progress(1, false); // Jump to end without animation
-    // Or animate: introRef.value.play(introRef.value.duration());
-  }
-  const madeForSection = document.getElementById("made-for");
-  if (madeForSection) {
-    madeForSection.scrollIntoView({ behavior: "smooth" });
-  }
   console.log("Logica personalizzata eseguita!");
+  // Aggiungi qui altre operazioni necessarie
 };
 
 //!SECTION
@@ -215,6 +230,10 @@ onMounted(() => {
     });
 
     function aggiornaResize(elemento) {
+      // Aggiorna gli attributi width e height del canvas in base alle dimensioni attuali
+      // canvasRef.value.width = canvasRef.value.offsetWidth;
+      // canvasRef.value.height = canvasRef.value.offsetHeight;
+
       elemento.layout = new Layout({
         fit: Fit.Layout, // Cambia il fit per coprire l'area
         alignment: Alignment.Center, // Allinea in basso
@@ -308,6 +327,11 @@ onMounted(() => {
       null,
       2
     );
+
+    // intro.EnterFrom("#logo_mne", { duration: 2, y: "0" });
+    // intro.EnterFrom("#H-screen", { duration: 0.7 }, "<");
+    // intro.EnterFrom("#H-deliver", { duration: 0.7 }, "> -=0.3");
+    // intro.EnterFrom("#H-preserve", { duration: 0.7 }, "> -=0.3");
     intro.EnterFrom("#heroSubTitle", { duration: 0.5, y: "-25px" }, "-=0.7");
 
     //!SECTION
@@ -355,6 +379,14 @@ onMounted(() => {
         deltaY = touchStartY - touchEndY;
       }
 
+      // Soglia minima per evitare input accidentali su mobile
+      // if (Math.abs(deltaY) > 30) {
+      //   if (deltaY > 0) {
+      //     sectionsTL.play(); // Scroll down
+      //   } else {
+      //     sectionsTL.reverse(); // Scroll up
+      //   }
+      // }
       //!SECTION
 
       if (event.deltaY > 0) {
@@ -391,6 +423,7 @@ onMounted(() => {
     $gsap.set("#hero-section", { zIndex: 1 });
     $gsap.set("#modules-section", { zIndex: 0 });
     $gsap.set("#phases-section", { zIndex: 0 });
+    //$gsap.set("#pre-chips-container .title", { autoAlpha: 0 });
     $gsap.set("#post-chips-container .title", { opacity: 0, y: -10 });
     $gsap.set("#production-chips-container .title", { opacity: 0, y: -10 });
     $gsap.set("#market-chips-container .title", { opacity: 0, y: -10 });
@@ -439,10 +472,12 @@ onMounted(() => {
     //ANCHOR - Hero end
 
     //ANCHOR - Phases Section Start
+    // sectionsTL.call(() => PhasesRef.value.rotationTL.pause());
     sectionsTL.call(() => RotationTL.pause());
     sectionsTL.call(() => RotationTL_Titles.pause());
 
     sectionsTL.to("#modules_svg", { rotate: "+=60", ease: "power1.in" });
+    //sectionsTL.call(() => PhasesRef.value.rotationTL.play(), [], "<+=0.2");
     sectionsTL.call(() => RotationTL.play(), [], "<+=0.2");
     sectionsTL.call(() => RotationTL_Titles.play(), [], "<+=0.2");
     sectionsTL.to(
