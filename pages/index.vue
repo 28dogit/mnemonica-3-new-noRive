@@ -34,7 +34,6 @@
       <div id="made-for" class="nofixed-inner-wrapper">
         <HSectionsMadeFor></HSectionsMadeFor>
       </div>
-      <USeparator color="primary" type="solid" icon="i-simple-icons-nuxtdotjs" />
       <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="production" class="nofixed-inner-wrapper">
         <HSectionsProduction></HSectionsProduction>
@@ -404,7 +403,7 @@ onMounted(() => {
           window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
         }, 100);
       },
-      onReverseCompleted: () => {},
+      onReverseCompleted: () => { },
     });
 
     //ANCHOR - Hero Section Start
@@ -585,5 +584,4 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-//@use "@/assets/css/_globals.scss" as *;
-</style>
+//@use "@/assets/css/_globals.scss" as *;</style>

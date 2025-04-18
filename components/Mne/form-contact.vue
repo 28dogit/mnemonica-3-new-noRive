@@ -1,28 +1,28 @@
 <template>
-  <h2><slot>Form name</slot></h2>
+  <h2>
+    <slot>Form name</slot>
+  </h2>
   <div>
     <UForm ref="form" :schema="formSchema" :state="state" class="space-y-4" @submit="formSubmition">
       <UFormField name="email" label="Email" required>
-        <UInput v-model="state.email" type="email" />
+        <UInput v-model="state.email" type="email" class="w-full" />
       </UFormField>
 
       <UFormField name="select" label="Your Interest" required>
-        <USelect v-model="state.select" placeholder="Select..." :options="options" />
+        <USelect v-model="state.select" placeholder="Select..." :items="items" class="w-full" />
       </UFormField>
 
       <UFormField name="firstName" label="First Name" required>
-        <UInput v-model="state.firstName" type="text" />
+        <UInput v-model="state.firstName" type="text" class="w-full" placeholder="John" />
       </UFormField>
 
       <UFormField name="lastName" label="Last Name" required>
-        <UInput v-model="state.lastName" type="text" />
+        <UInput v-model="state.lastName" type="text" class="w-full" placeholder="Doe" />
       </UFormField>
 
-      <UFormField name="checkbox" label="Privacy Policy" required>
-        <UCheckbox
-          v-model="state.checkbox"
-          label="I have read, understood, and accepted Mnemonica data treatment rules."
-        />
+      <UFormField name=" checkbox" label="Privacy Policy" required>
+        <UCheckbox v-model="state.checkbox"
+          label="I have read, understood, and accepted Mnemonica data treatment rules." />
       </UFormField>
 
       <UButton type="submit"> Submit </UButton>
@@ -40,14 +40,14 @@ import { z } from "zod";
 const form = ref(null);
 const successMessage = ref("");
 
-const options = [
+const items = ref([
   { label: "Demo", value: "demo" },
   { label: "Trial", value: "trial" },
   { label: "Quote", value: "quote" },
   { label: "More Info", value: "info" },
   { label: "Phone Call", value: "call" },
   { label: "Other", value: "other" },
-];
+]);
 const state = reactive({
   email: undefined,
   firstName: undefined,
