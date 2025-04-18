@@ -2,28 +2,28 @@
   <h2><slot>Form name</slot></h2>
   <div>
     <UForm ref="form" :schema="formSchema" :state="state" class="space-y-4" @submit="formSubmition">
-      <UFormGroup name="email" label="Email" required>
+      <UFormField name="email" label="Email" required>
         <UInput v-model="state.email" type="email" />
-      </UFormGroup>
+      </UFormField>
 
-      <UFormGroup name="select" label="Your Interest" required>
+      <UFormField name="select" label="Your Interest" required>
         <USelect v-model="state.select" placeholder="Select..." :options="options" />
-      </UFormGroup>
+      </UFormField>
 
-      <UFormGroup name="firstName" label="First Name" required>
+      <UFormField name="firstName" label="First Name" required>
         <UInput v-model="state.firstName" type="text" />
-      </UFormGroup>
+      </UFormField>
 
-      <UFormGroup name="lastName" label="Last Name" required>
+      <UFormField name="lastName" label="Last Name" required>
         <UInput v-model="state.lastName" type="text" />
-      </UFormGroup>
+      </UFormField>
 
-      <UFormGroup name="checkbox" label="Privacy Policy" required>
+      <UFormField name="checkbox" label="Privacy Policy" required>
         <UCheckbox
           v-model="state.checkbox"
           label="I have read, understood, and accepted Mnemonica data treatment rules."
         />
-      </UFormGroup>
+      </UFormField>
 
       <UButton type="submit"> Submit </UButton>
 
@@ -34,6 +34,7 @@
 </template>
 
 <script setup>
+import { UFormField } from "#components";
 import { reactive, ref } from "vue";
 import { z } from "zod";
 const form = ref(null);

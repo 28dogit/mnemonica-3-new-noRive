@@ -67,7 +67,6 @@ const { slots, defaultContent } = fetchSection();
 //!SECTION
 // SECTION - SCRIPT
 //le altre importazioni derivano dalla pagina principale
-import { _zIndex } from "#tailwind-config/theme";
 import { nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -136,8 +135,7 @@ onMounted(() => {
     color: #fff;
     font-size: 1.3rem;
     margin-bottom: 0;
-    text-shadow: 0 0 7px rgba(184, 239, 250, 1), 0 0 10px rgba(184, 239, 250, 1),
-      0 0 22px rgba(184, 239, 250, 1);
+    text-shadow: 0 0 7px rgba(184, 239, 250, 1), 0 0 10px rgba(184, 239, 250, 1), 0 0 22px rgba(184, 239, 250, 1);
   }
   #modules-content {
     // display: flex;

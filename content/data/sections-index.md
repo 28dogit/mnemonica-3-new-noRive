@@ -43,7 +43,7 @@ Experience active workspaces that free you from repetitive tasks—encoding, wat
 With the built-in data transfer facility, you can send & receive files and folders of any size and complexity directly from/to Rooms, as well as local drives, or deliver materials agreed in sales and distribution contracts. All without leaving Mnemonica safe walls.
 
 #link21
-[Learn more about Screening Rooms](/OLD/provadata2)
+[Learn more about Screening Rooms](/screening-rooms)
 
 #title3
 ## Preserve

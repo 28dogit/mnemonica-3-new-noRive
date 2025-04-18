@@ -10,7 +10,7 @@ const scssFiles = readdirSync(cssDir)
 // fine importazione css
 export default defineNuxtConfig({
   app: {
-    baseURL: "/mne/", // Assicurati che il percorso sia seguito da una barra finale
+    baseURL: "/mne", // Assicurati che il percorso sia seguito da una barra finale
     // layoutTransition: { name: 'layout', mode: 'out-in' }
   },
   robots: { robotsTxt: false },
@@ -22,18 +22,22 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
-  css: scssFiles, // Include all SCSS files in the assets/css directory invecec di dichiararli uno per volta
+  css: [
+    "~/assets/css/tailwindcss.css", // Importa Tailwind per primo!
+    ...scssFiles, // Poi tutti gli SCSS
+  ],
+  //css: scssFiles, // Include all SCSS files in the assets/css directory invecec di dichiararli uno per volta
   // css: [
   //   '~/assets/css/main.scss',
   //   '~/assets/css/nav.scss'
   // ],
 
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
-  },
+  // postcss: {
+  //   plugins: {
+  //     tailwindcss: {},
+  //     autoprefixer: {},
+  //   },
+  // },
 
   vite: {
     css: {
@@ -47,6 +51,9 @@ export default defineNuxtConfig({
   },
 
   plugins: ["@/plugins/gsap.js"],
+  // plugins: {
+  //   "@tailwindcss/postcss": {},
+  // },
 
   modules: [
     "@nuxt/ui",

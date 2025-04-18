@@ -4,16 +4,8 @@
       <div id="hero-section" class="section_fixed hero">
         <div id="hero-element" class="element">
           <div id="ghirlanda-element" class="circular"></div>
-          <canvas
-            ref="canvasRefLogo"
-            id="canvasLogo"
-            style="position: absolute; height: 100px; z-index: 5"
-          ></canvas>
-          <canvas
-            ref="canvasRef"
-            id="canvasPayoff"
-            style="width: 100%; height: 50vh"
-          ></canvas>
+          <canvas ref="canvasRefLogo" id="canvasLogo" style="position: absolute; height: 100px; z-index: 5"></canvas>
+          <canvas ref="canvasRef" id="canvasPayoff" style="width: 100%; height: 50vh"></canvas>
         </div>
         <slot name="screentitle"></slot>
         <div id="hero-content-wrapper" class="wrapper">
@@ -42,27 +34,28 @@
       <div id="made-for" class="nofixed-inner-wrapper">
         <HSectionsMadeFor></HSectionsMadeFor>
       </div>
-      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <USeparator color="primary" type="solid" icon="i-simple-icons-nuxtdotjs" />
+      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="production" class="nofixed-inner-wrapper">
         <HSectionsProduction></HSectionsProduction>
       </div>
-      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="production-ui" class="nofixed-inner-wrapper">
         <HSectionsProductionUi></HSectionsProductionUi>
       </div>
-      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="archive" class="nofixed-inner-wrapper">
         <HSectionsArchive></HSectionsArchive>
       </div>
-      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="archive-ui" class="nofixed-inner-wrapper">
         <HSectionsArchiveUi></HSectionsArchiveUi>
       </div>
-      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="about-us" class="nofixed-inner-wrapper">
         <HSectionsAboutUs></HSectionsAboutUs>
       </div>
-      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="contacts" class="nofixed-inner-wrapper">
         <HSectionsContacts></HSectionsContacts>
       </div>

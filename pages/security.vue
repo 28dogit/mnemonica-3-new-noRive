@@ -6,11 +6,19 @@
     <div class="video-box">
       <div class="video-box-content">
         <h1>Title video UI</h1>
-        <h3>Spiegazione: dove si producono gli asset, momento fabbrica complementare al successivo archive</h3>
+        <h3>
+          Spiegazione: dove si producono gli asset,<br />
+          momento fabbrica complementare al <br />
+          successivo archive
+        </h3>
       </div>
       <video class="video-sfumato" autoplay loop muted playsinline preload="auto">
         <!-- <source calss="deskMq" src="/assets/video/room-cards_4.webm" type="video/webm" /> -->
-        <source calss="mobileMq" src="/assets/video/box-2x-vertical.mp4" type="video/webm" />
+        <source
+          calss="mobileMq"
+          src="/assets/video/box-2x-vertical.mp4"
+          type="video/webm"
+        />
         <source calss="deskMq" src="/assets/video/room-cards.mp4" type="video/mp4" />
       </video>
     </div>
@@ -20,11 +28,19 @@
     <div class="video-box2">
       <div class="video-box-content">
         <h1>Title video UI</h1>
-        <h3>Spiegazione: dove si producono gli asset, momento fabbrica complementare al successivo archive</h3>
+        <h3>
+          Spiegazione: dove si producono gli asset,<br />
+          momento fabbrica complementare al<br />
+          successivo archive
+        </h3>
       </div>
       <video class="video-sfumato2" autoplay loop muted playsinline preload="auto">
         <!-- <source calss="deskMq" src="/assets/video/room-cards_4.webm" type="video/webm" /> -->
-        <source class="mobileMq" src="/assets/video/box-2x-vertical.mp4" type="video/webm" />
+        <source
+          class="mobileMq"
+          src="/assets/video/box-2x-vertical.mp4"
+          type="video/webm"
+        />
         <source calss="deskMq" src="/assets/video/room-cards.mp4" type="video/mp4" />
       </video>
     </div>
@@ -64,21 +80,6 @@ const modalId = "security"; // qui indico il nome del modale che devo aprire in 
 const closeModal = () => {
   isModalOpen.value = false;
 };
-
-const animationscroll = () => {
-  $gsap.fromTo(
-    ".video-box",
-    {
-      opacity: 0,
-    },
-    {
-      opacity: 1,
-      duration: 1.5,
-    }
-  );
-};
-
-animationscroll();
 </script>
 
 <style lang="scss" scoped>

@@ -4,39 +4,42 @@
 @use "breakpoints.scss" as bp;
 @use "animations.scss" as anim;
 
-  #mainContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    //justify-content: center;
-    min-height: 100vh;
-    width: 100vw;
+#mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  //justify-content: center;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+#bbg {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: -20;
+  background-size: 180% 180%;
+  -webkit-animation: rotateBackground 50s linear infinite;
+  animation: rotateBackground 50s linear infinite;
+  @include anim.rotateBG;
+  @include bp.for-desktop-small {
+    -webkit-animation: rotateBackground 70s linear infinite;
+    animation: rotateBackground 70s linear infinite;
+    @include anim.rotateBG;
+  }
+  @include bp.for-desktop-big-up {
+    -webkit-animation: rotateBackground 70s linear infinite;
+    animation: rotateBackground 70s linear infinite;
+    @include anim.rotateBG;
   }
 
-  #bbg {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    z-index: -20;
-    background-size: 180% 180%;
-    animation: rotateBackground 50s linear infinite;
-    @include anim.rotateBG;
-    @include bp.for-desktop-small{
-      animation: rotateBackground 70s linear infinite;
-      @include anim.rotateBG;
-    }
-    @include bp.for-desktop-big-up{
-      animation: rotateBackground 70s linear infinite;
-      @include anim.rotateBG;
-    }
-  
-    @include grad-var-phone(50%, 10%, 80%, 80%, 20%, 70%, 0.25%, 50%);
-    @include grad-var-tablet(50%, 10%, 80%, 80%, 20%, 70%, 0.25%, 50%);
-    @include grad-var-desktop(50%, 10%, 80%, 80%, 20%, 70%, 0.25%, 50%);
-    //@include grad-var-desktop(50%,10%,80%,80%,20%,70%,25%,5%);
-  }
+  @include grad-var-phone(50%, 10%, 80%, 80%, 20%, 70%, 0.25%, 50%);
+  @include grad-var-tablet(50%, 10%, 80%, 80%, 20%, 70%, 0.25%, 50%);
+  @include grad-var-desktop(50%, 10%, 80%, 80%, 20%, 70%, 0.25%, 50%);
+  //@include grad-var-desktop(50%,10%,80%,80%,20%,70%,25%,5%);
+}
 
 .element {
   // background-color: rosybrown;
@@ -95,7 +98,7 @@
   //position: relative; /* Contenitore relativo per le sezioni sovrapposte */
 }
 
-.section_fixed{
+.section_fixed {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -106,9 +109,9 @@
   width: 100vw;
   height: calc(100vh - 70px);
   opacity: 0;
-  overflow:hidden;
+  overflow: hidden;
   margin-bottom: 6rem;
-  &.hero{
+  &.hero {
     justify-content: flex-start;
   }
 }
@@ -127,59 +130,63 @@
     height: 100px;
   }
 }
-.nofixed-inner-wrapper{
- width: 100vw;
+.nofixed-inner-wrapper {
+  width: 100vw;
   max-width: 1200px;
   padding: 2rem;
 }
 
 //*SECTION - Hero
 
-#ghirlanda-element_start{
-    opacity:0.6;
-    mix-blend-mode: plus-lighter;
-    mix-blend-mode: luminosity;
+#ghirlanda-element_start {
+  opacity: 0.6;
+  mix-blend-mode: plus-lighter;
+  mix-blend-mode: luminosity;
 }
 
-  #heroTitle {
-    flex-direction: column;
-      gap: 0;
-      margin-bottom: 1.5rem;
-      h1 {
-        padding: 0;
-        font-size: 2rem;
-        //margin-bottom: 0.5rem;
-        //font-weight: 500;
-      }
-    @include bp.for-tablet {
-      flex-direction: row;
-      column-gap: 1.5rem;
-      h1 {
-        padding: 0;
-      }
+#heroTitle {
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 1.5rem;
+  h1 {
+    padding: 0;
+    font-size: 2rem;
+    //margin-bottom: 0.5rem;
+    //font-weight: 500;
+  }
+  @include bp.for-tablet {
+    flex-direction: row;
+    -moz-column-gap: 1.5rem;
+    column-gap: 1.5rem;
+    h1 {
+      padding: 0;
     }
   }
-  #hero-content{
-    @include bp.for-desktop-big-up-h-reduced{ // W-1200px H-750px up
-      //margin-top: -100px;
-      margin-bottom: 100px;
-    }
+}
+#hero-content {
+  @include bp.for-desktop-big-up-h-reduced {
+    // W-1200px H-750px up
+    //margin-top: -100px;
+    margin-bottom: 100px;
   }
-  #canvasLogo{
-    margin-top: 100px;
-    position: absolute;
-    z-index: 5;
-    @include bp.for-phone{ // W-1200px H-750px up
-      margin-top: 30px;
-    }
+}
+#canvasLogo {
+  margin-top: 100px;
+  position: absolute;
+  z-index: 5;
+  @include bp.for-phone {
+    // W-1200px H-750px up
+    margin-top: 30px;
   }
-  #canvasPayoff{
-    margin-top: 70px;
-    position: absolute;
-    max-width: 960px;
-    z-index: 5;
-    @include bp.for-phone{ // W-1200px H-750px up
-      margin-top: 0px;
-    }
-    }
+}
+#canvasPayoff {
+  margin-top: 70px;
+  position: absolute;
+  max-width: 960px;
+  z-index: 5;
+  @include bp.for-phone {
+    // W-1200px H-750px up
+    margin-top: 0px;
+  }
+}
 //*!SECTION

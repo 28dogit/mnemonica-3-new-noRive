@@ -8,18 +8,8 @@
     <div id="phases-content" class="content">
       <div class="headline">
         <!-- <div class="" v-html="defaultContent"></div> -->
-        <div
-          id="PhasesTitle"
-          class="text-center"
-          v-if="slots.title"
-          v-html="slots.title"
-        ></div>
-        <div
-          id="PhasesSubtitle"
-          class="text-center"
-          v-if="slots.subtitle"
-          v-html="slots.subtitle"
-        ></div>
+        <div id="PhasesTitle" class="text-center" v-if="slots.title" v-html="slots.title"></div>
+        <div id="PhasesSubtitle" class="text-center" v-if="slots.subtitle" v-html="slots.subtitle"></div>
         <div class="choice">
           <BtnMaster>Production</BtnMaster>
           <BtnMaster>Archive</BtnMaster>
@@ -42,8 +32,6 @@ const { slots, defaultContent, isloading } = fetchSection();
 
 //le altre importazioni derivano dalla pagina principale
 import { nextTick } from "vue";
-import { _opacity } from "#tailwind-config/theme";
-import { _bottom } from "#tailwind-config/theme/backgroundPosition";
 
 //definisco le costanti da esporre con defineExpose, che userò all'interno di onMounted utilizzando .value
 // utilizzo shallowRef per non covertire le proprietà interne di Gsap in oggetti reattivi di vue
@@ -58,9 +46,7 @@ onMounted(() => {
     let phasesTitles = $gsap.utils.toArray(".phaseCircle .innerTxt"); //creo l'array dei titoli delle fasi
     let phasesChipsTitle = $gsap.utils.toArray("#chips-wrapper .container .title");
     //let phasesChips = $gsap.utils.toArray("#chips-wrapper .phase-chips");
-    let phasesChipsContainer = $gsap.utils.toArray(
-      "#chips-wrapper .container .chipsContainer"
-    );
+    let phasesChipsContainer = $gsap.utils.toArray("#chips-wrapper .container .chipsContainer");
 
     //SECTION - sezione animazione continua dei cerchi delle Fasi
 
@@ -116,16 +102,8 @@ onMounted(() => {
       },
       "<"
     );
-    rotationTL_Titles.value.TitlesRotation(
-      ".phaseCircle #Post_txt",
-      { duration: 15 },
-      "<"
-    );
-    rotationTL_Titles.value.TitlesRotation(
-      ".phaseCircle #Market_txt",
-      { duration: 16 },
-      "<"
-    );
+    rotationTL_Titles.value.TitlesRotation(".phaseCircle #Post_txt", { duration: 15 }, "<");
+    rotationTL_Titles.value.TitlesRotation(".phaseCircle #Market_txt", { duration: 16 }, "<");
     //!SECTION
   }); //NOTE - chiusura nextTick
 }); //NOTE - chiusura onMounted
