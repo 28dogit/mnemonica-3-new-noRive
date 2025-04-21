@@ -1,5 +1,6 @@
 <template>
   <main>
+    <button @click="customLogic()" class="p-6 absolute top-150 right-30 z-50">Tl command</button>
     <div id="sectionsWrapper" class="z-20">
       <div id="hero-section" class="section_fixed hero">
         <div id="hero-element" class="element">
@@ -228,7 +229,7 @@ onMounted(() => {
     let introCompleted = false;
     //let isfixedSection = true; non serve più perchè sostituita dal composable
 
-    //SECTION - animazioni interne
+    //SECTION - animazioni Intro
     // implemento la timeline intro che sbloccherà alla fine l'overflow hidden del body per ripristinare lo scroll
     const intro = $gsap.timeline({
       onStart: () => {
@@ -304,8 +305,6 @@ onMounted(() => {
 
     //!SECTION
 
-    //SECTION - Gestione animazione Timeline allo scroll
-
     // array di tutte le sezioni
     const sections = document.querySelectorAll(".section_fixed");
     if (!sections.length) {
@@ -335,6 +334,7 @@ onMounted(() => {
       if (isCoolingDown) return;
 
       let deltaY = 0;
+
       //SECTION - ottimizazione touch mobile
       // Determina il tipo di evento
       if (event.type === "wheel") {
@@ -373,6 +373,7 @@ onMounted(() => {
     window.addEventListener("pointermove", handleScroll, { passive: false });
     window.addEventListener("pointerup", handleScroll, { passive: false });
 
+    //SECTION - Gestione animazione Timeline allo scroll
     //NOTE - recupero la rotationTL esposta dal componente phases_comp
     const RotationTL = PhasesRef.value?.rotationTL;
     const RotationTL_Titles = PhasesRef.value?.rotationTL_Titles;
@@ -431,6 +432,7 @@ onMounted(() => {
     //ANCHOR - Hero end
 
     //ANCHOR - Phases Section Start
+    sectionsTL.addLabel("Start-phases");
     sectionsTL.call(() => RotationTL.pause());
     sectionsTL.call(() => RotationTL_Titles.pause());
 
@@ -460,12 +462,13 @@ onMounted(() => {
       filter: "blur(0px)",
     });
 
-    sectionsTL.addLabel("phases_section");
+    sectionsTL.addLabel("End-phases");
     sectionsTL.addPause();
 
     //ANCHOR - Phases Section End
 
     //ANCHOR - Modules Section Start
+    sectionsTL.addLabel("Start-modules");
     sectionsTL.to("#phases-section", {
       autoAlpha: 0,
       duration: 0.5,
@@ -499,7 +502,6 @@ onMounted(() => {
     sectionsTL.to("#modules-content #module-txt_1", { opacity: 1, zIndex: 1 }, "<");
     // sectionsTL.set("#modules-content #module-txt_2", { zIndex: 0 });
 
-    sectionsTL.addLabel("modules_section");
     // pausa entrata modules
     sectionsTL.addPause();
     //-----
@@ -521,10 +523,10 @@ onMounted(() => {
     // sectionsTL.to("#modules-content #module-txt_2", { opacity: 0 }, "<");
     sectionsTL.to("#modules-content #module-txt_3", { opacity: 1, zIndex: 1 }, "<");
     // sectionsTL.to("#modules-content #module-txt_3", { opacity: 1 }, "<");
-
+    sectionsTL.addLabel("End-modules");
     sectionsTL.addPause();
     //ANCHOR - Modules Section End
-
+    sectionsTL.addLabel("sectionsTL-exit");
     //ANCHOR - nofixed Section Start (modificare in base a quale sarà l'ultima sezione prima del nofixed)
     sectionsTL.to(
       "#modules-section",
@@ -558,7 +560,9 @@ onMounted(() => {
     });
     // Registriamo  l'istanza dello scrolltrigger nella ref noFixedSTRef dichiarata all'inizio fuori dal nextTick
     noFixedSTRef.value = noFixedST;
+    //!SECTION
   }); //NOTE - chiusura Next Tick
+
   onBeforeUnmount(() => {
     // Ripristino lo scroll nel caso lasciassi la pagina prima di aver sbloccato lo scroll via gsap
     document.body.style.overflow = "auto";

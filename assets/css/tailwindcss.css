@@ -1,2 +1,69 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+
+@theme {
+  --font-montserrat: "Montserrat", "sans-serif";
+  --font-jost: "Jost", "sans-serif";
+  --font-instrumentSans: "Instrument Sans", "sans-serif";
+  --font-playfair: "Playfair Display", "serif";
+
+  --color-mne_primary-50: #ecfeff;
+  --color-mne_primary-100: #cff9fe;
+  --color-mne_primary-200: #a5f1fc;
+  --color-mne_primary-300: #66e5fa;
+  --color-mne_primary-400: #11cbee;
+  --color-mne_primary-500: #05b2d5;
+  --color-mne_primary-600: #078eb3;
+  --color-mne_primary-700: #0d7191;
+  --color-mne_primary-800: #145b76;
+  --color-mne_primary-900: #164c63;
+  --color-mne_primary-950: #083144;
+
+  --color-seagull-50: #f1fafe;
+  --color-seagull-200: #c0e8f7;
+  --color-seagull-100: #e3f3fb;
+  --color-seagull-300: #88d7f1;
+  --color-seagull-400: #5dc9ea;
+  --color-seagull-500: #21abd6;
+  --color-seagull-600: #138bb6;
+  --color-seagull-700: #116f93;
+  --color-seagull-800: #125e7a;
+  --color-seagull-900: #144e66;
+  --color-seagull-950: #0e3243;
+
+  --color-chenin-50: #fcfaee;
+  --color-chenin-200: #f6f0cf;
+  --color-chenin-100: #ece19b;
+  --color-chenin-300: #e6d379;
+  --color-chenin-400: #dcba43;
+  --color-chenin-500: #d39f2d;
+  --color-chenin-600: #ba7e25;
+  --color-chenin-700: #9b5d22;
+  --color-chenin-800: #7f4b21;
+  --color-chenin-900: #693d1e;
+  --color-chenin-950: #3b200d;
+
+  --color-mine-shaft-50: #f5f6f6;
+  --color-mine-shaft-100: #e4e9e9;
+  --color-mine-shaft-200: #ccd3d5;
+  --color-mine-shaft-300: #a8b5b8;
+  --color-mine-shaft-400: #7d8e93;
+  --color-mine-shaft-500: #627378;
+  --color-mine-shaft-600: #546066;
+  --color-mine-shaft-700: #485256;
+  --color-mine-shaft-800: #40474a;
+  --color-mine-shaft-900: #393d40;
+  --color-mine-shaft-950: #2d3235;
+
+  --color-woodsmoke-50: #f6f6f6;
+  --color-woodsmoke-100: #e7e7e7;
+  --color-woodsmoke-200: #d1d1d1;
+  --color-woodsmoke-300: #b0b0b0;
+  --color-woodsmoke-400: #888888;
+  --color-woodsmoke-500: #6d6d6d;
+  --color-woodsmoke-600: #5d5d5d;
+  --color-woodsmoke-700: #4f4f4f;
+  --color-woodsmoke-800: #454545;
+  --color-woodsmoke-900: #3d3d3d;
+  --color-woodsmoke-950: #151515;
+}

@@ -10,7 +10,7 @@ const scssFiles = readdirSync(cssDir)
 // fine importazione css
 export default defineNuxtConfig({
   app: {
-    baseURL: "/mne", // Assicurati che il percorso sia seguito da una barra finale
+    baseURL: "/mne",
     // layoutTransition: { name: 'layout', mode: 'out-in' }
   },
   robots: { robotsTxt: false },
@@ -44,34 +44,17 @@ export default defineNuxtConfig({
       preprocessorOptions: {
         scss: {
           api: "modern-compiler",
-          additionalData: '@use "sass:math";', // Aggiungi globalmente se necessario
+          additionalData: '@use "sass:math";', // Aggiungere globalmente se necessario
         },
       },
     },
   },
 
   plugins: ["@/plugins/gsap.js"],
-  // plugins: {
-  //   "@tailwindcss/postcss": {},
-  // },
 
-  modules: [
-    "@nuxt/ui",
-    "@nuxtjs/apollo",
-    "@nuxt/fonts",
-    "@nuxt/image",
-    "@vueuse/nuxt",
-    "@nuxtjs/seo",
-    "@nuxt/content",
-    "@pinia/nuxt",
-  ],
+  modules: ["@nuxt/ui", "@nuxtjs/apollo", "@nuxt/fonts", "@nuxt/image", "@vueuse/nuxt", "@nuxtjs/seo", "@nuxt/content", "@pinia/nuxt"],
 
   content: {
-    // Add your content module options here if needed
-    // build:{
-    //   markdown: {
-    //   },
-    // },
     preview: {
       api: "https://api.nuxt.studio",
       dev: true,

@@ -8,7 +8,7 @@
       <nuxt-link to="/screening-rooms" class="txt-link">Main components</nuxt-link>
       <nuxt-link to="/production-use-cases" class="txt-link">Use Cases</nuxt-link>
       <nuxt-link to="/production-hall-fame" class="txt-link">Hall of Fame</nuxt-link>
-      <UTabs color="neutral" :items="items"></UTabs>
+      <UTabs color="neutral" :items="items" class="w-full"></UTabs>
     </div>
   </div>
 </template>
