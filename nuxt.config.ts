@@ -52,7 +52,16 @@ export default defineNuxtConfig({
 
   plugins: ["@/plugins/gsap.js"],
 
-  modules: ["@nuxt/ui", "@nuxtjs/apollo", "@nuxt/fonts", "@nuxt/image", "@vueuse/nuxt", "@nuxtjs/seo", "@nuxt/content", "@pinia/nuxt"],
+  modules: [
+    "@nuxt/ui",
+    "@nuxtjs/apollo",
+    "@nuxt/fonts",
+    "@nuxt/image",
+    "@vueuse/nuxt",
+    "@nuxtjs/seo",
+    "@nuxt/content",
+    "@pinia/nuxt",
+  ],
 
   content: {
     preview: {
