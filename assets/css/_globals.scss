@@ -8,6 +8,11 @@ $J_Font: "jost", sans-serif;
     font-family: $M_Font;
 }
 
+//scroll marign
+html {
+    scroll-padding-top: 100px; /* per compensare l'haltezza dell'header di 70px quando scrollo un anchor link */
+  }
+
 //colors
 $mne_primary: #11cbee;
 $mne_lighter: #b8effa;

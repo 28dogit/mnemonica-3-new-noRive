@@ -89,6 +89,12 @@
   width: 100%;
   height: 100%;
   color: white;
+  &.hero{
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 2em;
+  }
 }
 
 #sectionsWrapper {
@@ -137,12 +143,6 @@
 }
 
 //*SECTION - Hero
-
-#ghirlanda-element_start {
-  opacity: 0.6;
-  mix-blend-mode: plus-lighter;
-  mix-blend-mode: luminosity;
-}
 
 #heroTitle {
   flex-direction: column;

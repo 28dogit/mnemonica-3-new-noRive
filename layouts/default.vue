@@ -23,7 +23,7 @@
       <!-- <div id="section1"> -->
       <div id="hero-section" class="hero">
         <div class="element">
-          <div id="ghirlanda-element_start" class="circular">
+          <div id="ghirlanda-element_start" class="circular fixed">
             <NuxtImg
               id="ghirlanda_img"
               src="/assets/img/Ghirlanda_full_web_800_opt.png"
@@ -46,6 +46,12 @@
 
 <style lang="scss" scoped>
 @use "@/assets/css/_breakpoints.scss" as bp;
+
+#ghirlanda-element_start {
+  opacity: 0.6;
+  mix-blend-mode: plus-lighter;
+  mix-blend-mode: luminosity;
+}
 
 #ghirlandeContainer {
   position: fixed;

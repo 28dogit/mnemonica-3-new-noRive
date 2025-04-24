@@ -1,5 +1,8 @@
 <template>
   <main>
+    <button @click="customLogic()" class="p-6 absolute top-150 right-30 z-50">
+      Tl command
+    </button>
     <div id="sectionsWrapper" class="z-20">
       <div id="hero-section" class="section_fixed hero">
         <div id="hero-element" class="element">
@@ -18,8 +21,6 @@
         <slot name="screentitle"></slot>
         <div id="hero-content-wrapper" class="wrapper">
           <div id="hero-content" class="content hero">
-            <!-- <div id="heroTitle" class="flex items-center justify-center flex-wrap">
-            </div> -->
             <div class="headline">
               <h2 id="heroSubTitle" class="hidden min-[680px]:block text-center">
                 Let your media assets flourish and last in the digital cinema ecosystem
@@ -34,7 +35,6 @@
       </div>
       <div id="phases-section" class="section_fixed phases">
         <HSectionsPhasesComponent ref="PhasesRef"></HSectionsPhasesComponent>
-        <!-- <HSectionsTest ref="TestRef"></HSectionsTest> -->
       </div>
       <div id="modules-section" class="section_fixed modules">
         <HSectionsModulesComponent></HSectionsModulesComponent>
@@ -45,27 +45,27 @@
       <div id="made-for" class="nofixed-inner-wrapper">
         <HSectionsMadeFor></HSectionsMadeFor>
       </div>
-      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="production" class="nofixed-inner-wrapper">
         <HSectionsProduction></HSectionsProduction>
       </div>
-      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="production-ui" class="nofixed-inner-wrapper">
         <HSectionsProductionUi></HSectionsProductionUi>
       </div>
-      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="archive" class="nofixed-inner-wrapper">
         <HSectionsArchive></HSectionsArchive>
       </div>
-      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="archive-ui" class="nofixed-inner-wrapper">
         <HSectionsArchiveUi></HSectionsArchiveUi>
       </div>
-      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="about-us" class="nofixed-inner-wrapper">
         <HSectionsAboutUs></HSectionsAboutUs>
       </div>
-      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
+      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="contacts" class="nofixed-inner-wrapper">
         <HSectionsContacts></HSectionsContacts>
       </div>
@@ -74,12 +74,6 @@
 </template>
 
 <script setup>
-// const { data: contentModulesComponent } = await useAsyncData(() =>
-//   queryCollection("content").path("/modules-content").first()
-// );
-// const { data: contentPhasesComponent } = await useAsyncData(() =>
-//   queryCollection("content").path("/phases-content").first()
-// );
 import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
@@ -90,58 +84,56 @@ const PhasesRef = ref(null);
 const canvasRefLogo = ref(null);
 const canvasRef = ref(null);
 const titleTrigger = ref(null);
-const canvasRefBtn = ref(null);
 const noFixedSTRef = ref(null);
 const handleScrollRef = ref(null);
-
+//costante in cui salvo sectionsTL per renderla disponibile in tutti i componenti
+const introRef = ref(null);
 // Usiamo il composable per lo stato Fixed Section
 const { isfixedSection, setFixedSection } = useFixedSection();
-
 // Variabile per memorizzare il buffer del file .riv
 let rivBuffer = null;
-
 // Funzione per caricare il file .riv una sola volta
 async function loadRivFile(url) {
   const response = await fetch(url);
   return await response.arrayBuffer();
 }
 
-function handleClick(event) {
-  event.preventDefault();
-  alert("Pulsante cliccato!");
-}
-const introRef = ref(null);
-function playFast() {
-  // Imposta la velocità a 2x
-  introRef.value.timeScale(2);
-
-  // Rimuovi tutte le pause e riproduci la timeline fino alla fine
-  introRef.value.play();
-}
-
 function checkNofixedSection() {
   const nofixedSection = document.querySelector(".nofixed_section");
   return nofixedSection && window.scrollY > nofixedSection.offsetTop;
 }
+
 //SECTION - scrolltest
 import { useNavStore } from "@/stores/navigationStore";
 
 const navigationStore = useNavStore();
 
 // Funzione per scorrere alla sezione
-const scrollToSection = (sectionId) => {
-  const element = document.getElementById(sectionId);
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth" });
-  } else {
-    console.error(`Elemento con ID "${sectionId}" non trovato.`);
-  }
+const scrollToSection = async (sectionId) => {
+  await nextTick();
+  setTimeout(() => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      customLogic();
+    } else {
+      console.error(`Elemento con ID "${sectionId}" non trovato.`);
+    }
+  }, 1000);
 };
 
-// Funzione personalizzata da eseguire
+// Funzione personalizzata da eseguire allo scroll verso Made-For per eseguire le animazioni di gsap
 const customLogic = () => {
-  console.log("Logica personalizzata eseguita!");
   // Aggiungi qui altre operazioni necessarie
+  if (introRef.value) {
+    introRef.value.progress(1, false); // Jump to end without animation
+    // Or animate: introRef.value.play(introRef.value.duration());
+  }
+  const madeForSection = document.getElementById("made-for");
+  if (madeForSection) {
+    madeForSection.scrollIntoView({ behavior: "smooth" });
+  }
+  console.log("Logica personalizzata eseguita!");
 };
 
 //!SECTION
@@ -159,8 +151,8 @@ onMounted(() => {
   // document.body.style.overflow = "hidden";
 
   //SECTION - scrolltrigger2
-  console.log("Pagina index montata.");
-  console.log("Stato attuale:", navigationStore);
+  // console.log("Pagina index montata.");
+  // console.log("Stato attuale:", navigationStore);
   if (navigationStore.targetSection) {
     // Scorri alla sezione
     console.log("Scorrendo alla sezione:", navigationStore.targetSection);
@@ -174,7 +166,7 @@ onMounted(() => {
 
     // Resetta lo stato dopo averlo utilizzato
     navigationStore.resetState();
-    console.log("Stato resettato.");
+    //console.log("Stato resettato.");
   } else {
     console.log("Nessuna sezione di destinazione trovata.");
   }
@@ -230,10 +222,6 @@ onMounted(() => {
     });
 
     function aggiornaResize(elemento) {
-      // Aggiorna gli attributi width e height del canvas in base alle dimensioni attuali
-      // canvasRef.value.width = canvasRef.value.offsetWidth;
-      // canvasRef.value.height = canvasRef.value.offsetHeight;
-
       elemento.layout = new Layout({
         fit: Fit.Layout, // Cambia il fit per coprire l'area
         alignment: Alignment.Center, // Allinea in basso
@@ -255,7 +243,7 @@ onMounted(() => {
     let introCompleted = false;
     //let isfixedSection = true; non serve più perchè sostituita dal composable
 
-    //SECTION - animazioni interne
+    //SECTION - animazioni Intro
     // implemento la timeline intro che sbloccherà alla fine l'overflow hidden del body per ripristinare lo scroll
     const intro = $gsap.timeline({
       onStart: () => {
@@ -327,16 +315,9 @@ onMounted(() => {
       null,
       2
     );
-
-    // intro.EnterFrom("#logo_mne", { duration: 2, y: "0" });
-    // intro.EnterFrom("#H-screen", { duration: 0.7 }, "<");
-    // intro.EnterFrom("#H-deliver", { duration: 0.7 }, "> -=0.3");
-    // intro.EnterFrom("#H-preserve", { duration: 0.7 }, "> -=0.3");
     intro.EnterFrom("#heroSubTitle", { duration: 0.5, y: "-25px" }, "-=0.7");
 
     //!SECTION
-
-    //SECTION - Gestione animazione Timeline allo scroll
 
     // array di tutte le sezioni
     const sections = document.querySelectorAll(".section_fixed");
@@ -367,6 +348,7 @@ onMounted(() => {
       if (isCoolingDown) return;
 
       let deltaY = 0;
+
       //SECTION - ottimizazione touch mobile
       // Determina il tipo di evento
       if (event.type === "wheel") {
@@ -379,14 +361,6 @@ onMounted(() => {
         deltaY = touchStartY - touchEndY;
       }
 
-      // Soglia minima per evitare input accidentali su mobile
-      // if (Math.abs(deltaY) > 30) {
-      //   if (deltaY > 0) {
-      //     sectionsTL.play(); // Scroll down
-      //   } else {
-      //     sectionsTL.reverse(); // Scroll up
-      //   }
-      // }
       //!SECTION
 
       if (event.deltaY > 0) {
@@ -413,6 +387,7 @@ onMounted(() => {
     window.addEventListener("pointermove", handleScroll, { passive: false });
     window.addEventListener("pointerup", handleScroll, { passive: false });
 
+    //SECTION - Gestione animazione Timeline allo scroll
     //NOTE - recupero la rotationTL esposta dal componente phases_comp
     const RotationTL = PhasesRef.value?.rotationTL;
     const RotationTL_Titles = PhasesRef.value?.rotationTL_Titles;
@@ -423,7 +398,6 @@ onMounted(() => {
     $gsap.set("#hero-section", { zIndex: 1 });
     $gsap.set("#modules-section", { zIndex: 0 });
     $gsap.set("#phases-section", { zIndex: 0 });
-    //$gsap.set("#pre-chips-container .title", { autoAlpha: 0 });
     $gsap.set("#post-chips-container .title", { opacity: 0, y: -10 });
     $gsap.set("#production-chips-container .title", { opacity: 0, y: -10 });
     $gsap.set("#market-chips-container .title", { opacity: 0, y: -10 });
@@ -472,12 +446,11 @@ onMounted(() => {
     //ANCHOR - Hero end
 
     //ANCHOR - Phases Section Start
-    // sectionsTL.call(() => PhasesRef.value.rotationTL.pause());
+    sectionsTL.addLabel("Start-phases");
     sectionsTL.call(() => RotationTL.pause());
     sectionsTL.call(() => RotationTL_Titles.pause());
 
     sectionsTL.to("#modules_svg", { rotate: "+=60", ease: "power1.in" });
-    //sectionsTL.call(() => PhasesRef.value.rotationTL.play(), [], "<+=0.2");
     sectionsTL.call(() => RotationTL.play(), [], "<+=0.2");
     sectionsTL.call(() => RotationTL_Titles.play(), [], "<+=0.2");
     sectionsTL.to(
@@ -503,12 +476,13 @@ onMounted(() => {
       filter: "blur(0px)",
     });
 
-    sectionsTL.addLabel("phases_section");
+    sectionsTL.addLabel("End-phases");
     sectionsTL.addPause();
 
     //ANCHOR - Phases Section End
 
     //ANCHOR - Modules Section Start
+    sectionsTL.addLabel("Start-modules");
     sectionsTL.to("#phases-section", {
       autoAlpha: 0,
       duration: 0.5,
@@ -542,7 +516,6 @@ onMounted(() => {
     sectionsTL.to("#modules-content #module-txt_1", { opacity: 1, zIndex: 1 }, "<");
     // sectionsTL.set("#modules-content #module-txt_2", { zIndex: 0 });
 
-    sectionsTL.addLabel("modules_section");
     // pausa entrata modules
     sectionsTL.addPause();
     //-----
@@ -564,10 +537,10 @@ onMounted(() => {
     // sectionsTL.to("#modules-content #module-txt_2", { opacity: 0 }, "<");
     sectionsTL.to("#modules-content #module-txt_3", { opacity: 1, zIndex: 1 }, "<");
     // sectionsTL.to("#modules-content #module-txt_3", { opacity: 1 }, "<");
-
+    sectionsTL.addLabel("End-modules");
     sectionsTL.addPause();
     //ANCHOR - Modules Section End
-
+    sectionsTL.addLabel("sectionsTL-exit");
     //ANCHOR - nofixed Section Start (modificare in base a quale sarà l'ultima sezione prima del nofixed)
     sectionsTL.to(
       "#modules-section",
@@ -601,28 +574,30 @@ onMounted(() => {
     });
     // Registriamo  l'istanza dello scrolltrigger nella ref noFixedSTRef dichiarata all'inizio fuori dal nextTick
     noFixedSTRef.value = noFixedST;
+    //!SECTION
   }); //NOTE - chiusura Next Tick
-  onBeforeUnmount(() => {
-    // Ripristino lo scroll nel caso lasciassi la pagina prima di aver sbloccato lo scroll via gsap
-    document.body.style.overflow = "auto";
-    // Clean up dello ScrollTrigger
-    if (noFixedSTRef.value) {
-      noFixedSTRef.value.kill();
-      noFixedSTRef.value = null;
-    }
+}); //NOTE - chiusura onMouted
 
-    // Remove event listeners
-    if (handleScrollRef.value) {
-      window.removeEventListener("wheel", handleScrollRef.value, { passive: false });
-      window.removeEventListener("pointerdown", handleScrollRef.value, {
-        passive: false,
-      });
-      window.removeEventListener("pointermove", handleScrollRef.value, {
-        passive: false,
-      });
-      window.removeEventListener("pointerup", handleScrollRef.value, { passive: false });
-    }
-  });
+onBeforeUnmount(() => {
+  // Ripristino lo scroll nel caso lasciassi la pagina prima di aver sbloccato lo scroll via gsap
+  document.body.style.overflow = "auto";
+  // Clean up dello ScrollTrigger
+  if (noFixedSTRef.value) {
+    noFixedSTRef.value.kill();
+    noFixedSTRef.value = null;
+  }
+
+  // Remove event listeners
+  if (handleScrollRef.value) {
+    window.removeEventListener("wheel", handleScrollRef.value, { passive: false });
+    window.removeEventListener("pointerdown", handleScrollRef.value, {
+      passive: false,
+    });
+    window.removeEventListener("pointermove", handleScrollRef.value, {
+      passive: false,
+    });
+    window.removeEventListener("pointerup", handleScrollRef.value, { passive: false });
+  }
 });
 </script>
 

@@ -135,7 +135,8 @@ onMounted(() => {
     color: #fff;
     font-size: 1.3rem;
     margin-bottom: 0;
-    text-shadow: 0 0 7px rgba(184, 239, 250, 1), 0 0 10px rgba(184, 239, 250, 1), 0 0 22px rgba(184, 239, 250, 1);
+    text-shadow: 0 0 7px rgba(184, 239, 250, 1), 0 0 10px rgba(184, 239, 250, 1),
+      0 0 22px rgba(184, 239, 250, 1);
   }
   #modules-content {
     // display: flex;
@@ -162,7 +163,7 @@ onMounted(() => {
     }
     .mSubTitle {
       color: $mne_secondary;
-      font-weight: 300;
+      font-weight: 400;
       text-align: center;
     }
   }
