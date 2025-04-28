@@ -19,6 +19,9 @@
         <li class="nav-hover">
           <a href="#" @click.prevent="navigateToSection('contacts')">Contacts</a>
         </li>
+        <li class="nav-hover">
+          <a href="#" @click.prevent="navigateToSection('allInOne')">All In One</a>
+        </li>
         <!-- <li class="nav-hover"><a href="#" @click="playFast">Blog</a></li> -->
       </ul>
     </nav>

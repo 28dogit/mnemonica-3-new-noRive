@@ -1,19 +1,12 @@
 <template>
   <main>
+    <!-- <button class="absolute z-5" @click="toAllinOne">Start-module-toio</button> -->
     <div id="sectionsWrapper" class="z-20">
       <div id="hero-section" class="section_fixed hero">
         <div id="hero-element" class="element">
           <div id="ghirlanda-element" class="circular"></div>
-          <canvas
-            ref="canvasRefLogo"
-            id="canvasLogo"
-            style="position: absolute; height: 100px; z-index: 5"
-          ></canvas>
-          <canvas
-            ref="canvasRef"
-            id="canvasPayoff"
-            style="width: 100%; height: 50vh"
-          ></canvas>
+          <canvas ref="canvasRefLogo" id="canvasLogo" style="position: absolute; height: 100px; z-index: 5"></canvas>
+          <canvas ref="canvasRef" id="canvasPayoff" style="width: 100%; height: 50vh"></canvas>
         </div>
         <slot name="screentitle"></slot>
         <div id="hero-content-wrapper" class="wrapper">
@@ -84,7 +77,7 @@ const titleTrigger = ref(null);
 const noFixedSTRef = ref(null);
 const handleScrollRef = ref(null);
 //costante in cui salvo sectionsTL per renderla disponibile in tutti i componenti
-const introRef = ref(null);
+const sectionsTLRef = ref(null);
 // Usiamo il composable per lo stato Fixed Section
 const { isfixedSection, setFixedSection } = useFixedSection();
 // Variabile per memorizzare il buffer del file .riv
@@ -123,9 +116,15 @@ const scrollToSection = async (sectionId) => {
 
 // Funzione personalizzata per eseguire le animazioni di gsap mentre si scrolla verso  la sezione desiderata (noFixed sections)
 const customLogic = () => {
-  //introRef.value è la timeline sectionsTL
-  if (introRef.value) {
-    introRef.value.progress(1, false); // Jump to section
+  //sectionsTLRef.value è la timeline sectionsTL
+  if (sectionsTLRef.value) {
+    sectionsTLRef.value.progress(1, false); // Jump to section
+  }
+};
+
+const toAllinOne = () => {
+  if (sectionsTLRef.value) {
+    sectionsTLRef.value.tweenTo("Start-modules-pause"); // anima fino ad
   }
 };
 
@@ -145,7 +144,13 @@ onMounted(() => {
 
   //SECTION - scroll to non fixed sections
   if (navigationStore.targetSection) {
-    scrollToSection(navigationStore.targetSection);
+    if (navigationStore.targetSection == "allInOne") {
+      console.log("vieni da allInOne");
+      toAllinOne();
+    } else {
+      scrollToSection(navigationStore.targetSection);
+    }
+
     // Resetta lo stato dopo averlo utilizzato
     //lo sposto nell'onComplete di sectionsTL perchè mi serve averlo ancora attivo quando arrivo da apgine esterne, resetterò lo stato dopo averlo utilizzato
     //navigationStore.resetState();
@@ -511,6 +516,7 @@ onMounted(() => {
     // sectionsTL.set("#modules-content #module-txt_2", { zIndex: 0 });
 
     // pausa entrata modules
+    sectionsTL.addLabel("Start-modules-pause");
     sectionsTL.addPause();
     //-----
 
@@ -548,7 +554,7 @@ onMounted(() => {
     );
     //sectionsTL.addPause();
 
-    introRef.value = sectionsTL;
+    sectionsTLRef.value = sectionsTL;
 
     //ANCHOR - Scrolltrigger per gestire la sezione "nofixed"
 

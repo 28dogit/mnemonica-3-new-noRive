@@ -14,6 +14,10 @@ export default defineNuxtConfig({
     // layoutTransition: { name: 'layout', mode: 'out-in' }
   },
   robots: { robotsTxt: false },
+  site: {
+    url: "https://mnemonica.com",
+    name: "Mnemonica v3",
+  },
 
   devtools: {
     enabled: true,
