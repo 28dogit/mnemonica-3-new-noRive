@@ -8,9 +8,9 @@
     </p>
 
     <div class="content">
-      <nuxt-link to="/masters" class="txt-link">Main components</nuxt-link>
-      <nuxt-link to="/archive-use-cases" class="txt-link">Use Cases</nuxt-link>
-      <nuxt-link to="/archive-trusted-by" class="txt-link">Trusted by</nuxt-link>
+      <NuxtLink to="/masters" class="txt-link">Main components</NuxtLink>
+      <NuxtLink to="/archive-use-cases" class="txt-link">Use Cases</NuxtLink>
+      <NuxtLink to="/archive-trusted-by" class="txt-link">Trusted by</NuxtLink>
       <img src="https://placehold.co/600x400" alt="Placeholder" />
     </div>
   </div>

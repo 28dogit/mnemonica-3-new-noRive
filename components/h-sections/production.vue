@@ -5,9 +5,9 @@
     <p>Spiegazione: dove si producono gli asset, momento fabbrica complementare al successivo archive.</p>
 
     <div class="content">
-      <nuxt-link to="/screening-rooms" class="txt-link">Main components</nuxt-link>
-      <nuxt-link to="/production-use-cases" class="txt-link">Use Cases</nuxt-link>
-      <nuxt-link to="/production-hall-fame" class="txt-link">Hall of Fame</nuxt-link>
+      <NuxtLink to="/screening-rooms" class="txt-link">Main components</NuxtLink>
+      <NuxtLink to="/production-use-cases" class="txt-link">Use Cases</NuxtLink>
+      <NuxtLink to="/production-hall-fame" class="txt-link">Hall of Fame</NuxtLink>
       <UTabs color="neutral" :items="items" class="w-full"></UTabs>
     </div>
   </div>
