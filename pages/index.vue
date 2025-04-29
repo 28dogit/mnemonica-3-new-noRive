@@ -5,8 +5,16 @@
       <div id="hero-section" class="section_fixed hero">
         <div id="hero-element" class="element">
           <div id="ghirlanda-element" class="circular"></div>
-          <canvas ref="canvasRefLogo" id="canvasLogo" style="position: absolute; height: 100px; z-index: 5"></canvas>
-          <canvas ref="canvasRef" id="canvasPayoff" style="width: 100%; height: 50vh"></canvas>
+          <canvas
+            ref="canvasRefLogo"
+            id="canvasLogo"
+            style="position: absolute; height: 100px; z-index: 5"
+          ></canvas>
+          <canvas
+            ref="canvasRef"
+            id="canvasPayoff"
+            style="width: 100%; height: 50vh"
+          ></canvas>
         </div>
         <slot name="screentitle"></slot>
         <div id="hero-content-wrapper" class="wrapper">
@@ -142,7 +150,7 @@ onMounted(() => {
   // blocca lo scroll on mount (solo per index)
   // document.body.style.overflow = "hidden";
 
-  //SECTION - scroll to non fixed sections
+  //SECTION - scroll to non fixed sections quando arrivo da una pagina esterna
   if (navigationStore.targetSection) {
     if (navigationStore.targetSection == "allInOne") {
       console.log("vieni da allInOne");
@@ -152,17 +160,23 @@ onMounted(() => {
     }
 
     // Resetta lo stato dopo averlo utilizzato
-    //lo sposto nell'onComplete di sectionsTL perchè mi serve averlo ancora attivo quando arrivo da apgine esterne, resetterò lo stato dopo averlo utilizzato
+    // il reset lo sposto nell'onComplete di sectionsTL perchè mi serve averlo ancora attivo quando arrivo da pagine esterne, resetterò lo stato dopo averlo utilizzato
     //navigationStore.resetState();
   } else {
     console.log("Nessuna sezione di destinazione trovata.");
   }
-  // aggiungo un watch per quando sono già nella home
+  // aggiungo un watch per quando sono già nella home e controlo lo stato dello store
   watch(
     () => navigationStore.targetSection,
     (newSection) => {
       if (newSection) {
-        scrollToSection(newSection);
+        if (newSection == "allInOne") {
+          console.log("vieni da allInOne al watch");
+          toAllinOne();
+        } else {
+          scrollToSection(newSection);
+        }
+        // scrollToSection(newSection);
         // Resetta lo stato dopo averlo utilizzato, demando sempre il reset alla fine dell'animazione di gsap sectionsTL
         //navigationStore.resetState();
       }
