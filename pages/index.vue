@@ -1,5 +1,6 @@
 <template>
   <main>
+    <MneNavSteps @menuAction="handleMenuAction" />
     <!-- <button class="absolute z-5" @click="toAllinOne">Start-module-toio</button> -->
     <div id="sectionsWrapper" class="z-20">
       <div id="hero-section" class="section_fixed hero">
@@ -136,6 +137,32 @@ const toAllinOne = () => {
   }
 };
 
+//aggiungo un watch per controllare la variazione action  emessa dal menu a step verticale
+// Gestore dell'evento menuAction
+const handleMenuAction = (action) => {
+  console.log("Azione ricevuta:", action);
+  // Chiama la funzione appropriata in base all'azione
+  switch (action) {
+    case "made-for":
+      scrollToSection("made-for");
+      break;
+    case "production":
+      scrollToSection("production");
+      break;
+    case "scrollToPhases":
+      scrollToPhases();
+      break;
+    case "scrollToAllInOne":
+      scrollToAllInOne();
+      break;
+    case "scrollToMadeFor":
+      scrollToMadeFor();
+      break;
+    default:
+      console.log("Azione non riconosciuta:", action);
+  }
+};
+
 //!SECTION
 
 onMounted(() => {
@@ -182,7 +209,6 @@ onMounted(() => {
       }
     }
   );
-  //!SECTION
 
   nextTick(async () => {
     //SECTION - RIVE

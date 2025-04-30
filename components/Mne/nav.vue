@@ -2,7 +2,7 @@
   <div class="text-right flex items-center gap-3">
     <nav class="">
       <ul class="block gap-3 uppercase text-sm md:flex testSass">
-        <li class="hover:text-seagull-400">
+        <li class="nav-hover">
           <NuxtLink to="/">Home</NuxtLink>
         </li>
         <li class="nav-hover"><NuxtLink to="/security">Security</NuxtLink></li>
