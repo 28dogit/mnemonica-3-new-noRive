@@ -104,73 +104,19 @@ function checkNofixedSection() {
 
 //SECTION - funzioni per scroll to non fixed sections
 import { useNavStore } from "@/stores/navigationStore";
+import { useNavigation } from "~/composables/useNavigation";
 
 const navigationStore = useNavStore();
 
-// Funzione per scorrere alla sezione
-const scrollToSection = async (sectionId) => {
-  await nextTick();
-  setTimeout(() => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      // nel css globale imposto html scroll-padding-top: 70px per compensare l'altezza dell'header!
-      element.scrollIntoView({ behavior: "smooth" });
-      // Eseguo la logica personalizzata per eseguire la timeline di gsap in modo da trovarla pronta quando scrollo nuovamente verso l'alto
-      customLogic();
-    } else {
-      console.error(`Elemento con ID "${sectionId}" non trovato.`);
-    }
-  }, 500);
-};
-
-// Funzione personalizzata per eseguire le animazioni di gsap mentre si scrolla verso  la sezione desiderata (noFixed sections)
-const customLogic = () => {
-  //sectionsTLRef.value è la timeline sectionsTL
-  if (sectionsTLRef.value) {
-    sectionsTLRef.value.progress(1, false); // Jump to section
-  }
-};
-
-const toHero = () => {
-  if (sectionsTLRef.value) {
-    sectionsTLRef.value.tweenTo("End-hero"); // anima fino ad
-  }
-};
-
-const toPhases = () => {
-  if (sectionsTLRef.value) {
-    sectionsTLRef.value.tweenTo("End-phases"); // anima fino ad
-  }
-};
-
-const toAllinOne = () => {
-  if (sectionsTLRef.value) {
-    sectionsTLRef.value.tweenTo("Start-modules-pause"); // anima fino ad
-  }
-};
-
-//aggiungo un watch per controllare la variazione action  emessa dal menu a step verticale
-// Gestore dell'evento menuAction
-const handleMenuAction = (action) => {
-  console.log("Azione ricevuta:", action);
-  // Chiama la funzione appropriata in base all'azione
-  switch (action) {
-    case "hero":
-      toHero();
-      break;
-    case "phases":
-      toPhases();
-      break;
-    case "allInOne": // Corretto da scrollToAllInOne
-      toAllinOne(); // Assicurati che questa funzione esista e faccia ciò che è previsto
-      break;
-    case "scrollToMadeFor":
-      scrollToMadeFor();
-      break;
-    default:
-      console.log("Azione non riconosciuta:", action);
-  }
-};
+// Utilizzo il composable per la navigazione
+const {
+  scrollToSection,
+  customLogic,
+  toHero,
+  toAllinOne,
+  handleMenuAction,
+  setSectionsTL,
+} = useNavigation();
 
 //!SECTION
 
@@ -604,6 +550,8 @@ onMounted(() => {
     //sectionsTL.addPause();
 
     sectionsTLRef.value = sectionsTL;
+    // Imposto la timeline nel composable per renderla disponibile alle funzioni di navigazione
+    setSectionsTL(sectionsTL);
 
     //ANCHOR - Scrolltrigger per gestire la sezione "nofixed"
 

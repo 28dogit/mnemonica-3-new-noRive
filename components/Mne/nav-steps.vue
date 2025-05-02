@@ -6,7 +6,6 @@
       :items="items"
       orientation="vertical"
       class="fixed right-10 top-25 z-50"
-      @select="handleNavigate"
     />
   </div>
 </template>
@@ -22,44 +21,30 @@ const items = ref<NavigationMenuItem[][]>([
     {
       label: "Hero",
       icon: "i-lucide-circle-ellipsis",
-      to: "/",
-      badge: "1",
+      //badge: "1",
       active: true,
-      action: "made-for",
+      onSelect: () => emit("menuAction", "hero"),
     },
     {
       label: "Phases",
       icon: "i-lucide-circle-dot",
-      to: "/",
-      badge: "2",
       target: "_self",
-      action: "production",
+      onSelect: () => emit("menuAction", "phases"),
     },
     {
       label: "All In One",
       icon: "i-lucide-circle-dot-dashed",
-      to: "/",
-      badge: "3",
+      onSelect: () => emit("menuAction", "allInOne"),
     },
   ],
   [
     {
       label: "Made For",
       icon: "i-lucide-box",
-      to: "/#made-for",
-      action: "made-for",
+      // to: "/#made-for",
+      onSelect: () => emit("menuAction", "made-for"),
     },
   ],
 ]);
-
-// Gestisce la navigazione e emette l'evento con l'azione associata
-const handleNavigate = (item: NavigationMenuItem) => {
-  console.log("Item cliccato:", item);
-  if (item.action) {
-    console.log("Emetto azione:", item.action);
-    emit("menuAction", item.action);
-  }
-};
 </script>
-
 <style lang="scss" scoped></style>
