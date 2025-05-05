@@ -1,6 +1,6 @@
 <template>
   <main>
-    <MneNavSteps @menuAction="handleMenuAction" />
+    <MneNavSteps @menuAction="handleMenuAction" class="hidden-tablet-down" />
     <!-- <button class="absolute z-5" @click="toAllinOne">Start-module-toio</button> -->
     <div id="sectionsWrapper" class="z-20">
       <div id="hero-section" class="section_fixed hero">
@@ -132,20 +132,89 @@ const customLogic = () => {
 };
 
 const toHero = () => {
+  const { $gsap } = useNuxtApp();
   if (sectionsTLRef.value) {
-    sectionsTLRef.value.tweenTo("End-hero"); // anima fino ad
+    // Verifica se l'utente si trova nella sezione non fissa
+    if (!checkNofixedSection()) {
+      // Imposta lo stato della sezione fissa a true
+      setFixedSection(true);
+      // Blocca lo scroll
+      document.body.style.overflow = "hidden";
+      // Anima la sezione non fissa per abbassarla sotto la viewport
+      const nofixedSection = document.querySelector(".nofixed_section");
+      if (nofixedSection) {
+        $gsap.to(nofixedSection, {
+          y: window.innerHeight,
+          duration: 0.5,
+          ease: "power2.out",
+          onComplete: () => {
+            // Avvia l'animazione della timeline
+            sectionsTLRef.value.tweenTo("Start-hero");
+          },
+        });
+      }
+    } else {
+      // Se non è nella sezione non fissa, avvia direttamente l'animazione
+      sectionsTLRef.value.tweenTo("Start-hero"); // anima fino a
+    }
   }
 };
 
 const toPhases = () => {
+  const { $gsap } = useNuxtApp();
   if (sectionsTLRef.value) {
-    sectionsTLRef.value.tweenTo("End-phases"); // anima fino ad
+    // Verifica se l'utente si trova nella sezione non fissa
+    if (!checkNofixedSection()) {
+      // Imposta lo stato della sezione fissa a true
+      setFixedSection(true);
+      // Blocca lo scroll
+      document.body.style.overflow = "hidden";
+      // Anima la sezione non fissa per abbassarla sotto la viewport
+      const nofixedSection = document.querySelector(".nofixed_section");
+      if (nofixedSection) {
+        $gsap.to(nofixedSection, {
+          y: window.innerHeight,
+          duration: 0.5,
+          ease: "power2.out",
+          onComplete: () => {
+            // Avvia l'animazione della timeline
+            sectionsTLRef.value.tweenTo("End-phases");
+          },
+        });
+      }
+    } else {
+      // Se non è nella sezione non fissa, avvia direttamente l'animazione
+      sectionsTLRef.value.tweenTo("End-phases"); // anima fino a
+    }
   }
 };
 
 const toAllinOne = () => {
+  const { $gsap } = useNuxtApp();
   if (sectionsTLRef.value) {
-    sectionsTLRef.value.tweenTo("Start-modules-pause"); // anima fino ad
+    // Verifica se l'utente si trova nella sezione non fissa
+    if (!checkNofixedSection()) {
+      // Imposta lo stato della sezione fissa a true
+      setFixedSection(true);
+      // Blocca lo scroll
+      document.body.style.overflow = "hidden";
+      // Anima la sezione non fissa per abbassarla sotto la viewport
+      const nofixedSection = document.querySelector(".nofixed_section");
+      if (nofixedSection) {
+        $gsap.to(nofixedSection, {
+          y: window.innerHeight,
+          duration: 0.5,
+          ease: "power2.out",
+          onComplete: () => {
+            // Avvia l'animazione della timeline
+            sectionsTLRef.value.tweenTo("Start-modules-pause");
+          },
+        });
+      }
+    } else {
+      // Se non è nella sezione non fissa, avvia direttamente l'animazione
+      sectionsTLRef.value.tweenTo("Start-modules-pause"); // anima fino a
+    }
   }
 };
 
@@ -164,8 +233,8 @@ const handleMenuAction = (action) => {
     case "allInOne": // Corretto da scrollToAllInOne
       toAllinOne(); // Assicurati che questa funzione esista e faccia ciò che è previsto
       break;
-    case "scrollToMadeFor":
-      scrollToMadeFor();
+    case "madeFor":
+      scrollToSection("made-for");
       break;
     default:
       console.log("Azione non riconosciuta:", action);
@@ -446,6 +515,18 @@ onMounted(() => {
     $gsap.set("#modules-section", { zIndex: 0 });
     $gsap.set("#phases-section", { zIndex: 0 });
 
+    // Funzione per ripristinare la posizione della sezione non fissa
+    const resetNofixedSectionPosition = () => {
+      const nofixedSection = document.querySelector(".nofixed_section");
+      if (nofixedSection) {
+        $gsap.to(nofixedSection, {
+          y: 0,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+      }
+    };
+
     const sectionsTL = $gsap.timeline({
       paused: true,
       defaults: {
@@ -457,6 +538,10 @@ onMounted(() => {
         setTimeout(() => {
           //attivo lo scroll di default
           $gsap.set("body", { overflow: "auto" });
+          // Ripristina la posizione della sezione non fissa
+          resetNofixedSectionPosition();
+          // Imposta lo stato della sezione fissa a false
+          setFixedSection(false);
           //porto l'utente sa made for solo se non arrivo da pagine esterne che hanno richiesto di scrollare ad una data sezione
           if (navigationStore.targetSection == null) {
             //Non ci sono richieste esterne di scroll a sezioni, vai a Made for
@@ -466,10 +551,14 @@ onMounted(() => {
           navigationStore.resetState();
         }, 100);
       },
-      onReverseCompleted: () => {},
+      onReverseCompleted: () => {
+        // Ripristina la posizione della sezione non fissa anche quando l'animazione viene invertita
+        resetNofixedSectionPosition();
+      },
     });
 
     //ANCHOR - Hero Section Start
+    sectionsTL.addLabel("Start-hero");
     // sectionsTL.call(
     //   () => {
     //     rLogo.play("Logo intro");

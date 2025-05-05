@@ -52,3 +52,13 @@ p {
     line-height: 1.3rem;
   }
 }
+
+a.txt-link {
+  text-decoration: none;
+  border-bottom: 1px dashed $mne_secondary;
+  color: $mne_secondary;
+}
+
+.txt-enphasis {
+  color: $mne_secondary;
+}

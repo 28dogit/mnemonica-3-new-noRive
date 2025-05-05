@@ -25,6 +25,13 @@
     }
 }
 
+@mixin for-tablet-portrait-down {
+    @media (max-width: 768px) {
+        // Stili per tablet
+        @content;
+    }
+}
+
 @mixin for-desktop-small {
     @media (min-width: 1025px) and (max-width: 1280px) {
         // Stili per laptop o schermi fino a Full HD

@@ -36,7 +36,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, onUnmounted, computed, watch, nextTick } from "vue";
+import {
+  ref,
+  onMounted,
+  onBeforeUnmount,
+  onUnmounted,
+  computed,
+  watch,
+  nextTick,
+} from "vue";
 import { useWindowSize } from "@vueuse/core";
 const { $gsap } = useNuxtApp();
 
@@ -250,7 +258,7 @@ onUnmounted(() => {});
   box-sizing: border-box;
   min-height: 100vh;
   height: 100vh;
-  padding: 2em;
+  padding: 2em 4em;
 }
 .modal-content {
   height: auto;

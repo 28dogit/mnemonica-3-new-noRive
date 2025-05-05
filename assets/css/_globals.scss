@@ -68,8 +68,25 @@ $gradient_5: hsl(303, 90%, 32%);
     }
 }
 
-a.txt-link {
-    text-decoration: none;
-    border-bottom: 1px dashed $mne_secondary;
-    color: $mne_secondary;
-}
+//*SECTION - Breakpoints veloci
+.hidden-mobile{
+    @include bp.for-phone{
+      display: none;
+    }
+  }
+  .hidden-tablet{
+    @include bp.for-tablet{
+      display: none;
+    }
+  }
+  .hidden-tablet-up{
+    @include bp.for-tablet-portrait-up{
+      display: none;
+    }
+  }
+  .hidden-tablet-down{
+    @include bp.for-tablet-portrait-down{
+      display: none;
+    }
+  }
+  //*!SECTION

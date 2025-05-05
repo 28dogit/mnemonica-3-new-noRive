@@ -18,6 +18,7 @@
       <div id="navWrapper" class="flex w-9/12 justify-end pr-10">
         <!-- <Nav class="hidden md:visible md:flex" /> -->
         <MneNav class="hidden md:visible md:flex" />
+        <MneNavUi class="hidden md:visible md:flex" />
         <MneNavMobile class="md:hidden" />
         <!-- <NavMobile class="md:hidden" /> -->
 

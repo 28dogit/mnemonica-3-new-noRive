@@ -28,14 +28,14 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useNavStore } from "@/stores/navigationStore";
 import { navigateTo } from "#app";
 import { NuxtLink } from "#components";
 
 const navigationStore = useNavStore();
 
-const navigateToSection = (sectionName) => {
+const navigateToSection = (sectionName: string) => {
   // Imposta la sezione di destinazione e indica che deve essere eseguita la logica personalizzata
   console.log("Navigazione avviata...");
   navigationStore.setTargetSection(sectionName, true);
