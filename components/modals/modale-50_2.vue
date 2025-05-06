@@ -1,11 +1,9 @@
 <template>
   <teleport to="body">
-    <!-- <div class="modal-wrapper"> --
-      <!-- <ClientOnly> -->
     <dialog
-      id="mioModale"
+      id="mioModale_2"
       ref="myModal"
-      :class="{ horizontal: isMounted && !isPortrait }"
+      :class="{ horizontal50: isMounted && !isPortrait }"
       @click="(e) => e.target === myModal && closeModal()"
     >
       <!-- aggiungo una classe dinamica horizontal che viene aggiunta quando la viewport non è portrait -->
@@ -20,12 +18,17 @@
         >
           <BtnClose></BtnClose>
         </button>
-        <div ref="modalInner" class="modal-inner">
+        <!-- <div ref="modalInner" class="modal-inner">
           <ContentRenderer v-if="modalContentData" :value="modalContentData" />
+        </div> -->
+        <div class="modal-inner">
+          <ContentRenderer v-if="modalContentData" :value="modalContentData" />
+        </div>
+        <div class="modal-inner-2">
+          <MneFormContact>Get in touch</MneFormContact>
         </div>
       </div>
     </dialog>
-    <!-- </ClientOnly> -->
   </teleport>
 </template>
 
@@ -70,7 +73,7 @@ const isClient = ref(false);
 const isMounted = ref(false);
 const myModal = ref(null);
 const modalContent = ref(null);
-const modalInner = ref(null);
+//const modalInner = ref(null);
 const { width, height } = useWindowSize({
   initialWidth: 0,
   initialHeight: 0,
@@ -103,14 +106,14 @@ const AnimationProps = (isOpening) => {
   if (isPortrait.value) {
     // Entrata dal basso per orientamento verticale
     return {
-      y: isOpening ? "100%" : "100%", //isOpening true = si sta aprendo e y sarà 100, se è false si sta chiudendo quindi y sarà 0
+      y: isOpening ? "100vh" : "100vh", //isOpening true = si sta aprendo e y sarà 100, se è false si sta chiudendo quindi y sarà 0
       x: "0%",
       opacity: 0,
     };
   } else {
     // Entrata da destra per orientamento orizzontale, in questo caso usiamo la x
     return {
-      x: isOpening ? "100%" : "100%",
+      x: isOpening ? "100vw" : "100vw",
       y: "0%",
       opacity: 0,
     };
@@ -123,7 +126,7 @@ const openModal = () => {
   //prendo i valori delle props dalla funzione AnimationProps passando isOpening=true
   const { x, y, opacity } = AnimationProps(true);
   //le passo a gsap
-  $gsap.set(myModal.value, { opacity: 0, x: "0%", y: "0%" });
+  $gsap.set(myModal.value, { opacity: 1, x: "0%", y: "0%" });
   $gsap.to(myModal.value, {
     opacity: 1,
     duration: 0.3,
@@ -134,8 +137,8 @@ const openModal = () => {
     { opacity, x, y },
     {
       opacity: 1,
-      x: isPortrait.value ? "0%" : "50%",
-      y: isPortrait.value ? "50%" : "0%",
+      x: isPortrait.value ? "0vw" : "50vw",
+      y: isPortrait.value ? "50vh" : "0vh",
       duration: 1,
       ease: "power2.out",
     }
@@ -143,25 +146,13 @@ const openModal = () => {
 };
 //chiudo il modale
 const closeModal = () => {
-  console.log("currentModalType-Apertura", currentModalType.value);
-  if (
-    currentModalType.value != "screen" ||
-    currentModalType.value != "deliver" ||
-    currentModalType.value != "preserve"
-  ) {
-    enableBodyScroll();
-    console.log("gatto");
-  } else {
-    disableBodyScroll();
-    console.log("ciccio");
-  }
   const { x, y, opacity } = AnimationProps(false); //passiamo isOpening = false
   $gsap.to(myModal.value, {
     opacity: 0,
     duration: 0.5,
     ease: "power2.in",
     onComplete: () => {
-      $gsap.set(myModal.value, { opacity: 0, x: "100%", y: "100%" });
+      $gsap.set(myModal.value, { opacity: 1, x: "100%", y: "100%" });
       emit("close");
     },
   });
@@ -174,30 +165,39 @@ const closeModal = () => {
   });
 };
 
-const handleScroll = (event) => {
-  if (!isPortrait.value) {
-    event.preventDefault();
-    event.stopPropagation();
+// const handleScroll = (event) => {
+//   if (!isPortrait.value) {
+//     event.preventDefault();
+//     event.stopPropagation();
 
-    $gsap.to(modalInner.value, {
-      scrollTo: {
-        x: modalInner.value.scrollLeft + event.deltaY * 6,
-      },
-      ease: "power2",
-      duration: 0.5,
-    });
-  }
-};
+//     $gsap.to(modalInner.value, {
+//       scrollTo: {
+//         x: modalInner.value.scrollLeft + event.deltaY * 6,
+//       },
+//       ease: "power2",
+//       duration: 0.5,
+//     });
+//   }
+// };
+
+const lastOpenedModalType = ref("");
 
 //tengo d'occhio la props isOpen
 watch(
   () => props.isOpen,
   (newVal) => {
     if (newVal) {
+      lastOpenedModalType.value = currentModalType.value;
       disableBodyScroll();
       openModal();
     } else {
-      // enableBodyScroll();
+      if (
+        lastOpenedModalType.value !== "screen" &&
+        lastOpenedModalType.value !== "deliver" &&
+        lastOpenedModalType.value !== "preserve"
+      ) {
+        enableBodyScroll();
+      }
     }
   },
   { immediate: true }
@@ -232,15 +232,32 @@ onMounted(() => {
     )
     .pause();
 
-  modalInner.value.addEventListener("wheel", handleScroll, { passive: false });
+  //modalInner.value.addEventListener("wheel", handleScroll, { passive: false });
 });
 
 onBeforeUnmount(() => {
-  modalInner.value.removeEventListener("wheel", handleScroll);
-  //enableBodyScroll();
+  //modalInner.value.removeEventListener("wheel", handleScroll);
 });
 
 onUnmounted(() => {});
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.horizontal50 .modal-content {
+  max-width: 50vw;
+}
+.modal-inner {
+  box-sizing: border-box;
+  min-height: 50vh;
+  height: 50vh;
+}
+.modal-inner-2 {
+  box-sizing: border-box;
+  min-height: 100vh;
+  height: 100vh;
+  padding: 2em 4em;
+}
+.modal-content {
+  height: auto;
+}
+</style>

@@ -8,7 +8,10 @@
       <div class="boxMF cursor-pointer" @click="openModal('madefor/post-supervisors')">
         <p class="font-semibold mb-0!">Post Supervisors</p>
       </div>
-      <div class="boxMF cursor-pointer" @click="openModal('madefor/post-production-labs')">
+      <div
+        class="boxMF cursor-pointer"
+        @click="openModal('madefor/post-production-labs')"
+      >
         <p class="font-semibold mb-0!">Post-production Labs</p>
       </div>
       <div class="boxMF cursor-pointer" @click="openModal('madefor/distributors')">
@@ -19,7 +22,12 @@
       </div>
     </div>
   </div>
-  <ModalsModale50 :isOpen="isModalOpen" :isModal="modalId" @close="closeModal" />
+  <ModalsModale501
+    :isOpen="isModalOpen"
+    :isModal="modalId"
+    @close="closeModal"
+    class="ciccio50"
+  />
 </template>
 
 <script setup>

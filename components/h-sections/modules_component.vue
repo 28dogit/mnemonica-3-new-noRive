@@ -51,7 +51,7 @@
       </div>
     </div>
   </div>
-  <ModalsModale50 :isOpen="isModalOpen" :isModal="modalId" @close="closeModal" />
+  <!-- <ModalsModale502 :isOpen="isModalOpen" :isModal="modalId" @close="closeModal" /> -->
   <!-- //!SECTION -->
 </template>
 

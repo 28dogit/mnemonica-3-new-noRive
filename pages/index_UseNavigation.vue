@@ -1,6 +1,6 @@
 <template>
   <main>
-    <MneNavSteps ref="navStepsRef" @menuAction="handleMenuAction" />
+    <MneNavSteps @menuAction="handleMenuAction" />
     <!-- <button class="absolute z-5" @click="toAllinOne">Start-module-toio</button> -->
     <div id="sectionsWrapper" class="z-20">
       <div id="hero-section" class="section_fixed hero">
@@ -110,46 +110,13 @@ const navigationStore = useNavStore();
 
 // Utilizzo il composable per la navigazione
 const {
-  scrollToSection: originalScrollToSection,
+  scrollToSection,
   customLogic,
-  toHero: originalToHero,
-  toAllinOne: originalToAllinOne,
-  handleMenuAction: originalHandleMenuAction,
+  toHero,
+  toAllinOne,
+  handleMenuAction,
   setSectionsTL,
 } = useNavigation();
-
-const navStepsRef = ref(null);
-
-// Funzione per aggiornare lo stato attivo del menu a step
-const updateNavStepsActive = (section) => {
-  if (navStepsRef.value) {
-    navStepsRef.value.setActiveSection(section);
-  }
-};
-
-// Sovrascrivo le funzioni di navigazione per aggiornare anche lo stato attivo del menu
-const toHero = () => {
-  originalToHero();
-  updateNavStepsActive("hero");
-};
-
-const toAllinOne = () => {
-  originalToAllinOne();
-  updateNavStepsActive("allInOne");
-};
-
-const scrollToSection = (sectionId) => {
-  originalScrollToSection(sectionId);
-  if (sectionId === "made-for") {
-    updateNavStepsActive("madeFor");
-  }
-};
-
-// Sovrascrivo il gestore dell'evento menuAction
-const handleMenuAction = (action) => {
-  originalHandleMenuAction(action);
-  updateNavStepsActive(action);
-};
 
 //!SECTION
 

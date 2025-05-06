@@ -91,9 +91,20 @@ const items = ref<NavigationMenuItem[]>([
     children: [],
   },
   {
-    label: "Production",
+    label: "Made For",
+    to: "/",
+    onSelect: () => navigateToSection("made-for"),
+  },
+  {
+    label: "Pricing",
     to: "/",
     onSelect: () => navigateToSection("production"),
+    children: [],
+  },
+  {
+    label: "Contacts",
+    to: "/",
+    onSelect: () => navigateToSection("contacts"),
     children: [],
   },
   {
