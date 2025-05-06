@@ -12,17 +12,16 @@
   "dependencies": {
     "@nuxt/content": "^3.5.1",
     "@pinia/nuxt": "^0.11.0",
-    "esbuild": "^0.25.3",
     "nitropack": "^2.11.11",
     "striptags": "^3.2.0"
   },
   "devDependencies": {
     "@egoist/tailwindcss-icons": "^1.9.0",
-    "@iconify-json/lucide": "^1.2.39",
+    "@iconify-json/lucide": "^1.2.40",
     "@iconify-json/mdi": "^1.2.3",
     "@nuxt/fonts": "^0.11.2",
     "@nuxt/image": "^1.10.0",
-    "@nuxt/ui": "^3.1.0",
+    "@nuxt/ui": "^3.1.1",
     "@nuxtjs/apollo": "^5.0.0-alpha.14",
     "@nuxtjs/seo": "^3.0.3",
     "@rive-app/canvas": "^2.27.1",
@@ -30,11 +29,12 @@
     "@vue/apollo-composable": "^4.2.2",
     "@vueuse/nuxt": "^13.1.0",
     "autoprefixer": "^10.4.21",
-    "gsap": "^3.12.7",
-    "nuxt": "^3.17.1",
+    "esbuild": "^0.25.4",
+    "gsap": "^3.13.0",
+    "nuxt": "^3.17.2",
     "postcss": "^8.5.3",
     "sass": "^1.87.0",
-    "tailwindcss": "^4.1.4",
+    "tailwindcss": "^4.1.5",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1"
   }
