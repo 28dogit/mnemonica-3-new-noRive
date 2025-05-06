@@ -22,12 +22,7 @@
       </div>
     </div>
   </div>
-  <ModalsModale501
-    :isOpen="isModalOpen"
-    :isModal="modalId"
-    @close="closeModal"
-    class="ciccio50"
-  />
+  <ModalsModale50 :isOpen="isModalOpen" :isModal="modalId" @close="closeModal" />
 </template>
 
 <script setup>
