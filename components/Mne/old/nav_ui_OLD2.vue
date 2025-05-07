@@ -1,22 +1,17 @@
 <template>
-  <div class="text-right">
-    <nav class="">
-      <UNavigationMenu
-        :items="items"
-        :portal="false"
-        class="w-full justify-flex-end"
-        higlight-color="neutral"
-        color="neutral"
-      />
-    </nav>
+  <div class="">
+    <UNavigationMenu
+      :items="items"
+      class="w-full justify-flex-end"
+      higlight-color="neutral"
+      color="neutral"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { useNavStore } from "@/stores/navigationStore";
-//import { navigateTo } from "#app";
-//import { NuxtLink } from "#components";
 import type { NavigationMenuItem } from "@nuxt/ui";
+import { useNavStore } from "@/stores/navigationStore";
 
 const navigationStore = useNavStore();
 
@@ -37,13 +32,14 @@ const items = computed(() => {
         label: "Home",
         //icon: "i-lucide-book-open",
         to: "/",
-        // children: [
-        //   {
-        //     label: "Hero",
-        //     description: "Media Asset Magic",
-        //     icon: "i-lucide-circle-ellipsis",
-        //     onSelect: () => navigateToSection("hero"),
-        //   },
+        children: [
+          {
+            label: "Hero",
+            description: "Media Asset Magic",
+            icon: "i-lucide-circle-ellipsis",
+            onSelect: () => navigateToSection("hero"),
+          },
+        ],
         //   {
         //     label: "Phases",
         //     description: "From Prep to Eternity",

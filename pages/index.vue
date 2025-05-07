@@ -1,7 +1,6 @@
 <template>
   <main>
     <MneNavSteps @menuAction="handleMenuAction" class="hidden-tablet-down" />
-    <!-- <button class="absolute z-5" @click="toAllinOne">Start-module-toio</button> -->
     <div id="sectionsWrapper" class="z-20">
       <div id="hero-section" class="section_fixed hero">
         <div id="hero-element" class="element">

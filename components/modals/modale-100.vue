@@ -1,9 +1,9 @@
 <template>
-  <teleport to="body">
+  <teleport to="#teleports">
     <!-- <div class="modal-wrapper"> --
       <!-- <ClientOnly> -->
     <dialog
-      id="mioModale"
+      id="mioModale-100"
       ref="myModal"
       :class="{ horizontal: isMounted && !isPortrait }"
       @click="(e) => e.target === myModal && closeModal()"

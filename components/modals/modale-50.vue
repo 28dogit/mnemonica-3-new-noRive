@@ -1,5 +1,5 @@
 <template>
-  <teleport to="body">
+  <teleport to="#teleports">
     <dialog
       id="mioModale"
       ref="myModal"

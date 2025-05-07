@@ -16,6 +16,37 @@ import type { NavigationMenuItem } from "@nuxt/ui";
 //definisco cosa emettere al click per poi interagire con le funzioni di index.vue
 const emit = defineEmits(["menuAction"]);
 
+// const items = ref<NavigationMenuItem[][]>([
+//   [
+//     {
+//       label: "Hero",
+//       icon: "i-lucide-circle-ellipsis",
+//       //badge: "1",
+//       active: true,
+//       onSelect: () => emit("menuAction", "hero"),
+//     },
+//     {
+//       label: "Phases",
+//       icon: "i-lucide-circle-dot",
+//       target: "_self",
+//       onSelect: () => emit("menuAction", "phases"),
+//     },
+//     {
+//       label: "All In One",
+//       icon: "i-lucide-circle-dot-dashed",
+//       onSelect: () => emit("menuAction", "allInOne"),
+//     },
+//   ],
+//   [
+//     {
+//       label: "Made For",
+//       icon: "i-lucide-box",
+//       // to: "/#made-for",
+//       onSelect: () => emit("menuAction", "madeFor"),
+//     },
+//   ],
+// ]);
+
 const activeSection = ref("hero");
 
 // Definisco una prop per permettere al componente genitore di impostare la sezione attiva
@@ -54,8 +85,17 @@ const items = computed(() => {
       {
         label: "Hero",
         icon: "i-lucide-circle-ellipsis",
+        //badge: "1",
         active: activeSection.value === "hero",
         onSelect: () => handleSelect("hero"),
+        children: [
+          {
+            label: "HeroC",
+            icon: "i-lucide-circle-ellipsis",
+            //badge: "1",
+            active: activeSection.value === "hero",
+          },
+        ],
       },
       {
         label: "Phases",
@@ -75,6 +115,7 @@ const items = computed(() => {
       {
         label: "Made For",
         icon: "i-lucide-box",
+        // to: "/#made-for",
         active: activeSection.value === "madeFor",
         onSelect: () => handleSelect("madeFor"),
       },
