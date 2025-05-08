@@ -93,12 +93,6 @@
       "folders": {},
       "files": {}
     },
-    "dist": {
-      "name": "dist",
-      "isOrdered": true,
-      "folders": {},
-      "files": {}
-    },
     "middleware": {
       "name": "middleware",
       "isOrdered": true,
@@ -116,6 +110,7 @@
     "README": 0,
     "ToDo Lavorazione": 1,
     "Struttura css": 2,
-    "Tips&triks": 3
+    "Tips&triks": 3,
+    "Note di appoggio": 4
   }
 }

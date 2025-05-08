@@ -1,12 +1,16 @@
 <template>
-  <div class="">
-    <UNavigationMenu
-      :items="items"
-      class="w-full justify-flex-end"
-      higlight-color="neutral"
-      color="neutral"
-    />
-  </div>
+  <UNavigationMenu
+    :items="items"
+    class="w-auto justify-center"
+    higlight-color="neutral"
+    color="neutral"
+    :ui="{
+      childList: 'flex flex-row gap-2',
+      childItem: 'h-10',
+      childLink: 'text-sm font-normal text-blue-600',
+      childLinkLabel: 'text-sm font-normal text-blue-600',
+    }"
+  />
 </template>
 
 <script setup lang="ts">
@@ -52,17 +56,20 @@ const items = computed(() => {
           {
             label: "Made For",
             to: "/",
+            active: false,
             onSelect: () => navigateToSection("made-for"),
           },
           {
             label: "Pricing",
             to: "/",
+            active: false,
             onSelect: () => navigateToSection("production"),
           },
           {
             label: "Contacts",
             to: "/",
             onSelect: () => navigateToSection("contacts"),
+            active: false,
           },
         ],
       },
