@@ -13,7 +13,13 @@
   >
     <template #subItems-content="{ item }">
       <span v-for="child in item.children" :key="child.label">
-        {{ child.label }}
+        <ULink
+          class="text-sm text-left rounded-md p-3 transition-colors hover:bg-elevated/50"
+        >
+          <p class="font-medium text-highlighted">
+            {{ child.label }}
+          </p>
+        </ULink>
       </span>
     </template>
   </UNavigationMenu>
@@ -30,8 +36,65 @@ const navigateToSection = (sectionName: string) => {
   console.log("Navigazione avviata...");
   navigationStore.setTargetSection(sectionName, true);
   console.log("Stato impostato:", navigationStore);
-  navigateTo("/");
+  //navigateTo("/");
 };
+
+//--------
+
+// const items = computed(() => {
+//   return [
+//     [
+//       {
+//         label: "Home",
+//         icon: "i-lucide-circle",
+//         to: "/",
+//       },
+//       {
+//         label: "Security",
+//         to: "/security",
+//       },
+//       {
+//         label: "Features",
+//         to: "/features",
+//       },
+//       {
+//         label: "App",
+//         icon: "i-lucide-box",
+//         to: "/mobile-app",
+//       },
+//       {
+//         label: "About",
+//         slot: "subItems" as const,
+//         children: [
+//           {
+//             label: "Made For",
+//             to: "/",
+//             active: false,
+//             onSelect: () => navigateToSection("made-for"),
+//           },
+//           {
+//             label: "Pricing",
+//             to: "/",
+//             active: false,
+//             onSelect: () => navigateToSection("production"),
+//           },
+//           {
+//             label: "Contacts",
+//             to: "/",
+//             onSelect: () => navigateToSection("contacts"),
+//             active: false,
+//           },
+//         ],
+//       },
+//       {
+//         label: "Login",
+//         to: "https://mnemonica.io",
+//         active: true,
+//         target: "_blank",
+//       },
+//     ],
+//   ] as NavigationMenuItem[][];
+// });
 
 const items = [
   {
