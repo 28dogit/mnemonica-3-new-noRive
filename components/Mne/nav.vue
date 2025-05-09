@@ -5,6 +5,7 @@
     higlight-color="neutral"
     color="neutral"
     :ui="{
+      viewport: 'sm:w-(--reka-navigation-menu-viewport-width)',
       childList: 'flex flex-row gap-2',
       childItem: 'h-10',
       childLink: 'text-sm font-normal text-blue-600',

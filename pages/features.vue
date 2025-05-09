@@ -1,5 +1,6 @@
 <template>
   <div class="page-wrapper">
+    <MneTestui />
     <ContentRenderer v-if="page" :value="page" />
   </div>
 </template>
