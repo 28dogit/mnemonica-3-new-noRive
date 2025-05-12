@@ -1,7 +1,5 @@
 <template>
   <teleport to="#teleports">
-    <!-- <div class="modal-wrapper"> --
-      <!-- <ClientOnly> -->
     <dialog
       id="mioModale-100"
       ref="myModal"
@@ -10,6 +8,7 @@
     >
       <!-- aggiungo una classe dinamica horizontal che viene aggiunta quando la viewport non è portrait -->
       <div ref="modalContent" class="modal-content" id="m-content">
+        <!-- <p>Modal ID: {{ isModal }}</p> -->
         <button
           class="modal-x-btn"
           @click.passive="closeModal"
@@ -19,10 +18,12 @@
         >
           <BtnClose></BtnClose>
         </button>
-        <div ref="modalInner" class="modal-inner">contenuto modale</div>
+        <!-- <div ref="modalInner" class="modal-inner">contenuto modale</div> -->
+        <div class="modal-inner">
+          <ContentRenderer v-if="modalContentData" :value="modalContentData" />
+        </div>
       </div>
     </dialog>
-    <!-- </ClientOnly> -->
   </teleport>
 </template>
 
@@ -44,7 +45,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isModal: {
+    type: String,
+    //default: "",
+  },
 });
+
+const currentModalType = computed(() => props.isModal);
+const modalContentData = ref(null);
 
 const emit = defineEmits(["close"]);
 
@@ -52,7 +60,7 @@ const isClient = ref(false);
 const isMounted = ref(false);
 const myModal = ref(null);
 const modalContent = ref(null);
-const modalInner = ref(null);
+//const modalInner = ref(null);
 const { width, height } = useWindowSize({
   initialWidth: 0,
   initialHeight: 0,
@@ -116,8 +124,8 @@ const openModal = () => {
     { opacity, x, y },
     {
       opacity: 1,
-      x: isPortrait.value ? "0%" : "50%",
-      y: isPortrait.value ? "50%" : "0%",
+      x: isPortrait.value ? "0%" : "0%",
+      y: isPortrait.value ? "0%" : "0%",
       duration: 1,
       ease: "power2.out",
     }
@@ -144,30 +152,65 @@ const closeModal = () => {
   });
 };
 
-const handleScroll = (event) => {
-  if (!isPortrait.value) {
-    event.preventDefault();
-    event.stopPropagation();
+// const handleScroll = (event) => {
+//   if (!isPortrait.value) {
+//     event.preventDefault();
+//     event.stopPropagation();
 
-    $gsap.to(modalInner.value, {
-      scrollTo: {
-        x: modalInner.value.scrollLeft + event.deltaY * 6,
-      },
-      ease: "power2",
-      duration: 0.5,
-    });
-  }
-};
+//     $gsap.to(modalInner.value, {
+//       scrollTo: {
+//         x: modalInner.value.scrollLeft + event.deltaY * 6,
+//       },
+//       ease: "power2",
+//       duration: 0.5,
+//     });
+//   }
+// };
+
+//tengo d'occhio la props isOpen
+// watch(
+//   () => props.isOpen,
+//   (newVal) => {
+//     if (newVal) {
+//       disableBodyScroll();
+//       openModal();
+//     } else {
+//       enableBodyScroll();
+//     }
+//   },
+//   { immediate: true }
+// );
+
+const lastOpenedModalType = ref("");
 
 //tengo d'occhio la props isOpen
 watch(
   () => props.isOpen,
   (newVal) => {
     if (newVal) {
+      lastOpenedModalType.value = currentModalType.value;
       disableBodyScroll();
       openModal();
     } else {
-      enableBodyScroll();
+      if (
+        lastOpenedModalType.value !== "screen" &&
+        lastOpenedModalType.value !== "deliver" &&
+        lastOpenedModalType.value !== "preserve"
+      ) {
+        enableBodyScroll();
+      }
+    }
+  },
+  { immediate: true }
+);
+watch(
+  () => props.isModal,
+  async (newModalId) => {
+    if (newModalId) {
+      const { data } = await useAsyncData(`/modali100/${newModalId}`, () =>
+        queryCollection("content").path(`/modali100/${newModalId}`).first()
+      );
+      modalContentData.value = data.value;
     }
   },
   { immediate: true }
@@ -189,11 +232,11 @@ onMounted(() => {
     )
     .pause();
 
-  modalInner.value.addEventListener("wheel", handleScroll, { passive: false });
+  // modalInner.value.addEventListener("wheel", handleScroll, { passive: false });
 });
 
 onBeforeUnmount(() => {
-  modalInner.value.removeEventListener("wheel", handleScroll);
+  // modalInner.value.removeEventListener("wheel", handleScroll);
   enableBodyScroll();
 });
 

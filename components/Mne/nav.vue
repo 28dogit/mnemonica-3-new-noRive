@@ -12,9 +12,17 @@
     }"
   >
     <template #subItems-content="{ item }">
-      <span v-for="child in item.children" :key="child.label">
-        {{ child.label }}
-      </span>
+      <div class="subMenuWrapper flex flex-col gap-2">
+        <a
+          v-for="child in item.children"
+          :key="child.label"
+          @click="handleSubItemClick(child, item)"
+          class="navSubItem"
+          :class="{ 'active-subitem': child.active }"
+        >
+          {{ child.label }}
+        </a>
+      </div>
     </template>
   </UNavigationMenu>
 </template>
@@ -31,6 +39,22 @@ const navigateToSection = (sectionName: string) => {
   navigationStore.setTargetSection(sectionName, true);
   console.log("Stato impostato:", navigationStore);
   navigateTo("/");
+};
+
+const handleSubItemClick = (clickedChild: NavigationMenuItem, parentItem: NavigationMenuItem) => {
+  if (parentItem && parentItem.children) {
+    parentItem.children.forEach((child: NavigationMenuItem) => {
+      child.active = false;
+    });
+  }
+  clickedChild.active = true;
+
+  // Assuming 'onSelect' is a custom property on our child items
+  if (typeof (clickedChild as any).onSelect === 'function') {
+    ((clickedChild as any).onSelect)();
+  } else if (clickedChild.to) {
+    navigateTo(clickedChild.to as string);
+  }
 };
 
 const items = [
@@ -85,4 +109,14 @@ const items = [
 ] satisfies NavigationMenuItem[]
 </script>
 
-<style scoped></style>
+<style scoped>
+.navSubItem {
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.active-subitem {
+  font-weight: bold;
+  /* Potresti voler usare un colore del tema qui, es. text-primary-500 se usi il theming di Nuxt UI */
+}
+</style>
