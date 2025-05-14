@@ -1,21 +1,21 @@
 <template>
   <div class="page-wrapper">
-    <div class="section-made-for">
+    <div class="page-title">
       <h1>Magic Features</h1>
       <h2>Things you can only find in mnemonica</h2>
-      <div class="content">
-        <div class="boxModal cursor-pointer" @click="openModal('dailies')">
-          <p class="font-semibold mb-0!">Ingenious Dailies</p>
-        </div>
-        <div class="boxModal cursor-pointer" @click="openModal('workflow')">
-          <p class="font-semibold mb-0!">One-upload workflow</p>
-        </div>
-        <div class="boxModal cursor-pointer" @click="openModal('playlists')">
-          <p class="font-semibold mb-0!">Instant Playlists</p>
-        </div>
-        <div class="boxModal cursor-pointer" @click="openModal('users')">
-          <p class="font-semibold mb-0!">Virtually unlimited users</p>
-        </div>
+    </div>
+    <div class="content">
+      <div class="boxModal cursor-pointer" @click="openModal('dailies')">
+        <p class="font-semibold mb-0!">Ingenious Dailies</p>
+      </div>
+      <div class="boxModal cursor-pointer" @click="openModal('workflow')">
+        <p class="font-semibold mb-0!">One-upload workflow</p>
+      </div>
+      <div class="boxModal cursor-pointer" @click="openModal('playlists')">
+        <p class="font-semibold mb-0!">Instant Playlists</p>
+      </div>
+      <div class="boxModal cursor-pointer" @click="openModal('users')">
+        <p class="font-semibold mb-0!">Virtually unlimited users</p>
       </div>
     </div>
     <ModalsModale100 :isOpen="isModalOpen" :isModal="modalId" @close="closeModal" />

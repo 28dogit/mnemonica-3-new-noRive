@@ -3,6 +3,7 @@ import { useAsyncData, ref } from '#imports'; // Importa useAsyncData e ref da N
 
 export const useExtractSlots = (sectionName, asyncDataKey = "sections-index") => {
   // Crea ref reattivi per i risultati
+  console.log("AsyncDataKey: ",asyncDataKey);
   const slots = ref({});
   const defaultContent = ref('');
   const isLoading = ref(true);
@@ -74,7 +75,9 @@ export const useExtractSlots = (sectionName, asyncDataKey = "sections-index") =>
 
     // Esegue la query in modo non bloccante
     useAsyncData(asyncDataKey, () => {
-      return queryCollection("contentData").first();
+      return queryCollection("contentData")
+        .where("title", "LIKE", `${asyncDataKey}`)
+        .first();
     }).then(({ data }) => {
       // Verifica che i dati siano presenti
       if (!data.value || !data.value.body) {
