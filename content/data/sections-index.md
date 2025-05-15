@@ -7,9 +7,7 @@ passandolo alla funzione, quindi per richiamare questo file asyncDataKey sarà s
 ::
 
 ::phases
----
-title: Phases titels
----
+
 Testo di default del modulo Phases
 
 #title
@@ -20,9 +18,7 @@ Testo di default del modulo Phases
 ::
 
 ::modules
----
-title: modules titles
----
+
 Testo di default del modulo Modules
 
 #title1
@@ -42,6 +38,7 @@ Experience active workspaces that free you from repetitive tasks—encoding, wat
 ### File Exchange & Delivery
 
 #middleModal2
+no middle modal here (never leave a slot empty)
 
 #title3
 ## Preserve
@@ -49,7 +46,4 @@ Experience active workspaces that free you from repetitive tasks—encoding, wat
 #subtitle3
 ### Perennial Availability
 
-#middle-modal-3
-**Get to know where your content lives.**
-Forget HDs and LTOs, welcome to the most advanced and reliable solution for long-term preservation of digital films that keeps them always ready to expand business and cultural outreach. Arrange screenings on the fly with the Gallery, easily retrieve relevant assets, securely deliver to stakeholders.
 ::

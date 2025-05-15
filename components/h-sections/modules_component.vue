@@ -36,8 +36,8 @@
         </button>
       </div>
       <div id="module-txt_3" class="module_card">
-        <h2 class="mTitle">Preserve</h2>
-        <h3 class="mSubTitle">perennial availability</h3>
+        <div class="mTitle" v-if="slots.title3" v-html="slots.title3"></div>
+        <div class="mSubTitle" v-if="slots.subtitle3" v-html="slots.subtitle3"></div>
         <button
           @click.passive="openModal3"
           @touchstart.passive="openModal3"
