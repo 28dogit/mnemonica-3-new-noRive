@@ -1,58 +1,77 @@
 <template>
   <div class="page-wrapper">
-    <!-- <div class="mausecoordinates">mouse: x: {{ x }} y: {{ y }}</div> -->
-    <ContentRenderer v-if="page" :value="page" />
-
-    <!-- <div class="video-box">
-      <div class="video-box-content">
-        <h1>Title video UI</h1>
-        <h3>
-          Spiegazione: dove si producono gli asset,<br />
-          momento fabbrica complementare al <br />
-          successivo archive
-        </h3>
+    <h1>Security</h1>
+    <p>
+      Designing to protect valuable assets, security has been our number one priority from
+      the first line of code
+    </p>
+    <span class="divider h-[2rem] block"></span>
+    <span class="p-[1rem] block">
+      <h2>Certifications</h2>
+      <div class="certifications-wrapper">
+        <div class="certification-card">
+          <NuxtImg
+            width="180"
+            loading="lazy"
+            src="assets/img/certifications/colhead-tpn-gold.png"
+            alt="ANICA Associazione Nazionale Industrie Cinematografiche Audiovisive Digitali"
+            preload
+          />
+          <h2>TPN Gold Shield</h2>
+          <span class="divider h-[1rem] block"></span>
+          <p>
+            The TPN Gold Shield certification confirms to the global market our policies’
+            value and our seriousness about security, guaranteeing our customers they work
+            safe in a protected environment.
+          </p>
+        </div>
+        <div class="certification-card">
+          <NuxtImg
+            width="180"
+            loading="lazy"
+            src="assets/img/certifications/colhead-iso-27001.png"
+            alt="Post-Super"
+            preload
+          />
+          <h2>ISO/IEC 27001</h2>
+          <span class="divider h-[1rem] block"></span>
+          <p>
+            ISO/IEC 27001 certification ensures that Mnemonica is implementing an optimal
+            information security management system for risk control, cyber-resilience, and
+            operational excellence.
+          </p>
+        </div>
+        <div class="certification-card">
+          <NuxtImg
+            width="180"
+            loading="lazy"
+            src="assets/img/certifications/colhead-gdpr-tr.png"
+            alt="APostLab"
+            preload
+          />
+          <h2>GDPR Compliance</h2>
+          <span class="divider h-[1rem] block"></span>
+          <p>
+            As an EU-based Company, Mnemonica obeys the General Data Protection Regulation
+            (GDPR) that is the most advanced law guaranteeing the safe processing of the
+            individual’s personal data.
+          </p>
+        </div>
       </div>
-      <video class="video-sfumato" autoplay loop muted playsinline preload="auto">
-        <source
-          calss="mobileMq"
-          src="/assets/video/box-2x-vertical.mp4"
-          type="video/webm"
-        />
-        <source calss="deskMq" src="/assets/video/room-cards.mp4" type="video/mp4" />
-      </video>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="video-box2">
-      <div class="video-box-content">
-        <h1>Title video UI</h1>
-        <h3>
-          Spiegazione: dove si producono gli asset,<br />
-          momento fabbrica complementare al<br />
-          successivo archive
-        </h3>
-      </div>
-      <video class="video-sfumato2" autoplay loop muted playsinline preload="auto">
-        <source
-          class="mobileMq"
-          src="/assets/video/box-2x-vertical.mp4"
-          type="video/webm"
-        />
-        <source calss="deskMq" src="/assets/video/room-cards.mp4" type="video/mp4" />
-      </video>
-    </div> -->
+    </span>
+    <p>Active, Passive, Cloud Security</p>
+    <span class="divider h-[2rem] block"></span>
+    <p>MFA, Pwdless login, Integrations</p>
   </div>
 
-  <MneParallaxWrapper :speed="100">
+  <!-- <MneParallaxWrapper :speed="100">
     <BtnMaster @click="isModalOpen = true">open Modale security</BtnMaster>
-  </MneParallaxWrapper>
+  </MneParallaxWrapper> -->
 
   <div style="height: 1000px; width: 100%; background: #e0e0e000">
     <!-- Spazio per controllo scroll con modal aperto -->
   </div>
-  <!-- <ModalsModaleBase :isOpen="isModalOpen" @close="closeModal" /> -->
-  <ModalsModale50 :isOpen="isModalOpen" :isModal="modalId" @close="closeModal" />
+  <!-- <ModalsModale50 :isOpen="isModalOpen" :isModal="modalId" @close="closeModal" /> -->
 </template>
 
 <script setup>
@@ -61,12 +80,6 @@ definePageMeta({
   layout: "page-layout",
 });
 
-const { $gsap } = useNuxtApp();
-
-// const videoV = document.querySelector(".video-sfumato");
-// videoV.playbackRate=2;
-
-const { x, y } = useMouse();
 const route = useRoute();
 
 const { data: page } = await useAsyncData(route.path, () => {
@@ -83,150 +96,15 @@ const closeModal = () => {
 <style lang="scss" scoped>
 @use "@/assets/css/_breakpoints.scss" as bp;
 
-// .mobileMq {
-//   @include bp.for-tablet {
-//     display: none;
-//   }
-
-//   @include bp.for-phone {
-//     display: block;
-//   }
-// }
-
-// .deskMq {
-//   @include bp.for-tablet {
-//     display: block;
-//   }
-
-//   @include bp.for-phone {
-//     display: none;
-//   }
-// }
-
-.divider {
-  height: 200px;
+.certifications-wrapper {
+  display: flex;
+  //flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-around;
+  gap: 1em;
+  // padding: 1em;
+  @include bp.for-tablet-portrait-down {
+    flex-wrap: wrap;
+  }
 }
-
-// .video-box {
-//   position: relative;
-//   display: flex;
-//   align-items: flex-end;
-//   flex-direction: column;
-//   width: 100%;
-//   // box-shadow: 0px 2px 18px 0px #E6EDF5;
-//   box-shadow: 27px 0px 39px -14px rgba(0, 0, 0, 0.43);
-//   border-radius: 0px 100px 100px 0px;
-//   overflow: hidden;
-// }
-
-// .video-box2 {
-//   position: relative;
-//   display: flex;
-//   align-items: flex-end;
-//   flex-direction: column;
-//   width: 100%;
-// }
-
-// .video-box-content {
-//   position: absolute;
-//   width: 100%;
-//   height: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   z-index: 10;
-//   padding: 2em;
-// }
-
-// .testgrad {
-//   height: 100px;
-//   width: 500px;
-//   // background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
-//   background: linear-gradient(
-//     to right,
-//     transparent 0%,
-//     rgb(233 174 0 / 30%) 10%,
-//     rgb(68 85 209 / 60%) 20%,
-//     rgb(121 182 42 / 90%) 30%,
-//     #b62323 40%
-//   );
-// }
-
-// .video-sfumato {
-//   max-width: 40%;
-//   /* Applico una maschera con gradiente da trasparente a opaco su lato destro e in alto */
-//   mask-image: linear-gradient(
-//     to right,
-//     transparent 0%,
-//     rgba(0, 0, 0, 0.3) 10%,
-//     rgba(0, 0, 0, 0.6) 25%,
-//     rgba(0, 0, 0, 0.9) 40%,
-//     black 60%
-//   );
-//   -webkit-mask-image: linear-gradient(
-//     to right,
-//     transparent 0%,
-//     rgba(0, 0, 0, 0.3) 10%,
-//     rgba(0, 0, 0, 0.6) 25%,
-//     rgba(0, 0, 0, 0.9) 40%,
-//     black 60%
-//   );
-//   -webkit-mask-composite: source-in;
-//   mask-composite: intersect;
-// }
-
-// .video-sfumato2 {
-//   max-width: 40%;
-//   /* Applico una maschera con gradiente da trasparente a opaco su lato destro e in alto */
-//   mask-image: linear-gradient(
-//       to right,
-//       transparent 0%,
-//       rgba(0, 0, 0, 0.3) 10%,
-//       rgba(0, 0, 0, 0.6) 25%,
-//       rgba(0, 0, 0, 0.9) 40%,
-//       black 60%
-//     ),
-//     linear-gradient(
-//       to top,
-//       transparent 0%,
-//       rgba(0, 0, 0, 0.3) 10%,
-//       rgba(0, 0, 0, 0.6) 25%,
-//       rgba(0, 0, 0, 0.9) 40%,
-//       black 60%
-//     ),
-//     linear-gradient(
-//       to bottom,
-//       transparent 0%,
-//       rgba(0, 0, 0, 0.3) 10%,
-//       rgba(0, 0, 0, 0.6) 25%,
-//       rgba(0, 0, 0, 0.9) 40%,
-//       black 60%
-//     );
-//   -webkit-mask-image: linear-gradient(
-//       to right,
-//       transparent 0%,
-//       rgba(0, 0, 0, 0.3) 10%,
-//       rgba(0, 0, 0, 0.6) 25%,
-//       rgba(0, 0, 0, 0.9) 40%,
-//       black 60%
-//     ),
-//     linear-gradient(
-//       to top,
-//       transparent 0%,
-//       rgba(0, 0, 0, 0.3) 10%,
-//       rgba(0, 0, 0, 0.6) 25%,
-//       rgba(0, 0, 0, 0.9) 40%,
-//       black 60%
-//     ),
-//     linear-gradient(
-//       to bottom,
-//       transparent 0%,
-//       rgba(0, 0, 0, 0.3) 10%,
-//       rgba(0, 0, 0, 0.6) 25%,
-//       rgba(0, 0, 0, 0.9) 40%,
-//       black 60%
-//     );
-//   -webkit-mask-composite: source-in;
-//   mask-composite: intersect;
-// }
 </style>

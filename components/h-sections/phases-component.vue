@@ -8,10 +8,20 @@
     <div id="phases-content" class="content">
       <div class="headline">
         <!-- <div class="" v-html="defaultContent"></div> -->
-        <div id="PhasesTitle" class="text-center" v-if="slots.title" v-html="slots.title"></div>
-        <div id="PhasesSubtitle" class="text-center" v-if="slots.subtitle" v-html="slots.subtitle"></div>
+        <div
+          id="PhasesTitle"
+          class="text-center"
+          v-if="slots.title"
+          v-html="slots.title"
+        ></div>
+        <div
+          id="PhasesSubtitle"
+          class="text-center"
+          v-if="slots.subtitle"
+          v-html="slots.subtitle"
+        ></div>
         <div class="choice">
-          <BtnMaster>Production</BtnMaster>
+          <BtnMaster @click="navigateToSection('archive')">Production</BtnMaster>
           <BtnMaster>Archive</BtnMaster>
         </div>
       </div>
@@ -20,6 +30,12 @@
 </template>
 
 <script setup>
+const navigationStore = useNavStore();
+
+const navigateToSection = (sectionName) => {
+  navigationStore.setTargetSection(sectionName, true);
+  //navigateTo("/");
+};
 //SECTION - Nuxt Content CMS
 
 //Uso il composable useExtractSlots per estrarre i dati dal file di markup (slot da estrarre, file .md da leggere)
@@ -46,7 +62,9 @@ onMounted(() => {
     let phasesTitles = $gsap.utils.toArray(".phaseCircle .innerTxt"); //creo l'array dei titoli delle fasi
     let phasesChipsTitle = $gsap.utils.toArray("#chips-wrapper .container .title");
     //let phasesChips = $gsap.utils.toArray("#chips-wrapper .phase-chips");
-    let phasesChipsContainer = $gsap.utils.toArray("#chips-wrapper .container .chipsContainer");
+    let phasesChipsContainer = $gsap.utils.toArray(
+      "#chips-wrapper .container .chipsContainer"
+    );
 
     //SECTION - sezione animazione continua dei cerchi delle Fasi
 
@@ -102,8 +120,16 @@ onMounted(() => {
       },
       "<"
     );
-    rotationTL_Titles.value.TitlesRotation(".phaseCircle #Post_txt", { duration: 15 }, "<");
-    rotationTL_Titles.value.TitlesRotation(".phaseCircle #Market_txt", { duration: 16 }, "<");
+    rotationTL_Titles.value.TitlesRotation(
+      ".phaseCircle #Post_txt",
+      { duration: 15 },
+      "<"
+    );
+    rotationTL_Titles.value.TitlesRotation(
+      ".phaseCircle #Market_txt",
+      { duration: 16 },
+      "<"
+    );
     //!SECTION
   }); //NOTE - chiusura nextTick
 }); //NOTE - chiusura onMounted

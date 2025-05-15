@@ -39,7 +39,7 @@
     </div>
     <slot class="min-h-screen" />
     <MneFooter />
-    <MneTopBtn />
+    <!-- <MneTopBtn /> -->
   </div>
 </template>
 
