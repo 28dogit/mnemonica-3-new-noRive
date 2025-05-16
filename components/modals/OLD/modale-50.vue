@@ -18,15 +18,6 @@
         >
           <BtnClose></BtnClose>
         </button>
-        <!-- Pulsante Espandi/Riduci -->
-        <button
-          v-if="isPortrait && props.isOpen"
-          @click="toggleExpand"
-          class="modal-expand-btn"
-          :aria-expanded="isExpanded.toString()"
-        >
-          {{ isExpanded ? "Riduci" : "Espandi" }}
-        </button>
         <!-- <div ref="modalInner" class="modal-inner">
           <ContentRenderer v-if="modalContentData" :value="modalContentData" />
         </div> -->
@@ -66,6 +57,14 @@ const props = defineProps({
 });
 
 const currentModalType = computed(() => props.isModal);
+
+//carico i dati .md
+// const { data: modalContentData } = await useAsyncData(
+//   `/modali50/${props.isModal}`,
+//   () => {
+//     return queryCollection("content").path(`/modali50/${props.isModal}`).first();
+//   }
+// );
 const modalContentData = ref(null);
 
 const emit = defineEmits(["close"]);
@@ -74,12 +73,11 @@ const isClient = ref(false);
 const isMounted = ref(false);
 const myModal = ref(null);
 const modalContent = ref(null);
+//const modalInner = ref(null);
 const { width, height } = useWindowSize({
   initialWidth: 0,
   initialHeight: 0,
 });
-
-const isExpanded = ref(false); // Nuova variabile di stato per l'espansione
 
 // Function to disable body scroll when modal is open
 const disableBodyScroll = () => {
@@ -101,14 +99,19 @@ const isPortrait = computed(() => {
   return height.value > width.value;
 });
 
+//imposto le props da passare in base al rapporto della viewport
+//creo la funzione (freccia) AnimationProps che passerà isOpening come come parametro booleano che indica se il modale si sta aprendo (true) o chiudendo (false)
 const AnimationProps = (isOpening) => {
+  //se isPortait è valido
   if (isPortrait.value) {
+    // Entrata dal basso per orientamento verticale
     return {
-      y: isOpening ? "100vh" : "100vh",
+      y: isOpening ? "100vh" : "100vh", //isOpening true = si sta aprendo e y sarà 100, se è false si sta chiudendo quindi y sarà 0
       x: "0%",
       opacity: 0,
     };
   } else {
+    // Entrata da destra per orientamento orizzontale, in questo caso usiamo la x
     return {
       x: isOpening ? "100vw" : "100vw",
       y: "0%",
@@ -116,95 +119,70 @@ const AnimationProps = (isOpening) => {
     };
   }
 };
+//i valori di questa funzione x,y,opacity vengono passati a gsap per l'animazione
 
+//apro il modale
 const openModal = () => {
-  const { x: offScreenX, y: offScreenY, opacity: offScreenOpacity } = AnimationProps(
-    true
-  );
+  //prendo i valori delle props dalla funzione AnimationProps passando isOpening=true
+  const { x, y, opacity } = AnimationProps(true);
+  //le passo a gsap
   $gsap.set(myModal.value, { opacity: 1, x: "0%", y: "0%" });
   $gsap.to(myModal.value, {
     opacity: 1,
     duration: 0.3,
     ease: "power2.out",
   });
-
-  let initialContentProps = { opacity: offScreenOpacity, x: offScreenX, y: offScreenY };
-  let targetContentProps = {
-    opacity: 1,
-    x: isPortrait.value ? "0vw" : "50vw",
-    y: isPortrait.value ? "50vh" : "0vh",
-    duration: 1,
-    ease: "power2.out",
-  };
-
-  // Quando si apre in portrait, assicurarsi che non sia espanso e l'altezza sia per 50%
-  if (isPortrait.value) {
-    isExpanded.value = false; // Resetta lo stato di espansione all'apertura
-    // L'altezza di modalContent è 'auto' da CSS, overflow-y è 'hidden'.
-    // Posizionando a y: '50vh', si vedrà la parte superiore (50vh) del contenuto.
-  }
-
-  $gsap.fromTo(modalContent.value, initialContentProps, targetContentProps);
+  $gsap.fromTo(
+    modalContent.value,
+    { opacity, x, y },
+    {
+      opacity: 1,
+      x: isPortrait.value ? "0vw" : "50vw",
+      y: isPortrait.value ? "50vh" : "0vh",
+      duration: 1,
+      ease: "power2.out",
+    }
+  );
 };
-
+//chiudo il modale
 const closeModal = () => {
-  const { x, y, opacity } = AnimationProps(false);
+  const { x, y, opacity } = AnimationProps(false); //passiamo isOpening = false
   $gsap.to(myModal.value, {
     opacity: 0,
     duration: 0.5,
     ease: "power2.in",
     onComplete: () => {
       $gsap.set(myModal.value, { opacity: 1, x: "100%", y: "100%" });
-      // Resetta l'altezza di modalContent se è stata modificata dall'espansione
-      if (isPortrait.value && isExpanded.value) {
-        modalContent.value.style.height = ""; // Rimuove lo stile inline, torna a CSS
-      }
-      isExpanded.value = false; // Resetta lo stato di espansione
       emit("close");
     },
   });
-
   $gsap.to(modalContent.value, {
     opacity,
     x,
     y,
     duration: 0.3,
     ease: "power2.in",
-    // Non è necessario onComplete qui se il reset principale è in myModal.value.onComplete
   });
 };
 
-const animateExpandCollapse = (expand) => {
-  if (!isPortrait.value) return;
-  if (expand) {
-    // Animazione per espandere a 100%
-    $gsap.to(modalContent.value, {
-      y: "0vh",
-      height: "100vh",
-      overflowY: "auto",
-      duration: 0.7,
-      ease: "power2.out",
-    });
-  } else {
-    // Animazione per ridurre a 50%
-    $gsap.to(modalContent.value, {
-      y: "50vh",
-      height: "50vh",
-      overflowY: "hidden", // Già 'hidden' da CSS, ma per coerenza
-      duration: 0.7,
-      ease: "power2.inOut",
-    });
-  }
-};
+// const handleScroll = (event) => {
+//   if (!isPortrait.value) {
+//     event.preventDefault();
+//     event.stopPropagation();
 
-const toggleExpand = () => {
-  if (!isPortrait.value) return;
-  isExpanded.value = !isExpanded.value;
-  animateExpandCollapse(isExpanded.value);
-};
+//     $gsap.to(modalInner.value, {
+//       scrollTo: {
+//         x: modalInner.value.scrollLeft + event.deltaY * 6,
+//       },
+//       ease: "power2",
+//       duration: 0.5,
+//     });
+//   }
+// };
 
 const lastOpenedModalType = ref("");
 
+//tengo d'occhio la props isOpen
 watch(
   () => props.isOpen,
   (newVal) => {
@@ -220,15 +198,10 @@ watch(
       ) {
         enableBodyScroll();
       }
-      // closeModal è già chiamato dal click sul pulsante X o sull'overlay
-      // Se props.isOpen diventa false programmaticamente, closeModal dovrebbe essere chiamato.
-      // Tuttavia, la logica attuale di chiusura è guidata dall'utente.
-      // Se props.isOpen può cambiare esternamente, potrebbe essere necessario chiamare closeModal qui.
     }
   },
   { immediate: true }
 );
-
 watch(
   () => props.isModal,
   async (newModalId) => {
@@ -241,14 +214,16 @@ watch(
   },
   { immediate: true }
 );
+//console.log("modalOpenIs", currentModalType.value);
 
 onMounted(() => {
   isClient.value = true;
   nextTick(() => {
     isMounted.value = true;
-    // isPortrait.value è già calcolato dal computed property basato su useWindowSize
+    isPortrait.value = height.value > width.value;
   });
 
+  //metto in pausa l'animazione di apertura del modale
   $gsap
     .fromTo(
       myModal.value,
@@ -256,9 +231,14 @@ onMounted(() => {
       { opacity: 1, x: "0%", y: "0%", duration: 0.5, ease: "power2.out" }
     )
     .pause();
+
+  //modalInner.value.addEventListener("wheel", handleScroll, { passive: false });
 });
 
-onBeforeUnmount(() => {});
+onBeforeUnmount(() => {
+  //modalInner.value.removeEventListener("wheel", handleScroll);
+});
+
 onUnmounted(() => {});
 </script>
 
@@ -268,42 +248,16 @@ onUnmounted(() => {});
 }
 .modal-inner {
   box-sizing: border-box;
-  min-height: 50vh; /* Altezza del contenuto visibile inizialmente in portrait non espanso */
+  min-height: 50vh;
   height: 50vh;
 }
 .modal-inner-2 {
   box-sizing: border-box;
-  /* L'altezza di modal-inner-2 dovrebbe essere relativa al suo contenuto */
-  /* o 50vh se si vuole che riempia la seconda metà quando espanso. */
-  /* Per ora, il contenuto determina la sua altezza. */
+  min-height: 100vh;
+  height: 100vh;
   padding: 2em 4em;
-  /* background-color: lightcoral; */ /* Utile per debug visivo */
 }
 .modal-content {
-  height: auto; /* Permette al contenuto di definire l'altezza */
-  overflow-y: hidden; /* Nasconde lo scrollbar per default (stato non espanso) */
-}
-
-/* Stili per il pulsante di espansione/riduzione */
-.modal-expand-btn {
-  position: absolute;
-  top: 15px; /* Adattare secondo il design */
-  /* Posizionare in modo che non si sovrapponga al pulsante di chiusura */
-  /* Esempio: se BtnClose è a destra (tipico), posizionare a sinistra */
-  left: 15px;
-  z-index: 1300; /* Assicurarsi che sia sopra il contenuto */
-  padding: 8px 12px;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.85em;
-  line-height: 1;
-  transition: background-color 0.2s ease;
-}
-
-.modal-expand-btn:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  height: auto;
 }
 </style>
