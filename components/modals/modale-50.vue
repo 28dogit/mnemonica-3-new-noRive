@@ -19,19 +19,29 @@
           <BtnClose></BtnClose>
         </button>
         <!-- Pulsante Espandi/Riduci -->
-        <button
+        <!-- <button
           v-if="isPortrait && props.isOpen"
           @click="toggleExpand"
           class="modal-expand-btn"
           :aria-expanded="isExpanded.toString()"
         >
           {{ isExpanded ? "Riduci" : "Espandi" }}
-        </button>
+        </button> -->
         <!-- <div ref="modalInner" class="modal-inner">
           <ContentRenderer v-if="modalContentData" :value="modalContentData" />
         </div> -->
         <div class="modal-inner">
           <ContentRenderer v-if="modalContentData" :value="modalContentData" />
+          <UButton
+            :trailing-icon="isExpanded ? 'i-lucide-arrow-down' : 'i-lucide-arrow-up'"
+            size="md"
+            color="neutral"
+            v-if="isPortrait && props.isOpen"
+            @click="toggleExpand"
+            class="modal-expand-btn"
+            :aria-expanded="isExpanded.toString()"
+            >{{ isExpanded ? "Back to info" : "Discover what Mnemonica can do for you" }}
+          </UButton>
         </div>
         <div class="modal-inner-2">
           <MneFormContact>Get in touch</MneFormContact>
@@ -286,11 +296,11 @@ onUnmounted(() => {});
 
 /* Stili per il pulsante di espansione/riduzione */
 .modal-expand-btn {
-  position: absolute;
-  top: 15px; /* Adattare secondo il design */
-  /* Posizionare in modo che non si sovrapponga al pulsante di chiusura */
-  /* Esempio: se BtnClose è a destra (tipico), posizionare a sinistra */
-  left: 15px;
+  // position: absolute;
+  // top: 15px; /* Adattare secondo il design */
+  // /* Posizionare in modo che non si sovrapponga al pulsante di chiusura */
+  // /* Esempio: se BtnClose è a destra (tipico), posizionare a sinistra */
+  // left: 15px;
   z-index: 1300; /* Assicurarsi che sia sopra il contenuto */
   padding: 8px 12px;
   background-color: rgba(0, 0, 0, 0.6);

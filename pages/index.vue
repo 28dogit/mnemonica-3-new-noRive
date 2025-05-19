@@ -2,6 +2,7 @@
   <main>
     <MneNavSteps @menuAction="handleMenuAction" class="hidden-tablet-down" />
     <div id="sectionsWrapper" class="z-20">
+      <UButton class="z-40" @click="scrollToSection('production')">provA</UButton>
       <div id="hero-section" class="section_fixed hero">
         <div id="hero-element" class="element">
           <div id="ghirlanda-element" class="circular"></div>
@@ -32,7 +33,10 @@
         </div>
       </div>
       <div id="phases-section" class="section_fixed phases">
-        <HSectionsPhasesComponent ref="PhasesRef"></HSectionsPhasesComponent>
+        <HSectionsPhasesComponent
+          ref="PhasesRef"
+          @menuAction="handleMenuAction"
+        ></HSectionsPhasesComponent>
       </div>
       <div id="modules-section" class="section_fixed modules">
         <HSectionsModulesComponent></HSectionsModulesComponent>
@@ -135,6 +139,7 @@ const toHero = () => {
   if (sectionsTLRef.value) {
     // Verifica se l'utente si trova nella sezione non fissa
     if (!checkNofixedSection()) {
+      console.log("sono in !checkNofixedSection", checkNofixedSection());
       // Imposta lo stato della sezione fissa a true
       setFixedSection(true);
       // Blocca lo scroll
@@ -142,6 +147,7 @@ const toHero = () => {
       // Anima la sezione non fissa per abbassarla sotto la viewport
       const nofixedSection = document.querySelector(".nofixed_section");
       if (nofixedSection) {
+        console.log("sono in !checkNofixedSection ed esguo gsap", nofixedSection);
         $gsap.to(nofixedSection, {
           y: window.innerHeight,
           duration: 0.5,
@@ -153,7 +159,8 @@ const toHero = () => {
         });
       }
     } else {
-      // Se non è nella sezione non fissa, avvia direttamente l'animazione
+      console.log("sono in checkNofixedSection", checkNofixedSection());
+      // Se è nella sezione fissa, avvia direttamente l'animazione
       sectionsTLRef.value.tweenTo("Start-hero"); // anima fino a
     }
   }
@@ -213,6 +220,7 @@ const toAllinOne = () => {
     } else {
       // Se non è nella sezione non fissa, avvia direttamente l'animazione
       sectionsTLRef.value.tweenTo("Start-modules-pause"); // anima fino a
+      //setFixedSection(false);
     }
   }
 };
@@ -224,16 +232,26 @@ const handleMenuAction = (action) => {
   // Chiama la funzione appropriata in base all'azione
   switch (action) {
     case "hero":
+      console.log("al click toHero", isfixedSection.value);
       toHero();
       break;
     case "phases":
       toPhases();
       break;
     case "allInOne": // Corretto da scrollToAllInOne
-      toAllinOne(); // Assicurati che questa funzione esista e faccia ciò che è previsto
+      toAllinOne();
       break;
     case "madeFor":
+      navigationStore.targetSection = "made-for";
       scrollToSection("made-for");
+      break;
+    case "production":
+      navigationStore.targetSection = "production";
+      scrollToSection("production");
+      break;
+    case "archive":
+      navigationStore.targetSection = "archive";
+      scrollToSection("archive");
       break;
     default:
       console.log("Azione non riconosciuta:", action);
@@ -517,6 +535,7 @@ onMounted(() => {
     // Funzione per ripristinare la posizione della sezione non fissa
     const resetNofixedSectionPosition = () => {
       const nofixedSection = document.querySelector(".nofixed_section");
+      console.log("Ripristino posizione della sezione non fissa");
       if (nofixedSection) {
         $gsap.to(nofixedSection, {
           y: 0,
@@ -538,7 +557,7 @@ onMounted(() => {
           //attivo lo scroll di default
           $gsap.set("body", { overflow: "auto" });
           // Ripristina la posizione della sezione non fissa
-          resetNofixedSectionPosition();
+          //resetNofixedSectionPosition();
           // Imposta lo stato della sezione fissa a false
           setFixedSection(false);
           //porto l'utente sa made for solo se non arrivo da pagine esterne che hanno richiesto di scrollare ad una data sezione
@@ -552,7 +571,7 @@ onMounted(() => {
       },
       onReverseCompleted: () => {
         // Ripristina la posizione della sezione non fissa anche quando l'animazione viene invertita
-        resetNofixedSectionPosition();
+        //resetNofixedSectionPosition();
       },
     });
 

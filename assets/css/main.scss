@@ -186,10 +186,12 @@
   max-width: 960px;
   z-index: 5;
   @include bp.for-tablet-portrait-up{
-    margin-top: 80px;
+    margin-top: 100px;
+    // margin-top: 80px;
   }
   @include bp.for-desktop-big-up {
-    margin-top: 135px;
+    // margin-top: 135px;
+    margin-top: 100px;
   }
   // @include bp.for-phone {
   //   // W-1200px H-750px ups

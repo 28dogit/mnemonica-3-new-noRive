@@ -90,3 +90,43 @@ $gradient_5: hsl(303, 90%, 32%);
     }
   }
   //*!SECTION
+
+  //*SECTION - column wrapper
+  // @mixin col-wrapper($align: flex-start, $justify: space-around, $gap: 1em, $wrap-mobile: true) {
+  //   display: flex;
+  //   align-items: $align;
+  //   justify-content: $justify;
+  //   gap: $gap;
+    
+  //   @if $wrap-mobile {
+  //     @include bp.for-tablet-portrait-down {
+  //       flex-wrap: wrap;
+  //     }
+  //   }
+  // }
+  
+  // // Classe predefinita che utilizza il mixin con valori di default
+  // .col-3-wrapper {
+  //   @include col-wrapper();
+  // }
+  
+  // // Esempi di utilizzo con parametri personalizzati
+  // .col-3-centered {
+  //   @include col-wrapper($align: center, $justify: center);
+  // }
+    
+  // .col-3-spaced-4 {
+  //   @include col-wrapper($gap: 4rem);
+  // }
+ 
+  
+  .col-3-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 1em;
+    @include bp.for-tablet-portrait-down {
+      flex-wrap: wrap;
+    }
+  }
+  

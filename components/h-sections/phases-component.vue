@@ -21,8 +21,8 @@
           v-html="slots.subtitle"
         ></div>
         <div class="choice">
-          <BtnMaster @click="navigateToSection('archive')">Production</BtnMaster>
-          <BtnMaster>Archive</BtnMaster>
+          <BtnMaster @click="handleSelectRef('production')">Production</BtnMaster>
+          <BtnMaster @click="handleSelectRef('archive')">Archive</BtnMaster>
         </div>
       </div>
     </div>
@@ -30,12 +30,6 @@
 </template>
 
 <script setup>
-const navigationStore = useNavStore();
-
-const navigateToSection = (sectionName) => {
-  navigationStore.setTargetSection(sectionName, true);
-  //navigateTo("/");
-};
 //SECTION - Nuxt Content CMS
 
 //Uso il composable useExtractSlots per estrarre i dati dal file di markup (slot da estrarre, file .md da leggere)
@@ -54,8 +48,40 @@ import { nextTick } from "vue";
 const rotationTL = shallowRef(null);
 const rotationTL_Titles = shallowRef(null);
 
+const emit = defineEmits(["menuAction"]);
+const handleSelectRef = ref(null);
+
+// Creo un ref per la funzione di navigazione
+
+// const navigationStore = useNavStore();
+
+// // Definisco la funzione di navigazione fuori da nextTick per garantire che sia disponibile subito
+// const navigateToSection = (sectionName) => {
+//   // Utilizzo setTimeout per assicurarmi che il calcolo delle posizioni avvenga dopo il rendering completo
+//   setTimeout(() => {
+//     const element = document.getElementById(sectionName);
+//     if (element) {
+//       // Utilizzo scrollIntoView che rispetta automaticamente il scroll-padding-top impostato nel CSS globale
+//       element.scrollIntoView({ behavior: "smooth" });
+//       // Eseguo anche la logica dello store per mantenere la coerenza con altre parti dell'applicazione
+//       navigationStore.setTargetSection(sectionName, true);
+//     } else {
+//       console.error(`Elemento con ID "${sectionName}" non trovato.`);
+//       // Fallback al metodo precedente se l'elemento non viene trovato
+//       navigationStore.setTargetSection(sectionName, true);
+//     }
+//     console.log(`Navigazione verso la sezione: ${sectionName}`);
+//   }, 50); // Un breve timeout per garantire che il layout sia calcolato
+// };
+
 onMounted(() => {
   const { $gsap } = useNuxtApp();
+  // Funzione per gestire la selezione di una voce del menu
+  const handleSelect = (section) => {
+    emit("menuAction", section);
+  };
+
+  handleSelectRef.value = handleSelect;
 
   nextTick(() => {
     let phasesItems = $gsap.utils.toArray(".phaseCircle .innerCircle"); //creo l'array dei cerchi delle Fasi
