@@ -1,8 +1,8 @@
 <template>
+  <!-- <UButton class="z-90 fixed top-25" @click="testGsap()">provA</UButton> -->
   <main>
     <MneNavSteps @menuAction="handleMenuAction" class="hidden-tablet-down" />
     <div id="sectionsWrapper" class="z-20">
-      <UButton class="z-40" @click="scrollToSection('production')">provA</UButton>
       <div id="hero-section" class="section_fixed hero">
         <div id="hero-element" class="element">
           <div id="ghirlanda-element" class="circular"></div>
@@ -138,39 +138,76 @@ const toHero = () => {
   const { $gsap } = useNuxtApp();
   if (sectionsTLRef.value) {
     // Verifica se l'utente si trova nella sezione non fissa
-    if (!checkNofixedSection()) {
-      console.log("sono in !checkNofixedSection", checkNofixedSection());
+    if (isfixedSection.value) {
+      console.log("sono in fixedSection", isfixedSection.value);
+      // Se è nella sezione fissa, avvia direttamente l'animazione
+      sectionsTLRef.value.tweenTo("Start-hero");
+    } else {
+      console.log("sono in NofixedSection", isfixedSection.value);
       // Imposta lo stato della sezione fissa a true
-      setFixedSection(true);
+      //setFixedSection(true);
       // Blocca lo scroll
       document.body.style.overflow = "hidden";
       // Anima la sezione non fissa per abbassarla sotto la viewport
-      const nofixedSection = document.querySelector(".nofixed_section");
-      if (nofixedSection) {
-        console.log("sono in !checkNofixedSection ed esguo gsap", nofixedSection);
-        $gsap.to(nofixedSection, {
-          y: window.innerHeight,
-          duration: 0.5,
-          ease: "power2.out",
-          onComplete: () => {
-            // Avvia l'animazione della timeline
-            sectionsTLRef.value.tweenTo("Start-hero");
-          },
-        });
-      }
-    } else {
-      console.log("sono in checkNofixedSection", checkNofixedSection());
-      // Se è nella sezione fissa, avvia direttamente l'animazione
-      sectionsTLRef.value.tweenTo("Start-hero"); // anima fino a
+      //const nofixedSection = document.querySelector(".nofixed_section");
+      //if (nofixedSection) {
+      console.log("eseguo gsap to: ", window.innerHeight);
+      $gsap.to(".nofixed_section", {
+        y: window.innerHeight,
+        duration: 0.5,
+        ease: "power2.out",
+        onComplete: () => {
+          // Avvia l'animazione della timeline
+          sectionsTLRef.value.tweenTo("Start-hero");
+          setFixedSection(true);
+          console.log("al complete:", isfixedSection.value);
+        },
+      });
+      // }
     }
   }
 };
+
+// const toHero = () => {
+//   const { $gsap } = useNuxtApp();
+//   if (sectionsTLRef.value) {
+//     // Verifica se l'utente si trova nella sezione non fissa
+//     if (!checkNofixedSection()) {
+//       console.log("sono in !checkNofixedSection", checkNofixedSection());
+//       // Imposta lo stato della sezione fissa a true
+//       // setFixedSection(true);
+//       // Blocca lo scroll
+//       document.body.style.overflow = "hidden";
+//       // Anima la sezione non fissa per abbassarla sotto la viewport
+//       const nofixedSection = document.querySelector(".nofixed_section");
+//       if (nofixedSection) {
+//         console.log("sono in !checkNofixedSection eseguo gsap", nofixedSection);
+//         $gsap.to(nofixedSection, {
+//           y: window.innerHeight,
+//           duration: 0.5,
+//           ease: "power2.out",
+//           onComplete: () => {
+//             // Avvia l'animazione della timeline
+//             sectionsTLRef.value.tweenTo("Start-hero");
+//             setFixedSection(true);
+//             console.log("al complete:", isfixedSection.value);
+//           },
+//         });
+//       }
+//     } else {
+//       console.log("sono in checkNofixedSection", checkNofixedSection());
+//       // Se è nella sezione fissa, avvia direttamente l'animazione
+//       sectionsTLRef.value.tweenTo("Start-hero"); // anima fino a
+//     }
+//   }
+// };
 
 const toPhases = () => {
   const { $gsap } = useNuxtApp();
   if (sectionsTLRef.value) {
     // Verifica se l'utente si trova nella sezione non fissa
     if (!checkNofixedSection()) {
+      console.log("sono in !checkNofixedSection", checkNofixedSection());
       // Imposta lo stato della sezione fissa a true
       setFixedSection(true);
       // Blocca lo scroll
@@ -189,6 +226,7 @@ const toPhases = () => {
         });
       }
     } else {
+      console.log("sono in checkNofixedSection", checkNofixedSection());
       // Se non è nella sezione non fissa, avvia direttamente l'animazione
       sectionsTLRef.value.tweenTo("End-phases"); // anima fino a
     }
@@ -232,10 +270,11 @@ const handleMenuAction = (action) => {
   // Chiama la funzione appropriata in base all'azione
   switch (action) {
     case "hero":
-      console.log("al click toHero", isfixedSection.value);
+      console.log("click toHero is fixedsection", isfixedSection.value);
       toHero();
       break;
     case "phases":
+      console.log("click Phase is fixedsection", isfixedSection.value);
       toPhases();
       break;
     case "allInOne": // Corretto da scrollToAllInOne
@@ -244,6 +283,7 @@ const handleMenuAction = (action) => {
     case "madeFor":
       navigationStore.targetSection = "made-for";
       scrollToSection("made-for");
+      resetNofixedSectionPosition(); // da sistemare per tutte le sezioni
       break;
     case "production":
       navigationStore.targetSection = "production";
@@ -258,10 +298,27 @@ const handleMenuAction = (action) => {
   }
 };
 
+//ristrutturare e ottimizzare per tutte le sezioni
+const resetNofixedSectionPosition = () => {
+  const { $gsap } = useNuxtApp();
+  const nofixedSection = document.querySelector(".nofixed_section");
+  console.log("Ripristino posizione della sezione non fissa");
+  if (nofixedSection) {
+    $gsap.to(nofixedSection, {
+      y: 0,
+      duration: 0.5,
+      ease: "power2.out",
+    });
+  }
+};
+
 //!SECTION
 
 onMounted(() => {
   const { $gsap } = useNuxtApp();
+
+  console.log("Monunt fixedsection:", isfixedSection.value);
+  console.log("Mount checkfixedsection:", checkNofixedSection());
 
   if (!checkNofixedSection()) {
     document.body.style.overflow = "hidden";
@@ -533,17 +590,17 @@ onMounted(() => {
     $gsap.set("#phases-section", { zIndex: 0 });
 
     // Funzione per ripristinare la posizione della sezione non fissa
-    const resetNofixedSectionPosition = () => {
-      const nofixedSection = document.querySelector(".nofixed_section");
-      console.log("Ripristino posizione della sezione non fissa");
-      if (nofixedSection) {
-        $gsap.to(nofixedSection, {
-          y: 0,
-          duration: 0.5,
-          ease: "power2.out",
-        });
-      }
-    };
+    // const resetNofixedSectionPosition = () => {
+    //   const nofixedSection = document.querySelector(".nofixed_section");
+    //   console.log("Ripristino posizione della sezione non fissa");
+    //   if (nofixedSection) {
+    //     $gsap.to(nofixedSection, {
+    //       y: 0,
+    //       duration: 0.5,
+    //       ease: "power2.out",
+    //     });
+    //   }
+    // };
 
     const sectionsTL = $gsap.timeline({
       paused: true,
