@@ -134,6 +134,44 @@ const customLogic = () => {
   }
 };
 
+//const nofixedSection = document.querySelector(".nofixed_section");
+//const rectTop = nofixedSection.getBoundingClientRect().top.toFixed();
+
+const toFixedSections = (section) => {
+  const { $gsap } = useNuxtApp();
+  if (sectionsTLRef.value) {
+    // Verifica se l'utente si trova nella sezione non fissa
+    if (isfixedSection.value) {
+      console.log("sono in fixedSection", isfixedSection.value);
+      // Se è nella sezione fissa, avvia direttamente l'animazione
+      sectionsTLRef.value.tweenTo(section);
+    } else {
+      console.log("sono in NofixedSection", isfixedSection.value);
+      // Imposta lo stato della sezione fissa a true
+      setFixedSection(true);
+      // Blocca lo scroll
+      document.body.style.overflow = "hidden";
+      // Anima la sezione non fissa per abbassarla sotto la viewport
+      const nofixedSection = document.querySelector(".nofixed_section");
+      const rectTop = nofixedSection.getBoundingClientRect().top.toFixed();
+      console.log("rectTop da Hero", rectTop + window.innerHeight);
+      if (nofixedSection) {
+        $gsap.to(".nofixed_section", {
+          y: window.innerHeight + rectTop,
+          duration: 0.5,
+          ease: "power2.out",
+          onComplete: () => {
+            // Avvia l'animazione della timeline
+            sectionsTLRef.value.tweenTo(section);
+            setFixedSection(true);
+            console.log("al complete:", isfixedSection.value);
+          },
+        });
+      }
+    }
+  }
+};
+
 const toHero = () => {
   const { $gsap } = useNuxtApp();
   if (sectionsTLRef.value) {
@@ -145,25 +183,26 @@ const toHero = () => {
     } else {
       console.log("sono in NofixedSection", isfixedSection.value);
       // Imposta lo stato della sezione fissa a true
-      //setFixedSection(true);
+      setFixedSection(true);
       // Blocca lo scroll
       document.body.style.overflow = "hidden";
       // Anima la sezione non fissa per abbassarla sotto la viewport
-      //const nofixedSection = document.querySelector(".nofixed_section");
-      //if (nofixedSection) {
-      console.log("eseguo gsap to: ", window.innerHeight);
-      $gsap.to(".nofixed_section", {
-        y: window.innerHeight,
-        duration: 0.5,
-        ease: "power2.out",
-        onComplete: () => {
-          // Avvia l'animazione della timeline
-          sectionsTLRef.value.tweenTo("Start-hero");
-          setFixedSection(true);
-          console.log("al complete:", isfixedSection.value);
-        },
-      });
-      // }
+      const nofixedSection = document.querySelector(".nofixed_section");
+      const rectTop = nofixedSection.getBoundingClientRect().top.toFixed();
+      console.log("rectTop da Hero", rectTop + window.innerHeight);
+      if (nofixedSection) {
+        $gsap.to(".nofixed_section", {
+          y: window.innerHeight + rectTop,
+          duration: 0.5,
+          ease: "power2.out",
+          onComplete: () => {
+            // Avvia l'animazione della timeline
+            sectionsTLRef.value.tweenTo("Start-hero");
+            setFixedSection(true);
+            console.log("al complete:", isfixedSection.value);
+          },
+        });
+      }
     }
   }
 };
@@ -214,6 +253,8 @@ const toPhases = () => {
       document.body.style.overflow = "hidden";
       // Anima la sezione non fissa per abbassarla sotto la viewport
       const nofixedSection = document.querySelector(".nofixed_section");
+      const rect = nofixedSection.getBoundingClientRect();
+      console.log("rect-pahse", rect.top.toFixed());
       if (nofixedSection) {
         $gsap.to(nofixedSection, {
           y: window.innerHeight,
@@ -244,6 +285,8 @@ const toAllinOne = () => {
       document.body.style.overflow = "hidden";
       // Anima la sezione non fissa per abbassarla sotto la viewport
       const nofixedSection = document.querySelector(".nofixed_section");
+      const rect = nofixedSection.getBoundingClientRect();
+      console.log("rect-AllInOne", rect.top.toFixed());
       if (nofixedSection) {
         $gsap.to(nofixedSection, {
           y: window.innerHeight,
@@ -288,10 +331,12 @@ const handleMenuAction = (action) => {
     case "production":
       navigationStore.targetSection = "production";
       scrollToSection("production");
+      resetNofixedSectionPosition();
       break;
     case "archive":
       navigationStore.targetSection = "archive";
       scrollToSection("archive");
+      resetNofixedSectionPosition();
       break;
     default:
       console.log("Azione non riconosciuta:", action);
