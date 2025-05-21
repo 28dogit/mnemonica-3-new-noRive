@@ -1,8 +1,7 @@
 <template>
+  <!-- <UButton class="z-90 fixed top-25" @click="testGsap()">provA</UButton> -->
   <main>
-    <button @click="customLogic()" class="p-6 absolute top-150 right-30 z-50">
-      Tl command
-    </button>
+    <MneNavSteps @menuAction="handleMenuAction" class="hidden-tablet-down" />
     <div id="sectionsWrapper" class="z-20">
       <div id="hero-section" class="section_fixed hero">
         <div id="hero-element" class="element">
@@ -23,25 +22,28 @@
           <div id="hero-content" class="content hero">
             <div class="headline">
               <h2 id="heroSubTitle" class="hidden min-[680px]:block text-center">
-                Let your media assets flourish and last in the digital cinema ecosystem
+                Connecting the dots of the digital cinema living ecosystem.
               </h2>
               <h2 id="heroSubTitle" class="text-center min-[680px]:hidden">
-                Let your media assets flourish<br />
-                and last in the digital cinema ecosystem
+                Connecting the dot <br />of the digital cinema living ecosystem.
               </h2>
             </div>
+            <NuxtLink to="/features" class="txt-link">Explore the magic</NuxtLink>
           </div>
         </div>
       </div>
       <div id="phases-section" class="section_fixed phases">
-        <HSectionsPhasesComponent ref="PhasesRef"></HSectionsPhasesComponent>
+        <HSectionsPhasesComponent
+          ref="PhasesRef"
+          @menuAction="handleMenuAction"
+        ></HSectionsPhasesComponent>
       </div>
       <div id="modules-section" class="section_fixed modules">
         <HSectionsModulesComponent></HSectionsModulesComponent>
       </div>
     </div>
     <div class="nofixed_section w-[100vw] z-30">
-      <div class="preMade"></div>
+      <!-- <div class="preMade"></div> -->
       <div id="made-for" class="nofixed-inner-wrapper">
         <HSectionsMadeFor></HSectionsMadeFor>
       </div>
@@ -74,7 +76,7 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";
+import { onMounted, onBeforeUnmount, ref, nextTick, watch } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
 import { HSectionsArchive } from "#components";
@@ -87,7 +89,7 @@ const titleTrigger = ref(null);
 const noFixedSTRef = ref(null);
 const handleScrollRef = ref(null);
 //costante in cui salvo sectionsTL per renderla disponibile in tutti i componenti
-const introRef = ref(null);
+const sectionsTLRef = ref(null);
 // Usiamo il composable per lo stato Fixed Section
 const { isfixedSection, setFixedSection } = useFixedSection();
 // Variabile per memorizzare il buffer del file .riv
@@ -103,7 +105,7 @@ function checkNofixedSection() {
   return nofixedSection && window.scrollY > nofixedSection.offsetTop;
 }
 
-//SECTION - scrolltest
+//SECTION - funzioni per scroll to non fixed sections
 import { useNavStore } from "@/stores/navigationStore";
 
 const navigationStore = useNavStore();
@@ -114,32 +116,115 @@ const scrollToSection = async (sectionId) => {
   setTimeout(() => {
     const element = document.getElementById(sectionId);
     if (element) {
+      // nel css globale imposto html scroll-padding-top: 70px per compensare l'altezza dell'header!
       element.scrollIntoView({ behavior: "smooth" });
+      // Eseguo la logica personalizzata per eseguire la timeline di gsap in modo da trovarla pronta quando scrollo nuovamente verso l'alto
       customLogic();
     } else {
       console.error(`Elemento con ID "${sectionId}" non trovato.`);
     }
-  }, 1000);
+  }, 500);
 };
 
-// Funzione personalizzata da eseguire allo scroll verso Made-For per eseguire le animazioni di gsap
+// Funzione personalizzata per eseguire le animazioni di gsap mentre si scrolla verso  la sezione desiderata (noFixed sections)
 const customLogic = () => {
-  // Aggiungi qui altre operazioni necessarie
-  if (introRef.value) {
-    introRef.value.progress(1, false); // Jump to end without animation
-    // Or animate: introRef.value.play(introRef.value.duration());
+  //sectionsTLRef.value è la timeline sectionsTL
+  if (sectionsTLRef.value) {
+    sectionsTLRef.value.progress(1, false); // Jump to section
   }
-  const madeForSection = document.getElementById("made-for");
-  if (madeForSection) {
-    madeForSection.scrollIntoView({ behavior: "smooth" });
+};
+
+const toFixedSections = (section) => {
+  const { $gsap } = useNuxtApp();
+  if (sectionsTLRef.value) {
+    // Verifica se l'utente si trova nella sezione non fissa
+    if (isfixedSection.value) {
+      // Se è nella sezione fissa, avvia direttamente l'animazione
+      sectionsTLRef.value.tweenTo(section);
+    } else {
+      // Imposta lo stato della sezione fissa a true
+      setFixedSection(true);
+      // Blocca lo scroll
+      document.body.style.overflow = "hidden";
+      // Anima la sezione non fissa per abbassarla sotto la viewport
+      const nofixedSection = document.querySelector(".nofixed_section");
+      const rectTop = nofixedSection.getBoundingClientRect().top.toFixed();
+      if (nofixedSection) {
+        $gsap.to(".nofixed_section", {
+          // y: window.innerHeight + rectTop,
+          y: Math.abs(parseFloat(rectTop)) + window.innerHeight,
+          duration: 0.5,
+          ease: "power2.out",
+          onComplete: () => {
+            // Avvia l'animazione della timeline
+            sectionsTLRef.value.tweenTo(section);
+            setFixedSection(true);
+          },
+        });
+      }
+    }
   }
-  console.log("Logica personalizzata eseguita!");
+};
+
+//aggiungo un watch per controllare la variazione action  emessa dal menu a step verticale
+// Gestore dell'evento menuAction
+const handleMenuAction = (action) => {
+  console.log("Azione ricevuta:", action);
+  // Chiama la funzione appropriata in base all'azione
+  switch (action) {
+    case "hero":
+      toFixedSections("Start-hero");
+      break;
+    case "phases":
+      toFixedSections("End-phases");
+      break;
+    case "allInOne": // Corretto da scrollToAllInOne
+      toFixedSections("Start-modules-pause");
+      break;
+    case "madeFor":
+      navigationStore.targetSection = "made-for";
+      scrollToSection("made-for");
+      resetNofixedSectionPosition(); // da sistemare per tutte le sezioni
+      break;
+    case "production":
+      navigationStore.targetSection = "production";
+      scrollToSection("production");
+      resetNofixedSectionPosition();
+      break;
+    case "archive":
+      navigationStore.targetSection = "archive";
+      scrollToSection("archive");
+      resetNofixedSectionPosition(); //da mettere ad ogni btn verso le nofixed sections, ad esempio anche dal menu principale
+      break;
+    default:
+      console.log("Azione non riconosciuta:", action);
+  }
+};
+
+//ristrutturare e ottimizzare per tutte le sezioni
+const resetNofixedSectionPosition = () => {
+  const { $gsap } = useNuxtApp();
+  const nofixedSection = document.querySelector(".nofixed_section");
+  console.log("Ripristino posizione della sezione non fissa");
+  if (nofixedSection) {
+    $gsap.set(nofixedSection, {
+      y: 0,
+    });
+    // $gsap.to(nofixedSection, {
+    //   y: 0,
+    //   duration: 0.5,
+    //   ease: "power2.out",
+    // });
+  }
 };
 
 //!SECTION
 
 onMounted(() => {
   const { $gsap } = useNuxtApp();
+
+  console.log("Monunt fixedsection:", isfixedSection.value);
+  console.log("Mount checkfixedsection:", checkNofixedSection());
 
   if (!checkNofixedSection()) {
     document.body.style.overflow = "hidden";
@@ -150,27 +235,40 @@ onMounted(() => {
   // blocca lo scroll on mount (solo per index)
   // document.body.style.overflow = "hidden";
 
-  //SECTION - scrolltrigger2
-  // console.log("Pagina index montata.");
-  // console.log("Stato attuale:", navigationStore);
+  //SECTION - scroll to non fixed sections quando arrivo da una pagina esterna
   if (navigationStore.targetSection) {
-    // Scorri alla sezione
-    console.log("Scorrendo alla sezione:", navigationStore.targetSection);
-    scrollToSection(navigationStore.targetSection);
-
-    // Esegui la logica personalizzata se richiesto
-    if (navigationStore.executeCustomLogic) {
-      console.log("Eseguendo logica personalizzata...");
-      customLogic();
+    if (navigationStore.targetSection == "allInOne") {
+      console.log("vieni da allInOne");
+      toFixedSections("Start-modules-pause");
+    } else {
+      scrollToSection(navigationStore.targetSection);
+      resetNofixedSectionPosition();
     }
 
     // Resetta lo stato dopo averlo utilizzato
-    navigationStore.resetState();
-    //console.log("Stato resettato.");
+    // il reset lo sposto nell'onComplete di sectionsTL perchè mi serve averlo ancora attivo quando arrivo da pagine esterne, resetterò lo stato dopo averlo utilizzato
+    //navigationStore.resetState();
   } else {
     console.log("Nessuna sezione di destinazione trovata.");
   }
-  //!SECTION
+  // aggiungo un watch per quando sono già nella home e controlo lo stato dello store
+  watch(
+    () => navigationStore.targetSection,
+    (newSection) => {
+      if (newSection) {
+        if (newSection == "allInOne") {
+          console.log("vieni da allInOne al watch");
+          toFixedSections("Start-modules-pause");
+        } else {
+          scrollToSection(newSection);
+          resetNofixedSectionPosition();
+        }
+        // scrollToSection(newSection);
+        // Resetta lo stato dopo averlo utilizzato, demando sempre il reset alla fine dell'animazione di gsap sectionsTL
+        //navigationStore.resetState();
+      }
+    }
+  );
 
   nextTick(async () => {
     //SECTION - RIVE
@@ -285,7 +383,7 @@ onMounted(() => {
     intro.from(
       "#ghirlanda-element_start",
       {
-        autoAlpha: 0,
+        opacity: 0,
         rotate: 5,
         filter: "blur(5px)",
         duration: 3,
@@ -398,12 +496,19 @@ onMounted(() => {
     $gsap.set("#hero-section", { zIndex: 1 });
     $gsap.set("#modules-section", { zIndex: 0 });
     $gsap.set("#phases-section", { zIndex: 0 });
-    $gsap.set("#post-chips-container .title", { opacity: 0, y: -10 });
-    $gsap.set("#production-chips-container .title", { opacity: 0, y: -10 });
-    $gsap.set("#market-chips-container .title", { opacity: 0, y: -10 });
-    $gsap.set("#post-chips-container .chipsContainer", { opacity: 0, y: 10 });
-    $gsap.set("#production-chips-container .chipsContainer", { opacity: 0, y: 10 });
-    $gsap.set("#market-chips-container .chipsContainer", { opacity: 0, y: 10 });
+
+    // Funzione per ripristinare la posizione della sezione non fissa
+    // const resetNofixedSectionPosition = () => {
+    //   const nofixedSection = document.querySelector(".nofixed_section");
+    //   console.log("Ripristino posizione della sezione non fissa");
+    //   if (nofixedSection) {
+    //     $gsap.to(nofixedSection, {
+    //       y: 0,
+    //       duration: 0.5,
+    //       ease: "power2.out",
+    //     });
+    //   }
+    // };
 
     const sectionsTL = $gsap.timeline({
       paused: true,
@@ -411,24 +516,39 @@ onMounted(() => {
         ease: "power2.out",
       },
       onComplete: () => {
+        console.log("Animazione completata e sato:", navigationStore.targetSection);
+
         setTimeout(() => {
+          //attivo lo scroll di default
           $gsap.set("body", { overflow: "auto" });
-          console.log("completata sectionsTL");
-          // Simula un piccolo scroll per attivare ScrollTrigger
-          window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+          // Ripristina la posizione della sezione non fissa
+          //resetNofixedSectionPosition();
+          // Imposta lo stato della sezione fissa a false
+          setFixedSection(false);
+          //porto l'utente sa made for solo se non arrivo da pagine esterne che hanno richiesto di scrollare ad una data sezione
+          if (navigationStore.targetSection == null) {
+            //Non ci sono richieste esterne di scroll a sezioni, vai a Made for
+            scrollToSection("made-for");
+          }
+          //resetto lo stato dopo averlo utilizzato
+          navigationStore.resetState();
         }, 100);
       },
-      onReverseCompleted: () => {},
+      onReverseCompleted: () => {
+        // Ripristina la posizione della sezione non fissa anche quando l'animazione viene invertita
+        //resetNofixedSectionPosition();
+      },
     });
 
     //ANCHOR - Hero Section Start
-    sectionsTL.call(
-      () => {
-        rLogo.play("Logo intro");
-      },
-      null,
-      "-=1"
-    );
+    sectionsTL.addLabel("Start-hero");
+    // sectionsTL.call(
+    //   () => {
+    //     rLogo.play("Logo intro");
+    //   },
+    //   null,
+    //   "-=1"
+    // );
     sectionsTL.to("#hero-section", {
       autoAlpha: 0,
       duration: 1,
@@ -517,6 +637,7 @@ onMounted(() => {
     // sectionsTL.set("#modules-content #module-txt_2", { zIndex: 0 });
 
     // pausa entrata modules
+    sectionsTL.addLabel("Start-modules-pause");
     sectionsTL.addPause();
     //-----
 
@@ -554,7 +675,7 @@ onMounted(() => {
     );
     //sectionsTL.addPause();
 
-    introRef.value = sectionsTL;
+    sectionsTLRef.value = sectionsTL;
 
     //ANCHOR - Scrolltrigger per gestire la sezione "nofixed"
 

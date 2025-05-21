@@ -2,22 +2,22 @@
   <div class="section-made-for">
     <h1>made-for</h1>
     <div class="content">
-      <div class="boxMF cursor-pointer" @click="openModal('madefor/producers')">
+      <div class="boxModal cursor-pointer" @click="openModal('madefor/producers')">
         <p class="font-semibold mb-0!">Producers</p>
       </div>
-      <div class="boxMF cursor-pointer" @click="openModal('madefor/post-supervisors')">
+      <div class="boxModal cursor-pointer" @click="openModal('madefor/post-supervisors')">
         <p class="font-semibold mb-0!">Post Supervisors</p>
       </div>
       <div
-        class="boxMF cursor-pointer"
+        class="boxModal cursor-pointer"
         @click="openModal('madefor/post-production-labs')"
       >
         <p class="font-semibold mb-0!">Post-production Labs</p>
       </div>
-      <div class="boxMF cursor-pointer" @click="openModal('madefor/distributors')">
+      <div class="boxModal cursor-pointer" @click="openModal('madefor/distributors')">
         <p class="font-semibold mb-0!">Distributors</p>
       </div>
-      <div class="boxMF cursor-pointer" @click="openModal('madefor/broadcasters')">
+      <div class="boxModal cursor-pointer" @click="openModal('madefor/broadcasters')">
         <p class="font-semibold mb-0!">Broadcasters / OTT</p>
       </div>
     </div>

@@ -1,7 +1,5 @@
 <template>
-  <!-- <UButton class="z-90 fixed top-25" @click="testGsap()">provA</UButton> -->
   <main>
-    <MneNavSteps @menuAction="handleMenuAction" class="hidden-tablet-down" />
     <div id="sectionsWrapper" class="z-20">
       <div id="hero-section" class="section_fixed hero">
         <div id="hero-element" class="element">
@@ -20,54 +18,54 @@
         <slot name="screentitle"></slot>
         <div id="hero-content-wrapper" class="wrapper">
           <div id="hero-content" class="content hero">
+            <!-- <div id="heroTitle" class="flex items-center justify-center flex-wrap">
+            </div> -->
             <div class="headline">
               <h2 id="heroSubTitle" class="hidden min-[680px]:block text-center">
-                Connecting the dots of the digital cinema living ecosystem.
+                Let your media assets flourish and last in the digital cinema ecosystem
               </h2>
               <h2 id="heroSubTitle" class="text-center min-[680px]:hidden">
-                Connecting the dot <br />of the digital cinema living ecosystem.
+                Let your media assets flourish<br />
+                and last in the digital cinema ecosystem
               </h2>
             </div>
-            <NuxtLink to="/features" class="txt-link">Explore the magic</NuxtLink>
           </div>
         </div>
       </div>
       <div id="phases-section" class="section_fixed phases">
-        <HSectionsPhasesComponent
-          ref="PhasesRef"
-          @menuAction="handleMenuAction"
-        ></HSectionsPhasesComponent>
+        <HSectionsPhasesComponent ref="PhasesRef"></HSectionsPhasesComponent>
+        <!-- <HSectionsTest ref="TestRef"></HSectionsTest> -->
       </div>
       <div id="modules-section" class="section_fixed modules">
         <HSectionsModulesComponent></HSectionsModulesComponent>
       </div>
     </div>
     <div class="nofixed_section w-[100vw] z-30">
-      <!-- <div class="preMade"></div> -->
+      <div class="preMade"></div>
       <div id="made-for" class="nofixed-inner-wrapper">
         <HSectionsMadeFor></HSectionsMadeFor>
       </div>
-      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
+      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
       <div id="production" class="nofixed-inner-wrapper">
         <HSectionsProduction></HSectionsProduction>
       </div>
-      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
+      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
       <div id="production-ui" class="nofixed-inner-wrapper">
         <HSectionsProductionUi></HSectionsProductionUi>
       </div>
-      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
+      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
       <div id="archive" class="nofixed-inner-wrapper">
         <HSectionsArchive></HSectionsArchive>
       </div>
-      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
+      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
       <div id="archive-ui" class="nofixed-inner-wrapper">
         <HSectionsArchiveUi></HSectionsArchiveUi>
       </div>
-      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
+      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
       <div id="about-us" class="nofixed-inner-wrapper">
         <HSectionsAboutUs></HSectionsAboutUs>
       </div>
-      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
+      <UDivider icon="i-lucide-fold-vertical" class="h-12" />
       <div id="contacts" class="nofixed-inner-wrapper">
         <HSectionsContacts></HSectionsContacts>
       </div>
@@ -76,7 +74,13 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount, ref, nextTick, watch } from "vue";
+// const { data: contentModulesComponent } = await useAsyncData(() =>
+//   queryCollection("content").path("/modules-content").first()
+// );
+// const { data: contentPhasesComponent } = await useAsyncData(() =>
+//   queryCollection("content").path("/phases-content").first()
+// );
+import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
 import { HSectionsArchive } from "#components";
@@ -86,154 +90,64 @@ const PhasesRef = ref(null);
 const canvasRefLogo = ref(null);
 const canvasRef = ref(null);
 const titleTrigger = ref(null);
+const canvasRefBtn = ref(null);
 const noFixedSTRef = ref(null);
 const handleScrollRef = ref(null);
-//costante in cui salvo sectionsTL per renderla disponibile in tutti i componenti
-const sectionsTLRef = ref(null);
-// Riferimento alla funzione per prevenire il rimbalzo in iOS
-const preventIOSBounceRef = ref(null);
+
 // Usiamo il composable per lo stato Fixed Section
 const { isfixedSection, setFixedSection } = useFixedSection();
+
 // Variabile per memorizzare il buffer del file .riv
 let rivBuffer = null;
+
 // Funzione per caricare il file .riv una sola volta
 async function loadRivFile(url) {
   const response = await fetch(url);
   return await response.arrayBuffer();
 }
 
+function handleClick(event) {
+  event.preventDefault();
+  alert("Pulsante cliccato!");
+}
+const introRef = ref(null);
+function playFast() {
+  // Imposta la velocità a 2x
+  introRef.value.timeScale(2);
+
+  // Rimuovi tutte le pause e riproduci la timeline fino alla fine
+  introRef.value.play();
+}
+
 function checkNofixedSection() {
   const nofixedSection = document.querySelector(".nofixed_section");
   return nofixedSection && window.scrollY > nofixedSection.offsetTop;
 }
-
-//SECTION - funzioni per scroll to non fixed sections
+//SECTION - scrolltest
 import { useNavStore } from "@/stores/navigationStore";
 
 const navigationStore = useNavStore();
-// const {
-//   scrollToSection,
-//   customLogic,
-//   toFixedSections,
-//   ,
-// } = useMNEfunctions(sectionsTLRef, isfixedSection, setFixedSection);
 
-//Funzione per scorrere alla sezione
-const scrollToSection = async (sectionId) => {
-  await nextTick();
-  setTimeout(() => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      // nel css globale imposto html scroll-padding-top: 70px per compensare l'altezza dell'header!
-      element.scrollIntoView({ behavior: "smooth" });
-      // Eseguo la logica personalizzata per eseguire la timeline di gsap in modo da trovarla pronta quando scrollo nuovamente verso l'alto
-      customLogic();
-      //resetNofixedSectionPosition("scrolltosection");
-    } else {
-      console.error(`Elemento con ID "${sectionId}" non trovato.`);
-    }
-  }, 500);
+// Funzione per scorrere alla sezione
+const scrollToSection = (sectionId) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  } else {
+    console.error(`Elemento con ID "${sectionId}" non trovato.`);
+  }
 };
 
-// Funzione personalizzata per eseguire le animazioni di gsap mentre si scrolla verso  la sezione desiderata (noFixed sections)
+// Funzione personalizzata da eseguire
 const customLogic = () => {
-  //sectionsTLRef.value è la timeline sectionsTL
-  if (sectionsTLRef.value) {
-    sectionsTLRef.value.progress(1, false); // Jump to section
-  }
-};
-
-const toFixedSections = (section) => {
-  const { $gsap } = useNuxtApp();
-  if (sectionsTLRef.value) {
-    // Verifica se l'utente si trova nella sezione non fissa
-    if (isfixedSection.value) {
-      // Se è nella sezione fissa, avvia direttamente l'animazione
-      sectionsTLRef.value.tweenTo(section);
-    } else {
-      // Imposta lo stato della sezione fissa a true
-      setFixedSection(true);
-      // Blocca lo scroll
-      document.body.style.overflow = "hidden";
-      // Anima la sezione non fissa per abbassarla sotto la viewport
-      const nofixedSection = document.querySelector(".nofixed_section");
-      const rectTop = nofixedSection.getBoundingClientRect().top.toFixed();
-      if (nofixedSection) {
-        $gsap.to(".nofixed_section", {
-          // y: window.innerHeight + rectTop,
-          y: Math.abs(parseFloat(rectTop)) + window.innerHeight,
-          duration: 0.5,
-          ease: "power2.out",
-          onComplete: () => {
-            // Avvia l'animazione della timeline
-            sectionsTLRef.value.tweenTo(section);
-            setFixedSection(true);
-          },
-        });
-      }
-    }
-  }
-};
-
-//aggiungo un watch per controllare la variazione action  emessa dal menu a step verticale
-// Gestore dell'evento menuAction
-const handleMenuAction = (action) => {
-  console.log("Azione ricevuta:", action);
-  // Chiama la funzione appropriata in base all'azione
-  switch (action) {
-    case "hero":
-      toFixedSections("Start-hero");
-      break;
-    case "phases":
-      toFixedSections("End-phases");
-      break;
-    case "allInOne": // Corretto da scrollToAllInOne
-      toFixedSections("Start-modules-pause");
-      break;
-    case "madeFor":
-      navigationStore.targetSection = "made-for";
-      scrollToSection("made-for");
-      resetNofixedSectionPosition("madefor");
-      break;
-    case "production":
-      navigationStore.targetSection = "production"; // serve per evitare che al on complete di sectionsTL vada a madefor
-      scrollToSection("production");
-      resetNofixedSectionPosition("Production");
-      break;
-    case "archive":
-      navigationStore.targetSection = "archive"; // serve per evitare che al on complete di sectionsTL vada a madefor
-      scrollToSection("archive");
-      resetNofixedSectionPosition("Archive");
-      break;
-    default:
-      console.log("Azione non riconosciuta:", action);
-  }
-};
-
-//ristrutturare e ottimizzare per tutte le sezioni
-const resetNofixedSectionPosition = (dachi) => {
-  const { $gsap } = useNuxtApp();
-  const nofixedSection = document.querySelector(".nofixed_section");
-  console.log("Ripristino posizione della sezione non fissa", dachi);
-  if (nofixedSection) {
-    // $gsap.set(nofixedSection, {
-    //   y: 0,
-    // });
-    $gsap.to(nofixedSection, {
-      y: 0,
-      duration: 0.5,
-      ease: "power2.out",
-    });
-  }
+  console.log("Logica personalizzata eseguita!");
+  // Aggiungi qui altre operazioni necessarie
 };
 
 //!SECTION
 
 onMounted(() => {
   const { $gsap } = useNuxtApp();
-
-  console.log("Monunt fixedsection:", isfixedSection.value);
-  console.log("Mount checkfixedsection:", checkNofixedSection());
 
   if (!checkNofixedSection()) {
     document.body.style.overflow = "hidden";
@@ -244,43 +158,27 @@ onMounted(() => {
   // blocca lo scroll on mount (solo per index)
   // document.body.style.overflow = "hidden";
 
-  //SECTION - scroll to non fixed sections quando arrivo da una pagina esterna
+  //SECTION - scrolltrigger2
+  console.log("Pagina index montata.");
+  console.log("Stato attuale:", navigationStore);
   if (navigationStore.targetSection) {
-    if (navigationStore.targetSection == "allInOne") {
-      console.log("vieni da allInOne");
-      toFixedSections("Start-modules-pause");
-    } else {
-      scrollToSection(navigationStore.targetSection);
-      resetNofixedSectionPosition("da esterno");
+    // Scorri alla sezione
+    console.log("Scorrendo alla sezione:", navigationStore.targetSection);
+    scrollToSection(navigationStore.targetSection);
+
+    // Esegui la logica personalizzata se richiesto
+    if (navigationStore.executeCustomLogic) {
+      console.log("Eseguendo logica personalizzata...");
+      customLogic();
     }
 
     // Resetta lo stato dopo averlo utilizzato
-    // il reset lo sposto nell'onComplete di sectionsTL perchè mi serve averlo ancora attivo quando arrivo da pagine esterne, resetterò lo stato dopo averlo utilizzato
-    //navigationStore.resetState();
+    navigationStore.resetState();
+    console.log("Stato resettato.");
   } else {
     console.log("Nessuna sezione di destinazione trovata.");
   }
-  // aggiungo un watch per quando sono già nella home e controlo lo stato dello store
-  watch(
-    () => navigationStore.targetSection,
-    (newSection) => {
-      if (newSection) {
-        console.log("-!-!- Nuova sezione di destinazione:", newSection);
-        console.log("-!-!- Nuova store:", navigationStore.targetSection);
-        if (newSection == "allInOne") {
-          console.log("vieni da allInOne al watch");
-          toFixedSections("Start-modules-pause");
-        } else {
-          scrollToSection(newSection);
-          resetNofixedSectionPosition("da Watch");
-        }
-        // scrollToSection(newSection);
-        // Resetta lo stato dopo averlo utilizzato, demando sempre il reset alla fine dell'animazione di gsap sectionsTL
-        //navigationStore.resetState();
-        //console.log("Resetto lo stato dello store dal watch");
-      }
-    }
-  );
+  //!SECTION
 
   nextTick(async () => {
     //SECTION - RIVE
@@ -332,6 +230,10 @@ onMounted(() => {
     });
 
     function aggiornaResize(elemento) {
+      // Aggiorna gli attributi width e height del canvas in base alle dimensioni attuali
+      // canvasRef.value.width = canvasRef.value.offsetWidth;
+      // canvasRef.value.height = canvasRef.value.offsetHeight;
+
       elemento.layout = new Layout({
         fit: Fit.Layout, // Cambia il fit per coprire l'area
         alignment: Alignment.Center, // Allinea in basso
@@ -353,7 +255,7 @@ onMounted(() => {
     let introCompleted = false;
     //let isfixedSection = true; non serve più perchè sostituita dal composable
 
-    //SECTION - animazioni Intro
+    //SECTION - animazioni interne
     // implemento la timeline intro che sbloccherà alla fine l'overflow hidden del body per ripristinare lo scroll
     const intro = $gsap.timeline({
       onStart: () => {
@@ -395,7 +297,7 @@ onMounted(() => {
     intro.from(
       "#ghirlanda-element_start",
       {
-        opacity: 0,
+        autoAlpha: 0,
         rotate: 5,
         filter: "blur(5px)",
         duration: 3,
@@ -425,9 +327,16 @@ onMounted(() => {
       null,
       2
     );
+
+    // intro.EnterFrom("#logo_mne", { duration: 2, y: "0" });
+    // intro.EnterFrom("#H-screen", { duration: 0.7 }, "<");
+    // intro.EnterFrom("#H-deliver", { duration: 0.7 }, "> -=0.3");
+    // intro.EnterFrom("#H-preserve", { duration: 0.7 }, "> -=0.3");
     intro.EnterFrom("#heroSubTitle", { duration: 0.5, y: "-25px" }, "-=0.7");
 
     //!SECTION
+
+    //SECTION - Gestione animazione Timeline allo scroll
 
     // array di tutte le sezioni
     const sections = document.querySelectorAll(".section_fixed");
@@ -437,15 +346,11 @@ onMounted(() => {
     }
 
     let isCoolingDown = false;
-    let COOL_DOWN_TIME = 800; // ms - ridotto per una risposta più rapida e modificabile dinamicamente
+    const COOL_DOWN_TIME = 1600; // ms
 
     // Variabili per tracciare il tocco
     let touchStartY = 0;
     let touchEndY = 0;
-    let touchStartTime = 0;
-    let touchEndTime = 0;
-    let lastTouchY = 0;
-    let touchVelocity = 0;
 
     function handleScroll(event) {
       const { isScrollLocked } = useScrollLock();
@@ -462,75 +367,34 @@ onMounted(() => {
       if (isCoolingDown) return;
 
       let deltaY = 0;
-      let isTouchEvent = false;
-
       //SECTION - ottimizazione touch mobile
       // Determina il tipo di evento
       if (event.type === "wheel") {
-        // Gestione mouse wheel più sensibile
         deltaY = event.deltaY;
-        // Aumenta la sensibilità per lo scroll con mouse/trackpad
-        if (Math.abs(deltaY) < 5) deltaY *= 2;
-      } else if (event.type === "touchstart") {
-        isTouchEvent = true;
-        touchStartY = event.touches[0].clientY;
-        lastTouchY = touchStartY;
-        touchStartTime = Date.now();
-        // Resetta i valori di fine tocco
-        touchEndY = touchStartY;
-      } else if (event.type === "touchmove") {
-        isTouchEvent = true;
-        const currentY = event.touches[0].clientY;
-        // Calcola la velocità del movimento
-        const timeDiff = Date.now() - touchStartTime;
-        if (timeDiff > 0) {
-          touchVelocity = (Math.abs(currentY - lastTouchY) / timeDiff) * 1000; // pixel al secondo
-        }
-        lastTouchY = currentY;
-        touchEndY = currentY;
-
-        // Calcola il delta con una soglia più bassa per dispositivi touch
-        if (Math.abs(touchStartY - touchEndY) > 5) {
-          // Soglia ridotta da 10 a 5
-          deltaY = touchStartY - touchEndY;
-          // Previeni lo scroll predefinito del browser su mobile
-          event.preventDefault();
-        }
-      } else if (event.type === "touchend") {
-        isTouchEvent = true;
-        touchEndTime = Date.now();
-        const touchDuration = touchEndTime - touchStartTime;
-
-        // Calcola il delta con una soglia più bassa
-        if (Math.abs(touchStartY - touchEndY) > 5) {
-          // Soglia ridotta da 10 a 5
-          deltaY = touchStartY - touchEndY;
-
-          // Considera anche la velocità del gesto per migliorare la reattività
-          if (touchVelocity > 200) {
-            // Se il movimento è stato veloce
-            deltaY = deltaY > 0 ? Math.max(deltaY, 20) : Math.min(deltaY, -20);
-          }
-        }
+      } else if (event.type === "pointerdown") {
+        touchStartY = event.clientY;
+      } else if (event.type === "pointermove") {
+        touchEndY = event.clientY;
+      } else if (event.type === "pointerup") {
+        deltaY = touchStartY - touchEndY;
       }
 
+      // Soglia minima per evitare input accidentali su mobile
+      // if (Math.abs(deltaY) > 30) {
+      //   if (deltaY > 0) {
+      //     sectionsTL.play(); // Scroll down
+      //   } else {
+      //     sectionsTL.reverse(); // Scroll up
+      //   }
+      // }
       //!SECTION
 
-      // Applica l'azione con soglie ottimizzate per dispositivi touch
-      if (isTouchEvent) {
-        // Soglie più basse per eventi touch
-        if (deltaY > 5) {
-          sectionsTL.play();
-        } else if (deltaY < -5) {
-          sectionsTL.reverse();
-        }
-      } else {
-        // Mantieni le soglie originali per eventi mouse/wheel
-        if (deltaY > 10) {
-          sectionsTL.play();
-        } else if (deltaY < -10) {
-          sectionsTL.reverse();
-        }
+      if (event.deltaY > 0) {
+        //nextStep();
+        sectionsTL.play();
+      } else if (event.deltaY < 0) {
+        //prevStep();
+        sectionsTL.reverse();
       }
 
       // Attiviamo la "finestra" di cooldown
@@ -543,49 +407,12 @@ onMounted(() => {
     //registro handleScrol nella ref handleScrollRef dichiarata all'inizio fuori dal nextTick per l'onBeforeUnmount
     handleScrollRef.value = handleScroll;
 
-    // Ottimizzazione per eventi wheel
     window.addEventListener("wheel", handleScroll, { passive: false });
+    //window.addEventListener("touchmove", handleScroll, { passive: false });
+    window.addEventListener("pointerdown", handleScroll, { passive: false });
+    window.addEventListener("pointermove", handleScroll, { passive: false });
+    window.addEventListener("pointerup", handleScroll, { passive: false });
 
-    // Ottimizzazione per eventi touch con opzioni migliorate per iOS
-    window.addEventListener("touchstart", handleScroll, { passive: false });
-    window.addEventListener("touchmove", handleScroll, {
-      passive: false,
-      capture: true, // Cattura l'evento nella fase di capturing per una risposta più immediata
-    });
-    window.addEventListener("touchend", handleScroll, { passive: false });
-
-    // Aggiungiamo supporto per i gesti swipe
-    window.addEventListener("touchcancel", handleScroll, { passive: false });
-
-    // Manteniamo anche gli eventi mouse per desktop
-    window.addEventListener("mousedown", handleScroll, { passive: false });
-    window.addEventListener("mousemove", handleScroll, { passive: false });
-    window.addEventListener("mouseup", handleScroll, { passive: false });
-
-    // Funzione per prevenire il comportamento di rimbalzo su iOS Safari
-    const preventIOSBounce = function (e) {
-      if (isfixedSection.value) {
-        e.preventDefault();
-      }
-    };
-
-    // Salva la funzione nel riferimento per poterla rimuovere in onBeforeUnmount
-    preventIOSBounceRef.value = preventIOSBounce;
-
-    // Aggiungi l'event listener con la funzione nominata
-    document.addEventListener("touchmove", preventIOSBounce, { passive: false });
-
-    // Aggiungi un gestore specifico per iOS per migliorare ulteriormente la reattività
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    if (isIOS) {
-      // Su iOS, aggiungiamo un listener aggiuntivo con priorità massima
-      document.body.style.touchAction = "none"; // Disabilita il comportamento touch predefinito
-
-      // Imposta un tempo di cooldown più breve per iOS
-      COOL_DOWN_TIME = 500;
-    }
-
-    //SECTION - Gestione animazione Timeline allo scroll
     //NOTE - recupero la rotationTL esposta dal componente phases_comp
     const RotationTL = PhasesRef.value?.rotationTL;
     const RotationTL_Titles = PhasesRef.value?.rotationTL_Titles;
@@ -596,19 +423,13 @@ onMounted(() => {
     $gsap.set("#hero-section", { zIndex: 1 });
     $gsap.set("#modules-section", { zIndex: 0 });
     $gsap.set("#phases-section", { zIndex: 0 });
-
-    // Funzione per ripristinare la posizione della sezione non fissa
-    // const resetNofixedSectionPosition = () => {
-    //   const nofixedSection = document.querySelector(".nofixed_section");
-    //   console.log("Ripristino posizione della sezione non fissa");
-    //   if (nofixedSection) {
-    //     $gsap.to(nofixedSection, {
-    //       y: 0,
-    //       duration: 0.5,
-    //       ease: "power2.out",
-    //     });
-    //   }
-    // };
+    //$gsap.set("#pre-chips-container .title", { autoAlpha: 0 });
+    $gsap.set("#post-chips-container .title", { opacity: 0, y: -10 });
+    $gsap.set("#production-chips-container .title", { opacity: 0, y: -10 });
+    $gsap.set("#market-chips-container .title", { opacity: 0, y: -10 });
+    $gsap.set("#post-chips-container .chipsContainer", { opacity: 0, y: 10 });
+    $gsap.set("#production-chips-container .chipsContainer", { opacity: 0, y: 10 });
+    $gsap.set("#market-chips-container .chipsContainer", { opacity: 0, y: 10 });
 
     const sectionsTL = $gsap.timeline({
       paused: true,
@@ -616,39 +437,24 @@ onMounted(() => {
         ease: "power2.out",
       },
       onComplete: () => {
-        console.log("Animazione completata e sato:", navigationStore.targetSection);
-
         setTimeout(() => {
-          //attivo lo scroll di default
           $gsap.set("body", { overflow: "auto" });
-          // Ripristina la posizione della sezione non fissa
-          //resetNofixedSectionPosition();
-          // Imposta lo stato della sezione fissa a false
-          setFixedSection(false);
-          //porto l'utente sa made for solo se non arrivo da pagine esterne che hanno richiesto di scrollare ad una data sezione
-          if (navigationStore.targetSection == null) {
-            //Non ci sono richieste esterne di scroll a sezioni, vai a Made for
-            scrollToSection("made-for");
-          }
-          //resetto lo stato dopo averlo utilizzato
-          navigationStore.resetState();
+          console.log("completata sectionsTL");
+          // Simula un piccolo scroll per attivare ScrollTrigger
+          window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
         }, 100);
       },
-      onReverseCompleted: () => {
-        // Ripristina la posizione della sezione non fissa anche quando l'animazione viene invertita
-        //resetNofixedSectionPosition();
-      },
+      onReverseCompleted: () => {},
     });
 
     //ANCHOR - Hero Section Start
-    sectionsTL.addLabel("Start-hero");
-    // sectionsTL.call(
-    //   () => {
-    //     rLogo.play("Logo intro");
-    //   },
-    //   null,
-    //   "-=1"
-    // );
+    sectionsTL.call(
+      () => {
+        rLogo.play("Logo intro");
+      },
+      null,
+      "-=1"
+    );
     sectionsTL.to("#hero-section", {
       autoAlpha: 0,
       duration: 1,
@@ -666,11 +472,12 @@ onMounted(() => {
     //ANCHOR - Hero end
 
     //ANCHOR - Phases Section Start
-    sectionsTL.addLabel("Start-phases");
+    // sectionsTL.call(() => PhasesRef.value.rotationTL.pause());
     sectionsTL.call(() => RotationTL.pause());
     sectionsTL.call(() => RotationTL_Titles.pause());
 
     sectionsTL.to("#modules_svg", { rotate: "+=60", ease: "power1.in" });
+    //sectionsTL.call(() => PhasesRef.value.rotationTL.play(), [], "<+=0.2");
     sectionsTL.call(() => RotationTL.play(), [], "<+=0.2");
     sectionsTL.call(() => RotationTL_Titles.play(), [], "<+=0.2");
     sectionsTL.to(
@@ -696,13 +503,12 @@ onMounted(() => {
       filter: "blur(0px)",
     });
 
-    sectionsTL.addLabel("End-phases");
+    sectionsTL.addLabel("phases_section");
     sectionsTL.addPause();
 
     //ANCHOR - Phases Section End
 
     //ANCHOR - Modules Section Start
-    sectionsTL.addLabel("Start-modules");
     sectionsTL.to("#phases-section", {
       autoAlpha: 0,
       duration: 0.5,
@@ -736,8 +542,8 @@ onMounted(() => {
     sectionsTL.to("#modules-content #module-txt_1", { opacity: 1, zIndex: 1 }, "<");
     // sectionsTL.set("#modules-content #module-txt_2", { zIndex: 0 });
 
+    sectionsTL.addLabel("modules_section");
     // pausa entrata modules
-    sectionsTL.addLabel("Start-modules-pause");
     sectionsTL.addPause();
     //-----
 
@@ -758,10 +564,10 @@ onMounted(() => {
     // sectionsTL.to("#modules-content #module-txt_2", { opacity: 0 }, "<");
     sectionsTL.to("#modules-content #module-txt_3", { opacity: 1, zIndex: 1 }, "<");
     // sectionsTL.to("#modules-content #module-txt_3", { opacity: 1 }, "<");
-    sectionsTL.addLabel("End-modules");
+
     sectionsTL.addPause();
     //ANCHOR - Modules Section End
-    sectionsTL.addLabel("sectionsTL-exit");
+
     //ANCHOR - nofixed Section Start (modificare in base a quale sarà l'ultima sezione prima del nofixed)
     sectionsTL.to(
       "#modules-section",
@@ -775,7 +581,7 @@ onMounted(() => {
     );
     //sectionsTL.addPause();
 
-    sectionsTLRef.value = sectionsTL;
+    introRef.value = sectionsTL;
 
     //ANCHOR - Scrolltrigger per gestire la sezione "nofixed"
 
@@ -795,43 +601,28 @@ onMounted(() => {
     });
     // Registriamo  l'istanza dello scrolltrigger nella ref noFixedSTRef dichiarata all'inizio fuori dal nextTick
     noFixedSTRef.value = noFixedST;
-    //!SECTION
   }); //NOTE - chiusura Next Tick
-}); //NOTE - chiusura onMouted
-
-onBeforeUnmount(() => {
-  // Ripristino lo scroll nel caso lasciassi la pagina prima di aver sbloccato lo scroll via gsap
-  document.body.style.overflow = "auto";
-  // Clean up dello ScrollTrigger
-  if (noFixedSTRef.value) {
-    noFixedSTRef.value.kill();
-    noFixedSTRef.value = null;
-  }
-
-  // Remove event listeners
-  if (handleScrollRef.value) {
-    window.removeEventListener("wheel", handleScrollRef.value, { passive: false });
-    window.removeEventListener("touchstart", handleScrollRef.value, { passive: false });
-    window.removeEventListener("touchmove", handleScrollRef.value, {
-      passive: false,
-      capture: true,
-    });
-    window.removeEventListener("touchend", handleScrollRef.value, { passive: false });
-    window.removeEventListener("touchcancel", handleScrollRef.value, { passive: false });
-    window.removeEventListener("mousedown", handleScrollRef.value, { passive: false });
-    window.removeEventListener("mousemove", handleScrollRef.value, { passive: false });
-    window.removeEventListener("mouseup", handleScrollRef.value, { passive: false });
-
-    // Rimuovi anche l'event listener per prevenire il rimbalzo usando il riferimento alla funzione
-    if (preventIOSBounceRef.value) {
-      document.removeEventListener("touchmove", preventIOSBounceRef.value, {
-        passive: false,
-      });
+  onBeforeUnmount(() => {
+    // Ripristino lo scroll nel caso lasciassi la pagina prima di aver sbloccato lo scroll via gsap
+    document.body.style.overflow = "auto";
+    // Clean up dello ScrollTrigger
+    if (noFixedSTRef.value) {
+      noFixedSTRef.value.kill();
+      noFixedSTRef.value = null;
     }
 
-    // Ripristina il comportamento touch predefinito
-    document.body.style.touchAction = "";
-  }
+    // Remove event listeners
+    if (handleScrollRef.value) {
+      window.removeEventListener("wheel", handleScrollRef.value, { passive: false });
+      window.removeEventListener("pointerdown", handleScrollRef.value, {
+        passive: false,
+      });
+      window.removeEventListener("pointermove", handleScrollRef.value, {
+        passive: false,
+      });
+      window.removeEventListener("pointerup", handleScrollRef.value, { passive: false });
+    }
+  });
 });
 </script>
 
