@@ -18,8 +18,10 @@ const canvasRefBtn = ref(null);
 let rCloseBtn = null; // Istanza di Rive
 
 onMounted(() => {
+  const runtimeConfig = useRuntimeConfig();
+  const baseURL = runtimeConfig.app.baseURL;
   rCloseBtn = new Rive({
-    src: "/assets/rive/focusbtn.riv",
+    src: `${baseURL}/rive/focusbtn.riv`,
     artboard: "CloseBTN",
     canvas: canvasRefBtn.value,
     autoplay: true,

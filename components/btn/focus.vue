@@ -18,8 +18,11 @@ const canvasRefBtn = ref(null);
 let rFocusBtn = null; // Istanza di Rive
 
 onMounted(() => {
+  const runtimeConfig = useRuntimeConfig();
+  const baseURL = runtimeConfig.app.baseURL;
   rFocusBtn = new Rive({
-    src: "/assets/rive/focusbtn.riv",
+    src: `${baseURL}/rive/focusbtn.riv`,
+    // src: "/assets/rive/focusbtn.riv",
     artboard: "FocusArtboard",
     canvas: canvasRefBtn.value,
     autoplay: true,

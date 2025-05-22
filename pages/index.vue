@@ -2,6 +2,7 @@
   <!-- <UButton class="z-90 fixed top-25" @click="testGsap()">provA</UButton> -->
   <main>
     <MneNavSteps @menuAction="handleMenuAction" class="hidden-tablet-down" />
+    <MneNavStepsMobile @menuAction="handleMenuAction" class="hidden-tablet-up" />
     <div id="sectionsWrapper" class="z-20">
       <div id="hero-section" class="section_fixed hero">
         <div id="hero-element" class="element">
@@ -102,6 +103,8 @@ async function loadRivFile(url) {
   const baseUrl = runtimeConfig.app.baseURL;
   const fullUrl = `${baseUrl}${url}`;
   const response = await fetch(fullUrl);
+  console.log("Base URL:", baseUrl);
+  console.log("Full URL:", fullUrl);
   //const response = await fetch(url);
   return await response.arrayBuffer();
 }
