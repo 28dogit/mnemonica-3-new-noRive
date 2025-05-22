@@ -5,16 +5,20 @@
       <h2>Things you can only find in mnemonica</h2>
     </div>
     <div class="content">
-      <div class="boxModal cursor-pointer" @click="openModal('dailies')">
+      <div class="boxModal BmFlex cursor-pointer" @click="openModal('dailies')">
+        <UIcon name="i-lucide-lightbulb" class="size-5" />
         <p class="font-semibold mb-0!">Ingenious Dailies</p>
       </div>
-      <div class="boxModal cursor-pointer" @click="openModal('workflow')">
+      <div class="boxModal BmFlex cursor-pointer" @click="openModal('workflow')">
+        <UIcon name="i-lucide-bird" class="size-5" />
         <p class="font-semibold mb-0!">One-upload workflow</p>
       </div>
-      <div class="boxModal cursor-pointer" @click="openModal('playlists')">
+      <div class="boxModal BmFlex cursor-pointer" @click="openModal('playlists')">
+        <UIcon name="i-lucide-boom-box" class="size-5" />
         <p class="font-semibold mb-0!">Instant Playlists</p>
       </div>
-      <div class="boxModal cursor-pointer" @click="openModal('users')">
+      <div class="boxModal BmFlex cursor-pointer" @click="openModal('users')">
+        <UIcon name="i-lucide-container" class="size-5" />
         <p class="font-semibold mb-0!">Virtually unlimited users</p>
       </div>
     </div>

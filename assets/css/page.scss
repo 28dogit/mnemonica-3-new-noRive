@@ -26,6 +26,12 @@
   border-radius: 10px;
   color: #fff;
   padding: 1em;
+  &.BmFlex{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+  }
 }
 //blocco contenuto pagina
 .page-content-block {
