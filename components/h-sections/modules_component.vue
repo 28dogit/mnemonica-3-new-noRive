@@ -1,5 +1,4 @@
 <template>
-  <!-- //SECTION - TEMPLATE -->
   <div id="modules-element" class="element">
     <!-- <div class="elementSvg"> -->
     <div class="circular">
@@ -50,7 +49,6 @@
     </div>
   </div>
   <ModalsModale50 :isOpen="isModalOpen" :isModal="modalId" @close="closeModal" />
-  <!-- //!SECTION -->
 </template>
 
 <script setup>

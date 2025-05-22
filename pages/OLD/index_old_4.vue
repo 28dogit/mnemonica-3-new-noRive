@@ -98,11 +98,7 @@ const { isfixedSection, setFixedSection } = useFixedSection();
 let rivBuffer = null;
 // Funzione per caricare il file .riv una sola volta
 async function loadRivFile(url) {
-  const runtimeConfig = useRuntimeConfig();
-  const baseUrl = runtimeConfig.app.baseURL;
-  const fullUrl = `${baseUrl}${url}`;
-  const response = await fetch(fullUrl);
-  //const response = await fetch(url);
+  const response = await fetch(url);
   return await response.arrayBuffer();
 }
 
@@ -163,23 +159,17 @@ const toFixedSections = (section) => {
       const nofixedSection = document.querySelector(".nofixed_section");
       const rectTop = nofixedSection.getBoundingClientRect().top.toFixed();
       if (nofixedSection) {
-        $gsap.fromTo(
-          ".nofixed_section",
-          {
-            y: 0,
+        $gsap.to(".nofixed_section", {
+          // y: window.innerHeight + rectTop,
+          y: Math.abs(parseFloat(rectTop)) + window.innerHeight,
+          duration: 0.5,
+          ease: "power2.out",
+          onComplete: () => {
+            // Avvia l'animazione della timeline
+            sectionsTLRef.value.tweenTo(section);
+            setFixedSection(true);
           },
-          {
-            // y: window.innerHeight + rectTop,
-            y: Math.abs(parseFloat(rectTop)) + window.innerHeight,
-            duration: 0.5,
-            ease: "power2.out",
-            onComplete: () => {
-              // Avvia l'animazione della timeline
-              sectionsTLRef.value.tweenTo(section);
-              setFixedSection(true);
-            },
-          }
-        );
+        });
       }
     }
   }
@@ -295,7 +285,7 @@ onMounted(() => {
   nextTick(async () => {
     //SECTION - RIVE
     // Carica il file .riv una sola volta
-    rivBuffer = await loadRivFile("/rive/hero_mne_divided.riv");
+    rivBuffer = await loadRivFile("/assets/rive/hero_mne_divided.riv");
 
     const rLogo = new Rive({
       buffer: rivBuffer, // Utilizza il buffer già caricato

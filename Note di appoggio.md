@@ -1,4 +1,18 @@
-<span class="colour" style="color:rgb(224, 227, 238)">viewport:</span><span class="colour" style="color:rgb(212, 212, 212)"> </span><span class="colour" style="color:rgb(130, 217, 159)">'w-50 items-end'</span><span class="colour" style="color:rgb(212, 212, 212)">,</span>
-<span class="colour" style="color:rgb(224, 227, 238)">content:</span><span class="colour" style="color:rgb(212, 212, 212)"> </span><span class="colour" style="color:rgb(130, 217, 159)">'w-auto items-end'</span><span class="colour" style="color:rgb(212, 212, 212)">,</span>
-<span class="colour" style="color:rgb(224, 227, 238)">childList:</span><span class="colour" style="color:rgb(212, 212, 212)"> </span><span class="colour" style="color:rgb(130, 217, 159)">'w-auto flex flex-col'</span><span class="colour" style="color:rgb(212, 212, 212)">,</span>
-<span class="colour" style="color:rgb(224, 227, 238)">childLinkWrapper:</span><span class="colour" style="color:rgb(212, 212, 212)"> </span><span class="colour" style="color:rgb(130, 217, 159)">'flex flex-col items-end'</span><span class="colour" style="color:rgb(212, 212, 212)">,</span>
+viewport: 'w-50 items-end',
+content: 'w-auto items-end',
+childList: 'w-auto flex flex-col',
+childLinkWrapper: 'flex flex-col items-end',
+
+```
+import { useRuntimeConfig } from "#app";
+```
+
+
+```
+  const runtimeConfig = useRuntimeConfig();
+  const baseURL = runtimeConfig.app.baseURL;
+```
+
+```
+    src: `${baseURL}/assets/rive/focusbtn.riv`,
+```
