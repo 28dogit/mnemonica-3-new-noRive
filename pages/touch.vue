@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-full">
     <h1>Touch & Click Event Tester</h1>
     <div
       ref="touchArea"
@@ -17,6 +17,9 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+definePageMeta({
+  layout: "page-layout",
+});
 
 const message = ref("Interagisci con l'area per testare gli eventi.");
 const touchArea = ref(null);
@@ -55,9 +58,9 @@ onMounted(() => {
 
 <style scoped>
 .touch-area {
-  width: 300px;
-  height: 200px;
-  background-color: lightblue;
+  width: 100%;
+  height: 80vh;
+  background-color: rgb(0, 0, 0);
   display: flex;
   align-items: center;
   justify-content: center;

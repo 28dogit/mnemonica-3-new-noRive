@@ -104,6 +104,12 @@
       "isOrdered": true,
       "folders": {},
       "files": {}
+    },
+    "dist": {
+      "name": "dist",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
     }
   },
   "files": {
@@ -111,6 +117,7 @@
     "ToDo Lavorazione": 1,
     "Struttura css": 2,
     "Tips&triks": 3,
-    "Note di appoggio": 4
+    "Note di appoggio": 4,
+    "Gestione composables": 5
   }
 }

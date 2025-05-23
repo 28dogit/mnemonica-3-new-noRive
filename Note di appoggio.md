@@ -7,7 +7,6 @@ childLinkWrapper: 'flex flex-col items-end',
 import { useRuntimeConfig } from "#app";
 ```
 
-
 ```
   const runtimeConfig = useRuntimeConfig();
   const baseURL = runtimeConfig.app.baseURL;
@@ -16,3 +15,5 @@ import { useRuntimeConfig } from "#app";
 ```
     src: `${baseURL}/assets/rive/focusbtn.riv`,
 ```
+<br>
+<br>

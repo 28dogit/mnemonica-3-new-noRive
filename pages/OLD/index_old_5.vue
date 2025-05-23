@@ -95,43 +95,158 @@ const sectionsTLRef = ref(null);
 const preventIOSBounceRef = ref(null);
 // Usiamo il composable per lo stato Fixed Section
 const { isfixedSection, setFixedSection } = useFixedSection();
-
-//SECTION - funzioni per scroll to non fixed sections
-import { useNavStore } from "@/stores/navigationStore";
-
-const navigationStore = useNavStore();
-
-//NOTE - uso la funzione di useMNEfunctions per gestire le funzioni di scrollTo e customLogic tra le sezioni fixed e non fixed
-// e anche l'evento menuAction emesso dai menu alternativi come nav-steps
-const {
-  checkNofixedSection,
-  scrollToSection,
-  customLogic,
-  toFixedSections,
-  handleMenuAction,
-  resetNofixedSectionPosition,
-} = useMNEfunctions(navigationStore, sectionsTLRef, isfixedSection, setFixedSection); // passo le refs necessarie
-
-//!SECTION
-
 // Variabile per memorizzare il buffer del file .riv
 let rivBuffer = null;
-
 // Funzione per caricare il file .riv una sola volta
 async function loadRivFile(url) {
   const runtimeConfig = useRuntimeConfig();
   const baseUrl = runtimeConfig.app.baseURL;
   const fullUrl = `${baseUrl}${url}`;
   const response = await fetch(fullUrl);
+  console.log("Base URL:", baseUrl);
+  console.log("Full URL:", fullUrl);
   //const response = await fetch(url);
   return await response.arrayBuffer();
 }
 
+function checkNofixedSection() {
+  const nofixedSection = document.querySelector(".nofixed_section");
+  return nofixedSection && window.scrollY > nofixedSection.offsetTop;
+}
+
+//SECTION - funzioni per scroll to non fixed sections
+import { useNavStore } from "@/stores/navigationStore";
+
+const navigationStore = useNavStore();
+const {
+  scrollToSection,
+  customLogic,
+  toFixedSections,
+  resetNofixedSectionPosition,
+} = useMNEfunctions(sectionsTLRef, isfixedSection, setFixedSection);
+
+//Funzione per scorrere alla sezione
+// const scrollToSection = async (sectionId) => {
+//   await nextTick();
+//   setTimeout(() => {
+//     const element = document.getElementById(sectionId);
+//     if (element) {
+//       // nel css globale imposto html scroll-padding-top: 70px per compensare l'altezza dell'header!
+//       element.scrollIntoView({ behavior: "smooth" });
+//       // Eseguo la logica personalizzata per eseguire la timeline di gsap in modo da trovarla pronta quando scrollo nuovamente verso l'alto
+//       customLogic();
+//       //resetNofixedSectionPosition("scrolltosection");
+//     } else {
+//       console.error(`Elemento con ID "${sectionId}" non trovato.`);
+//     }
+//   }, 500);
+// };
+
+// // Funzione personalizzata per eseguire le animazioni di gsap mentre si scrolla verso  la sezione desiderata (noFixed sections)
+// const customLogic = () => {
+//   //sectionsTLRef.value è la timeline sectionsTL
+//   if (sectionsTLRef.value) {
+//     sectionsTLRef.value.progress(1, false); // Jump to section
+//   }
+// };
+
+// const toFixedSections = (section) => {
+//   const { $gsap } = useNuxtApp();
+//   if (sectionsTLRef.value) {
+//     // Verifica se l'utente si trova nella sezione non fissa
+//     if (isfixedSection.value) {
+//       // Se è nella sezione fissa, avvia direttamente l'animazione
+//       sectionsTLRef.value.tweenTo(section);
+//     } else {
+//       // Imposta lo stato della sezione fissa a true
+//       setFixedSection(true);
+//       // Blocca lo scroll
+//       document.body.style.overflow = "hidden";
+//       // Anima la sezione non fissa per abbassarla sotto la viewport
+//       const nofixedSection = document.querySelector(".nofixed_section");
+//       const rectTop = nofixedSection.getBoundingClientRect().top.toFixed();
+//       if (nofixedSection) {
+//         $gsap.fromTo(
+//           ".nofixed_section",
+//           {
+//             y: 0,
+//           },
+//           {
+//             // y: window.innerHeight + rectTop,
+//             y: Math.abs(parseFloat(rectTop)) + window.innerHeight,
+//             duration: 0.5,
+//             ease: "power2.out",
+//             onComplete: () => {
+//               // Avvia l'animazione della timeline
+//               sectionsTLRef.value.tweenTo(section);
+//               setFixedSection(true);
+//             },
+//           }
+//         );
+//       }
+//     }
+//   }
+// };
+
+//aggiungo un watch per controllare la variazione action  emessa dal menu a step verticale
+// Gestore dell'evento menuAction
+const handleMenuAction = (action) => {
+  console.log("Azione ricevuta:", action);
+  // Chiama la funzione appropriata in base all'azione
+  switch (action) {
+    case "hero":
+      toFixedSections("Start-hero");
+      break;
+    case "phases":
+      toFixedSections("End-phases");
+      break;
+    case "allInOne": // Corretto da scrollToAllInOne
+      toFixedSections("Start-modules-pause");
+      break;
+    case "madeFor":
+      navigationStore.targetSection = "made-for";
+      scrollToSection("made-for");
+      resetNofixedSectionPosition("madefor");
+      break;
+    case "production":
+      navigationStore.targetSection = "production"; // serve per evitare che al on complete di sectionsTL vada a madefor
+      scrollToSection("production");
+      resetNofixedSectionPosition("Production");
+      break;
+    case "archive":
+      navigationStore.targetSection = "archive"; // serve per evitare che al on complete di sectionsTL vada a madefor
+      scrollToSection("archive");
+      resetNofixedSectionPosition("Archive");
+      break;
+    default:
+      console.log("Azione non riconosciuta:", action);
+  }
+};
+
+// //ristrutturare e ottimizzare per tutte le sezioni
+// const resetNofixedSectionPosition = (dachi) => {
+//   const { $gsap } = useNuxtApp();
+//   const nofixedSection = document.querySelector(".nofixed_section");
+//   console.log("Ripristino posizione della sezione non fissa", dachi);
+//   if (nofixedSection) {
+//     // $gsap.set(nofixedSection, {
+//     //   y: 0,
+//     // });
+//     $gsap.to(nofixedSection, {
+//       y: 0,
+//       duration: 0.5,
+//       ease: "power2.out",
+//     });
+//   }
+// };
+
+//!SECTION
+
 onMounted(() => {
   const { $gsap } = useNuxtApp();
 
-  // console.log("Monunt fixedsection:", isfixedSection.value);
-  // console.log("Mount checkfixedsection:", checkNofixedSection());
+  console.log("Monunt fixedsection:", isfixedSection.value);
+  console.log("Mount checkfixedsection:", checkNofixedSection());
 
   if (!checkNofixedSection()) {
     document.body.style.overflow = "hidden";
