@@ -197,6 +197,9 @@ onMounted(() => {
   // Inizializza GSAP timeline
   const nuxtApp = useNuxtApp();
   const gsapInstance = nuxtApp.$gsap || gsap;
+  gsapInstance.set("body", { overflow: "hidden" }); // blocco lo scroll per poter testare le gesture
+
+  timeline.value = gsapInstance;
 
   // Mostra il primo quadrato all'avvio
   gsapInstance.set([square2.value, square3.value], { opacity: 0 });
