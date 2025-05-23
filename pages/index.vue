@@ -101,7 +101,7 @@ import { useNavStore } from "@/stores/navigationStore";
 
 const navigationStore = useNavStore();
 
-//NOTE - uso la funzione di useMNEfunctions per gestire le funzioni di scrollTo e customLogic tra le sezioni fixed e non fixed
+//NOTE - il composable useMNEfunctions serve per gestire le funzioni di scrollTo e customLogic tra le sezioni fixed e non fixed
 // e anche l'evento menuAction emesso dai menu alternativi come nav-steps
 const {
   checkNofixedSection,
@@ -494,19 +494,6 @@ onMounted(() => {
     $gsap.set("#hero-section", { zIndex: 1 });
     $gsap.set("#modules-section", { zIndex: 0 });
     $gsap.set("#phases-section", { zIndex: 0 });
-
-    // Funzione per ripristinare la posizione della sezione non fissa
-    // const resetNofixedSectionPosition = () => {
-    //   const nofixedSection = document.querySelector(".nofixed_section");
-    //   console.log("Ripristino posizione della sezione non fissa");
-    //   if (nofixedSection) {
-    //     $gsap.to(nofixedSection, {
-    //       y: 0,
-    //       duration: 0.5,
-    //       ease: "power2.out",
-    //     });
-    //   }
-    // };
 
     const sectionsTL = $gsap.timeline({
       paused: true,
