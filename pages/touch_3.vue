@@ -3,9 +3,10 @@
     <h1 class="text-2xl font-bold mb-6">Animazione Quadrati con @vueuse/gesture</h1>
 
     <ClientOnly>
+      <!-- v-drag="handleDrag"  AD28 -->
       <div
         ref="animationContainer"
-        v-drag="handleDrag"
+        v-drag="{ handler: handleDrag, passive: false }"
         class="relative w-full h-[70vh] bg-gray-100 rounded-lg overflow-hidden cursor-grab active:cursor-grabbing"
         @wheel="handleScroll"
         style="touch-action: none; -webkit-user-select: none; user-select: none"
@@ -118,10 +119,12 @@ const squares = reactive([
 // Variabile per il throttle/debounce
 const isAnimating = ref(false);
 const lastScrollTime = ref(0);
-const scrollCooldown = 500; // Tempo di attesa in ms tra uno scroll e l'altro
+//const scrollCooldown = 500; // Tempo di attesa in ms tra uno scroll e l'altro
+const scrollCooldown = 300; // Tempo di attesa in ms tra uno scroll e l'altro AD28
 
 // Gestione drag con @vueuse/gesture
 const handleDrag = ({ movement: [mx, my], down, velocity, direction, cancel, event }) => {
+  event?.preventDefault(); // Importante! //AD28
   // Se è in corso un'animazione, cancella il drag
   if (isAnimating.value) {
     cancel();
@@ -132,9 +135,10 @@ const handleDrag = ({ movement: [mx, my], down, velocity, direction, cancel, eve
   // Durante il drag, mostra feedback visivo opzionale
   if (down) {
     // Opzionale: aggiungi feedback visivo durante il drag
-    console.log("Dragging:", mx, my);
+    console.log("Dragging-Down:", mx, my);
   } else {
     // Al rilascio, determina la direzione del gesto
+    console.log("Dragging-UP:", mx, my);
     const threshold = 50;
     const velocityThreshold = 0.3;
 
@@ -262,6 +266,7 @@ const playAnimation = () => {
 onMounted(() => {
   // Imposta isClient a true quando siamo nel browser
   isClient.value = true;
+  console.log("isClient:", isClient.value); //AD28
 
   // Controlla se il dispositivo supporta eventi touch
   if (typeof window !== "undefined") {
@@ -277,6 +282,15 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.square {
+  pointer-events: none;
+}
+
+/* Oppure applica touch-action a tutti i figli AD28 */
+* {
+  touch-action: none;
+}
+
 .square {
   position: absolute;
   top: 50%;
