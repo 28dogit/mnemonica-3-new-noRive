@@ -100,9 +100,11 @@ const handleTouchEnd = () => {
     if (swipeDistance > 0) {
       // Swipe verso il basso (precedente)
       goToPrevStep();
+      console.log("Swipe verso il basso su mobile con touch");
     } else {
       // Swipe verso l'alto (successivo)
       goToNextStep();
+      console.log("Swipe verso l'alto su mobile con touch");
     }
   }
 };
