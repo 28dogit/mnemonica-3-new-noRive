@@ -334,12 +334,9 @@ onMounted(() => {
       return;
     }
 
-    // INIZIO MODIFICHE SWIPE VERTICALE
-    // Variabili per il throttle/debounce
-    let isAnimating = false;
-    let lastScrollTime = 0;
-    const scrollCooldown = 500; // Tempo di attesa in ms tra uno scroll e l'altro (ridotto da 800ms)
-    
+    let isCoolingDown = false;
+    let COOL_DOWN_TIME = 800; // ms - ridotto per una risposta più rapida e modificabile dinamicamente
+
     // Variabili per tracciare il tocco
     let touchStartY = 0;
     let touchEndY = 0;
@@ -347,10 +344,7 @@ onMounted(() => {
     let touchEndTime = 0;
     let lastTouchY = 0;
     let touchVelocity = 0;
-    const touchThreshold = 25; // Soglia minima per considerare uno swipe
-    // FINE MODIFICHE SWIPE VERTICALE
 
-    // INIZIO MODIFICHE SWIPE VERTICALE
     function handleScroll(event) {
       const { isScrollLocked } = useScrollLock();
       // Se lo scroll è bloccato (modale aperto), ignora l'evento
@@ -362,15 +356,8 @@ onMounted(() => {
         event.preventDefault();
         return;
       }
-      
-      // Implementazione di throttle per gli eventi di scroll
-      // Se è in corso un'animazione o non è passato abbastanza tempo dall'ultimo evento, ignora
-      const now = Date.now();
-      if (isAnimating || now - lastScrollTime < scrollCooldown) {
-        return;
-      }
-      
-      lastScrollTime = now;
+      // Se siamo in fase di "cooldown", ignoriamo tutti gli eventi successivi
+      if (isCoolingDown) return;
 
       let deltaY = 0;
       let isTouchEvent = false;
@@ -378,18 +365,10 @@ onMounted(() => {
       //SECTION - ottimizazione touch mobile
       // Determina il tipo di evento
       if (event.type === "wheel") {
-        // Gestione mouse wheel con soglia per ridurre sensibilità
+        // Gestione mouse wheel più sensibile
         deltaY = event.deltaY;
-        
-        // Riduzione della sensibilità per il Magic Mouse
-        // Utilizziamo una soglia più alta per il deltaY
-        const scrollThreshold = 10;
-        if (Math.abs(deltaY) < scrollThreshold) {
-          return; // Ignora movimenti troppo piccoli
-        }
-        
-        // Aumenta la sensibilità per lo scroll con mouse/trackpad solo per movimenti significativi
-        if (Math.abs(deltaY) < 20) deltaY *= 1.5;
+        // Aumenta la sensibilità per lo scroll con mouse/trackpad
+        if (Math.abs(deltaY) < 5) deltaY *= 2;
       } else if (event.type === "touchstart") {
         isTouchEvent = true;
         touchStartY = event.touches[0].clientY;
@@ -408,8 +387,9 @@ onMounted(() => {
         lastTouchY = currentY;
         touchEndY = currentY;
 
-        // Calcola il delta con una soglia minima per considerare uno swipe
-        if (Math.abs(touchStartY - touchEndY) > touchThreshold) {
+        // Calcola il delta con una soglia più bassa per dispositivi touch
+        if (Math.abs(touchStartY - touchEndY) > 5) {
+          // Soglia ridotta da 10 a 5
           deltaY = touchStartY - touchEndY;
           // Previeni lo scroll predefinito del browser su mobile
           event.preventDefault();
@@ -419,8 +399,9 @@ onMounted(() => {
         touchEndTime = Date.now();
         const touchDuration = touchEndTime - touchStartTime;
 
-        // Calcola il delta con la soglia minima per considerare uno swipe
-        if (Math.abs(touchStartY - touchEndY) > touchThreshold) {
+        // Calcola il delta con una soglia più bassa
+        if (Math.abs(touchStartY - touchEndY) > 5) {
+          // Soglia ridotta da 10 a 5
           deltaY = touchStartY - touchEndY;
 
           // Considera anche la velocità del gesto per migliorare la reattività
@@ -433,45 +414,29 @@ onMounted(() => {
 
       //!SECTION
 
-      // Imposta il flag di animazione
-      isAnimating = true;
-      
       // Applica l'azione con soglie ottimizzate per dispositivi touch
       if (isTouchEvent) {
-        // Swipe verso l'alto (successivo)
-        if (deltaY > touchThreshold) {
+        // Soglie più basse per eventi touch
+        if (deltaY > 5) {
           sectionsTL.play();
-        } 
-        // Swipe verso il basso (precedente)
-        else if (deltaY < -touchThreshold) {
+        } else if (deltaY < -5) {
           sectionsTL.reverse();
-        } else {
-          // Se non supera la soglia, non consideriamo come animazione
-          isAnimating = false;
-          return;
         }
       } else {
-        // Gestione scroll con mouse/trackpad
-        // Scroll verso il basso (successivo)
-        if (deltaY > 0) {
+        // Mantieni le soglie originali per eventi mouse/wheel
+        if (deltaY > 10) {
           sectionsTL.play();
-        } 
-        // Scroll verso l'alto (precedente)
-        else if (deltaY < 0) {
+        } else if (deltaY < -10) {
           sectionsTL.reverse();
-        } else {
-          // Se non c'è movimento, non consideriamo come animazione
-          isAnimating = false;
-          return;
         }
       }
 
-      // Reset del flag di animazione dopo il completamento
+      // Attiviamo la "finestra" di cooldown
+      isCoolingDown = true;
       setTimeout(() => {
-        isAnimating = false;
-      }, 600); // Leggermente più lungo della durata dell'animazione tipica
+        isCoolingDown = false;
+      }, COOL_DOWN_TIME);
     }
-    // FINE MODIFICHE SWIPE VERTICALE
 
     //registro handleScrol nella ref handleScrollRef dichiarata all'inizio fuori dal nextTick per l'onBeforeUnmount
     handleScrollRef.value = handleScroll;
@@ -508,17 +473,15 @@ onMounted(() => {
     // Aggiungi l'event listener con la funzione nominata
     document.addEventListener("touchmove", preventIOSBounce, { passive: false });
 
-    // INIZIO MODIFICHE SWIPE VERTICALE
     // Aggiungi un gestore specifico per iOS per migliorare ulteriormente la reattività
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     if (isIOS) {
       // Su iOS, aggiungiamo un listener aggiuntivo con priorità massima
       document.body.style.touchAction = "none"; // Disabilita il comportamento touch predefinito
-      
-      // Nota: non modifichiamo più il tempo di cooldown qui perché è già impostato a 500ms
-      // nella dichiarazione delle variabili all'inizio
+
+      // Imposta un tempo di cooldown più breve per iOS
+      COOL_DOWN_TIME = 500;
     }
-    // FINE MODIFICHE SWIPE VERTICALE
 
     //SECTION - Gestione animazione Timeline allo scroll
     //NOTE - recupero la rotationTL esposta dal componente phases_comp
