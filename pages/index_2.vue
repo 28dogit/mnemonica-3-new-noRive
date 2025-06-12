@@ -77,11 +77,17 @@
 </template>
 
 <script setup>
+//SECTION - importazioni
+
 import { onMounted, onBeforeUnmount, ref, nextTick, watch } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
 import { HSectionsArchive } from "#components";
 import { toRaw } from "vue"; //serve per gestire gli imput delle statemachine di RIVE
+import { useNavStore } from "@/stores/navigationStore";
+
+//!SECTION
+//SECTION - Costanti e Refs
 
 const PhasesRef = ref(null);
 const canvasRefLogo = ref(null);
@@ -97,10 +103,11 @@ const preventIOSBounceRef = ref(null);
 // Usiamo il composable per lo stato Fixed Section
 const { isfixedSection, setFixedSection } = useFixedSection();
 
-//SECTION - funzioni per scroll to non fixed sections
-import { useNavStore } from "@/stores/navigationStore";
+const navigationStore = useNavStore(); // importato più su
 
-const navigationStore = useNavStore();
+///!SECTION
+
+//SECTION - funzioni per scroll to non fixed sections
 
 //NOTE - il composable useMNEfunctions serve per gestire le funzioni di scrollTo e customLogic tra le sezioni fixed e non fixed
 // e anche l'evento menuAction emesso dai menu alternativi come nav-steps
@@ -115,6 +122,7 @@ const {
 
 //!SECTION
 
+//SECTION - Rive buffer
 // Variabile per memorizzare il buffer del file .riv
 let rivBuffer = null;
 
@@ -127,7 +135,9 @@ async function loadRivFile(url) {
   //const response = await fetch(url);
   return await response.arrayBuffer();
 }
+//!SECTION
 
+//SECTION - onMounted
 onMounted(() => {
   const { $gsap } = useNuxtApp();
 
@@ -159,6 +169,7 @@ onMounted(() => {
   } else {
     console.log("Nessuna sezione di destinazione trovata.");
   }
+  //!SECTION
   // aggiungo un watch per quando sono già nella home e controlo lo stato dello store
   watch(
     () => navigationStore.targetSection,
@@ -180,6 +191,7 @@ onMounted(() => {
       }
     }
   );
+  //SECTION - Next Tick
 
   nextTick(async () => {
     //SECTION - RIVE
@@ -334,6 +346,7 @@ onMounted(() => {
       console.error("Nessuna sezione trovata.");
       return;
     }
+    //SECTION - Handle scroll mobile e desktop
 
     // Variabili per il controllo dello scroll e touch
     let isAnimating = false;
@@ -494,6 +507,7 @@ onMounted(() => {
       // nella dichiarazione delle variabili all'inizio
     }
     // FINE MODIFICHE SWIPE VERTICALE
+    //!SECTION
 
     //SECTION - Gestione animazione Timeline allo scroll
     //NOTE - recupero la rotationTL esposta dal componente phases_comp
@@ -518,6 +532,7 @@ onMounted(() => {
         setTimeout(() => {
           //attivo lo scroll di default
           $gsap.set("body", { overflow: "auto" });
+          document.body.style.touchAction = ""; //aggiunta 28
           // Ripristina la posizione della sezione non fissa
           //resetNofixedSectionPosition();
           // Imposta lo stato della sezione fissa a false
@@ -694,11 +709,15 @@ onMounted(() => {
     noFixedSTRef.value = noFixedST;
     //!SECTION
   }); //NOTE - chiusura Next Tick
+  //!SECTION
 }); //NOTE - chiusura onMouted
+//!SECTION
 
 onBeforeUnmount(() => {
   // Ripristino lo scroll nel caso lasciassi la pagina prima di aver sbloccato lo scroll via gsap
   document.body.style.overflow = "auto";
+  // Ripristina il comportamento touch predefinito
+  document.body.style.touchAction = "";
 
   // Kill ScrollTrigger
   if (noFixedSTRef.value) {
@@ -761,9 +780,6 @@ onBeforeUnmount(() => {
       passive: false,
     });
   }
-
-  // Ripristina il comportamento touch predefinito
-  document.body.style.touchAction = "";
 });
 </script>
 
