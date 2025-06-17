@@ -10,7 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/content": "^3.5.1",
+    "@nuxt/content": "^3.6.0",
     "@vueuse/gesture": "^2.0.0",
     "animejs": "^4.0.2",
     "hammerjs": "^2.0.8",
@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@egoist/tailwindcss-icons": "^1.9.0",
-    "@iconify-json/lucide": "^1.2.48",
+    "@iconify-json/lucide": "^1.2.49",
     "@iconify-json/mdi": "^1.2.3",
     "@nuxt/fonts": "^0.11.2",
     "@nuxt/image": "^1.10.0",
@@ -35,7 +35,7 @@
     "esbuild": "^0.25.5",
     "gsap": "^3.13.0",
     "nuxt": "^3.17.5",
-    "postcss": "^8.5.5",
+    "postcss": "^8.5.6",
     "sass": "^1.89.2",
     "tailwindcss": "^4.1.10",
     "vue": "^3.5.13",
