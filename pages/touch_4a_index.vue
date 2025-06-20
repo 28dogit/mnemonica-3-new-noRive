@@ -152,17 +152,13 @@ const goToNextStep = () => {
     currentStep.value++;
     playAnimation();
     message.value = `Mostrato quadrato ${currentStep.value + 1}`;
-
-    // Reset del flag di animazione dopo il completamento
-    setTimeout(() => {
-      isAnimating.value = false;
-    }, 600); // Leggermente più lungo della durata dell'animazione
+    // Il flag isAnimating.value verrà resettato nel callback onComplete dell'animazione
   }
 };
 
 const goToPrevStep = () => {
   console.log(
-    "goToNextStep chiamato - currentStep:",
+    "goToPrevStep chiamato - currentStep:",
     currentStep.value,
     "isAnimating:",
     isAnimating.value
@@ -172,11 +168,7 @@ const goToPrevStep = () => {
     currentStep.value--;
     playAnimation();
     message.value = `Mostrato quadrato ${currentStep.value + 1}`;
-
-    // Reset del flag di animazione dopo il completamento
-    setTimeout(() => {
-      isAnimating.value = false;
-    }, 600); // Leggermente più lungo della durata dell'animazione
+    // Il flag isAnimating.value verrà resettato nel callback onComplete dell'animazione
   }
 };
 
@@ -187,6 +179,8 @@ const playAnimation = () => {
   const sectionsTL = $gsap.timeline({
     onComplete: () => {
       console.log("Animazione completata gsap");
+      // Reset del flag di animazione dopo il completamento effettivo dell'animazione
+      isAnimating.value = false;
     },
   });
 
@@ -198,9 +192,11 @@ const playAnimation = () => {
   sectionsTL.to(currentSquare, {
     opacity: 1,
     scale: 1,
-    duration: 0.5,
+    duration: 5,
     ease: "power2.out",
   });
+
+  return sectionsTL; // Ritorna la timeline per poterla controllare se necessario
 };
 
 onMounted(() => {
