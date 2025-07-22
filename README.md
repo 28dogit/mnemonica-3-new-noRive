@@ -5,10 +5,7 @@ tutte le dipendenze sono state aggiornate al 22/07/2025
 
 ## animazioni e css:
 
-Gsap
-anime.js 4.0.2
-tailwindcss 4.1.11
-rive 2.30.4
+Gsap, anime.js 4.0.2, tailwindcss 4.1.11, Rive 2.30.4
 
 ### per i CSS utilizzo scss, organizzati in questo modo
 
@@ -29,13 +26,13 @@ la soluzione è implementata **nel file /pages/touch_4a_y.vue** e nel file touch
 
 # CMS
 
-per quanto riguarda la gestione dei testi tramite il modulo nuxt content, allego due screenshot esemplificativi di come il content derivante dal file .md viene gestito nelle pagine.
+per quanto riguarda la gestione dei testi tramite il modulo nuxt content, allego due screenshot esemplificativi di come il content derivante dal file .md viene gestito nelle pagine. </br>
 La parte implementata attuale è quella del data content /content/data/\*.md questi files contengono i testi di alcune parti dei componenti presenti nelle sezioni (pahases e modules) e vengono utilizzati secondo la logica che trovate indicata nell'allegato **"Content data utilizzo e richiamo tramite composable.png"** in pratica i testi vengono richiamati dal componente attraverso un composable che cicla il contenuto e lo estrae, poi viene renderizzato nel punto voluto utilizzando gli slot relativi.
 
-nell'allegato **"Content Components all'interno di Components.png"** in dico l'utilizzo dei conten componentes (/components/content/\*.md), sono componenti creati per formattare i pezzi di contenuto utilizzati all'interno delle pagine e che nel file .md vengono racchiusi nel relativo componente in questo modo
-::nome-componente
-contenuto
-::
+Nell'allegato **"Content Components all'interno di Components.png"** in dico l'utilizzo dei conten componentes (/components/content/\*.md), sono componenti creati per formattare i pezzi di contenuto utilizzati all'interno delle pagine e che nel file .md vengono racchiusi nel relativo componente in questo modo:</br>
+::nome-componente</br>
+contenuto</br>
+::</br>
 
 In questo modo anche utilizzando il metodo classico per caricare i contenuti testuali, posso controllare la formattazione dei singoli blocchi del contenuto del file .md invece di avere un singolo blocco di testo.
 
