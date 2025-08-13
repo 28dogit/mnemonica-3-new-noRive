@@ -33,6 +33,14 @@
       </div>
     </div> -->
     <div class="nofixed_section w-[100vw] z-30">
+      <ParallaxSection>
+        <template #background>
+          <!-- Vuoto, lo fa lo stile -->
+        </template>
+        <template #foreground>
+          <h1>Benvenuto nel Parallasse</h1>
+        </template>
+      </ParallaxSection>
       <div id="hero-section-2" class="hero nofixed-inner-wrapper">
         <div id="hero-element" class="element">
           <div id="ghirlanda-element" class="circular"></div>
@@ -774,5 +782,4 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss">
-//@use "@/assets/css/_globals.scss" as *;
-</style>
+//@use "@/assets/css/_globals.scss" as *;</style>

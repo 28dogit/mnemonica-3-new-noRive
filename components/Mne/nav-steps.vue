@@ -1,12 +1,7 @@
 <template>
   <div>
-    <UNavigationMenu
-      color="neutral"
-      variant="pill"
-      :items="items"
-      orientation="vertical"
-      class="fixed right-10 top-[30%] z-50"
-    />
+    <UNavigationMenu color="neutral" variant="pill" :items="items" orientation="vertical"
+      class="fixed right-10 top-[30%] z-50" />
   </div>
 </template>
 
@@ -18,7 +13,7 @@ const emit = defineEmits(["menuAction"]);
 
 const activeSection = ref("hero");
 
-// Definisco una prop per permettere al componente genitore di impostare la sezione attiva
+// Definisco una prop per permettere al componente genitore di impostare la sezione attiva (in partenza è hero)
 const props = defineProps({
   initialActive: {
     type: String,

@@ -1,11 +1,5 @@
 // composables/useFunctions.ts
-export const useMNEfunctions = (
-  navigationStore,
-  sectionsTLRef,
-  isfixedSection,
-  setFixedSection
-) => {
-
+export const useMNEfunctions = (navigationStore, sectionsTLRef, isfixedSection, setFixedSection) => {
   // Funzione per verificare se la sezione non fissa è stata raggiunta
   function checkNofixedSection() {
     // console.log("-#-#- checkfixedsection-composable");
@@ -85,13 +79,22 @@ export const useMNEfunctions = (
     // Chiama la funzione appropriata in base all'azione
     switch (action) {
       case "hero":
-        toFixedSections("Start-hero");
+        //toFixedSections("Start-hero"); (vecchio sistema con le fixed sections)
+        navigationStore.targetSection = "hero-section-2";
+        scrollToSection("hero-section-2");
+        resetNofixedSectionPosition("hero-section-2");
         break;
       case "phases":
-        toFixedSections("End-phases");
+        // toFixedSections("End-phases"); (vecchio sistema con le fixed sections)
+        navigationStore.targetSection = "phases-section-2";
+        scrollToSection("phases-section-2");
+        resetNofixedSectionPosition("phases-section-2");
         break;
       case "allInOne": // Corretto da scrollToAllInOne
-        toFixedSections("Start-modules-pause");
+        // toFixedSections("Start-modules-pause"); (vecchio sistema con le fixed sections)
+        navigationStore.targetSection = "modules-section-2";
+        scrollToSection("modules-section-2");
+        resetNofixedSectionPosition("modules-section-2");
         break;
       case "madeFor":
         navigationStore.targetSection = "made-for";
@@ -109,7 +112,7 @@ export const useMNEfunctions = (
         resetNofixedSectionPosition("Archive");
         break;
       default:
-        // console.log("Azione non riconosciuta-composable:", action);
+      // console.log("Azione non riconosciuta-composable:", action);
     }
   };
 
