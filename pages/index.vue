@@ -33,14 +33,6 @@
       </div>
     </div> -->
     <div class="nofixed_section w-[100vw] z-30">
-      <ParallaxSection>
-        <template #background>
-          <!-- Vuoto, lo fa lo stile -->
-        </template>
-        <template #foreground>
-          <h1>Benvenuto nel Parallasse</h1>
-        </template>
-      </ParallaxSection>
       <div id="hero-section-2" class="hero nofixed-inner-wrapper">
         <div id="hero-element" class="element">
           <div id="ghirlanda-element" class="circular"></div>
@@ -62,13 +54,15 @@
           </div>
         </div>
       </div>
+      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="phases-section-2" class="phases nofixed-inner-wrapper">
         <HSectionsPhasesComponent ref="PhasesRef" @menuAction="handleMenuAction"></HSectionsPhasesComponent>
       </div>
+      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="modules-section-2" class="modules nofixed-inner-wrapper">
         <HSectionsModulesComponent></HSectionsModulesComponent>
       </div>
-      <!-- <div class="preMade"></div> -->
+      <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="made-for" class="nofixed-inner-wrapper">
         <HSectionsMadeFor></HSectionsMadeFor>
       </div>
@@ -96,6 +90,14 @@
       <div id="contacts" class="nofixed-inner-wrapper">
         <HSectionsContacts></HSectionsContacts>
       </div>
+      <ParallaxSection>
+        <template #background>
+          <!-- Vuoto, lo fa lo stile -->
+        </template>
+        <template #foreground>
+          <h1>Benvenuto nel Parallasse</h1>
+        </template>
+      </ParallaxSection>
     </div>
   </main>
 </template>
@@ -545,12 +547,9 @@ onMounted(() => {
     // FINE MODIFICHE SWIPE VERTICALE
 
     //SECTION - Gestione animazione Timeline allo scroll
-    //NOTE - recupero la rotationTL esposta dal componente phases_comp
-    const RotationTL = PhasesRef.value?.rotationTL;
-    const RotationTL_Titles = PhasesRef.value?.rotationTL_Titles;
 
     //NOTE - recupero la phasesTL esposta dal componente phases_comp
-    const PhasesTL = PhasesRef.value?.phasesTL;
+    // const PhasesTL = PhasesRef.value?.phasesTL;
 
     $gsap.set("#hero-section", { zIndex: 1 });
     $gsap.set("#modules-section", { zIndex: 0 });
@@ -613,12 +612,7 @@ onMounted(() => {
 
     //ANCHOR - Phases Section Start
     sectionsTL.addLabel("Start-phases");
-    sectionsTL.call(() => RotationTL.pause());
-    sectionsTL.call(() => RotationTL_Titles.pause());
-
     sectionsTL.to("#modules_svg", { rotate: "+=60", ease: "power1.in" });
-    sectionsTL.call(() => RotationTL.play(), [], "<+=0.2");
-    sectionsTL.call(() => RotationTL_Titles.play(), [], "<+=0.2");
     sectionsTL.to(
       "#hero-section",
       {
@@ -663,10 +657,6 @@ onMounted(() => {
       },
       "<"
     );
-    sectionsTL.call(() => RotationTL.play());
-    sectionsTL.call(() => RotationTL_Titles.play());
-    sectionsTL.call(() => RotationTL.pause());
-    sectionsTL.call(() => RotationTL_Titles.pause());
 
     sectionsTL.to(
       "#modules-section",
@@ -690,7 +680,7 @@ onMounted(() => {
     sectionsTL.to("#modules_svg", { rotate: "+=120", ease: "back.out" });
     sectionsTL.to("#Modules_4 #Screen path", { fill: "#B8EFFA" }, "<");
     sectionsTL.to("#Modules_4 #Deliver path", { fill: "#CEF372" }, "<");
-    sectionsTL.to("#modules-content #module-txt_1", { opacity: 0, zIndex: 0 }, "<");
+    //sectionsTL.to("#modules-content #module-txt_1", { opacity: 0, zIndex: 0 }, "<");
     // sectionsTL.set("#modules-content #module-txt_1", { zIndex: 0 }, "<");
     sectionsTL.to("#modules-content #module-txt_2", { opacity: 1, zIndex: 1 }, "<");
     // sectionsTL.set("#modules-content #module-txt_2", { zIndex: 110 }, "<");
@@ -700,7 +690,7 @@ onMounted(() => {
     sectionsTL.to("#modules_svg", { rotate: "+=120", ease: "back.out" });
     sectionsTL.to("#Modules_4 #Deliver path", { fill: "#B8EFFA" }, "<");
     sectionsTL.to("#Modules_4 #Preserve path", { fill: "#CEF372" }, "<");
-    sectionsTL.to("#modules-content #module-txt_2", { opacity: 0, zIndex: 0 }, "<");
+    //sectionsTL.to("#modules-content #module-txt_2", { opacity: 0, zIndex: 0 }, "<");
     // sectionsTL.to("#modules-content #module-txt_2", { opacity: 0 }, "<");
     sectionsTL.to("#modules-content #module-txt_3", { opacity: 1, zIndex: 1 }, "<");
     // sectionsTL.to("#modules-content #module-txt_3", { opacity: 1 }, "<");

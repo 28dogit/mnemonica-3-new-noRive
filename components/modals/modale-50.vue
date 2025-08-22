@@ -52,15 +52,7 @@
 </template>
 
 <script setup>
-import {
-  ref,
-  onMounted,
-  onBeforeUnmount,
-  onUnmounted,
-  computed,
-  watch,
-  nextTick,
-} from "vue";
+import { ref, onMounted, onBeforeUnmount, onUnmounted, computed, watch, nextTick } from "vue";
 import { useWindowSize } from "@vueuse/core";
 const { $gsap } = useNuxtApp();
 
@@ -128,9 +120,7 @@ const AnimationProps = (isOpening) => {
 };
 
 const openModal = () => {
-  const { x: offScreenX, y: offScreenY, opacity: offScreenOpacity } = AnimationProps(
-    true
-  );
+  const { x: offScreenX, y: offScreenY, opacity: offScreenOpacity } = AnimationProps(true);
   $gsap.set(myModal.value, { opacity: 1, x: "0%", y: "0%" });
   $gsap.to(myModal.value, {
     opacity: 1,
@@ -276,22 +266,29 @@ onUnmounted(() => {});
 .horizontal50 .modal-content {
   max-width: 50vw;
 }
+
 .modal-inner {
   box-sizing: border-box;
-  min-height: 50vh; /* Altezza del contenuto visibile inizialmente in portrait non espanso */
+  min-height: 50vh;
+  /* Altezza del contenuto visibile inizialmente in portrait non espanso */
   height: 50vh;
 }
+
 .modal-inner-2 {
   box-sizing: border-box;
   /* L'altezza di modal-inner-2 dovrebbe essere relativa al suo contenuto */
   /* o 50vh se si vuole che riempia la seconda metà quando espanso. */
   /* Per ora, il contenuto determina la sua altezza. */
   padding: 2em 4em;
-  /* background-color: lightcoral; */ /* Utile per debug visivo */
+  /* background-color: lightcoral; */
+  /* Utile per debug visivo */
 }
+
 .modal-content {
-  height: auto; /* Permette al contenuto di definire l'altezza */
-  overflow-y: hidden; /* Nasconde lo scrollbar per default (stato non espanso) */
+  height: auto;
+  /* Permette al contenuto di definire l'altezza */
+  overflow-y: hidden;
+  /* Nasconde lo scrollbar per default (stato non espanso) */
 }
 
 /* Stili per il pulsante di espansione/riduzione */
@@ -301,7 +298,8 @@ onUnmounted(() => {});
   // /* Posizionare in modo che non si sovrapponga al pulsante di chiusura */
   // /* Esempio: se BtnClose è a destra (tipico), posizionare a sinistra */
   // left: 15px;
-  z-index: 1300; /* Assicurarsi che sia sopra il contenuto */
+  z-index: 1300;
+  /* Assicurarsi che sia sopra il contenuto */
   padding: 8px 12px;
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
