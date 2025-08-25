@@ -1,21 +1,10 @@
 <template>
   <teleport to="#teleports">
-    <dialog
-      id="mioModale"
-      ref="myModal"
-      :class="{ horizontal50: isMounted && !isPortrait }"
-      @click="(e) => e.target === myModal && closeModal()"
-    >
+    <dialog id="mioModale" ref="myModal" :class="{ horizontal50: isMounted && !isPortrait }" @click="(e) => e.target === myModal && closeModal()">
       <!-- aggiungo una classe dinamica horizontal che viene aggiunta quando la viewport non è portrait -->
       <div ref="modalContent" class="modal-content" id="m-content">
         <!-- <p>Modal ID: {{ isModal }}</p> -->
-        <button
-          class="modal-x-btn"
-          @click.passive="closeModal"
-          @touchstart.passive="closeModal"
-          @pointerdown.passive="closeModal"
-          @mousedown.passive="closeModal"
-        >
+        <button class="modal-x-btn" @click.passive="closeModal" @touchstart.passive="closeModal" @pointerdown.passive="closeModal" @mousedown.passive="closeModal">
           <BtnClose></BtnClose>
         </button>
         <!-- Pulsante Espandi/Riduci -->
@@ -213,11 +202,7 @@ watch(
       disableBodyScroll();
       openModal();
     } else {
-      if (
-        lastOpenedModalType.value !== "screen" &&
-        lastOpenedModalType.value !== "deliver" &&
-        lastOpenedModalType.value !== "preserve"
-      ) {
+      if (lastOpenedModalType.value !== "screen" && lastOpenedModalType.value !== "deliver" && lastOpenedModalType.value !== "preserve") {
         enableBodyScroll();
       }
       // closeModal è già chiamato dal click sul pulsante X o sull'overlay
@@ -233,9 +218,7 @@ watch(
   () => props.isModal,
   async (newModalId) => {
     if (newModalId) {
-      const { data } = await useAsyncData(`/modali50/${newModalId}`, () =>
-        queryCollection("content").path(`/modali50/${newModalId}`).first()
-      );
+      const { data } = await useAsyncData(`/modali50/${newModalId}`, () => queryCollection("content").path(`/modali50/${newModalId}`).first());
       modalContentData.value = data.value;
     }
   },
@@ -249,13 +232,7 @@ onMounted(() => {
     // isPortrait.value è già calcolato dal computed property basato su useWindowSize
   });
 
-  $gsap
-    .fromTo(
-      myModal.value,
-      { opacity: 0, x: "100%", y: "100%" },
-      { opacity: 1, x: "0%", y: "0%", duration: 0.5, ease: "power2.out" }
-    )
-    .pause();
+  $gsap.fromTo(myModal.value, { opacity: 0, x: "100%", y: "100%" }, { opacity: 1, x: "0%", y: "0%", duration: 0.5, ease: "power2.out" }).pause();
 });
 
 onBeforeUnmount(() => {});
