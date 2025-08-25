@@ -7,33 +7,9 @@
         <button class="modal-x-btn" @click.passive="closeModal" @touchstart.passive="closeModal" @pointerdown.passive="closeModal" @mousedown.passive="closeModal">
           <BtnClose></BtnClose>
         </button>
-        <!-- Pulsante Espandi/Riduci -->
-        <!-- <button
-          v-if="isPortrait && props.isOpen"
-          @click="toggleExpand"
-          class="modal-expand-btn"
-          :aria-expanded="isExpanded.toString()"
-        >
-          {{ isExpanded ? "Riduci" : "Espandi" }}
-        </button> -->
-        <!-- <div ref="modalInner" class="modal-inner">
-          <ContentRenderer v-if="modalContentData" :value="modalContentData" />
-        </div> -->
+        <!-- <div ref="modalInner" class="modal-inner">contenuto modale</div> -->
         <div class="modal-inner">
           <ContentRenderer v-if="modalContentData" :value="modalContentData" />
-          <UButton
-            :trailing-icon="isExpanded ? 'i-lucide-arrow-down' : 'i-lucide-arrow-up'"
-            size="md"
-            color="neutral"
-            v-if="isPortrait && props.isOpen"
-            @click="toggleExpand"
-            class="modal-expand-btn"
-            :aria-expanded="isExpanded.toString()"
-            >{{ isExpanded ? "Back to info" : "Discover what Mnemonica can do for you" }}
-          </UButton>
-        </div>
-        <div class="modal-inner-2">
-          <MneFormContact>Get in touch</MneFormContact>
         </div>
       </div>
     </dialog>

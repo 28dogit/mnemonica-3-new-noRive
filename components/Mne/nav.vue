@@ -9,8 +9,7 @@
       childItem: 'h-10 w-[30%]',
       childLink: 'text-sm font-normal text-blue-600',
       childLinkLabel: 'text-sm font-normal text-blue-600',
-    }"
-  >
+    }">
   </UNavigationMenu>
 </template>
 
@@ -68,7 +67,7 @@ const items = [
         onSelect: (event: Event) => navigateToSection("made-for", event),
       },
       {
-        label: "Pricing h2",
+        label: "Pricing",
         to: null,
         onSelect: (event: Event) => navigateToSection("production", event),
       },
