@@ -89,7 +89,7 @@
   width: 100%;
   height: 100%;
   color: white;
-  &.hero{
+  &.hero {
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
@@ -171,28 +171,28 @@
   }
 }
 #canvasLogo {
-  margin-top: 100px;
+  //margin-top: 100px;
   position: absolute;
   z-index: 5;
-  @include bp.for-phone {
-    // W-1200px H-750px up
-    margin-top: 30px;
-  }
+  // @include bp.for-phone {
+  //   // W-1200px H-750px up
+  //   margin-top: 30px;
+  // }
 }
 #canvasPayoff {
-  margin-top: 0px;
+  //margin-top: 0px;
   // margin-top: 70px;
   position: absolute;
   max-width: 960px;
   z-index: 5;
-  @include bp.for-tablet-portrait-up{
-    margin-top: 100px;
-    // margin-top: 80px;
-  }
-  @include bp.for-desktop-big-up {
-    // margin-top: 135px;
-    margin-top: 100px;
-  }
+  // @include bp.for-tablet-portrait-up{
+  //   margin-top: 100px;
+  //   // margin-top: 80px;
+  // }
+  // @include bp.for-desktop-big-up {
+  //   // margin-top: 135px;
+  //   margin-top: 100px;
+  // }
   // @include bp.for-phone {
   //   // W-1200px H-750px ups
   //   margin-top: 0px;

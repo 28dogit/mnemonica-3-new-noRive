@@ -19,19 +19,40 @@
     </div>
 
     <MneHeader />
+    <div id="sectionsWrapper">
+      <!-- <div id="section1"> -->
+      <div id="hero-section" class="hero">
+        <div class="element">
+          <div id="ghirlanda-element_start" class="circular fixed">
+            <NuxtImg
+              id="ghirlanda_img"
+              src="/assets/img/Ghirlanda_full_web_800_opt.png"
+              alt="mnemonica ghirlanda ecosystem"
+              densities="x1"
+            />
+          </div>
+        </div>
+        <div class="wrapper">
+          <div class="content"></div>
+        </div>
+      </div>
+    </div>
     <slot class="min-h-screen" />
     <MneFooter />
     <!-- <MneTopBtn /> -->
   </div>
 </template>
 
-<script setup>
-onMounted(() => {});
-//Gsap-fine
-</script>
+<script setup></script>
 
 <style lang="scss" scoped>
 @use "@/assets/css/_breakpoints.scss" as bp;
+
+#ghirlanda-element_start {
+  opacity: 0.6;
+  mix-blend-mode: plus-lighter;
+  mix-blend-mode: luminosity;
+}
 
 #ghirlandeContainer {
   position: fixed;
@@ -52,11 +73,15 @@ onMounted(() => {});
 .ghirlanda-updx {
   top: 0;
   right: 0;
+  opacity: 0;
+  filter: blur(5px);
 }
 
 .ghirlanda-dwsx {
   bottom: 0;
   left: 0;
+  opacity: 0;
+  filter: blur(5px);
 }
 @media screen and (max-width: 600px) {
   #ghirlandeContainer {

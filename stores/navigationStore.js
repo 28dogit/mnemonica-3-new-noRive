@@ -1,7 +1,7 @@
 // stores/navigationStore.js
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
-export const useNavStore = defineStore('nav', {
+export const useNavStore = defineStore("nav", {
   state: () => ({
     targetSection: null, // La sezione di destinazione
     executeCustomLogic: false, // Flag per eseguire logica personalizzata
