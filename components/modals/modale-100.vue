@@ -133,6 +133,7 @@ const closeModal = () => {
     onComplete: () => {
       $gsap.set(myModal.value, { opacity: 0, x: "100%", y: "100%" });
       emit("close");
+      enableBodyScroll();
     },
   });
   $gsap.to(modalContent.value, {
@@ -143,21 +144,6 @@ const closeModal = () => {
     ease: "power2.in",
   });
 };
-
-// const handleScroll = (event) => {
-//   if (!isPortrait.value) {
-//     event.preventDefault();
-//     event.stopPropagation();
-
-//     $gsap.to(modalInner.value, {
-//       scrollTo: {
-//         x: modalInner.value.scrollLeft + event.deltaY * 6,
-//       },
-//       ease: "power2",
-//       duration: 0.5,
-//     });
-//   }
-// };
 
 const lastOpenedModalType = ref("");
 
@@ -170,13 +156,7 @@ watch(
       disableBodyScroll();
       openModal();
     } else {
-      if (
-        lastOpenedModalType.value !== "screen" &&
-        lastOpenedModalType.value !== "deliver" &&
-        lastOpenedModalType.value !== "preserve"
-      ) {
-        enableBodyScroll();
-      }
+      enableBodyScroll();
     }
   },
   { immediate: true }

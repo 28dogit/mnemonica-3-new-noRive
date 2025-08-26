@@ -37,7 +37,7 @@
       </div>
       <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="modules-section-2" class="modules nofixed-inner-wrapper">
-        <HSectionsModulesComponent></HSectionsModulesComponent>
+        <HSectionsModulesComponentNoRive></HSectionsModulesComponentNoRive>
       </div>
       <USeparator icon="i-lucide-fold-vertical" class="h-12" />
       <div id="made-for" class="nofixed-inner-wrapper">
