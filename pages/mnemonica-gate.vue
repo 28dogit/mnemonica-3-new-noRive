@@ -1,6 +1,8 @@
 <template>
   <div class="page-wrapper">
-    <ContentRenderer v-if="page" :value="page" />
+    <h1>Mnemonica Gate</h1>
+    <h2>Subtitle</h2>
+    <p>Content of mnemonica gate</p>
   </div>
 </template>
 
@@ -9,10 +11,6 @@ definePageMeta({
   layout: "page-layout",
 });
 const route = useRoute();
-
-const { data: page } = await useAsyncData(route.path, () => {
-  return queryCollection("content").path(route.path).first();
-});
 </script>
 
 <style lang="scss" scoped></style>

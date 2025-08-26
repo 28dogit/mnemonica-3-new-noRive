@@ -8,7 +8,6 @@
     >
       <!-- aggiungo una classe dinamica horizontal che viene aggiunta quando la viewport non è portrait -->
       <div ref="modalContent" class="modal-content" id="m-content">
-        <!-- <p>Modal ID: {{ isModal }}</p> -->
         <button
           class="modal-x-btn"
           @click.passive="closeModal"
@@ -16,11 +15,13 @@
           @pointerdown.passive="closeModal"
           @mousedown.passive="closeModal"
         >
-          <BtnClose></BtnClose>
+          <BtnClose>X</BtnClose>
         </button>
-        <!-- <div ref="modalInner" class="modal-inner">contenuto modale</div> -->
         <div class="modal-inner">
           <ContentRenderer v-if="modalContentData" :value="modalContentData" />
+        </div>
+        <div class="modal-inner-2">
+          <MneFormContact>Get in touch</MneFormContact>
         </div>
       </div>
     </dialog>
@@ -28,15 +29,7 @@
 </template>
 
 <script setup>
-import {
-  ref,
-  onMounted,
-  onBeforeUnmount,
-  onUnmounted,
-  computed,
-  watch,
-  nextTick,
-} from "vue";
+import { ref, onMounted, onBeforeUnmount, onUnmounted, computed, watch, nextTick } from "vue";
 import { useWindowSize } from "@vueuse/core";
 const { $gsap } = useNuxtApp();
 
@@ -60,7 +53,6 @@ const isClient = ref(false);
 const isMounted = ref(false);
 const myModal = ref(null);
 const modalContent = ref(null);
-//const modalInner = ref(null);
 const { width, height } = useWindowSize({
   initialWidth: 0,
   initialHeight: 0,
@@ -141,6 +133,7 @@ const closeModal = () => {
     onComplete: () => {
       $gsap.set(myModal.value, { opacity: 0, x: "100%", y: "100%" });
       emit("close");
+      enableBodyScroll();
     },
   });
   $gsap.to(modalContent.value, {
@@ -151,35 +144,6 @@ const closeModal = () => {
     ease: "power2.in",
   });
 };
-
-// const handleScroll = (event) => {
-//   if (!isPortrait.value) {
-//     event.preventDefault();
-//     event.stopPropagation();
-
-//     $gsap.to(modalInner.value, {
-//       scrollTo: {
-//         x: modalInner.value.scrollLeft + event.deltaY * 6,
-//       },
-//       ease: "power2",
-//       duration: 0.5,
-//     });
-//   }
-// };
-
-//tengo d'occhio la props isOpen
-// watch(
-//   () => props.isOpen,
-//   (newVal) => {
-//     if (newVal) {
-//       disableBodyScroll();
-//       openModal();
-//     } else {
-//       enableBodyScroll();
-//     }
-//   },
-//   { immediate: true }
-// );
 
 const lastOpenedModalType = ref("");
 
@@ -192,13 +156,7 @@ watch(
       disableBodyScroll();
       openModal();
     } else {
-      if (
-        lastOpenedModalType.value !== "screen" &&
-        lastOpenedModalType.value !== "deliver" &&
-        lastOpenedModalType.value !== "preserve"
-      ) {
-        enableBodyScroll();
-      }
+      enableBodyScroll();
     }
   },
   { immediate: true }
@@ -231,12 +189,9 @@ onMounted(() => {
       { opacity: 1, x: "0%", y: "0%", duration: 0.5, ease: "power2.out" }
     )
     .pause();
-
-  // modalInner.value.addEventListener("wheel", handleScroll, { passive: false });
 });
 
 onBeforeUnmount(() => {
-  // modalInner.value.removeEventListener("wheel", handleScroll);
   enableBodyScroll();
 });
 

@@ -5,13 +5,13 @@ $M_Font: "montserrat", sans-serif;
 $J_Font: "jost", sans-serif;
 
 * {
-    font-family: $M_Font;
+  font-family: $M_Font;
 }
 
 //scroll marign
 html {
-    scroll-padding-top: 100px; /* per compensare l'haltezza dell'header di 70px quando scrollo un anchor link */
-  }
+  scroll-padding-top: 100px; /* per compensare l'haltezza dell'header di 70px quando scrollo un anchor link */
+}
 
 //colors
 $mne_primary: #11cbee;
@@ -29,104 +29,106 @@ $gradient_4: hsla(205, 59%, 10%, 1);
 $gradient_4_0: hsla(205, 59%, 10%, 0);
 $gradient_5: hsl(303, 90%, 32%);
 
-@mixin grad-var-phone($x1,$y1,$x2,$y2,$x3,$y3,$gs_1,$gs_2){
-    @include bp.for-phone{
-    background-image: radial-gradient(circle at $x1 $y1, $gradient_1 $gs_1, $gradient_3 $gs_2, transparent),
-    //radial-gradient(circle at $x1 $y1, $gradient_1 0.25%, $gradient_3 50%, transparent),
-    radial-gradient(circle at $x2 $y2, $gradient_2 0.25%, $gradient_4 20%, transparent),
-    radial-gradient(circle at $x3 $y3, $gradient_2 0.25%, $gradient_4 40%);
-    }
+@mixin grad-var-phone($x1, $y1, $x2, $y2, $x3, $y3, $gs_1, $gs_2) {
+  @include bp.for-phone {
+    background-image:
+      radial-gradient(circle at $x1 $y1, $gradient_1 $gs_1, $gradient_3 $gs_2, transparent),
+      //radial-gradient(circle at $x1 $y1, $gradient_1 0.25%, $gradient_3 50%, transparent),
+      radial-gradient(circle at $x2 $y2, $gradient_2 0.25%, $gradient_4 20%, transparent),
+      radial-gradient(circle at $x3 $y3, $gradient_2 0.25%, $gradient_4 40%);
+  }
 }
-@mixin grad-var-tablet($x1,$y1,$x2,$y2,$x3,$y3,$gs_1,$gs_2){
-    @include bp.for-tablet{
-    background-image: radial-gradient(circle at $x1 $y1, $gradient_1 $gs_1, $gradient_3 $gs_2, transparent),
-    //radial-gradient(circle at $x1 $y1, $gradient_1 0.25%, $gradient_3 50%, transparent),
-    radial-gradient(circle at $x2 $y2, $gradient_2 0.25%, $gradient_4 20%, transparent),
-    radial-gradient(circle at $x3 $y3, $gradient_2 0.25%, $gradient_4 40%);
-    }
-    @include bp.for-tablet-portrait{
-        background-image: radial-gradient(circle at $x1 $y1, $gradient_1 $gs_1, $gradient_3 $gs_2, transparent),
-        //radial-gradient(circle at $x1 $y1, $gradient_1 0.25%, $gradient_3 50%, transparent),
-        radial-gradient(circle at $x2 $y2, $gradient_2 0.25%, $gradient_4 20%, transparent),
-        radial-gradient(circle at $x3 $y3, $gradient_2 0.25%, $gradient_4 40%);
-        }
+@mixin grad-var-tablet($x1, $y1, $x2, $y2, $x3, $y3, $gs_1, $gs_2) {
+  @include bp.for-tablet {
+    background-image:
+      radial-gradient(circle at $x1 $y1, $gradient_1 $gs_1, $gradient_3 $gs_2, transparent),
+      //radial-gradient(circle at $x1 $y1, $gradient_1 0.25%, $gradient_3 50%, transparent),
+      radial-gradient(circle at $x2 $y2, $gradient_2 0.25%, $gradient_4 20%, transparent),
+      radial-gradient(circle at $x3 $y3, $gradient_2 0.25%, $gradient_4 40%);
+  }
+  @include bp.for-tablet-portrait {
+    background-image:
+      radial-gradient(circle at $x1 $y1, $gradient_1 $gs_1, $gradient_3 $gs_2, transparent),
+      //radial-gradient(circle at $x1 $y1, $gradient_1 0.25%, $gradient_3 50%, transparent),
+      radial-gradient(circle at $x2 $y2, $gradient_2 0.25%, $gradient_4 20%, transparent),
+      radial-gradient(circle at $x3 $y3, $gradient_2 0.25%, $gradient_4 40%);
+  }
 }
 
-
-@mixin grad-var-desktop($x1,$y1,$x2,$y2,$x3,$y3,$gs_1,$gs_2){
-    @include bp.for-desktop-small{
-        background-image: radial-gradient(circle at $x1 $y1, $gradient_1 $gs_1, $gradient_3 $gs_2, transparent),
-        //radial-gradient(circle at $x1 $y1, $gradient_1 0.25%, $gradient_3 50%, transparent),
-        radial-gradient(circle at $x2 $y2, $gradient_2 0.25%, $gradient_4 20%, transparent),
-        radial-gradient(circle at $x3 $y3, $gradient_2 0.25%, $gradient_4 40%);
-        }
-    @include bp.for-desktop-big-up{
-    background-image: radial-gradient(circle at $x1 $y1, $gradient_1 $gs_1, $gradient_3 $gs_2, transparent),
-    //radial-gradient(circle at $x1 $y1, $gradient_1 0.25%, $gradient_3 50%, transparent),
-    radial-gradient(circle at $x2 $y2, $gradient_2 0.25%, $gradient_4 20%, transparent),
-    radial-gradient(circle at $x3 $y3, $gradient_2 0.25%, $gradient_4 40%);
-    }
+@mixin grad-var-desktop($x1, $y1, $x2, $y2, $x3, $y3, $gs_1, $gs_2) {
+  @include bp.for-desktop-small {
+    background-image:
+      radial-gradient(circle at $x1 $y1, $gradient_1 $gs_1, $gradient_3 $gs_2, transparent),
+      //radial-gradient(circle at $x1 $y1, $gradient_1 0.25%, $gradient_3 50%, transparent),
+      radial-gradient(circle at $x2 $y2, $gradient_2 0.25%, $gradient_4 20%, transparent),
+      radial-gradient(circle at $x3 $y3, $gradient_2 0.25%, $gradient_4 40%);
+  }
+  @include bp.for-desktop-big-up {
+    background-image:
+      radial-gradient(circle at $x1 $y1, $gradient_1 $gs_1, $gradient_3 $gs_2, transparent),
+      //radial-gradient(circle at $x1 $y1, $gradient_1 0.25%, $gradient_3 50%, transparent),
+      radial-gradient(circle at $x2 $y2, $gradient_2 0.25%, $gradient_4 20%, transparent),
+      radial-gradient(circle at $x3 $y3, $gradient_2 0.25%, $gradient_4 40%);
+  }
 }
 
 //*SECTION - Breakpoints veloci
-.hidden-mobile{
-    @include bp.for-phone{
-      display: none;
-    }
+.hidden-mobile {
+  @include bp.for-phone {
+    display: none;
   }
-  .hidden-tablet{
-    @include bp.for-tablet{
-      display: none;
-    }
+}
+.hidden-tablet {
+  @include bp.for-tablet {
+    display: none;
   }
-  .hidden-tablet-up{
-    @include bp.for-tablet-portrait-up{
-      display: none;
-    }
+}
+.hidden-tablet-up {
+  @include bp.for-tablet-portrait-up {
+    display: none;
   }
-  .hidden-tablet-down{
-    @include bp.for-tablet-portrait-down{
-      display: none;
-    }
+}
+.hidden-tablet-down {
+  @include bp.for-tablet-portrait-down {
+    display: none;
   }
-  //*!SECTION
+}
+//*!SECTION
 
-  //*SECTION - column wrapper
-  // @mixin col-wrapper($align: flex-start, $justify: space-around, $gap: 1em, $wrap-mobile: true) {
-  //   display: flex;
-  //   align-items: $align;
-  //   justify-content: $justify;
-  //   gap: $gap;
-    
-  //   @if $wrap-mobile {
-  //     @include bp.for-tablet-portrait-down {
-  //       flex-wrap: wrap;
-  //     }
-  //   }
-  // }
-  
-  // // Classe predefinita che utilizza il mixin con valori di default
-  // .col-3-wrapper {
-  //   @include col-wrapper();
-  // }
-  
-  // // Esempi di utilizzo con parametri personalizzati
-  // .col-3-centered {
-  //   @include col-wrapper($align: center, $justify: center);
-  // }
-    
-  // .col-3-spaced-4 {
-  //   @include col-wrapper($gap: 4rem);
-  // }
- 
-  
-  .col-3-wrapper {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-around;
-    gap: 1em;
-    @include bp.for-tablet-portrait-down {
-      flex-wrap: wrap;
-    }
+//*SECTION - column wrapper
+// @mixin col-wrapper($align: flex-start, $justify: space-around, $gap: 1em, $wrap-mobile: true) {
+//   display: flex;
+//   align-items: $align;
+//   justify-content: $justify;
+//   gap: $gap;
+
+//   @if $wrap-mobile {
+//     @include bp.for-tablet-portrait-down {
+//       flex-wrap: wrap;
+//     }
+//   }
+// }
+
+// // Classe predefinita che utilizza il mixin con valori di default
+// .col-3-wrapper {
+//   @include col-wrapper();
+// }
+
+// // Esempi di utilizzo con parametri personalizzati
+// .col-3-centered {
+//   @include col-wrapper($align: center, $justify: center);
+// }
+
+// .col-3-spaced-4 {
+//   @include col-wrapper($gap: 4rem);
+// }
+
+.col-3-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  gap: 1em;
+  @include bp.for-tablet-portrait-down {
+    flex-wrap: wrap;
   }
-  
+}

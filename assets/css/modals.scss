@@ -1,61 +1,91 @@
 @use "globals.scss" as *;
 dialog {
-    background-color: rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column;
-    z-index: 9999999999;
-    opacity: 0;
-    max-width: none;
-    max-height: none;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    margin: 0;
-    overflow-y: auto;
-  }
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  z-index: 9999999999;
+  opacity: 0;
+  max-width: none;
+  max-height: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  overflow-y: auto;
+}
 
-  .modal-content {
-    background-color: $gradient_4;
-    height: 100%;
-    // width: 50%;
-  }
+.horizontal .modal-content {
+  background-color: $gradient_4;
+  height: 100%;
+  // width: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 2rem 4rem;
+}
 
-  .modal-inner {
-    padding: 0px 4em 20px 4em;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    overflow: auto;
-    white-space: normal;
-  }
-  .modal-inner .modal-block {
-    margin-bottom: 4%;
-  }
-  
-  .horizontal .modal-inner {
-    flex-direction: row;
-    white-space: nowrap;
-    overflow-x: clip;
-    overflow-y: hidden;
-    padding: 0px 2%;
-    // height: 100%;
-    // padding-left: 60px;
-  }
-  
-  .modal-inner p {
-    font-size: 1.0rem;
-    line-height: 2rem;
-    // color: black;
-    color: $mne_text-on-dark;
-  }
-  .horizontal .modal-inner .modal-block {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: auto 20px;
-    text-wrap: wrap;
-    min-width: 400px;
-    height: 100%;
-  }
+.modal-content {
+  background-color: $gradient_4;
+  height: 100%;
+  // width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 2rem 6%;
+}
+
+.modal-inner {
+  //padding: 0px 4em 20px 4em;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  overflow: auto;
+  white-space: normal;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 2rem;
+}
+.modal-inner .modal-block {
+  margin-bottom: 4%;
+}
+
+.horizontal .modal-inner {
+  flex-direction: row;
+  // white-space: nowrap;
+  overflow-x: clip;
+  overflow-y: hidden;
+  padding: 1rem;
+  border-right: 1px dashed #333333;
+  //max-width: 50vw;
+}
+.horizontal .modal-inner-2 {
+  padding: 1rem;
+  border: none;
+  width: auto;
+}
+.modal-inner-2 {
+  padding: 1rem;
+  border-top: 1px dashed #333333;
+  width: 100%;
+}
+
+.modal-inner p {
+  font-size: 1rem;
+  line-height: 2rem;
+  // color: black;
+  color: $mne_text-on-dark;
+  padding-right: 2rem;
+}
+.horizontal .modal-inner .modal-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto 20px;
+  text-wrap: wrap;
+  //min-width: 400px;
+  height: 100%;
+}

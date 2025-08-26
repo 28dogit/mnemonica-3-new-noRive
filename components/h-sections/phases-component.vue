@@ -8,18 +8,12 @@
     <div id="phases-content" class="content">
       <div class="headline">
         <!-- <div class="" v-html="defaultContent"></div> -->
-        <div
-          id="PhasesTitle"
-          class="text-center"
-          v-if="slots.title"
-          v-html="slots.title"
-        ></div>
-        <div
-          id="PhasesSubtitle"
-          class="text-center"
-          v-if="slots.subtitle"
-          v-html="slots.subtitle"
-        ></div>
+        <div id="PhasesTitle" class="text-center">
+          <h2>From <i>prep</i> to <strong>Eternity</strong></h2>
+        </div>
+        <div id="PhasesSubtitle" class="text-center">
+          <p><strong>Empowering media companies</strong> to <i>protect</i> and grow their digital assets</p>
+        </div>
         <div class="choice">
           <BtnMaster @click="handleSelectRef('production')">Production</BtnMaster>
           <BtnMaster @click="handleSelectRef('archive')">Archive</BtnMaster>
@@ -30,18 +24,9 @@
 </template>
 
 <script setup>
-//SECTION - Nuxt Content CMS
-
-//Uso il composable useExtractSlots per estrarre i dati dal file di markup (slot da estrarre, file .md da leggere)
-const { fetchSection } = useExtractSlots("phases", "sections-index");
-
-// Estraggo i dati per ottenere i testi degli slot che mi servono più il file di default nell'html fare riferimento al nome dello slot da richiamare nel file di markup
-const { slots, defaultContent, isloading } = fetchSection();
-
-//!SECTION
-
 //le altre importazioni derivano dalla pagina principale
-import { nextTick } from "vue";
+// import { nextTick } from "vue";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 //definisco le costanti da esporre con defineExpose, che userò all'interno di onMounted utilizzando .value
 // utilizzo shallowRef per non covertire le proprietà interne di Gsap in oggetti reattivi di vue
@@ -50,29 +35,6 @@ const rotationTL_Titles = shallowRef(null);
 
 const emit = defineEmits(["menuAction"]);
 const handleSelectRef = ref(null);
-
-// Creo un ref per la funzione di navigazione
-
-// const navigationStore = useNavStore();
-
-// // Definisco la funzione di navigazione fuori da nextTick per garantire che sia disponibile subito
-// const navigateToSection = (sectionName) => {
-//   // Utilizzo setTimeout per assicurarmi che il calcolo delle posizioni avvenga dopo il rendering completo
-//   setTimeout(() => {
-//     const element = document.getElementById(sectionName);
-//     if (element) {
-//       // Utilizzo scrollIntoView che rispetta automaticamente il scroll-padding-top impostato nel CSS globale
-//       element.scrollIntoView({ behavior: "smooth" });
-//       // Eseguo anche la logica dello store per mantenere la coerenza con altre parti dell'applicazione
-//       navigationStore.setTargetSection(sectionName, true);
-//     } else {
-//       console.error(`Elemento con ID "${sectionName}" non trovato.`);
-//       // Fallback al metodo precedente se l'elemento non viene trovato
-//       navigationStore.setTargetSection(sectionName, true);
-//     }
-//     console.log(`Navigazione verso la sezione: ${sectionName}`);
-//   }, 50); // Un breve timeout per garantire che il layout sia calcolato
-// };
 
 onMounted(() => {
   const { $gsap } = useNuxtApp();
@@ -85,12 +47,8 @@ onMounted(() => {
 
   nextTick(() => {
     let phasesItems = $gsap.utils.toArray(".phaseCircle .innerCircle"); //creo l'array dei cerchi delle Fasi
-    let phasesTitles = $gsap.utils.toArray(".phaseCircle .innerTxt"); //creo l'array dei titoli delle fasi
-    let phasesChipsTitle = $gsap.utils.toArray("#chips-wrapper .container .title");
-    //let phasesChips = $gsap.utils.toArray("#chips-wrapper .phase-chips");
-    let phasesChipsContainer = $gsap.utils.toArray(
-      "#chips-wrapper .container .chipsContainer"
-    );
+    //let phasesTitles = $gsap.utils.toArray(".phaseCircle .innerTxt"); //creo l'array dei titoli delle fasi
+    const phasesElement = document.getElementById("phases-element");
 
     //SECTION - sezione animazione continua dei cerchi delle Fasi
 
@@ -99,7 +57,7 @@ onMounted(() => {
     });
 
     rotationTL.value = $gsap.timeline({
-      paused: true,
+      //paused: true,
     });
 
     rotationTL.value.to(phasesItems, {
@@ -131,7 +89,7 @@ onMounted(() => {
     });
 
     rotationTL_Titles.value = $gsap.timeline({
-      paused: true,
+      // paused: true,
     });
 
     rotationTL_Titles.value.TitlesRotation(".phaseCircle #Pre_txt", {
@@ -146,21 +104,36 @@ onMounted(() => {
       },
       "<"
     );
-    rotationTL_Titles.value.TitlesRotation(
-      ".phaseCircle #Post_txt",
-      { duration: 15 },
-      "<"
-    );
-    rotationTL_Titles.value.TitlesRotation(
-      ".phaseCircle #Market_txt",
-      { duration: 16 },
-      "<"
-    );
+    rotationTL_Titles.value.TitlesRotation(".phaseCircle #Post_txt", { duration: 15 }, "<");
+    rotationTL_Titles.value.TitlesRotation(".phaseCircle #Market_txt", { duration: 16 }, "<");
+
+    // avvia/pausa animazioni cerchi in base alla visibilità
+    const phasesScrollTrigger = ScrollTrigger.create({
+      trigger: phasesElement, // il contenitore principale del componente
+      start: "top 80%", // quando la parte superiore del componente è all'80% della viewport
+      end: "bottom 20%", // finché il fondo non scende sotto il 20% della viewport
+      onEnter: () => {
+        rotationTL.value.play();
+        rotationTL_Titles.value.play();
+      },
+      onLeave: () => {
+        rotationTL.value.pause();
+        rotationTL_Titles.value.pause();
+      },
+      onEnterBack: () => {
+        rotationTL.value.play();
+        rotationTL_Titles.value.play();
+      },
+      onLeaveBack: () => {
+        rotationTL.value.pause();
+        rotationTL_Titles.value.pause();
+      },
+      //markers: true,
+    });
+
     //!SECTION
   }); //NOTE - chiusura nextTick
 }); //NOTE - chiusura onMounted
-
-defineExpose({ rotationTL, rotationTL_Titles });
 </script>
 
 <style lang="scss" scoped>

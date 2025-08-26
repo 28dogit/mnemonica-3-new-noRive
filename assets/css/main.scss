@@ -83,17 +83,21 @@
 .content {
   // background-color: red;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   padding: 2em;
   width: 100%;
   height: 100%;
   color: white;
-  &.hero{
+  flex-direction: column;
+  &.hero {
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
     gap: 2em;
+  }
+  @include bp.for-tablet-portrait-up {
+    flex-direction: row;
   }
 }
 
@@ -171,31 +175,18 @@
   }
 }
 #canvasLogo {
-  margin-top: 100px;
   position: absolute;
   z-index: 5;
-  @include bp.for-phone {
-    // W-1200px H-750px up
-    margin-top: 30px;
-  }
+  display: flex;
+  height: 80px;
+  opacity: 0.05;
 }
 #canvasPayoff {
-  margin-top: 0px;
-  // margin-top: 70px;
   position: absolute;
   max-width: 960px;
   z-index: 5;
-  @include bp.for-tablet-portrait-up{
-    margin-top: 100px;
-    // margin-top: 80px;
-  }
-  @include bp.for-desktop-big-up {
-    // margin-top: 135px;
-    margin-top: 100px;
-  }
-  // @include bp.for-phone {
-  //   // W-1200px H-750px ups
-  //   margin-top: 0px;
-  // }
+  font-size: 35px;
+  text-transform: uppercase;
+  text-align: center;
 }
 //*!SECTION
