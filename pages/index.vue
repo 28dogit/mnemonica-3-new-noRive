@@ -11,8 +11,8 @@
               densities="x1"
             />
           </div>
-          <canvas ref="canvasRefLogo" id="canvasLogo" style="position: absolute; height: 100px; z-index: 5"></canvas>
-          <canvas ref="canvasRef" id="canvasPayoff" style="width: 100%; height: 50vh"></canvas>
+          <div id="canvasLogo" style="position: absolute; height: 100px; z-index: 5">Logo Mnemonica</div>
+          <div id="canvasPayoff" style="width: 100%; height: 50vh">Screen Deliver Preserve</div>
         </div>
         <slot name="screentitle"></slot>
         <div id="hero-content-wrapper" class="wrapper">
@@ -71,14 +71,9 @@
 
 <script setup>
 import { onMounted, onBeforeUnmount, ref, nextTick, watch } from "vue";
-import { Rive, Fit, Alignment, Layout } from "@rive-app/canvas";
 import { HSectionsArchive } from "#components";
-import { toRaw } from "vue"; //serve per gestire gli imput delle statemachine di RIVE
 
 const PhasesRef = ref(null);
-const canvasRefLogo = ref(null);
-const canvasRef = ref(null);
-const titleTrigger = ref(null);
 const noFixedSTRef = ref(null);
 const handleScrollRef = ref(null);
 
@@ -95,19 +90,6 @@ const navigationStore = useNavStore();
 const { scrollToSection, handleMenuAction } = useMNEfunctions(navigationStore); // passo le refs necessarie
 
 //!SECTION
-
-// Variabile per memorizzare il buffer del file .riv
-let rivBuffer = null;
-
-// Funzione per caricare il file .riv una sola volta
-async function loadRivFile(url) {
-  const runtimeConfig = useRuntimeConfig();
-  const baseUrl = runtimeConfig.app.baseURL;
-  const fullUrl = `${baseUrl}${url}`;
-  const response = await fetch(fullUrl);
-  //const response = await fetch(url);
-  return await response.arrayBuffer();
-}
 
 onMounted(() => {
   const { $gsap } = useNuxtApp();
@@ -164,72 +146,6 @@ onMounted(() => {
   );
 
   nextTick(async () => {
-    //SECTION - RIVE
-    // Carica il file .riv una sola volta
-    rivBuffer = await loadRivFile("/rive/hero_mne_divided.riv");
-
-    const rLogo = new Rive({
-      buffer: rivBuffer, // Utilizza il buffer già caricato
-      artboard: "Logo",
-      canvas: canvasRefLogo.value,
-      autoplay: true,
-      //stateMachines: "State logo",
-      animations: "Logo intro",
-      layout: new Layout({
-        fit: Fit.Layout, // Adatta senza distorsione
-        alignment: Alignment.Center, // Centra l'animazione
-        resizeMode: "auto",
-      }),
-      onLoad: () => {
-        rLogo.resizeDrawingSurfaceToCanvas();
-        rLogo.pause(); // metto in pausa l'istanza rLogo dopo averla inizializzata in modo da poterla riprendere in seguito e fare rLogo.play("timelineName")
-      },
-    });
-
-    const rTitle = new Rive({
-      buffer: rivBuffer,
-      artboard: "Title",
-      canvas: canvasRef.value,
-      autoplay: true,
-      stateMachines: "State Title",
-      //animations:"Hero-title-intro",
-      layout: new Layout({
-        fit: Fit.Layout, // Adatta senza distorsione
-        alignment: Alignment.Center, // Centra l'animazione
-        resizeMode: "auto",
-      }),
-      onLoad: () => {
-        rTitle.resizeDrawingSurfaceToCanvas();
-        //rTitle.pause();
-        const inputs = rTitle.stateMachineInputs("State Title");
-        //console.log(inputs);
-        // Find the input you want to set a value for, or trigger e lo salvo in una ref titleTrigger
-        titleTrigger.value = inputs.find((i) => i.name === "start");
-        //nomino i run text in rive e poi gli assegno un nuovo nome qui
-        rTitle.setTextRunValue("primo", "MEDIA");
-        rTitle.setTextRunValue("secondo", "ASSET");
-        rTitle.setTextRunValue("terzo", "MAGIC");
-      },
-    });
-
-    function aggiornaResize(elemento) {
-      elemento.layout = new Layout({
-        fit: Fit.Layout, // Cambia il fit per coprire l'area
-        alignment: Alignment.Center, // Allinea in basso
-        resizeMode: "auto",
-      });
-      elemento.resizeDrawingSurfaceToCanvas();
-    }
-
-    window.addEventListener("resize", () => {
-      [rTitle, rLogo].forEach(aggiornaResize);
-    });
-
-    //!SECTION
-
-    //$gsap.set("#hero-section", { opacity: 1, zIndex: 1 });
-    $gsap.set(".ghirlanda-updx, .ghirlanda-dwsx ", { opacity: 0 });
-
     // Variabile che indica se l'animazione intro è completata
     let introCompleted = false;
     //let isfixedSection = true; non serve più perchè sostituita dal composable
@@ -266,13 +182,6 @@ onMounted(() => {
       extendTimeline: true,
     });
 
-    intro.call(
-      () => {
-        rLogo.play("Logo intro");
-      },
-      null,
-      0.3
-    );
     intro.from(
       "#ghirlanda-element",
       {
@@ -285,26 +194,6 @@ onMounted(() => {
         ease: "power2.inOut",
       },
       ">=0.5"
-    );
-    intro.to(
-      "#canvasLogo",
-      {
-        autoAlpha: 0,
-        duration: 2,
-      },
-      "<+=1"
-    );
-    intro.call(
-      () => {
-        if (titleTrigger.value) {
-          //gestisco l'input trigger della Statemachine di RIVE con toRaw per leggerla
-          const rawTrigger = toRaw(titleTrigger.value);
-          console.log(rawTrigger);
-          rawTrigger.fire();
-        }
-      },
-      null,
-      2
     );
     intro.EnterFrom("#heroSubTitle", { duration: 0.5, y: "-25px" }, "-=0.7");
 

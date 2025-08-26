@@ -1,5 +1,5 @@
 <template>
-  <div class="focusWrapper">
+  <div class="btnWrapper">
     <canvas
       ref="canvasRefBtn"
       id="canvasFocusBtn"
@@ -15,25 +15,24 @@ const emit = defineEmits(["click", "touch", "pointerdown", "mousedown"]);
 // const emit = defineEmits(["click", "touch", "pointerdown", "mousedown", "touchend", "pointerup", "keydown"]);
 
 const canvasRefBtn = ref(null);
-let rFocusBtn = null; // Istanza di Rive
+let rCloseBtn = null; // Istanza di Rive
 
 onMounted(() => {
   const runtimeConfig = useRuntimeConfig();
   const baseURL = runtimeConfig.app.baseURL;
-  rFocusBtn = new Rive({
+  rCloseBtn = new Rive({
     src: `${baseURL}/rive/focusbtn.riv`,
-    // src: "/assets/rive/focusbtn.riv",
-    artboard: "FocusArtboard",
+    artboard: "CloseBTN",
     canvas: canvasRefBtn.value,
     autoplay: true,
-    stateMachines: "FocusBtn_animation",
+    stateMachines: "CloseBtn_animation",
     layout: new Layout({
       fit: Fit.Layout, // Adatta senza distorsione
       alignment: Alignment.Center, // Centra l'animazione
       resizeMode: "auto",
     }),
     onLoad: () => {
-      rFocusBtn.resizeDrawingSurfaceToCanvas();
+      rCloseBtn.resizeDrawingSurfaceToCanvas();
     },
   });
 
@@ -52,9 +51,9 @@ onMounted(() => {
     }
   }
   // Add event listener and provide callback to handle Rive Event
-  rFocusBtn.on(EventType.RiveEvent, onRiveEventReceived);
+  rCloseBtn.on(EventType.RiveEvent, onRiveEventReceived);
   // Can unsubscribe to Rive Events at any time via the off() API like below
-  // rFocusBtn.off(EventType.RiveEvent, onRiveEventReceived);
+  // rCloseBtn.off(EventType.RiveEvent, onRiveEventReceived);
 
   function aggiornaResize(elemento) {
     elemento.layout = new Layout({
@@ -66,7 +65,7 @@ onMounted(() => {
   }
 
   window.addEventListener("resize", () => {
-    aggiornaResize(rFocusBtn);
+    aggiornaResize(rCloseBtn);
   });
 });
 </script>
@@ -74,10 +73,10 @@ onMounted(() => {
 @use "@/assets/css/_globals.scss" as *;
 @use "@/assets/css/_breakpoints.scss" as bp;
 
-.focusWrapper {
+.btnWrapper {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;

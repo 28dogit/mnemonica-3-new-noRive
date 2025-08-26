@@ -15,7 +15,7 @@
           @pointerdown.passive="closeModal"
           @mousedown.passive="closeModal"
         >
-          <BtnClose></BtnClose>
+          <BtnClose>X</BtnClose>
         </button>
         <div class="modal-inner">
           <ContentRenderer v-if="modalContentData" :value="modalContentData" />

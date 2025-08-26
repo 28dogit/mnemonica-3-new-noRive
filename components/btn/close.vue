@@ -1,84 +1,27 @@
 <template>
   <div class="btnWrapper">
-    <canvas
-      ref="canvasRefBtn"
-      id="canvasFocusBtn"
-      style="height: 70px; width: 70px"
-    ></canvas>
+    <span class="btnTxt"><slot>btn name</slot></span>
   </div>
 </template>
-<script setup>
-import { onMounted, ref } from "vue";
-import { Rive, Fit, Alignment, Layout, EventType, RiveEventType } from "@rive-app/canvas";
-
-const emit = defineEmits(["click", "touch", "pointerdown", "mousedown"]);
-// const emit = defineEmits(["click", "touch", "pointerdown", "mousedown", "touchend", "pointerup", "keydown"]);
-
-const canvasRefBtn = ref(null);
-let rCloseBtn = null; // Istanza di Rive
-
-onMounted(() => {
-  const runtimeConfig = useRuntimeConfig();
-  const baseURL = runtimeConfig.app.baseURL;
-  rCloseBtn = new Rive({
-    src: `${baseURL}/rive/focusbtn.riv`,
-    artboard: "CloseBTN",
-    canvas: canvasRefBtn.value,
-    autoplay: true,
-    stateMachines: "CloseBtn_animation",
-    layout: new Layout({
-      fit: Fit.Layout, // Adatta senza distorsione
-      alignment: Alignment.Center, // Centra l'animazione
-      resizeMode: "auto",
-    }),
-    onLoad: () => {
-      rCloseBtn.resizeDrawingSurfaceToCanvas();
-    },
-  });
-
-  function onRiveEventReceived(riveEvent) {
-    const eventData = riveEvent.data;
-    switch (eventData.name) {
-      case "onClickEvent":
-        console.log("Event da switch case", eventData.name);
-        emit("click");
-        emit("touch");
-        emit("pointerdown");
-        emit("mousedown");
-        break;
-      default:
-        break;
-    }
-  }
-  // Add event listener and provide callback to handle Rive Event
-  rCloseBtn.on(EventType.RiveEvent, onRiveEventReceived);
-  // Can unsubscribe to Rive Events at any time via the off() API like below
-  // rCloseBtn.off(EventType.RiveEvent, onRiveEventReceived);
-
-  function aggiornaResize(elemento) {
-    elemento.layout = new Layout({
-      fit: Fit.Layout, // Cambia il fit per coprire l'area
-      alignment: Alignment.Center, // Allinea in basso
-      resizeMode: "auto",
-    });
-    elemento.resizeDrawingSurfaceToCanvas();
-  }
-
-  window.addEventListener("resize", () => {
-    aggiornaResize(rCloseBtn);
-  });
-});
-</script>
+<script setup></script>
 <style lang="scss" scoped>
 @use "@/assets/css/_globals.scss" as *;
 @use "@/assets/css/_breakpoints.scss" as bp;
-
 .btnWrapper {
-  position: relative;
-  width: 70px;
-  height: 70px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 35px;
+  border-radius: 50%;
+  width: 35px;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: $gradient_2;
+  border: 2px solid $mne-secondary;
+  .btnTxt {
+    opacity: 1;
+    color: $mne_text-on-dark;
+  }
 }
 </style>
