@@ -11,8 +11,15 @@
               densities="x1"
             />
           </div>
-          <div id="canvasLogo" style="position: absolute; height: 100px; z-index: 5">Logo Mnemonica</div>
-          <div id="canvasPayoff" style="width: 100%; height: 50vh">Screen Deliver Preserve</div>
+          <div id="canvasLogo">
+            <NuxtImg
+              id="MneLogo"
+              src="assets/img/svg/Logo-mne-Vector.svg"
+              alt="mnemonica 3.0 logo"
+              densities="x1"
+            ></NuxtImg>
+          </div>
+          <div id="canvasPayoff">Screen Deliver Preserve</div>
         </div>
         <slot name="screentitle"></slot>
         <div id="hero-content-wrapper" class="wrapper">

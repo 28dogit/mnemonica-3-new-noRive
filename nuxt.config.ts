@@ -10,7 +10,7 @@ const scssFiles = readdirSync(cssDir)
 // fine importazione css
 export default defineNuxtConfig({
   app: {
-    baseURL: "/mne",
+    baseURL: "/mne2",
     // layoutTransition: { name: 'layout', mode: 'out-in' }
   },
   robots: { robotsTxt: false },
