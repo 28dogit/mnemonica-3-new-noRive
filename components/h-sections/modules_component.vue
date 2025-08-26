@@ -16,8 +16,12 @@
         <div class="mSubTitle">
           <h3>Streaming & Discussion</h3>
         </div>
-        <button @click.passive="openModal1" @touchstart.passive="openModal1" @pointerdown.passive="openModal1"
-          @mousedown.passive="openModal1">
+        <button
+          @click.passive="openModal1"
+          @touchstart.passive="openModal1"
+          @pointerdown.passive="openModal1"
+          @mousedown.passive="openModal1"
+        >
           <!-- pointerdown potrebbe sostituire touchstart e mousedown, perchè li contempla, per ora li tengo per sicurezza -->
           <BtnFocus></BtnFocus>
         </button>
@@ -29,8 +33,12 @@
         <div class="mSubTitle">
           <h3>File Exchange & Delivery</h3>
         </div>
-        <button @click.passive="openModal2" @touchstart.passive="openModal2" @pointerdown.passive="openModal2"
-          @mousedown.passive="openModal2">
+        <button
+          @click.passive="openModal2"
+          @touchstart.passive="openModal2"
+          @pointerdown.passive="openModal2"
+          @mousedown.passive="openModal2"
+        >
           <BtnFocus></BtnFocus>
         </button>
       </div>
@@ -41,14 +49,18 @@
         <div class="mSubTitle">
           <h3>Perennial Availability</h3>
         </div>
-        <button @click.passive="openModal3" @touchstart.passive="openModal3" @pointerdown.passive="openModal3"
-          @mousedown.passive="openModal3">
+        <button
+          @click.passive="openModal3"
+          @touchstart.passive="openModal3"
+          @pointerdown.passive="openModal3"
+          @mousedown.passive="openModal3"
+        >
           <BtnFocus></BtnFocus>
         </button>
       </div>
     </div>
   </div>
-  <ModalsModale50 :isOpen="isModalOpen" :isModal="modalId" @close="closeModal" />
+  <ModalsModale100 :isOpen="isModalOpen" :isModal="modalId" @close="closeModal" />
 </template>
 
 <script setup>
@@ -59,7 +71,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // mipreparo le istanze dei modali
 const isModalOpen = ref(false);
-const modalId = ref("");
+//const modalId = ref("");
+const modalId = ref(null);
 
 // Controlla se il dispositivo supporta eventi touch
 const isTouchDevice = () => {
@@ -93,7 +106,7 @@ const closeModal = () => {
 };
 
 onMounted(() => {
-  nextTick(() => { }); //NOTE - end nextTick
+  nextTick(() => {}); //NOTE - end nextTick
 }); //NOTE - end onMounted
 //!SECTION
 </script>
@@ -104,7 +117,6 @@ onMounted(() => {
 @use "@/assets/css/_breakpoints.scss" as bp;
 
 #modules-section-2 {
-
   // #modules-element {
   //   overflow: hidden;
   // }
@@ -123,7 +135,10 @@ onMounted(() => {
     color: #fff;
     font-size: 1.3rem;
     margin-bottom: 0;
-    text-shadow: 0 0 7px rgba(184, 239, 250, 1), 0 0 10px rgba(184, 239, 250, 1), 0 0 22px rgba(184, 239, 250, 1);
+    text-shadow:
+      0 0 7px rgba(184, 239, 250, 1),
+      0 0 10px rgba(184, 239, 250, 1),
+      0 0 22px rgba(184, 239, 250, 1);
   }
 
   #modules-content {
@@ -177,4 +192,5 @@ onMounted(() => {
   }
 }
 
-//!SECTION</style>
+//!SECTION
+</style>

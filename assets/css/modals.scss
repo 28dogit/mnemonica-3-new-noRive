@@ -16,23 +16,38 @@ dialog {
   overflow-y: auto;
 }
 
-.modal-content {
+.horizontal .modal-content {
   background-color: $gradient_4;
   height: 100%;
   // width: 50%;
   display: flex;
+  flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
   padding: 2rem 4rem;
 }
 
-.modal-inner {
-  padding: 0px 4em 20px 4em;
+.modal-content {
+  background-color: $gradient_4;
+  height: 100%;
+  // width: 50%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 2rem 6%;
+}
+
+.modal-inner {
+  //padding: 0px 4em 20px 4em;
+  display: flex;
+  align-items: flex-start;
   flex-direction: column;
   overflow: auto;
   white-space: normal;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 2rem;
 }
 .modal-inner .modal-block {
   margin-bottom: 4%;
@@ -40,12 +55,22 @@ dialog {
 
 .horizontal .modal-inner {
   flex-direction: row;
-  white-space: nowrap;
+  // white-space: nowrap;
   overflow-x: clip;
   overflow-y: hidden;
-  padding: 0px 2%;
-  // height: 100%;
-  // padding-left: 60px;
+  padding: 1rem;
+  border-right: 1px dashed #333333;
+  //max-width: 50vw;
+}
+.horizontal .modal-inner-2 {
+  padding: 1rem;
+  border: none;
+  width: auto;
+}
+.modal-inner-2 {
+  padding: 1rem;
+  border-top: 1px dashed #333333;
+  width: 100%;
 }
 
 .modal-inner p {
@@ -53,6 +78,7 @@ dialog {
   line-height: 2rem;
   // color: black;
   color: $mne_text-on-dark;
+  padding-right: 2rem;
 }
 .horizontal .modal-inner .modal-block {
   display: flex;

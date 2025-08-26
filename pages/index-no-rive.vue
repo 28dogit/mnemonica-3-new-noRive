@@ -11,8 +11,10 @@
               densities="x1"
             />
           </div>
-          <canvas ref="canvasRefLogo" id="canvasLogo" style="position: absolute; height: 100px; z-index: 5"></canvas>
-          <canvas ref="canvasRef" id="canvasPayoff" style="width: 100%; height: 50vh"></canvas>
+          <div id="canvasLogo" style="position: absolute; height: 100px; z-index: 5">Logo Mnemonica</div>
+          <div id="canvasPayoff" style="width: 100%; height: 50vh">Screen Deliver Preserve</div>
+          <!-- <canvas ref="canvasRefLogo" id="canvasLogo" style="position: absolute; height: 100px; z-index: 5"></canvas> -->
+          <!-- <canvas ref="canvasRef" id="canvasPayoff" style="width: 100%; height: 50vh"></canvas> -->
         </div>
         <slot name="screentitle"></slot>
         <div id="hero-content-wrapper" class="wrapper">

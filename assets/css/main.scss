@@ -89,11 +89,15 @@
   width: 100%;
   height: 100%;
   color: white;
+  flex-direction: column;
   &.hero {
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
     gap: 2em;
+  }
+  @include bp.for-tablet-portrait-up {
+    flex-direction: row;
   }
 }
 

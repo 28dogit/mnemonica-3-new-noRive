@@ -1,36 +1,24 @@
 <template>
   <teleport to="#teleports">
-    <dialog id="mioModale-100" ref="myModal" :class="{ horizontal: isMounted && !isPortrait }" @click="(e) => e.target === myModal && closeModal()">
+    <dialog
+      id="mioModale-100"
+      ref="myModal"
+      :class="{ horizontal: isMounted && !isPortrait }"
+      @click="(e) => e.target === myModal && closeModal()"
+    >
       <!-- aggiungo una classe dinamica horizontal che viene aggiunta quando la viewport non è portrait -->
       <div ref="modalContent" class="modal-content" id="m-content">
-        <!-- <p>Modal ID: {{ isModal }}</p> -->
-        <button class="modal-x-btn" @click.passive="closeModal" @touchstart.passive="closeModal" @pointerdown.passive="closeModal" @mousedown.passive="closeModal">
+        <button
+          class="modal-x-btn"
+          @click.passive="closeModal"
+          @touchstart.passive="closeModal"
+          @pointerdown.passive="closeModal"
+          @mousedown.passive="closeModal"
+        >
           <BtnClose></BtnClose>
         </button>
-        <!-- Pulsante Espandi/Riduci -->
-        <!-- <button
-          v-if="isPortrait && props.isOpen"
-          @click="toggleExpand"
-          class="modal-expand-btn"
-          :aria-expanded="isExpanded.toString()"
-        >
-          {{ isExpanded ? "Riduci" : "Espandi" }}
-        </button> -->
-        <!-- <div ref="modalInner" class="modal-inner">
-          <ContentRenderer v-if="modalContentData" :value="modalContentData" />
-        </div> -->
         <div class="modal-inner">
           <ContentRenderer v-if="modalContentData" :value="modalContentData" />
-          <UButton
-            :trailing-icon="isExpanded ? 'i-lucide-arrow-down' : 'i-lucide-arrow-up'"
-            size="md"
-            color="neutral"
-            v-if="isPortrait && props.isOpen"
-            @click="toggleExpand"
-            class="modal-expand-btn"
-            :aria-expanded="isExpanded.toString()"
-            >{{ isExpanded ? "Back to info" : "Discover what Mnemonica can do for you" }}
-          </UButton>
         </div>
         <div class="modal-inner-2">
           <MneFormContact>Get in touch</MneFormContact>
@@ -65,7 +53,6 @@ const isClient = ref(false);
 const isMounted = ref(false);
 const myModal = ref(null);
 const modalContent = ref(null);
-//const modalInner = ref(null);
 const { width, height } = useWindowSize({
   initialWidth: 0,
   initialHeight: 0,
@@ -172,20 +159,6 @@ const closeModal = () => {
 //   }
 // };
 
-//tengo d'occhio la props isOpen
-// watch(
-//   () => props.isOpen,
-//   (newVal) => {
-//     if (newVal) {
-//       disableBodyScroll();
-//       openModal();
-//     } else {
-//       enableBodyScroll();
-//     }
-//   },
-//   { immediate: true }
-// );
-
 const lastOpenedModalType = ref("");
 
 //tengo d'occhio la props isOpen
@@ -197,7 +170,11 @@ watch(
       disableBodyScroll();
       openModal();
     } else {
-      if (lastOpenedModalType.value !== "screen" && lastOpenedModalType.value !== "deliver" && lastOpenedModalType.value !== "preserve") {
+      if (
+        lastOpenedModalType.value !== "screen" &&
+        lastOpenedModalType.value !== "deliver" &&
+        lastOpenedModalType.value !== "preserve"
+      ) {
         enableBodyScroll();
       }
     }
@@ -208,7 +185,9 @@ watch(
   () => props.isModal,
   async (newModalId) => {
     if (newModalId) {
-      const { data } = await useAsyncData(`/modali100/${newModalId}`, () => queryCollection("content").path(`/modali100/${newModalId}`).first());
+      const { data } = await useAsyncData(`/modali100/${newModalId}`, () =>
+        queryCollection("content").path(`/modali100/${newModalId}`).first()
+      );
       modalContentData.value = data.value;
     }
   },
@@ -223,7 +202,13 @@ onMounted(() => {
   });
 
   //metto in pausa l'animazione di apertura del modale
-  $gsap.fromTo(myModal.value, { opacity: 0, x: "100%", y: "100%" }, { opacity: 1, x: "0%", y: "0%", duration: 0.5, ease: "power2.out" }).pause();
+  $gsap
+    .fromTo(
+      myModal.value,
+      { opacity: 0, x: "100%", y: "100%" },
+      { opacity: 1, x: "0%", y: "0%", duration: 0.5, ease: "power2.out" }
+    )
+    .pause();
 
   // modalInner.value.addEventListener("wheel", handleScroll, { passive: false });
 });
