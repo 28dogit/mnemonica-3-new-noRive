@@ -189,12 +189,9 @@ onMounted(() => {
       { opacity: 1, x: "0%", y: "0%", duration: 0.5, ease: "power2.out" }
     )
     .pause();
-
-  // modalInner.value.addEventListener("wheel", handleScroll, { passive: false });
 });
 
 onBeforeUnmount(() => {
-  // modalInner.value.removeEventListener("wheel", handleScroll);
   enableBodyScroll();
 });
 
