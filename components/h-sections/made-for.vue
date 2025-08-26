@@ -7,37 +7,25 @@
         <UIcon name="i-lucide-sprout" class="size-5" />
         <p class="font-semibold mb-0!">Producers</p>
       </div>
-      <div
-        class="boxModal BmFlex cursor-pointer"
-        @click="openModal('madefor/post-supervisors')"
-      >
+      <div class="boxModal BmFlex cursor-pointer" @click="openModal('madefor/post-supervisors')">
         <UIcon name="i-lucide-flip-horizontal" class="size-5" />
         <p class="font-semibold mb-0!">Post Supervisors</p>
       </div>
-      <div
-        class="boxModal BmFlex cursor-pointer"
-        @click="openModal('madefor/post-production-labs')"
-      >
+      <div class="boxModal BmFlex cursor-pointer" @click="openModal('madefor/post-production-labs')">
         <UIcon name="i-lucide-projector" class="size-5" />
         <p class="font-semibold mb-0!">Post-production Labs</p>
       </div>
-      <div
-        class="boxModal BmFlex cursor-pointer"
-        @click="openModal('madefor/distributors')"
-      >
+      <div class="boxModal BmFlex cursor-pointer" @click="openModal('madefor/distributors')">
         <UIcon name="i-lucide-memory-stick" class="size-5" />
         <p class="font-semibold mb-0!">Distributors</p>
       </div>
-      <div
-        class="boxModal BmFlex cursor-pointer"
-        @click="openModal('madefor/broadcasters')"
-      >
+      <div class="boxModal BmFlex cursor-pointer" @click="openModal('madefor/broadcasters')">
         <UIcon name="i-lucide-monitor-dot" class="size-5" />
         <p class="font-semibold mb-0!">Broadcasters / OTT</p>
       </div>
     </div>
   </div>
-  <ModalsModale50 :isOpen="isModalOpen" :isModal="modalId" @close="closeModal" />
+  <ModalsModale100 :isOpen="isModalOpen" :isModal="modalId" @close="closeModal" />
 </template>
 
 <script setup>
