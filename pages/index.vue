@@ -19,7 +19,7 @@
               densities="x1"
             ></NuxtImg>
           </div>
-          <div id="canvasPayoff">Screen Deliver Preserve</div>
+          <div id="canvasPayoff">Media Asset Magic</div>
         </div>
         <slot name="screentitle"></slot>
         <div id="hero-content-wrapper" class="wrapper">
