@@ -104,7 +104,7 @@ onMounted(() => {
   // Effetti da utilizzare Zoom e Parallax. Qui sotto ci sono due demo una per lo zoom applicato alla ghirlanda e una per il parallasse applicato ai cerchi delle fasi
   // per applicarli a qualsiasi elemento del DOM bisogna variare i due riferimenti:
   // il primo è l'elemento che riceverà l'effetto ad esempio #ghirlanda_img e il secondo è quello che innesca l'animazione allo scroll (il trigger) ad esempio #ghirlanda-element
-  // il trigger si innesca e si stoppa sull'incrocio di start e end. Primo valore di start è l'elemento che viene animato, secondo valore e la viewport, stessa cosa per end
+  // il trigger si innesca e si stoppa sull'incrocio di start e end. Primo valore di start è l'elemento che trigga l'effetto, secondo valore e la viewport, stessa cosa per end
   // quindi - start: "top 100px" - significa quando la parte alta di #ghirlanda-element supera il punto equivalente a 100px a partire dall'alto della viewport
   // e - end: "bottom 500px" - significa quando la parte bassa di #ghirlanda-element supera il punto equivalente a 500px a partire dall'alto della viewport
   // mettendo markers: true, verranno i riferimenti verranno visualizzati a schermo per poter regolare al meglio l'attivazione e la disattivazione dell'effetto
